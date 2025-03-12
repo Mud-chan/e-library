@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Guru;
 use App\Models\Buku;
-use App\Models\Dtluser;
+use App\Models\Dtl_Siswa;
 use App\Models\Comments;
-// use App\Models\Playlist;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,7 +23,7 @@ class PagesControllerSp extends Controller
         $tutors = Guru::find($tutorsId); // Temukan pengguna berdasarkan ID
         $userName = $tutors->name; // Ambil nama pengguna
         $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->mengampu;
+        $userProfesi = $tutors->profession;
 
         return view('components.spheader', [
             "title" => "Dashboard Admin",
@@ -44,7 +43,7 @@ class PagesControllerSp extends Controller
     if ($tutor) {
         $userName = $tutor->name;
         $userImage = $tutor->image;
-        $userProfesi = $tutor->mengampu;
+        $userProfesi = $tutor->profession;
         // Hitung total tutor
         $totalTutors = Guru::count();
 
@@ -54,25 +53,25 @@ class PagesControllerSp extends Controller
         // foreach ($siswa as $item) {
         //     $plays = Playlist::find($item->playlist_id);
         //     $item->playlist = $plays;
-        }
-        $dtlsiswa = Dtluser::all();
-        foreach ($dtlsiswa as $item) {
-            $user = User::find($item->id_user);
-            $plays = Playlist::find($item->playlist_id);
-            $item->playlist = $plays;
-            $item->user = $user;
-        }
+        // }
+        // $dtlsiswa = Dtluser::all();
+        // foreach ($dtlsiswa as $item) {
+        //     $user = User::find($item->id_user);
+        //     $plays = Playlist::find($item->playlist_id);
+        //     $item->playlist = $plays;
+        //     $item->user = $user;
+        // }
 
         // Hitung total harga transaksi
-        $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
-            ->sum('playlist.harga');
+        // $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
+        //     ->sum('playlist.harga');
 
         // Hitung jumlah transaksi dengan status 'pending'
-        $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
-        ->where('dtl_user.status', 'pending')
-        ->select('transaksi.id') // Select only the transaction IDs
-        ->distinct() // Ensure we count only distinct transactions
-        ->count();
+        // $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
+        // ->where('dtl_user.status', 'pending')
+        // ->select('transaksi.id') // Select only the transaction IDs
+        // ->distinct() // Ensure we count only distinct transactions
+        // ->count();
 
         return view('dashboardsp', [
             "title" => "Dashboard Admin",
@@ -82,9 +81,9 @@ class PagesControllerSp extends Controller
             "totalTutors" => $totalTutors,
             "totalUsers" => $totalUsers,
             "siswa" => $siswa,
-            "totalHargaTransaksi" => $totalHargaTransaksi,
-            "jumlahTransaksiPending" => $jumlahTransaksiPending,
-            "dtlsiswa"=> $dtlsiswa
+            // "totalHargaTransaksi" => $totalHargaTransaksi,
+            // "jumlahTransaksiPending" => $jumlahTransaksiPending,
+            // "dtlsiswa"=> $dtlsiswa
         ]);
     } else {
         return redirect()->route('loginnn');
@@ -93,62 +92,62 @@ class PagesControllerSp extends Controller
 
 
 
-    public function carisiswasp(Request $request)
-{
-    // Ambil ID tutor dari cookie
-    $tutorId = Cookie::get('sp_id');
+//     public function carisiswasp(Request $request)
+// {
+//     // Ambil ID tutor dari cookie
+//     $tutorId = Cookie::get('sp_id');
 
-    // Temukan data tutor berdasarkan ID
-    $tutor = Tutors::find($tutorId);
+//     // Temukan data tutor berdasarkan ID
+//     $tutor = Tutors::find($tutorId);
 
-    if ($tutor) {
-        $userName = $tutor->name;
-        $userImage = $tutor->image;
-        $userProfesi = $tutor->profession;
+//     if ($tutor) {
+//         $userName = $tutor->name;
+//         $userImage = $tutor->image;
+//         $userProfesi = $tutor->profession;
 
-        // Hitung total tutor
-        $totalTutors = Tutors::count();
+//         // Hitung total tutor
+//         $totalTutors = Tutors::count();
 
-        // Hitung total user
-        $totalUsers = User::count();
+//         // Hitung total user
+//         $totalUsers = User::count();
 
-        // Ambil semua siswa
-        $siswa = User::all();
-        $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
-            ->sum('playlist.harga');
+//         // Ambil semua siswa
+//         $siswa = User::all();
+//         $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
+//             ->sum('playlist.harga');
 
-        // Hitung jumlah transaksi dengan status 'pending'
-        $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
-        ->where('dtl_user.status', 'pending')
-        ->select('transaksi.id') // Select only the transaction IDs
-        ->distinct() // Ensure we count only distinct transactions
-        ->count();
+//         // Hitung jumlah transaksi dengan status 'pending'
+//         $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
+//         ->where('dtl_user.status', 'pending')
+//         ->select('transaksi.id') // Select only the transaction IDs
+//         ->distinct() // Ensure we count only distinct transactions
+//         ->count();
 
 
-        // Lakukan pencarian jika terdapat input pencarian
-        if ($request->has('search')) {
-            $keyword = $request->input('search');
+//         // Lakukan pencarian jika terdapat input pencarian
+//         if ($request->has('search')) {
+//             $keyword = $request->input('search');
 
-            // Lakukan pencarian berdasarkan kriteria tertentu, misalnya nama siswa atau lainnya
-            $siswa = User::where('name', 'like', '%' . $keyword . '%')->get();
-        }
+//             // Lakukan pencarian berdasarkan kriteria tertentu, misalnya nama siswa atau lainnya
+//             $siswa = User::where('name', 'like', '%' . $keyword . '%')->get();
+//         }
 
-        // Kirim data ke view
-        return view('dashboardsp', [
-            "title" => "Dashboard Admin",
-            "userName" => $userName,
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi,
-            "totalTutors" => $totalTutors,
-            "totalUsers" => $totalUsers,
-            "siswa" => $siswa,
-            "totalHargaTransaksi" => $totalHargaTransaksi,
-            "jumlahTransaksiPending" => $jumlahTransaksiPending,
-        ]);
-    } else {
-        return redirect()->route('loginnn');
-    }
-}
+//         // Kirim data ke view
+//         return view('dashboardsp', [
+//             "title" => "Dashboard Admin",
+//             "userName" => $userName,
+//             "userImage" => $userImage,
+//             "userProfesi" => $userProfesi,
+//             "totalTutors" => $totalTutors,
+//             "totalUsers" => $totalUsers,
+//             "siswa" => $siswa,
+//             "totalHargaTransaksi" => $totalHargaTransaksi,
+//             "jumlahTransaksiPending" => $jumlahTransaksiPending,
+//         ]);
+//     } else {
+//         return redirect()->route('loginnn');
+//     }
+// }
 
 
 public function user()
