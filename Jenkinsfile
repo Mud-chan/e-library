@@ -1,24 +1,15 @@
 node {
-    checkout scm
-
-    // Deploy env dev
-    stage("Build") {
-        docker.image('php:8.2-cli').inside('-u root') {
-            sh 'composer install --no-interaction --prefer-dist'
-        }
-    }
-
-    // Database Migration
-    stage("Database Migration") {
-        docker.image('php:8.2-cli').inside('-u root') {
-            sh 'php artisan migrate --force'
-        }
-    }
-
-    // Testing
-    stage("Testing") {
-        docker.image('php:8.2-cli').inside('-u root') {
-            sh 'php artisan test'
-        }
-    }
+checkout scm
+// deploy env dev
+stage("Build"){
+docker.image('shippingdocker/php-composer:7.4').inside('-u
+root') {
+sh 'rm composer.lock'
+sh 'composer install'
+}
+}
+// Testing
+docker.image('ubuntu').inside('-u root') {
+sh 'echo "Ini adalah test"'
+}
 }
