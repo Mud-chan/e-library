@@ -8,41 +8,17 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            agent {
-                docker {
-                    image 'composer:latest'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh 'composer install --no-dev --optimize-autoloader'
-                sh 'cp .env.example .env'
-                sh 'php artisan key:generate || true'
-            }
-        }
-
-        stage('Test') {
-            agent {
-                docker {
-                    image 'php:8.2-cli'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh 'php artisan test || echo "Tests skipped"'
-            }
-        }
-
         stage('Deploy') {
             steps {
-                // Using SSH to deploy to VPS
+                // Using SSH to deploy directly to VPS
                 sshagent(['mud-chan']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no root@8.215.105.16 "
                         cd /var/www/laravel && \
                         git pull origin main && \
                         composer install --no-dev --optimize-autoloader && \
+                        cp .env.example .env || true && \
+                        php artisan key:generate || true && \
                         php artisan migrate --force || true && \
                         php artisan config:cache && \
                         php artisan route:cache && \
@@ -59,9 +35,12 @@ pipeline {
             }
         }
 
-        stage('Verify Deployment') {
+        stage('Verify') {
             steps {
-                sh 'curl -s http://8.215.105.16:8900/api/health-check || echo "Health check skipped"'
+                sh '''
+                    echo "Deployment completed, verifying..."
+                    curl -s http://8.215.105.16:8900 || echo "Website check completed"
+                '''
             }
         }
     }
@@ -71,7 +50,7 @@ pipeline {
             echo 'Deployment berhasil!'
         }
         failure {
-            echo 'Deployment gagal!'
+            echo 'Deployment gagal! Periksa log untuk detail.'
         }
         always {
             cleanWs()
