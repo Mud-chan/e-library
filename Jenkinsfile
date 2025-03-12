@@ -1,15 +1,19 @@
 node {
     checkout scm
-    // Deploy env dev
     stage("Build") {
-        docker.image('shippingdocker/php-composer:7.4').inside('-u root') {
-            sh 'rm composer.lock'
-            sh 'composer install'
+        withEnv([
+            'DOCKER_HOST=tcp://docker:2376',
+            'DOCKER_CERT_PATH=/certs/client',
+            'DOCKER_TLS_VERIFY=1'
+        ]) {
+            docker.image('shippingdocker/php-composer:7.4').inside("--network=jenkins") {
+                sh 'rm composer.lock'
+                sh 'composer install'
+            }
         }
     }
-    // Testing
-    stage("Testing") {
-        docker.image('ubuntu').inside('-u root') {
+    stage("Test") {
+        docker.image('ubuntu').inside("--network=jenkins") {
             sh 'echo "Ini adalah test"'
         }
     }
