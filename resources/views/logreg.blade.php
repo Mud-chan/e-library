@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/loginregis.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>Login/Register</title>
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    {{-- <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}"> --}}
 </head>
 {{-- @if (session('error'))
     <script>
@@ -112,8 +112,7 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-image"></i>
-                        <input type="file" placeholder="Image" name="image" id="image" accept="image/*"
-                            >
+                        <input type="file" placeholder="Image" name="image" id="image" accept="image/*">
 
                     </div>
 
@@ -133,19 +132,19 @@
         <div class="panels-container">
             <div class="panel left-panel">
                 <div class="content">
-                    <h3>Login dan bergabung bersama Codinggo</h3>
+                    <h3>Login dan Bergabung Bersama Kami</h3>
                     <p>
-                        Belum memiliki akun Codinggo? Klik tombol dibawah!
+                        Belum memiliki akun? Klik tombol dibawah!
                     </p>
                     <button class="btn transparent" id="sign-up-btn">
-                        Daftar Sekarang
+                        Daftar
                     </button>
                 </div>
                 <img src="img/log.svg" class="image" alt="" />
             </div>
             <div class="panel right-panel">
                 <div class="content">
-                    <h3>Selamat datang di Codinggo!</h3>
+                    <h3>Selamat datang!</h3>
                     <p>
                         Sudah memiliki akun? Klik tombol dibawah!
                     </p>
