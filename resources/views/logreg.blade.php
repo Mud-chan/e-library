@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/loginregis.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <title>Login/Register</title>
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    {{-- <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}"> --}}
 </head>
 {{-- @if (session('error'))
     <script>
