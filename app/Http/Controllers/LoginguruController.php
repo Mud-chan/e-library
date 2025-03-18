@@ -3,6 +3,7 @@
 // app/Http/Controllers/LoginController.php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,7 +11,7 @@ use App\Models\Guru;
 use Illuminate\Support\Facades\Hash; // Import class Hash
 use Illuminate\Support\Facades\Cookie;
 
-class LogintuController extends Controller
+class LoginguruController extends Controller
 {
     public function index()
     {
@@ -29,16 +30,16 @@ class LogintuController extends Controller
             $tutor = Guru::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                Cookie::queue('user_id', $user->id, 60*24*30);
+                Cookie::queue('user_id', $user->id, 60 * 24 * 30);
                 // Jika login berhasil sebagai user
                 return redirect()->intended('/dashboarduser');
             } elseif ($tutor && Hash::check($request->password, $tutor->password)) {
                 if ($tutor->role === 'guru') {
-                    Cookie::queue('tutor_id', $tutor->id, 60*24*30);
+                    Cookie::queue('tutor_id', $tutor->id, 60 * 24 * 30);
                     // Jika login berhasil sebagai tutor guru
                     return redirect()->intended('/dashboardad');
                 } elseif ($tutor->role === 'superadmin') {
-                    Cookie::queue('sp_id', $tutor->id, 60*24*30);
+                    Cookie::queue('sp_id', $tutor->id, 60 * 24 * 30);
                     // Jika login berhasil sebagai tutor superadmin
                     return redirect()->intended('/dashboardsp');
                 } else {
@@ -54,6 +55,4 @@ class LogintuController extends Controller
         // Jika metode bukan POST, kembalikan ke halaman login
         // return view('logreg');
     }
-
 }
-

@@ -22,3 +22,21 @@ Route::post('/logreg', [LoginController::class, 'login']);
 use App\Http\Controllers\EmailController;
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
 Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass');
+
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/dashboardsp', 'PagesControllerSp@dashboard')->name('pages.dashboardsp');
+    // Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
+    // Route::post('/carisiswasp', 'PagesControllerSp@carisiswasp')->name('pages.carisiswasp');
+    // Route::get('/datatransaksi', 'PagesControllerSp@datatransaksi')->name('pages.datatransaksi');
+    // Route::get('/caritransaksi', 'PagesControllerSp@datatransaksi')->name('caritransaksi');
+    // Route::get('/dashboardad', 'PagesControllerAdmin@dashboard')->name('pages.dashboardad');
+    // Route::get('/kursus', 'PagesControllerAdmin@kursus')->name('pages.kursus');
+    // Route::get('/landing', 'PagesController@landing')->name('pages.landing');
+    // Route::get('/datawarga', 'PagesController@datawarga')->name('pages.datawarga');
+    // Route::get('/info', 'PagesController@info')->name('pages.info');
+    // Route::get('/bantuansosial', 'PagesController@bantuansosial')->name('pages.bantuansosial');
+    // Route::get('/keuangan', 'PagesController@keuangan')->name('pages.keuangan');
+    // Route::get('/berita/{slug}',
+    // 'PagesController@luwe')->name('pages.berita');
+});
