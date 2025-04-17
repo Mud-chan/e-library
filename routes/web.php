@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\ProfilespController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,7 @@ Route::post('/update-password', [LoginController::class, 'updatePassword'])->nam
 
 Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
+Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 
 
 use App\Http\Controllers\EmailController;
@@ -41,6 +43,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/berita/{slug}',
     // 'PagesController@luwe')->name('pages.berita');
 });
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
+
+});
+
+// Route::get('/profilesp', [ProfilespController::class, 'profilesp'])->name('tutors.profilesp');
+Route::get('/tutors/editsp', [ProfilespController::class, 'editsp'])->name('tutors.editsp');
+Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('tutors.updatesp');
 
 Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
 Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');

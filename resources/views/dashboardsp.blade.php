@@ -35,8 +35,8 @@
             <span>{{ $userProfesi }}</span>
             <a href="" class="btn">view profile</a>
 
-            <a href="" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                class="delete-btn">log out</a>
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">log out</a>
 
         </div>
 

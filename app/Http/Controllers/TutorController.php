@@ -105,7 +105,7 @@ class TutorController extends Controller
         // Lakukan pencarian jika terdapat input pencarian
         if ($request->has('search')) {
             $keyword = $request->input('search');
-            $playlists->where('name', 'like', '%' . $keyword . '%');
+            $playlists->where('nama', 'like', '%' . $keyword . '%');
         }
 
         // Ambil data tutor sesuai dengan kriteria pencarian
