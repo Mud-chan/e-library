@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\TutorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,3 +41,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/berita/{slug}',
     // 'PagesController@luwe')->name('pages.berita');
 });
+
+Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
+Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');

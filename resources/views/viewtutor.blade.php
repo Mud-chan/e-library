@@ -29,8 +29,8 @@
             <span>{{ $userProfesi }}</span>
             <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
 
-            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">Log out</a>
+            {{-- <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">Log out</a> --}}
 
         </div>
 
@@ -56,15 +56,15 @@
              {{-- <span>{{ $playlist->total_videos }}</span> --}}
              <img src="{{ asset('uploaded_files/' . $playlist->image) }}" alt="">
           </div>
-          <h3 class="title">{{ $playlist->name }}</h3>
-          <p class="description">{{ $playlist->profession }}</p>
+          <h3 class="title">{{ $playlist->nama }}</h3>
+          <p class="description">{{ $playlist->mengampu }}</p>
           <form action="" method="post" class="flex-btn">
             @csrf
              <input type="hidden" name="playlist_id" value="">
              <a href="" class="option-btn">Ubah</a>
              <input type="submit" value="Hapus" class="delete-btn" onclick="return confirm('Anda Yakin Ingin Menghapus Data Tutor?');" name="delete">
           </form>
-          <a href="{{ route('detailsiswa.showPlaylistad', ['id' => $playlist->id]) }}" class="btn">Lihat Tutor</a>
+          <a href="" class="btn">Lihat Tutor</a>
        </div>
        @endforeach
     </div>
