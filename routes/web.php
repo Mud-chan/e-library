@@ -9,7 +9,13 @@ use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ContentspController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/detail', function () {
+    return view('detail');
+});
+Route::get('/bacabuku', function () {
+    return view('bacabuku');
 });
 
 Route::get('/logreg', [RegisterController::class, 'index'])->name('logreg');
