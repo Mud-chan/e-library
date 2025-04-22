@@ -11,9 +11,7 @@ use App\Http\Controllers\ContentspController;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/detail', function () {
-    return view('detail');
-});
+
 Route::get('/bacabuku', function () {
     return view('bacabuku');
 });
@@ -70,3 +68,5 @@ Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->n
 Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
+Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
+

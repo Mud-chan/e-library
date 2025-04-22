@@ -306,6 +306,45 @@ public function uploadContent(Request $request)
         }
     }
 
+
+
+
+    public function DetailBukuForm($videoId)
+    {
+        $tutorId = Cookie::get('sp_id');
+        $tutors = Guru::find($tutorId);
+        $userName = $tutors->nama; // Ambil nama pengguna
+        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $userProfesi = $tutors->mengampu;
+        if (!$tutorId) {
+            return redirect()->route('logreg'); // Redirect to login if tutor_id is not set
+        }
+
+        $content = Buku::where('id', $videoId)
+            ->where('guru_id', $tutorId)
+            ->first();
+
+        if (!$content) {
+            return redirect()->route('contentsp')->with('error', 'Video not found!');
+        }
+
+        // Load the playlists associated with the tutor
+        $playlists = Buku::where('guru_id', $tutorId)->get();
+
+        // Render the update content form view with the $content data and playlists
+        return view('detailbukusp', compact('content', 'playlists'), [
+            "title" => "Content Admin",
+            "userName" => $userName, // Teruskan nama pengguna ke tampilan
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi
+            // Teruskan URL gambar profil pengguna ke tampilan
+        ]);
+    }
+
+
+
+
+
     public function commentsAd()
     {
         // Ambil tutor_id dari cookie

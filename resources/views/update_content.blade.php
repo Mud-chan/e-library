@@ -64,7 +64,7 @@
         <p>Deskripsi Materi <span>*</span></p>
         <textarea name="deskripsi" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10">{{ $content->deskripsi }}</textarea>
 
-        
+
 
         <p>Status Buku <span>*</span></p>
         <select name="tingkatan" class="box" required>
@@ -85,7 +85,7 @@
 
         <p>Unggah Video Materi</p>
         {{-- <video src="../uploaded_files/{{ $content->pdf }}" controls></video> --}}
-        <input type="file" name="pdf" accept="video/*" class="box" id="video">
+        <input type="file" name="pdf" accept="pdf/*" class="box" id="video">
         <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>
 
         <input type="submit" value="Update" name="update" class="btn">

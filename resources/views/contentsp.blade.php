@@ -85,7 +85,8 @@
                         <a href="{{ route('update.content', ['videoId' => $content->id]) }}" class="option-btn">Ubah</a>
                         <button type="submit" class="delete-btn" onclick="return confirm('Anda Yakin Ingin Menghapus Buku?');">Hapus</button>
                     </form>
-                    <a href="" class="btn">Baca Buku</a>
+                    <a href="{{ route('detailbukusp.content', ['videoId' => $content->id]) }}" class="btn">Baca Buku</a>
+
                 </div>
             @endforeach
         @else
