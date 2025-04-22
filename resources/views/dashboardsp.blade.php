@@ -26,7 +26,7 @@
             <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
-      
+
 
         <div class="profile">
 
@@ -35,8 +35,8 @@
             <span>{{ $userProfesi }}</span>
             <a href="" class="btn">view profile</a>
 
-            <a href="" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                class="delete-btn">log out</a>
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">log out</a>
 
         </div>
 
@@ -68,7 +68,7 @@
                             <i class='bx bx-book-open'></i>
                             <span class="info">
                                 <h3>
-                                    {{-- {{ $totalTutors }} --}}
+                                    {{ $totalTutors }}
                                 </h3>
                                 <p>Total Tutor</p>
                             </span>
@@ -79,7 +79,7 @@
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
-                                    {{-- {{ $totalUsers }} --}}
+                                    {{ $totalUsers }}
                                 </h3>
                                 <p>Total Siswa</p>
                             </span>

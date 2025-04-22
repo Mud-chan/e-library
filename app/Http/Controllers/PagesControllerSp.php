@@ -21,9 +21,9 @@ class PagesControllerSp extends Controller
     {
         $tutorsId = Cookie::get('sp_id'); // Ambil ID pengguna dari cookie
         $tutors = Guru::find($tutorsId); // Temukan pengguna berdasarkan ID
-        $userName = $tutors->name; // Ambil nama pengguna
+        $userName = $tutors->nama; // Ambil nama pengguna
         $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->profession;
+        $userProfesi = $tutors->mengampu;
 
         return view('components.spheader', [
             "title" => "Dashboard Admin",
@@ -41,9 +41,9 @@ class PagesControllerSp extends Controller
     // Temukan data tutor berdasarkan ID
     $tutor = Guru::find($tutorId);
     if ($tutor) {
-        $userName = $tutor->name;
+        $userName = $tutor->nama;
         $userImage = $tutor->image;
-        $userProfesi = $tutor->profession;
+        $userProfesi = $tutor->mengampu;
         // Hitung total tutor
         $totalTutors = Guru::count();
 

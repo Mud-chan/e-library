@@ -5,117 +5,92 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Likes;
 use App\Models\Guru;
-use App\Models\Buku;
+use App\Models\Content;
 use App\Models\Bookmark;
 use App\Models\Comments;
-// use App\Models\Playlist;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
 
-class PlaylistadController extends Controller
+class SiswassssController extends Controller
 {
     public function index($id)
     {
-        $tutorsId = Cookie::get('tutor_id'); // Ambil ID pengguna dari cookie
+        $tutorsId = Cookie::get('sp_id'); // Ambil ID pengguna dari cookie
         $tutors = Guru::find($tutorsId); // Temukan pengguna berdasarkan ID
-        $userName = $tutors->name; // Ambil nama pengguna
+        $userName = $tutors->nama; // Ambil nama pengguna
         $userImage = $tutors->image;
-        $userProfesi = $tutors->profession;
+        $userProfesi = $tutors->mengampu;
 
-        // // Ambil playlist berdasarkan ID
-        // $playlist = Buku::find($id);
-        // // Ambil semua konten (videos) terkait dengan playlist
-        // $videos = Buku::where('id', $playlist->id)
-        //                 //  ->where('status', 'active')
-        //                  ->orderByDesc('date')
-        //                  ->get();
-        //                  dd(DB::getQueryLog());
-        // // Mengambil data tutor yang terkait dengan playlist
-        // $tutor = Guru::find($playlist->tutor_id);
-        $buku = Buku::all();
-        $bukuJudul = $buku->judul;
-        $bukuImage = $buku->thumb;
-
-        return view('playlistad', compact('tutor', 'userName', 'userImage', 'userProfesi', 'bukuJudul', 'buku', 'bukuImage'));
-    }
-
-    public function cariplaydalamad(Request $request, $id)
-    {
-        $tutorsId = Cookie::get('tutor_id'); // Ambil ID pengguna dari cookie
-        $tutors = Guru::find($tutorsId); // Temukan pengguna berdasarkan ID
-        $userName = $tutors->name; // Ambil nama pengguna
-        $userImage = $tutors->image;
-        $userProfesi = $tutors->profession;
-
-        // Ambil playlist berdasarkan ID
-        $buku = Buku::all();
-
-        // Lakukan pencarian jika terdapat input pencarian
-        if ($request->has('search')) {
-            $keyword = $request->input('search');
-            $bukucari = Buku::where(function ($query) use ($keyword) {
-                                 $query->where('judul', 'LIKE', "%$keyword%")
-                                       ->orWhere('deskripsi', 'LIKE', "%$keyword%")
-                                       ->orWhere('tingkatan', 'LIKE', "%$keyword%")
-                                       ->orWhere('kategori', 'LIKE', "%$keyword%");
-                             })
-                            //  ->where('status', 'active')
-                             ->orderByDesc('date')
-                             ->get();
-        } else {
-            // Ambil semua konten (videos) terkait dengan playlist jika tidak ada pencarian
-            // $videos = Buku::where('playlist_id', $playlist->id)
-            //                  ->where('status', 'active')
-            //                  ->orderByDesc('date')
-            //                  ->get();
-        }
-
-        // Mengambil data tutor yang terkait dengan playlist
-        // $tutor = Tutors::find($playlist->tutor_id);
-
-        return view('playlistad', compact('playlist', 'videos', 'tutor', 'userName', 'userImage', 'userProfesi'));
+        $tutor = Guru::find($id);
+        // $videos = User::where('id_guru', $tutor->id)->get();
+        // return view('detailsiswa', compact('videos', 'tutor', 'userName', 'userImage', 'userProfesi'));
     }
 
 
-    public function showPlaylistad(Request $request, $bukuId)
+    public function carisiswadalam(Request $request, $id)
+{
+    $tutorsId = Cookie::get('sp_id'); // Ambil ID pengguna dari cookie
+    $tutors = Guru::find($tutorsId); // Temukan pengguna berdasarkan ID
+    $userName = $tutors->nama; // Ambil nama pengguna
+    $userImage = $tutors->image;
+    $userProfesi = $tutors->mengampu;
+
+    $tutor = Guru::find($id);
+    $videos = Guru::where('id', $tutor->id);
+
+    // Lakukan pencarian jika terdapat input pencarian
+    if ($request->has('search')) {
+        $keyword = $request->input('search');
+        $videos->where('name', 'like', '%' . $keyword . '%');
+    }
+
+    // Ambil data video sesuai dengan kriteria pencarian
+    $videos = $videos->get();
+
+    return view('detailsiswa', compact('videos', 'tutor', 'userName', 'userImage', 'userProfesi'));
+}
+
+
+
+
+    public function showPlaylistad(Request $request, $playlistId)
     {
         // Ambil data playlist berdasarkan ID
-        $playlist = Buku::where('id', $bukuId)
-            // ->where('status', 'active')
+        $tutor = Guru::where('id', $playlistId)
             ->first();
 
         // Periksa jika playlist ditemukan
-        if ($playlist) {
-            // Lakukan operasi untuk menambah atau menghapus bookmark playlist
-            $user_id = $request->cookie('user_id');
-            $bookmark = Bookmark::where('id_siswa', $user_id)
-                ->where('id_buku', $bukuId)
-                ->exists();
+        if ($tutor) {
+            // // Lakukan operasi untuk menambah atau menghapus bookmark playlist
+            // $user_id = $request->cookie('sp_id');
+            // $bookmark = Bookmark::where('user_id', $user_id)
+            //     ->where('playlist_id', $playlistId)
+            //     ->exists();
 
-            // Jika user telah bookmark playlist, tandai sebagai sudah disimpan
-            $isSaved = $bookmark ? true : false;
+            // // Jika user telah bookmark playlist, tandai sebagai sudah disimpan
+            // $isSaved = $bookmark ? true : false;
 
             // Assign videos jika playlist ditemukan
             // $videos = $playlist->videos;
-            $videos = Buku::all()
-                         ->orderByDesc('date')
+            $videos = User::where('tutor_id', $tutor->id)
                          ->get();
                         //  dd(DB::getQueryLog());
 
             // Mengambil data tutor yang terkait dengan playlist
-            $tutor = Guru::find($playlist->tutor_id);
+            // $tutor = Tutors::find($playlist->tutor_id);
 
             // Mengambil informasi pengguna dari cookie
-            $tutorsId = Cookie::get('tutor_id');
+            $tutorsId = Cookie::get('sp_id');
             $tutors = Guru::find($tutorsId);
-            $userName = $tutors->nama;
+            $userName = $tutors->name;
             $userImage = $tutors->image;
-            $userProfesi = $tutors->mengampu;
+            $userProfesi = $tutors->profession;
 
             // Tampilkan view playlist dengan data yang diperlukan
-            return view('playlistad', compact('playlist', 'videos', 'tutor', 'isSaved', 'userName', 'userImage', 'userProfesi'));
+            return view('detailsiswa', compact('videos', 'tutor', 'userName', 'userImage', 'userProfesi'));
         } else {
             // Jika playlist tidak ditemukan, tampilkan pesan error
             return view('playlist_not_found');
