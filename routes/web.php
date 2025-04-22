@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
+use App\Http\Controllers\ContentspController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -54,3 +55,12 @@ Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('
 
 Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
 Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');
+
+
+Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
+Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
+Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
+Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
+Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
+Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
+Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');

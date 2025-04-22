@@ -14,18 +14,24 @@ class Buku extends Model
     public $timestamps = false; // tidak menggunakan kolom timestamps
 
     protected $fillable = [
-        'id ', 'id_guru', 'judul','deskripsi','kategori','kategori','tingkatan','thumb','pdf'
+        'id',
+        'guru_id',
+        'judul',
+        'deskripsi',
+        'kategori',
+        'tingkatan',
+        'thumb',
+        'pdf',
+        'date'
     ];
 
     public function guru()
     {
-    return $this->belongsTo(Guru::class, 'id_guru');
+        return $this->belongsTo(Guru::class, 'guru_id', 'id');
     }
 
     public function peminjaman()
     {
         return $this->hasMany(Peminjaman::class, 'id_buku');
     }
-
 }
-

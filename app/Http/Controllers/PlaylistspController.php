@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
 
-class PlaylistadController extends Controller
+class PlaylistspController extends Controller
 {
     public function index($id)
     {
