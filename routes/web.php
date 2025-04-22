@@ -14,6 +14,9 @@ Route::get('/detail', function () {
 Route::get('/bacabuku', function () {
     return view('bacabuku');
 });
+Route::get('/katalogbuku', function () {
+    return view('katalogbuku');
+});
 
 Route::get('/logreg', [RegisterController::class, 'index'])->name('logreg');
 Route::post('/logreg', [RegisterController::class, 'store']);
