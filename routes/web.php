@@ -6,7 +6,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/detail', function () {
+    return view('detail');
+});
+Route::get('/bacabuku', function () {
+    return view('bacabuku');
 });
 
 Route::get('/logreg', [RegisterController::class, 'index'])->name('logreg');
