@@ -37,6 +37,7 @@ Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass')
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/dashboardsp', 'PagesControllerSp@dashboard')->name('pages.dashboardsp');
+    Route::get('/katalogbuku', 'PagesControllerSp@katalogbuku')->name('pages.katalogbuku');
     // Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
     // Route::post('/carisiswasp', 'PagesControllerSp@carisiswasp')->name('pages.carisiswasp');
     // Route::get('/datatransaksi', 'PagesControllerSp@datatransaksi')->name('pages.datatransaksi');
@@ -83,6 +84,4 @@ Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_s
 Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'])->name('update.siswa.form');
 Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');
 
-Route::get('/katalogbuku', function () {
-    return view('katalogbuku');
-});
+

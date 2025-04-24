@@ -25,7 +25,7 @@ class SiswaController extends Controller
         $userName = $tutors->nama; // Ambil nama pengguna
         $userImage = $tutors->image; // Ambil URL gambar profil pengguna
         $userProfesi = $tutors->mengampu;
-        $contents = User::paginate(5);
+        $contents = User::paginate(7);
         return view('viewsiswa', [
             "title" => "Data Tutors",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
@@ -53,11 +53,11 @@ class SiswaController extends Controller
         // Lakukan pencarian jika terdapat input pencarian
         if ($request->has('search')) {
             $keyword = $request->input('search');
-            $contents->where('nama', 'like', '%' . $keyword . '%')->paginate(5);
+            $contents->where('nama', 'like', '%' . $keyword . '%')->paginate(7);
         }
 
         // Ambil data siswa sesuai dengan kriteria pencarian
-        $contents = $contents->paginate(5);
+        $contents = $contents->paginate(7);
 
         return view('viewsiswa', [
             "title" => "Data Siswa",

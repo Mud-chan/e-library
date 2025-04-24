@@ -31,7 +31,7 @@ class ContentspController extends Controller
             return redirect()->route('logreg'); // Redirect to login if tutor_id is not set
         }
 
-        $contents = Buku::orderBy('date', 'DESC')->paginate(8);
+        $contents = Buku::orderBy('date', 'DESC')->paginate(7);
 
 
         return view('contentsp', compact('contents'), [
@@ -64,11 +64,11 @@ class ContentspController extends Controller
             $keyword = $request->input('search');
             $contents = Buku::where('judul', 'LIKE', "%$keyword%")
                 ->orderBy('date', 'DESC')
-                ->paginate(5);
+                ->paginate(7);
         } else {
             $contents = Buku::where('guru_id', $tutor_id)
                 ->orderBy('date', 'DESC')
-                ->paginate(5);
+                ->paginate(7);
         }
 
         return view('contentsp', compact('contents'), [

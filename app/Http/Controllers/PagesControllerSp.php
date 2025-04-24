@@ -220,7 +220,36 @@ class PagesControllerSp extends Controller
 //     return $this->datatransaksi($request);
 // }
 
+public function katalogbuku()
+{
+    // Ambil ID tutor dari cookie
+    $tutorId = Cookie::get('user_id');
+    // Temukan data tutor berdasarkan ID
+    $tutor = User::find($tutorId);
+    if ($tutor) {
+        $userName = $tutor->nama;
+        $userImage = $tutor->image;
+        $userProfesi = $tutor->email;
+        $contents = Buku::orderBy('date', 'DESC')->paginate(7);
 
+
+        return view('katalogbuku', [
+            "title" => "Dashboard Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "contents" => $contents,
+            "totalPages" => $contents->lastPage(),
+            "currentPage" => $contents->currentPage()
+
+            // "totalHargaTransaksi" => $totalHargaTransaksi,
+            // "jumlahTransaksiPending" => $jumlahTransaksiPending,
+            // "dtlsiswa"=> $dtlsiswa
+        ]);
+    } else {
+        return redirect()->route('loginnn');
+    }
+}
 
 
 }
