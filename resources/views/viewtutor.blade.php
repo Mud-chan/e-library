@@ -47,7 +47,7 @@
           <a href="{{ url('/tambahtutor') }}" class="btn">Tambah</a>
        </div>
        @foreach($playlists as $playlist)
-       <div class="box">
+       <div class="box" style="text-align: center">
           <div class="flex">
              {{-- <div><i class="fas fa-circle-dot" style="{{ $playlist->status == 'active' ? 'color: limegreen' : 'color: red' }}"></i><span style="{{ $playlist->status == 'active' ? 'color: limegreen' : 'color: red' }}">{{ $playlist->status }}</span></div>
              <div><i class="fas fa-calendar"></i><span>{{ $playlist->date }}</span></div> --}}
@@ -56,8 +56,9 @@
              {{-- <span>{{ $playlist->total_videos }}</span> --}}
              <img src="{{ asset('uploaded_files/' . $playlist->image) }}" alt="">
           </div>
-          <h3 class="title">{{ $playlist->nama }}</h3>
-          <p class="description">{{ $playlist->mengampu }}</p>
+          <h3 class="title">Nama : {{ $playlist->nama }}</h3>
+          <h4 class="title">{{ $playlist->email }} </h4>
+          <h4 class="title">{{ $playlist->mengampu }}</h4>
           <form action="" method="post" class="flex-btn">
             @csrf
              <input type="hidden" name="playlist_id" value="">

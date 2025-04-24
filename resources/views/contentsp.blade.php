@@ -2,6 +2,7 @@
 @section('main')
 <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}">
 
+
 {{-- <script src="{{ asset('assets/js/admin_script.js') }}"></script> --}}
 <header class="header">
     <section class="flex">
@@ -9,15 +10,23 @@
 
         <form action="{{ route('caricontentsp') }}" method="post" class="search-form">
             @csrf
-            <input type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
+            <input  type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
+            {{-- <div class="gcse-search"></div>  --}}
+
         </form>
+        <div class="gcse-search"></div>
+
+
+
+{{--
+        <div class="gcse-search"></div> --}}
 
         <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
+
         </div>
 
         <div class="profile">
@@ -175,4 +184,7 @@
         window.location.href = url.toString();
     }
 </script>
+
+
+
 @endsection

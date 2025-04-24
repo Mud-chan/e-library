@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Cookie;
 // use App\Models\Likes;
 use App\Models\Comments;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Bus;
 
 class ContentspController extends Controller
@@ -349,7 +350,7 @@ public function uploadContent(Request $request)
     {
         // Ambil tutor_id dari cookie
         $tutor_id = request()->cookie('tutor_id');
-        $tutors = Tutors::find($tutor_id);
+        $tutors = Guru::find($tutor_id);
         $userName = $tutors->name; // Ambil nama pengguna
         $userImage = $tutors->image; // Ambil URL gambar profil pengguna
         $userProfesi = $tutors->profession;
@@ -358,12 +359,12 @@ public function uploadContent(Request $request)
         if ($tutor_id) {
             // Dapatkan semua komentar yang terkait dengan tutor_id tersebut
             $comments = Comments::where('tutor_id', $tutor_id)->orderBy('date', 'DESC')->paginate(10);
-            $playlist = Playlist::where('id' . $comments);
+            $playlist = Buku::where('id' . $comments);
 
             // Ambil nama pengguna untuk setiap komentar
             foreach ($comments as $comment) {
                 $comment->user_name = User::find($comment->user_id)->name;
-                $comment->materi_name = Content::find($comment->content_id)->title;
+                $comment->materi_name = Buku::find($comment->content_id)->title;
             }
 
             // Kirim data komentar ke view
@@ -380,6 +381,42 @@ public function uploadContent(Request $request)
             // Redirect ke halaman login jika tutor_id tidak tersedia di cookie
             return redirect()->route('logreg');
         }
+    }
+
+
+    public function storeComment(Request $request, $videoId)
+    {
+
+        $tutor_id = Cookie::get('sp_id');
+        $tutors = Guru::find($tutor_id);
+        $userid = $tutors->id;
+        // Validasi data yang diterima dari formulir
+        $validator = Validator::make($request->all(), [
+            'content_id' => 'required|exists:contents,id',
+            'comment_box' => 'required|max:1000',
+        ]);
+
+        // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan kesalahan
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        $content = Buku::findOrFail($request->input('content_id'));
+        // Simpan komentar ke dalam database
+        $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter
+
+        // Membuat komentar dengan menggunakan karakter random sebagai ID
+        Comments::create([
+            'id' => $randomId,
+            'id_buku' => $request->input('content_id'),
+            'id_siswa' => $userid,
+            'comment' => $request->input('comment_box'),
+            'date' => Carbon::now()->format('Y-m-d'),
+
+        ]);
+
+        // Redirect kembali ke halaman detailbukusp setelah komentar disimpan
+        return redirect()->route('detailbukusp.content', ['videoId' => $videoId])
+        ->with('success', 'Komentar berhasil ditambahkan!');
     }
 
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detail Artikel</title>
+  <title>Detail Buku</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
@@ -68,8 +68,8 @@
       </div>
 
       <div class="tags">
-        <span>Kategori : </span><span>{{ $content->kategori }}</span>
-        <span>{{ $content->tingkatan ?? 'Tidak ada tingkatan' }}</span>
+        <span>Kategori : {{ $content->kategori }}</span>
+        <span>Kelas : {{ $content->tingkatan ?? 'Tidak ada tingkatan' }}</span>
       </div>
 
     {{-- <div class="chapters">
@@ -85,20 +85,19 @@
         </div>
     </div>
     <div class="comment-section">
-        <textarea rows="3" placeholder="Write a comment............"></textarea>
-        <button>Submit</button>
+        <form action="{{ route('video.storeComment', ['videoId' => $content->id]) }}" method="post" >
+            @csrf
+            <input type="hidden" name="content_id" value="{{ $content->id }}">
+            <textarea rows="3" placeholder="Write a comment............" name="comment_box"></textarea>
+            <button name="add_comment">Submit</button>
+        </form>
 
         <div class="comments">
-          <div class="comment">
-            <div class="circle"></div>
-            <div class="content">
-              <p><strong>Lorem Ip</strong><br/>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-              <div class="meta">12.30 Saturday 18 August 2025</div>
-            </div>
-          </div>
+          
 
           <div class="comment">
-            <div class="circle"></div>
+            <img class="circle" src="{{ asset('uploaded_files/' . $content->thumb) }}" alt="">
+            {{-- <div class="circle"></div> --}}
             <div class="content">
               <p><strong>Lorem Ip</strong><br/>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
               <div class="meta">12.30 Saturday 18 August 2025</div>

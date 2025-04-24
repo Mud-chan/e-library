@@ -14,7 +14,7 @@ class Comments extends Model
     public $timestamps = false; // tidak menggunakan kolom timestamps
 
     protected $fillable = [
-        'id', 'id_buku', 'id_siwa', 'comment', 'date'
+        'id', 'id_buku', 'id_siswa', 'comment', 'date'
     ];
 }
 
