@@ -12,7 +12,9 @@ use App\Http\Controllers\SiswaController;
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/detail', function () {
+    return view('detail');
+});
 Route::get('/bacabuku', function () {
     return view('bacabuku');
 });
