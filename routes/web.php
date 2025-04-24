@@ -81,3 +81,6 @@ Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_s
 Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'])->name('update.siswa.form');
 Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');
 
+Route::get('/katalogbuku', function () {
+    return view('katalogbuku');
+});
