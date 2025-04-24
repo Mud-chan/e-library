@@ -89,14 +89,19 @@ h3 {
 }
 
 .grid-buku {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 30px; */
+
+  display: flex;
+  gap: 20px;
+
 }
 
 .kartu-buku {
   background: white;
+  width: 20vw;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 10px;

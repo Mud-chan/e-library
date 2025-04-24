@@ -74,7 +74,7 @@
           <span class="badge">Fiksi</span>
         </div>
       </div>
-      
+
     </div>
 
     <h3><span class="ikon-bulet"></span> Eksplorasi Genre</h3>
