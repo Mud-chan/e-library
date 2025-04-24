@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\TutorController;
+use App\Http\Controllers\ProfilespController;
+use App\Http\Controllers\ContentspController;
+use App\Http\Controllers\SiswaController;
 
 Route::get('/', function () {
     return view('index');
@@ -23,6 +27,7 @@ Route::post('/update-password', [LoginController::class, 'updatePassword'])->nam
 
 Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
+Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 
 
 use App\Http\Controllers\EmailController;
@@ -46,3 +51,33 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Route::get('/berita/{slug}',
     // 'PagesController@luwe')->name('pages.berita');
 });
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
+
+});
+
+// Route::get('/profilesp', [ProfilespController::class, 'profilesp'])->name('tutors.profilesp');
+Route::get('/tutors/editsp', [ProfilespController::class, 'editsp'])->name('tutors.editsp');
+Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('tutors.updatesp');
+
+Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
+Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');
+
+
+Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
+Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
+Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
+Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
+Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
+Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
+Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
+Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
+Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
+
+Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::post('/carisiswa', [SiswaController::class, 'carisiswa'])->name('siswa.carisiswa');
+Route::get('/add-siswa', [SiswaController::class, 'showAddSiswaform'])->name('add_siswa');
+Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upload_siswa');
+Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_siswa');
+Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'])->name('update.siswa.form');
+Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');

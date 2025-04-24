@@ -109,8 +109,8 @@ class RegadController extends Controller
         ]);
 
         // Proses update data tutor
-        if ($request->filled('name')) {
-            $tutor->name = $request->name;
+        if ($request->filled('nama')) {
+            $tutor->nama = $request->nama;
         }
 
         if ($request->filled('mengampu')) {
