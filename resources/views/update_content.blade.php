@@ -83,7 +83,7 @@
         <input type="file" name="thumb" accept="image/*" class="box" id="image">
         <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
 
-        <p>Unggah Video Materi</p>
+        <p>Unggah Buku (pdf)</p>
         {{-- <video src="../uploaded_files/{{ $content->pdf }}" controls></video> --}}
         <input type="file" name="pdf" accept="pdf/*" class="box" id="video">
         <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>

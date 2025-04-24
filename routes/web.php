@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ContentspController;
+use App\Http\Controllers\SiswaController;
 
 Route::get('/', function () {
     return view('index');
@@ -69,4 +70,12 @@ Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
+Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
 
+Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::post('/carisiswa', [SiswaController::class, 'carisiswa'])->name('siswa.carisiswa');
+Route::get('/add-siswa', [SiswaController::class, 'showAddSiswaform'])->name('add_siswa');
+Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upload_siswa');
+Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_siswa');
+Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'])->name('update.siswa.form');
+Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');

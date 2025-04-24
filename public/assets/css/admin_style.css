@@ -307,9 +307,22 @@ section{
    margin-bottom: .5rem;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 .header .flex .profile h3{
    font-size: 2rem;
    color: var(--black);
+   
 }
 
 .header .flex .profile span{
