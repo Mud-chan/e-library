@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+        <img src="{{ asset('images/cek.jpg') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
         <p class="judul">Belajar Ganti Busi</p>
         <div class="label-genre">
           <span class="badge">Budaya</span>

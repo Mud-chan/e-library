@@ -96,6 +96,7 @@ h3 {
   display: flex;
   gap: 20px;
   justify-content: center;
+  margin-bottom: 100px;
 
 }
 
@@ -110,7 +111,7 @@ h3 {
 
 .kartu-buku img {
   width: 100%;
-  height: 200px;
+  height: 80%;
   border-radius: 10px;
   object-fit: cover;
 }
