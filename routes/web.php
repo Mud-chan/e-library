@@ -69,6 +69,7 @@ Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->n
 Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
+
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
 Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
 
@@ -79,3 +80,4 @@ Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upl
 Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_siswa');
 Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'])->name('update.siswa.form');
 Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');
+
