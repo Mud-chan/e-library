@@ -93,15 +93,15 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   margin-bottom: 30px; */
-
   display: flex;
   gap: 20px;
+  justify-content: center;
 
 }
 
 .kartu-buku {
   background: white;
-  width: 20vw;
+  width: 250px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 10px;
@@ -209,4 +209,14 @@ h3 {
   .pagination ul li:last-child:hover{
     color: #fff;
     background: #0391c5;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+
+    .grid-buku {
+
+        flex-wrap: wrap;
+      }
+
   }
