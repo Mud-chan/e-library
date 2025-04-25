@@ -12,15 +12,12 @@
             @csrf
             <input  type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
-            {{-- <div class="gcse-search"></div>  --}}
+
 
         </form>
         <div class="gcse-search"></div>
 
 
-
-{{--
-        <div class="gcse-search"></div> --}}
 
         <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
