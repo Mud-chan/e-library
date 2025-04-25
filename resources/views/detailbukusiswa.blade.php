@@ -110,8 +110,8 @@
                     <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
                     <div class="content">
                       <p><strong>{{ $user->nama }}</strong><br/>{{ $comment->comment }}</p>
-                      <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
-                      <button style="background-color: green; padding: 5px 9px; font-size:12px;">Edit</button>
+                      <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format(' l d F Y') }}</div>
+                      <button style="background-color: #2ecc71; padding: 5px 9px; font-size:12px;">Edit</button>
                       <button style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
                     </div>
                   </div>
