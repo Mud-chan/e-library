@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Guru;
 use App\Models\Buku;
+use App\Models\Bookmark;
 use App\Models\Dtl_Siswa;
 use App\Models\Comments;
 use App\Models\Peminjaman;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 
 class PagesControllerSp extends Controller
@@ -255,6 +257,32 @@ public function katalogbuku()
     }
 }
 
+public function toggleBookmark(Request $request, $id)
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Cek apakah bookmark sudah ada
+    $bookmark = Bookmark::where('id_siswa', $userId)->where('id_buku', $id)->first();
+
+    if ($bookmark) {
+        // Jika sudah di-bookmark, hapus
+        $bookmark->delete();
+        return redirect()->back()->with('success', 'Bookmark dihapus!');
+    } else {
+        // Jika belum, tambahkan
+        Bookmark::create([
+            'id_bookmark' => Str::random(20), // ID acak untuk bookmark
+            'id_siswa' => $userId,
+            'id_buku' => $id
+        ]);
+        return redirect()->back()->with('success', 'Berhasil di-bookmark!');
+    }
+}
+
 public function DetailBukusiswa($videoId)
 {
     $tutorId = Cookie::get('user_id');
@@ -275,8 +303,10 @@ public function DetailBukusiswa($videoId)
     $comments = Comments::where('id_buku', $videoId)->get();
     $userIds = $comments->pluck('id_siswa')->unique();
     $users = User::whereIn('id', $userIds)->get();
+    $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
 
-    return view('detailbukusiswa', compact('content', 'comments', 'users'), [
+
+    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked'), [
         "title" => "Detail Buku Siswa",
         "userName" => $userName,
         "userImage" => $userImage,

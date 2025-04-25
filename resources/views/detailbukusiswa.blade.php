@@ -64,7 +64,14 @@
           <h3>{{ $content->judul }}</h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
-        <a href="#" class="bookmark">🔖 BookMark</a>
+
+        <form action="{{ route('buku.bookmark', ['id' => $content->id]) }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit" class="bookmark" style="background:none; border:none; cursor:pointer; color: black; font-size: 16px;">
+                {{ $isBookmarked ? '🔖  Bookmarked' : '🔖  Bookmark' }}
+            </button>
+
+        </form>
       </div>
 
       <div class="tags">
