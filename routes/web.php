@@ -31,6 +31,8 @@ Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 
 
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PagesControllerSp;
+
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
 Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass');
 
@@ -85,3 +87,5 @@ Route::get('/update-siswa/{siswaId}', [SiswaController::class, 'updateSiswaForm'
 Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->name('update.siswa');
 
 
+Route::get('/detail-buku-siswa/{videoId}', [PagesControllerSp::class, 'DetailBukusiswa'])->name('detailbukusiswa.content');
+Route::post('/video/{videoId}/store-comment-siswa', [PagesControllerSp::class, 'storeCommentsiswa'])->name('video.storeCommentsiswa');

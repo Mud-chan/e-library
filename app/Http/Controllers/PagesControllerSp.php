@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 
 class PagesControllerSp extends Controller
 {
@@ -250,6 +254,71 @@ public function katalogbuku()
         return redirect()->route('loginnn');
     }
 }
+
+public function DetailBukusiswa($videoId)
+{
+    $tutorId = Cookie::get('user_id');
+    if (!$tutorId) {
+        return redirect()->route('logreg');
+    }
+
+    $tutors = User::find($tutorId);
+    $userName = $tutors->nama;
+    $userImage = $tutors->image;
+    $userProfesi = $tutors->email;
+
+    $content = Buku::find($videoId);
+    if (!$content) {
+        return redirect()->route('contentsp')->with('error', 'Buku tidak ditemukan!');
+    }
+
+    $comments = Comments::where('id_buku', $videoId)->get();
+    $userIds = $comments->pluck('id_siswa')->unique();
+    $users = User::whereIn('id', $userIds)->get();
+
+    return view('detailbukusiswa', compact('content', 'comments', 'users'), [
+        "title" => "Detail Buku Siswa",
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $tutorId // penting ini, buat perbandingan user login
+    ]);
+}
+
+    public function storeCommentsiswa(Request $request, $videoId)
+    {
+
+        $tutorId = Cookie::get('user_id');
+        $tutors = User::find($tutorId);
+        $userid = $tutors->id;
+        // Validasi data yang diterima dari formulir
+        $validator = Validator::make($request->all(), [
+            'content_id' => 'required|exists:contents,id',
+            'comment_box' => 'required|max:1000',
+        ]);
+
+        // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan kesalahan
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        $content = Buku::findOrFail($request->input('content_id'));
+        // Simpan komentar ke dalam database
+        $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter
+
+        // Membuat komentar dengan menggunakan karakter random sebagai ID
+        Comments::create([
+            'id' => $randomId,
+            'id_buku' => $request->input('content_id'),
+            'id_siswa' => $userid,
+            'comment' => $request->input('comment_box'),
+            'date' => Carbon::now()->format('Y-m-d'),
+
+        ]);
+
+        // Redirect kembali ke halaman detailbukusp setelah komentar disimpan
+        return redirect()->route('detailbukusiswa.content', ['videoId' => $videoId])
+        ->with('success', 'Komentar berhasil ditambahkan!');
+    }
 
 
 }

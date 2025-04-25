@@ -332,12 +332,17 @@ public function uploadContent(Request $request)
         // Load the playlists associated with the tutor
         $playlists = Buku::where('guru_id', $tutorId)->get();
 
+        $comments = Comments::where('content_id', $videoId)->get();
+        $userIds = $comments->pluck('user_id');
+        $users = User::whereIn('id', $userIds)->get();
+
         // Render the update content form view with the $content data and playlists
-        return view('detailbukusp', compact('content', 'playlists'), [
+        return view('detailbukusp', compact('content', 'playlists', 'comments', 'users'), [
             "title" => "Content Admin",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
             "userImage" => $userImage,
-            "userProfesi" => $userProfesi
+            "userProfesi" => $userProfesi,
+            'comments' => $comments,
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
     }

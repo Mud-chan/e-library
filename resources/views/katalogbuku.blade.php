@@ -58,23 +58,30 @@
 
     <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
     <div class="grid-buku">
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Talaga Warna</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Rakyat</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
 
+      @if ($contents->count() > 0)
+            @foreach ($contents as $content)
+            <div class="kartu-buku">
+                <a href="{{ route('detailbukusiswa.content', ['videoId' => $content->id]) }}" style="text-decoration: none; color: black;">
+                    <img src="../uploaded_files/{{ $content->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                    <p class="judul">{{ $content->judul }}</p>
+                    <div class="label-genre">
+                    <span class="badge">{{ $content->kategori }}</span>
+                    <span class="badge">{{ $content->tingkatan }}</span>
+                    </div>
+                </a>
+            </div>
+
+            @endforeach
+        @else
+            <p class="empty">Tidak ada buku yang ditambahkan!</p>
+        @endif
+
+    </div>
+    <div class="page">
+        <div class="pagination">
+            <ul> <!-- pages or li are comes from javascript --> </ul>
+        </div>
     </div>
 
     <h3><span class="ikon-bulet"></span> Eksplorasi Genre</h3>
@@ -87,5 +94,79 @@
     </div>
   </section>
 
+  <script>
+    function closeModalAndClearSession() {
+        document.getElementById('success-message').style.display = 'none';
+        // Tambahkan kode untuk menghapus sesi jika diperlukan
+    }
+
+    const element = document.querySelector(".pagination ul");
+    const totalPages = {{ $totalPages }};
+    const currentPage = {{ $currentPage }};
+
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, page) {
+        let liTag = '';
+        let active;
+        let beforePage = page - 1;
+        let afterPage = page + 1;
+        if (page > 1) {
+            liTag += `<li class="newbtn prev" onclick="changePage(${page - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (page > 2) {
+            liTag += `<li class="first numb" onclick="changePage(1)"><span>1</span></li>`;
+            if (page > 3) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        // if (page == totalPages) {
+        //     beforePage = beforePage - 2;
+        // } else if (page == totalPages - 1) {
+        //     beforePage = beforePage - 1;
+        // }
+        if (page == 1) {
+            afterPage = afterPage + 2;
+        } else if (page == 2) {
+            afterPage = afterPage + 1;
+        }
+
+        for (var plength = beforePage; plength <= afterPage; plength++) {
+            if (plength > totalPages) {
+                continue;
+            }
+            if (plength == 0) {
+                plength = plength + 1;
+            }
+            if (page == plength) {
+                active = "active";
+            } else {
+                active = "";
+            }
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength}</span></li>`;
+        }
+
+        if (page < totalPages - 1) {
+            if (page < totalPages - 2) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+            liTag += `<li class="last numb" onclick="changePage(${totalPages})"><span>${totalPages}</span></li>`;
+        }
+
+        if (page < totalPages) {
+            liTag += `<li class="newbtn next" onclick="changePage(${page + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+    function changePage(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.location.href = url.toString();
+    }
+</script>
 </body>
 </html>
