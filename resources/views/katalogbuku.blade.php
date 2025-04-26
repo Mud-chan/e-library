@@ -35,6 +35,8 @@
             <h3>{{ $userName }}</h3>
             <span>{{ $userProfesi }}</span>
             <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+            <a href="" class="btn">History</a>
+            <a href="" class="btn">Bookmark</a>
 
             <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>
@@ -195,5 +197,6 @@
         window.location.href = url.toString();
     }
 </script>
+<script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>
 </html>

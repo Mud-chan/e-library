@@ -211,6 +211,31 @@ h3 {
 
 }
 
+.btn{
+    border-radius: .5rem;
+   padding: 0.3rem 0.6rem;
+   font-size: 1rem;
+   color: #e2e2e2;
+   margin-top: 1rem;
+   text-transform: capitalize;
+   cursor: pointer;
+   text-align: center;
+   background-color: #28c76f;
+}
+
+
+.delete-btn{
+    border-radius: .5rem;
+   padding: 0.3rem 0.6rem;
+   font-size: 1rem;
+   color: #e2e2e2;
+   margin-top: 1rem;
+   text-transform: capitalize;
+   cursor: pointer;
+   text-align: center;
+   background-color: #e74c3c;
+}
+
 .kartu-buku {
   background: white;
   width: 250px;
