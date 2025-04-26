@@ -8,15 +8,20 @@
     <section class="flex">
         <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
-        <form action="{{ route('caricontentsp') }}" method="post" class="search-form">
+        <div class="search-type-selector">
+            <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Cari Biasa</button>
+            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Cari Google</button>
+        </div>
+
+        <form id="basicSearchForm" action="{{ route('caricontentsp') }}" method="post" class="search-form">
             @csrf
-            <input  type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
+            <input type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
-
-
         </form>
-        <div class="gcse-search"></div>
 
+        <div id="gcseSearchWrapper" class="gcse-search-wrapper inactive">
+            <div class="gcse-search"></div>
+        </div>
 
 
         <div class="icons">
@@ -180,6 +185,32 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+
+
+    function setSearchType(type) {
+    const basicForm = document.getElementById('basicSearchForm');
+    const gcseWrapper = document.getElementById('gcseSearchWrapper');
+    const buttons = document.querySelectorAll('.search-type-btn');
+
+    if (type === 'basic') {
+        basicForm.classList.remove('inactive');
+        gcseWrapper.classList.add('inactive');
+    } else if (type === 'gcse') {
+        basicForm.classList.add('inactive');
+        gcseWrapper.classList.remove('inactive');
+    }
+
+    // Atur tombol aktif
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.search-type-btn[onclick*="${type}"]`).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setSearchType('basic');
+});
+
+
+
 </script>
 
 
