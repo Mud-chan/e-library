@@ -307,18 +307,6 @@ section{
    margin-bottom: .5rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .header .flex .profile h3{
    font-size: 2rem;
    color: var(--black);
@@ -341,7 +329,7 @@ section{
    width: 30rem;
    background-color: var(--white);
    border-right: var(--border);
-   z-index: 1200;
+   z-index: 0;
 }
 
 .side-bar .close-side-bar{
@@ -1746,3 +1734,55 @@ button.tutupbutup{
     color: #fff;
     background: #0391c5;
   }
+
+/* Search type selector styles */
+.search-type-selector {
+    display: flex;
+    margin-right: 15px;
+}
+
+.search-type-btn {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-type-btn.active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.search-type-btn:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.search-type-btn:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.gcse-search-wrapper.inactive {
+    display: none !important;
+}
+
+.search-form.inactive {
+    display: none !important;
+}
+
+
+/* Google Search box styling */
+.gsc-search-box {
+    margin-bottom: 0;
+}
+
+.gsc-input-box {
+    height: 40px;
+    width: 400px;
+    border-radius: 5px;
+    z-index: 9999999;
+}
+
+.gsc-search-button {
+    margin-left: 5px;
+}
