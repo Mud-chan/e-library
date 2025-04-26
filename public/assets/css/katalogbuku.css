@@ -179,7 +179,9 @@ padding: 0;
 .katalog-buku {
   padding: 40px 20px;
   max-width: 1200px;
+
   margin: auto;
+
 }
 
 h3 {
@@ -200,14 +202,13 @@ h3 {
 }
 
 .grid-buku {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 15rem);
   gap: 20px;
-  margin-bottom: 30px; */
-  display: flex;
+  margin-bottom: 30px;
+  /* display: flex; */
   gap: 20px;
   justify-content: center;
-  margin-bottom: 100px;
 
 }
 
@@ -246,7 +247,7 @@ h3 {
 }
 
 .kartu-buku img {
-  width: 100%;
+  width: 230px;
   height: 80%;
   border-radius: 10px;
   object-fit: cover;
@@ -372,7 +373,11 @@ h3 {
 
 
     .grid-buku {
-
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         flex-wrap: wrap;
       }
 
@@ -390,8 +395,8 @@ h3 {
       }
 
       .kartu-buku img {
-        width: 100%;
-        height: 70%;
+        width: 130px;
+        height: 160px;
         border-radius: 10px;
         object-fit: cover;
       }

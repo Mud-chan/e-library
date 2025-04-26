@@ -237,7 +237,15 @@ public function katalogbuku()
         $userName = $tutor->nama;
         $userImage = $tutor->image;
         $userProfesi = $tutor->email;
-        $contents = Buku::orderBy('date', 'DESC')->paginate(7);
+        $contents = Buku::orderBy('date', 'DESC')->paginate(8);
+
+        $popularBooks = Buku::select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
+        ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
+        ->groupBy('buku.id', 'buku.guru_id', 'buku.judul', 'buku.deskripsi', 'buku.kategori', 'buku.tingkatan', 'buku.thumb', 'buku.pdf', 'buku.date')
+        ->orderByDesc('total_views')
+        ->limit(4)
+        ->get();
+
 
 
         return view('katalogbuku', [
@@ -247,11 +255,51 @@ public function katalogbuku()
             "userProfesi" => $userProfesi,
             "contents" => $contents,
             "totalPages" => $contents->lastPage(),
-            "currentPage" => $contents->currentPage()
+            "currentPage" => $contents->currentPage(),
+            "popularBooks" => $popularBooks,
 
             // "totalHargaTransaksi" => $totalHargaTransaksi,
             // "jumlahTransaksiPending" => $jumlahTransaksiPending,
             // "dtlsiswa"=> $dtlsiswa
+        ]);
+    } else {
+        return redirect()->route('loginnn');
+    }
+}
+
+public function carikatalogbuku(Request $request)
+{
+    // Ambil ID tutor dari cookie
+    $tutorId = Cookie::get('user_id');
+    // Temukan data tutor berdasarkan ID
+    $tutor = User::find($tutorId);
+    if ($tutor) {
+        $userName = $tutor->nama;
+        $userImage = $tutor->image;
+        $userProfesi = $tutor->email;
+
+        // Lakukan pencarian jika terdapat input pencarian
+        if ($request->has('search')) {
+            $keyword = $request->input('search');
+            // Lakukan pencarian berdasarkan kriteria tertentu, misalnya nama siswa atau lainnya
+            $contents = Buku::where('judul', 'like', '%' . $keyword . '%')
+    ->orWhere('kategori', 'like', '%' . $keyword . '%')
+    ->orWhere('tingkatan', 'like', '%' . $keyword . '%')
+    ->paginate(8);
+
+        } else {
+            // Jika tidak ada pencarian, ambil semua konten
+            $contents = Buku::orderBy('date', 'DESC')->paginate(8);
+        }
+
+        return view('caribuku', [
+            "title" => "Dashboard Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "contents" => $contents,
+            "totalPages" => $contents->lastPage(),
+            "currentPage" => $contents->currentPage(),
         ]);
     } else {
         return redirect()->route('loginnn');

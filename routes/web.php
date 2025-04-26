@@ -90,3 +90,4 @@ Route::post('update-siswa/{siswaId}', [SiswaController::class, 'updateSiswa'])->
 Route::get('/detail-buku-siswa/{videoId}', [PagesControllerSp::class, 'DetailBukusiswa'])->name('detailbukusiswa.content');
 Route::post('/video/{videoId}/store-comment-siswa', [PagesControllerSp::class, 'storeCommentsiswa'])->name('video.storeCommentsiswa');
 Route::post('/buku/{id}/bookmark', [PagesControllerSp::class, 'toggleBookmark'])->name('buku.bookmark');
+Route::post('/caribuku', [PagesControllerSp::class, 'carikatalogbuku'])->name('caribuku');

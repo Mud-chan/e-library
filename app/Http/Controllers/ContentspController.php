@@ -326,7 +326,7 @@ public function uploadContent(Request $request)
             ->first();
 
         if (!$content) {
-            return redirect()->route('contentsp')->with('error', 'Video not found!');
+            return redirect()->route('contentsp.index')->with('error', 'Video not found!');
         }
 
         // Load the playlists associated with the tutor

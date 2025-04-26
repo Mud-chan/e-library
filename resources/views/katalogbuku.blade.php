@@ -17,9 +17,9 @@
 
         <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
-        <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
+        <form action="{{ route('caribuku') }}" method="post" class="search-form">
             @csrf
-            <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
+            <input type="text" name="search" placeholder="Cari Buku..." required maxlength="100">
             <button type="submit" class="fas fa-search" name="search_btn"></button>
         </form>
 
@@ -51,39 +51,17 @@
   <section class="katalog-buku">
     <h3><span class="ikon-bulet"></span> Buku Populer</h3>
     <div class="grid-buku">
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Nusantara</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
+        @foreach ($popularBooks as $book)
+          <div class="kartu-buku">
+            <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+            <p class="judul">{{ $book->judul }}</p>
+            <div class="label-genre">
+              <span class="badge">{{ $book->kategori }}</span>
+              <span class="badge">{{ $book->tingkatan }}</span>
+            </div>
+          </div>
+        @endforeach
       </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Si Kancil</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Menulis Alphabet</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('images/cek.jpg') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Belajar Ganti Busi</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-    </div>
 
     <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
     <div class="grid-buku">
@@ -113,14 +91,27 @@
         </div>
     </div>
 
-    <h3><span class="ikon-bulet"></span> Eksplorasi Genre</h3>
-    <div class="genre">
-      <button>Budaya</button>
-      <button>Fiksi</button>
-      <button>Pelajaran</button>
-      <button>Non-Fiksi</button>
-      <button>Non-Pelajaran</button>
+    <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
+    <div class="genre" style="display: flex; gap: 10px;">
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Komik">
+            <button type="submit">Komik</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Cerita">
+            <button type="submit">Buku Cerita</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Novel">
+            <button type="submit">Novel</button>
+        </form>
     </div>
+
   </section>
 
   <script>
