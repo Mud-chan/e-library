@@ -92,3 +92,4 @@ Route::post('/video/{videoId}/store-comment-siswa', [PagesControllerSp::class, '
 Route::post('/buku/{id}/bookmark', [PagesControllerSp::class, 'toggleBookmark'])->name('buku.bookmark');
 Route::post('/caribuku', [PagesControllerSp::class, 'carikatalogbuku'])->name('caribuku');
 Route::get('/bookmarkbuku', [PagesControllerSp::class, 'bookmarkview'])->name('bookmarkbuku');
+Route::get('/historybuku', [PagesControllerSp::class, 'historyview'])->name('historybuku');

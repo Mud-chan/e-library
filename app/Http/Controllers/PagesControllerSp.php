@@ -342,6 +342,8 @@ public function bookmarkview()
 }
 
 
+
+
 public function toggleBookmark(Request $request, $id)
 {
     $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
@@ -368,7 +370,40 @@ public function toggleBookmark(Request $request, $id)
     }
 }
 
+public function historyview()
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
 
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $tutor = User::find($userId);
+    if (!$tutor) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $userName = $tutor->nama;
+    $userImage = $tutor->image;
+    $userProfesi = $tutor->email;
+
+    $histories = Histori::where('id_siswa', $userId)->get();
+
+    $historyBooks = Buku::whereIn('id', $histories->pluck('id_buku'))
+                            ->paginate(8); // <-- paginate 8 data!
+
+    return view('historybuku', [
+        "title" => "History",
+        "historyBooks" => $historyBooks,
+        "histories" => $histories,
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $userId,
+        "totalPages" => $historyBooks->lastPage(),
+        "currentPage" => $historyBooks->currentPage(),
+    ]);
+}
 
 public function DetailBukusiswa($videoId)
 {

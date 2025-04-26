@@ -35,7 +35,7 @@
             <h3>{{ $userName }}</h3>
             <span>{{ $userProfesi }}</span>
             <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
-            <a href="" class="btn">History</a>
+            <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
 
             <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
@@ -53,12 +53,14 @@
     <div class="grid-buku">
         @foreach ($popularBooks as $book)
           <div class="kartu-buku">
-            <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-            <p class="judul">{{ $book->judul }}</p>
-            <div class="label-genre">
-              <span class="badge">{{ $book->kategori }}</span>
-              <span class="badge">{{ $book->tingkatan }}</span>
-            </div>
+            <a href="{{ route('detailbukusiswa.content', ['videoId' => $book->id]) }}" style="text-decoration: none; color: black;">
+                <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                <p class="judul">{{ $book->judul }}</p>
+                <div class="label-genre">
+                <span class="badge">{{ $book->kategori }}</span>
+                <span class="badge">{{ $book->tingkatan }}</span>
+                </div>
+            </a>
           </div>
         @endforeach
       </div>

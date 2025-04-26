@@ -50,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 10vh;
+    height: 8vh;
 
  }
 
@@ -62,7 +62,7 @@
 
  .header .flex .search-form{
     width: 50rem;
-    height: 7vh;
+    height: 5vh;
     border-radius: .5rem;
     display: flex;
     align-items: center;
