@@ -8,7 +8,8 @@ use App\Models\Buku;
 use App\Models\Bookmark;
 use App\Models\Dtl_Siswa;
 use App\Models\Comments;
-use App\Models\Peminjaman;
+use App\Models\Conterbaca;
+use App\Models\Histori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -283,6 +284,8 @@ public function toggleBookmark(Request $request, $id)
     }
 }
 
+
+
 public function DetailBukusiswa($videoId)
 {
     $tutorId = Cookie::get('user_id');
@@ -290,6 +293,22 @@ public function DetailBukusiswa($videoId)
         return redirect()->route('logreg');
     }
 
+    // Tambah view ke counter baca (selalu tambah, walau sudah pernah baca)
+    Conterbaca::create([
+        'id' => uniqid(), // pastikan kolom `id` tetap unik
+        'id_buku' => $videoId,
+        'id_siswa' => $tutorId,
+        'date' => Carbon::now()->format('Y-m-d'),
+    ]);
+
+    Histori::create([
+        'id' => uniqid(), // pastikan kolom `id` tetap unik
+        'id_buku' => $videoId,
+        'id_siswa' => $tutorId,
+        'date' => Carbon::now()->format('Y-m-d'),
+    ]);
+
+    // Lanjutkan logic lainnya...
     $tutors = User::find($tutorId);
     $userName = $tutors->nama;
     $userImage = $tutors->image;
@@ -305,15 +324,17 @@ public function DetailBukusiswa($videoId)
     $users = User::whereIn('id', $userIds)->get();
     $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
 
+    $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
 
-    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked'), [
+    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked', 'jumlahView'), [
         "title" => "Detail Buku Siswa",
         "userName" => $userName,
         "userImage" => $userImage,
         "userProfesi" => $userProfesi,
-        "userId" => $tutorId // penting ini, buat perbandingan user login
+        "userId" => $tutorId
     ]);
 }
+
 
     public function storeCommentsiswa(Request $request, $videoId)
     {

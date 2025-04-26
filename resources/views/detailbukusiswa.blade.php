@@ -30,7 +30,6 @@
                 {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
                 <div id="search-btn" class="fas fa-search"></div>
                 <div id="user-btn" class="fas fa-user"></div>
-                <div id="toggle-btn" class="fas fa-sun"></div>
             </div>
 
             <div class="profile">
@@ -64,14 +63,23 @@
           <h3>{{ $content->judul }}</h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
+        <p><strong>Jumlah Dibaca:</strong> {{ $jumlahView }} kali</p>
 
         <form action="{{ route('buku.bookmark', ['id' => $content->id]) }}" method="POST" style="display:inline;">
             @csrf
-            <button type="submit" class="bookmark" style="background:none; border:none; cursor:pointer; color: black; font-size: 16px;">
+            <button type="submit" class="bookmark" style="
+                background-color: {{ $isBookmarked ? '#22a65a' : '#28c76f' }};
+                border: none;
+                cursor: pointer;
+                color: white;
+                font-size: 16px;
+                padding: 6px 12px;
+                border-radius: 6px;
+            ">
                 {{ $isBookmarked ? '🔖  Bookmarked' : '🔖  Bookmark' }}
             </button>
-
         </form>
+
       </div>
 
       <div class="tags">

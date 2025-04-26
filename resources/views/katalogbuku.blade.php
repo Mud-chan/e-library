@@ -4,19 +4,46 @@
   <meta charset="UTF-8">
   <title>Katalog Buku</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/css/katalogbuku.css') }}">
 </head>
 <body>
 
   <!-- Navbar -->
-  <div class="navbar">
-    <div>Home</div>
-    <div class="search-section">
-      <input type="text" placeholder="Search here............" />
-      <button>Search</button>
-    </div>
-    <div>👤 Diego</div>
-  </div>
+  <header class="header">
+
+    <section class="flex">
+
+        <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
+
+        <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
+            @csrf
+            <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_btn"></button>
+        </form>
+
+        <div class="icons">
+            {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+        </div>
+
+        <div class="profile">
+
+            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
+            <h3>{{ $userName }}</h3>
+            <span>{{ $userProfesi }}</span>
+            <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">log out</a>
+
+        </div>
+
+    </section>
+
+</header>
 
   <!-- Katalog Buku -->
   <section class="katalog-buku">

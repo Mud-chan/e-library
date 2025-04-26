@@ -37,7 +37,7 @@
 
 
 .header{
-    background-color: var(--white);
+    background-color: #28c76f;
     border-bottom: var(--border);
     position: sticky;
     top: 0; left: 0; right: 0;
