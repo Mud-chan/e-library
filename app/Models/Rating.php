@@ -6,15 +6,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Dtl_Siswa extends Model
+class Rating extends Model
 {
-    protected $table = 'dtl_siswa';
+    protected $table = 'rating';
     protected $primaryKey = null; // karena tidak ada primary key tunggal
     public $incrementing = false; // karena tidak ada kolom auto-increment
     public $timestamps = false; // tidak menggunakan kolom timestamps
 
     protected $fillable = [
-        'id_siswa', 'id_buku', 'id_peminjaman'
+        'id_siswa', 'id_buku', 'rating'
     ];
 
     public function user()
