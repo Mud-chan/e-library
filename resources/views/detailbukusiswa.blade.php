@@ -36,10 +36,12 @@
 
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
-                <span>{{ $userProfesi }}</span>
+                <span>Siswa</span>
                 <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+                <a href="" class="btn">History</a>
+                <a href="" class="btn">Bookmark</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+                <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
                 class="delete-btn">log out</a>
 
             </div>

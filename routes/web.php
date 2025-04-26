@@ -28,7 +28,7 @@ Route::post('/update-password', [LoginController::class, 'updatePassword'])->nam
 Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
 Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
-
+Route::get('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logoutsiswa');
 
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PagesControllerSp;

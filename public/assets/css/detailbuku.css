@@ -277,7 +277,7 @@ body{
    text-transform: capitalize;
    cursor: pointer;
    text-align: center;
-   background-color: var(--dark-grey);
+   background-color: #28c76f;
 }
 
 
@@ -290,7 +290,7 @@ body{
    text-transform: capitalize;
    cursor: pointer;
    text-align: center;
-   background-color: rgb(70, 0, 0);
+   background-color: #e74c3c;
 }
 
 .article-info img {
