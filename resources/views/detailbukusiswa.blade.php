@@ -10,6 +10,18 @@
   <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
 
 </head>
+<style>
+    .rating-stars {
+        display: flex;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #ccc;
+    }
+
+    .rating-stars .star.filled {
+        color: #f5b301;
+    }
+    </style>
 <body>
 
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}"> --}}
@@ -67,6 +79,18 @@
           <p>{{ $content->deskripsi }}</p>
         </div>
         <p><strong>Jumlah Dibaca:</strong> {{ $jumlahView }} kali</p>
+
+        <form id="ratingForm" action="{{ route('buku.rating', ['id' => $content->id]) }}" method="POST">
+            @csrf
+            <div class="rating-stars">
+                @for ($i = 1; $i <= 5; $i++)
+                    <span class="star {{ $existingRating >= $i ? 'filled' : '' }}" data-value="{{ $i }}">
+                        ★
+                    </span>
+                @endfor
+            </div>
+            <input type="hidden" name="rating" id="ratingValue" value="{{ $existingRating }}">
+        </form>
 
         <form action="{{ route('buku.bookmark', ['id' => $content->id]) }}" method="POST" style="display:inline;">
             @csrf
@@ -137,6 +161,30 @@
 
   </div>
   <script src="{{ asset('assets/js/admin_script.js') }}"></script>
+  <script>
+    const stars = document.querySelectorAll('.rating-stars .star');
+    const ratingValue = document.getElementById('ratingValue');
+    const ratingForm = document.getElementById('ratingForm');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = star.getAttribute('data-value');
+            ratingValue.value = value;
+
+            // isi bintang sesuai klik
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') <= value) {
+                    s.classList.add('filled');
+                } else {
+                    s.classList.remove('filled');
+                }
+            });
+
+            // langsung submit form
+            ratingForm.submit();
+        });
+    });
+</script>
 
 </body>
 </html>

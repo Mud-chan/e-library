@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Guru;
 use App\Models\Buku;
 use App\Models\Bookmark;
-use App\Models\Dtl_Siswa;
+use App\Models\Rating;
 use App\Models\Comments;
 use App\Models\Conterbaca;
 use App\Models\Histori;
@@ -433,6 +433,8 @@ public function DetailBukusiswa($videoId)
     $userImage = $tutors->image;
     $userProfesi = $tutors->email;
 
+
+
     $content = Buku::find($videoId);
     if (!$content) {
         return redirect()->route('contentsp')->with('error', 'Buku tidak ditemukan!');
@@ -442,10 +444,11 @@ public function DetailBukusiswa($videoId)
     $userIds = $comments->pluck('id_siswa')->unique();
     $users = User::whereIn('id', $userIds)->get();
     $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
+    $existingRating = Rating::where('id_siswa', $tutorId)->where('id_buku', $videoId)->value('rating') ?? 0;
 
     $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
 
-    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked', 'jumlahView'), [
+    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked', 'jumlahView', 'existingRating'), [
         "title" => "Detail Buku Siswa",
         "userName" => $userName,
         "userImage" => $userImage,
@@ -489,6 +492,25 @@ public function DetailBukusiswa($videoId)
         return redirect()->route('detailbukusiswa.content', ['videoId' => $videoId])
         ->with('success', 'Komentar berhasil ditambahkan!');
     }
+
+
+
+
+    public function storeRating(Request $request, $id)
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $rating = Rating::updateOrCreate(
+        ['id_siswa' => $userId, 'id_buku' => $id],
+        ['rating' => $request->rating]
+    );
+
+    return back();
+}
 
 
 }

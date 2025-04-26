@@ -93,3 +93,4 @@ Route::post('/buku/{id}/bookmark', [PagesControllerSp::class, 'toggleBookmark'])
 Route::post('/caribuku', [PagesControllerSp::class, 'carikatalogbuku'])->name('caribuku');
 Route::get('/bookmarkbuku', [PagesControllerSp::class, 'bookmarkview'])->name('bookmarkbuku');
 Route::get('/historybuku', [PagesControllerSp::class, 'historyview'])->name('historybuku');
+Route::post('/buku/{id}/rating', [PagesControllerSp::class, 'storeRating'])->name('buku.rating');
