@@ -10,6 +10,7 @@ use App\Models\Rating;
 use App\Models\Comments;
 use App\Models\Conterbaca;
 use App\Models\Histori;
+use App\Charts\SiswaChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -41,7 +42,7 @@ class PagesControllerSp extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(SiswaChart $areaChart)
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('sp_id');
@@ -57,28 +58,7 @@ class PagesControllerSp extends Controller
         // Hitung total user
         $totalUsers = User::count();
         $siswa = User::all();
-        // foreach ($siswa as $item) {
-        //     $plays = Playlist::find($item->playlist_id);
-        //     $item->playlist = $plays;
-        // }
-        // $dtlsiswa = Dtluser::all();
-        // foreach ($dtlsiswa as $item) {
-        //     $user = User::find($item->id_user);
-        //     $plays = Playlist::find($item->playlist_id);
-        //     $item->playlist = $plays;
-        //     $item->user = $user;
-        // }
-
-        // Hitung total harga transaksi
-        // $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
-        //     ->sum('playlist.harga');
-
-        // Hitung jumlah transaksi dengan status 'pending'
-        // $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
-        // ->where('dtl_user.status', 'pending')
-        // ->select('transaksi.id') // Select only the transaction IDs
-        // ->distinct() // Ensure we count only distinct transactions
-        // ->count();
+        $totalBuku = Buku::count();
 
         return view('dashboardsp', [
             "title" => "Dashboard Admin",
@@ -88,9 +68,8 @@ class PagesControllerSp extends Controller
             "totalTutors" => $totalTutors,
             "totalUsers" => $totalUsers,
             "siswa" => $siswa,
-            // "totalHargaTransaksi" => $totalHargaTransaksi,
-            // "jumlahTransaksiPending" => $jumlahTransaksiPending,
-            // "dtlsiswa"=> $dtlsiswa
+            "totalBuku" => $totalBuku,
+            "areaChart" => $areaChart->areaChart(),
         ]);
     } else {
         return redirect()->route('loginnn');
