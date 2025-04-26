@@ -469,11 +469,6 @@ public function DetailBukusiswa($videoId)
             'content_id' => 'required|exists:contents,id',
             'comment_box' => 'required|max:1000',
         ]);
-
-        // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan kesalahan
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
         $content = Buku::findOrFail($request->input('content_id'));
         // Simpan komentar ke dalam database
         $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter
@@ -492,6 +487,45 @@ public function DetailBukusiswa($videoId)
         return redirect()->route('detailbukusiswa.content', ['videoId' => $videoId])
         ->with('success', 'Komentar berhasil ditambahkan!');
     }
+
+
+    public function updateComment(Request $request, $id)
+{
+    $request->validate([
+        'comment_box' => 'required|max:1000',
+    ]);
+
+    $comment = Comments::findOrFail($id);
+
+    $userId = Cookie::get('user_id');
+    $tutors = User::find($userId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh edit komentar orang lain!');
+    }
+
+    $comment->comment = $request->comment_box;
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
+}
+
+public function deleteComment($id)
+{
+    $comment = Comments::findOrFail($id);
+
+    $userId = Cookie::get('user_id');
+    $tutors = User::find($userId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh hapus komentar orang lain!');
+    }
+
+    $comment->delete();
+
+    return redirect()->back()->with('success', 'Komentar berhasil dihapus!');
+}
+
 
 
 

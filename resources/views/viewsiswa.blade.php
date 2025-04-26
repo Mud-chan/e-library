@@ -65,7 +65,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="empty">No contents added yet!</p>
+                <p class="empty">Belum ada Siswa Yang di Tambahkan</p>
             @endif
 
         </div>

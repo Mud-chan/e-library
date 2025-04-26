@@ -140,6 +140,7 @@
     transform: scale(1);
     transition: .2s linear;
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
 

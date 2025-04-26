@@ -94,3 +94,5 @@ Route::post('/caribuku', [PagesControllerSp::class, 'carikatalogbuku'])->name('c
 Route::get('/bookmarkbuku', [PagesControllerSp::class, 'bookmarkview'])->name('bookmarkbuku');
 Route::get('/historybuku', [PagesControllerSp::class, 'historyview'])->name('historybuku');
 Route::post('/buku/{id}/rating', [PagesControllerSp::class, 'storeRating'])->name('buku.rating');
+Route::post('/buku/update-comment/{id}', [PagesControllerSp::class, 'updateComment'])->name('buku.updateComment');
+Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteComment'])->name('buku.deleteComment');

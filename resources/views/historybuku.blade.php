@@ -31,9 +31,9 @@
 
         <div class="profile">
 
-            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
+            <<img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
             <h3>{{ $userName }}</h3>
-            <span>{{ $userProfesi }}</span>
+            <span>Siswa</span>
             <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>

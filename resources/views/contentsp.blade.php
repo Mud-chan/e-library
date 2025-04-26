@@ -9,8 +9,8 @@
         <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
         <div class="search-type-selector">
-            <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Cari Biasa</button>
-            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Cari Google</button>
+            <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Biasa</button>
+            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Google</button>
         </div>
 
         <form id="basicSearchForm" action="{{ route('caricontentsp') }}" method="post" class="search-form">
