@@ -107,6 +107,13 @@
             <button type="submit">Buku Cerita</button>
         </form>
 
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Pelajaran">
+            <button type="submit">Buku Pelajaran</button>
+        </form>
+
         <form action="{{ route('caribuku') }}" method="POST">
             @csrf
             <input type="hidden" name="search" value="Novel">

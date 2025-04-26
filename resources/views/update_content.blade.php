@@ -55,6 +55,7 @@
             <option value="{{ $content->kategori }}" selected>{{ $content->kategori }}</option>
             <option value="Kunci Jawaban">Kunci Jawaban</option>
             <option value="Buku Cerita">Buku Cerita</option>
+            <option value="Novel">Novel</option>
             <option value="Komik">Komik</option>
             <option value="Buku Pelajaran">Buku Pelajaran</option>
         </select>
