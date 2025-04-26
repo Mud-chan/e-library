@@ -78,6 +78,9 @@
           <h3>{{ $content->judul }}</h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
+        <p><strong>Rata-rata Rating:</strong> {{ number_format($averageRating, 1, '.', '.') }}/5.0 ⭐</p>
+
+
         <p><strong>Jumlah Dibaca:</strong> {{ $jumlahView }} kali</p>
 
         <form id="ratingForm" action="{{ route('buku.rating', ['id' => $content->id]) }}" method="POST">

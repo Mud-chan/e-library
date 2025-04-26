@@ -387,6 +387,8 @@ public function historyview()
     ]);
 }
 
+ // Pastikan sudah use Rating
+
 public function DetailBukusiswa($videoId)
 {
     $tutorId = Cookie::get('user_id');
@@ -394,28 +396,25 @@ public function DetailBukusiswa($videoId)
         return redirect()->route('logreg');
     }
 
-    // Tambah view ke counter baca (selalu tambah, walau sudah pernah baca)
+    // Tambah view ke counter baca
     Conterbaca::create([
-        'id' => uniqid(), // pastikan kolom `id` tetap unik
+        'id' => uniqid(),
         'id_buku' => $videoId,
         'id_siswa' => $tutorId,
         'date' => Carbon::now()->format('Y-m-d'),
     ]);
 
     Histori::create([
-        'id' => uniqid(), // pastikan kolom `id` tetap unik
+        'id' => uniqid(),
         'id_buku' => $videoId,
         'id_siswa' => $tutorId,
         'date' => Carbon::now()->format('Y-m-d'),
     ]);
 
-    // Lanjutkan logic lainnya...
     $tutors = User::find($tutorId);
     $userName = $tutors->nama;
     $userImage = $tutors->image;
     $userProfesi = $tutors->email;
-
-
 
     $content = Buku::find($videoId);
     if (!$content) {
@@ -430,7 +429,20 @@ public function DetailBukusiswa($videoId)
 
     $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
 
-    return view('detailbukusiswa', compact('content', 'comments', 'users', 'isBookmarked', 'jumlahView', 'existingRating'), [
+    // Tambahkan: Hitung rata-rata rating
+    $averageRatingRaw = Rating::where('id_buku', $videoId)->avg('rating');
+    $averageRating = round($averageRatingRaw * 2) / 2;
+
+
+    return view('detailbukusiswa', compact(
+        'content',
+        'comments',
+        'users',
+        'isBookmarked',
+        'jumlahView',
+        'existingRating',
+        'averageRating' // jangan lupa ini
+    ), [
         "title" => "Detail Buku Siswa",
         "userName" => $userName,
         "userImage" => $userImage,
@@ -438,6 +450,7 @@ public function DetailBukusiswa($videoId)
         "userId" => $tutorId
     ]);
 }
+
 
 
     public function storeCommentsiswa(Request $request, $videoId)
