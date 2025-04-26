@@ -6,7 +6,7 @@
   <title>Detail Buku</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
+
   <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
 
 </head>
@@ -21,7 +21,7 @@
 
             <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
-            <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
+            <form action="{{ route('caribuku') }}" method="post" class="search-form">
                 @csrf
                 <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
@@ -40,7 +40,7 @@
                 <span>Siswa</span>
                 <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
                 <a href="" class="btn">History</a>
-                <a href="" class="btn">Bookmark</a>
+                <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
 
                 <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
                 class="delete-btn">log out</a>

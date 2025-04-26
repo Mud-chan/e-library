@@ -19,7 +19,7 @@
 
         <form action="{{ route('caribuku') }}" method="post" class="search-form">
             @csrf
-            <input type="text" name="search" placeholder="Cari Buku..." required maxlength="100">
+            <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
             <button type="submit" class="fas fa-search" name="search_btn"></button>
         </form>
 
@@ -49,40 +49,27 @@
 
   <!-- Katalog Buku -->
   <section class="katalog-buku">
-    <h3><span class="ikon-bulet"></span> Buku Populer</h3>
+
+    <h3><span class="ikon-bulet"></span> Boolmark</h3>
     <div class="grid-buku">
-        @foreach ($popularBooks as $book)
-          <div class="kartu-buku">
-            <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-            <p class="judul">{{ $book->judul }}</p>
-            <div class="label-genre">
-              <span class="badge">{{ $book->kategori }}</span>
-              <span class="badge">{{ $book->tingkatan }}</span>
-            </div>
-          </div>
+
+        @if ($bookmarkedBooks->count() > 0)
+        @foreach ($bookmarkedBooks as $content)
+        <div class="kartu-buku">
+            <a href="{{ route('detailbukusiswa.content', ['videoId' => $content->id]) }}" style="text-decoration: none; color: black;">
+                <img src="{{ asset('uploaded_files/' . $content->thumb) }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                <p class="judul">{{ $content->judul }}</p>
+                <div class="label-genre">
+                <span class="badge">{{ $content->kategori }}</span>
+                <span class="badge">{{ $content->tingkatan }}</span>
+                </div>
+            </a>
+        </div>
         @endforeach
-      </div>
+    @else
+        <p class="empty">Tidak ada hasil yang ditemukan!</p>
+    @endif
 
-    <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
-    <div class="grid-buku">
-
-      @if ($contents->count() > 0)
-            @foreach ($contents as $content)
-            <div class="kartu-buku">
-                <a href="{{ route('detailbukusiswa.content', ['videoId' => $content->id]) }}" style="text-decoration: none; color: black;">
-                    <img src="../uploaded_files/{{ $content->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                    <p class="judul">{{ $content->judul }}</p>
-                    <div class="label-genre">
-                    <span class="badge">{{ $content->kategori }}</span>
-                    <span class="badge">{{ $content->tingkatan }}</span>
-                    </div>
-                </a>
-            </div>
-
-            @endforeach
-        @else
-            <p class="empty">Tidak ada buku yang ditambahkan!</p>
-        @endif
 
     </div>
     <div class="page">
@@ -90,28 +77,6 @@
             <ul> <!-- pages or li are comes from javascript --> </ul>
         </div>
     </div>
-
-    <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
-    <div class="genre" style="display: flex; gap: 10px;">
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Komik">
-            <button type="submit">Komik</button>
-        </form>
-
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Buku Cerita">
-            <button type="submit">Buku Cerita</button>
-        </form>
-
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Novel">
-            <button type="submit">Novel</button>
-        </form>
-    </div>
-
   </section>
 
   <script>

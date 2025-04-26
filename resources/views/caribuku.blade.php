@@ -17,7 +17,7 @@
 
         <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
-        <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
+        <form action="{{ route('caribuku') }}" method="post" class="search-form">
             @csrf
             <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
             <button type="submit" class="fas fa-search" name="search_btn"></button>
@@ -36,7 +36,7 @@
             <span>{{ $userProfesi }}</span>
             <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
             <a href="" class="btn">History</a>
-            <a href="" class="btn">Bookmark</a>
+            <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
 
             <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>

@@ -306,6 +306,42 @@ public function carikatalogbuku(Request $request)
     }
 }
 
+public function bookmarkview()
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $tutor = User::find($userId);
+    if (!$tutor) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $userName = $tutor->nama;
+    $userImage = $tutor->image;
+    $userProfesi = $tutor->email;
+
+    $bookmarks = Bookmark::where('id_siswa', $userId)->get();
+
+    $bookmarkedBooks = Buku::whereIn('id', $bookmarks->pluck('id_buku'))
+                            ->paginate(8); // <-- paginate 8 data!
+
+    return view('bookmarkbuku', [
+        "title" => "Bookmark",
+        "bookmarkedBooks" => $bookmarkedBooks,
+        "bookmarks" => $bookmarks,
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $userId,
+        "totalPages" => $bookmarkedBooks->lastPage(),
+        "currentPage" => $bookmarkedBooks->currentPage(),
+    ]);
+}
+
+
 public function toggleBookmark(Request $request, $id)
 {
     $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
