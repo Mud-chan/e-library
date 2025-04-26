@@ -210,22 +210,25 @@ public function katalogbuku()
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('user_id');
-    // Temukan data tutor berdasarkan ID
     $tutor = User::find($tutorId);
+
     if ($tutor) {
         $userName = $tutor->nama;
         $userImage = $tutor->image;
         $userProfesi = $tutor->email;
-        $contents = Buku::orderBy('date', 'DESC')->paginate(8);
 
-        $popularBooks = Buku::select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
-        ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
-        ->groupBy('buku.id', 'buku.guru_id', 'buku.judul', 'buku.deskripsi', 'buku.kategori', 'buku.tingkatan', 'buku.thumb', 'buku.pdf', 'buku.date')
-        ->orderByDesc('total_views')
-        ->limit(4)
-        ->get();
+        // Ambil buku hanya dengan kategori yang diizinkan
+        $contents = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+            ->orderBy('date', 'DESC')
+            ->paginate(8);
 
-
+        $popularBooks = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+            ->select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
+            ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
+            ->groupBy('buku.id', 'buku.guru_id', 'buku.judul', 'buku.deskripsi', 'buku.kategori', 'buku.tingkatan', 'buku.thumb', 'buku.pdf', 'buku.date')
+            ->orderByDesc('total_views')
+            ->limit(4)
+            ->get();
 
         return view('katalogbuku', [
             "title" => "Dashboard Siswa",
@@ -236,10 +239,6 @@ public function katalogbuku()
             "totalPages" => $contents->lastPage(),
             "currentPage" => $contents->currentPage(),
             "popularBooks" => $popularBooks,
-
-            // "totalHargaTransaksi" => $totalHargaTransaksi,
-            // "jumlahTransaksiPending" => $jumlahTransaksiPending,
-            // "dtlsiswa"=> $dtlsiswa
         ]);
     } else {
         return redirect()->route('loginnn');
@@ -248,27 +247,30 @@ public function katalogbuku()
 
 public function carikatalogbuku(Request $request)
 {
-    // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('user_id');
-    // Temukan data tutor berdasarkan ID
     $tutor = User::find($tutorId);
+
     if ($tutor) {
         $userName = $tutor->nama;
         $userImage = $tutor->image;
         $userProfesi = $tutor->email;
 
-        // Lakukan pencarian jika terdapat input pencarian
+        $allowedCategories = ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'];
+
         if ($request->has('search')) {
             $keyword = $request->input('search');
-            // Lakukan pencarian berdasarkan kriteria tertentu, misalnya nama siswa atau lainnya
-            $contents = Buku::where('judul', 'like', '%' . $keyword . '%')
-    ->orWhere('kategori', 'like', '%' . $keyword . '%')
-    ->orWhere('tingkatan', 'like', '%' . $keyword . '%')
-    ->paginate(8);
 
+            $contents = Buku::whereIn('kategori', $allowedCategories)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('judul', 'like', '%' . $keyword . '%')
+                        ->orWhere('kategori', 'like', '%' . $keyword . '%')
+                        ->orWhere('tingkatan', 'like', '%' . $keyword . '%');
+                })
+                ->paginate(8);
         } else {
-            // Jika tidak ada pencarian, ambil semua konten
-            $contents = Buku::orderBy('date', 'DESC')->paginate(8);
+            $contents = Buku::whereIn('kategori', $allowedCategories)
+                ->orderBy('date', 'DESC')
+                ->paginate(8);
         }
 
         return view('caribuku', [
@@ -284,6 +286,7 @@ public function carikatalogbuku(Request $request)
         return redirect()->route('loginnn');
     }
 }
+
 
 public function bookmarkview()
 {

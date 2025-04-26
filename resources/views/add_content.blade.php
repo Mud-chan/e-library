@@ -51,6 +51,7 @@
             <p>Kategori<span>*</span></p>
             <select name="kategori" class="box" required>
                 <option value="" selected disabled>-- Kategori --</option>
+                <option value="Kunci Jawaban">Kunci Jawaban</option>
                 <option value="Buku Cerita">Buku Cerita</option>
                 <option value="Komik">Komik</option>
                 <option value="Buku Pelajaran">Buku Pelajaran</option>

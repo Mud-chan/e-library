@@ -53,6 +53,7 @@
         <p>Kategori Buku <span>*</span></p>
         <select name="kategori" class="box" required>
             <option value="{{ $content->kategori }}" selected>{{ $content->kategori }}</option>
+            <option value="Kunci Jawaban">Kunci Jawaban</option>
             <option value="Buku Cerita">Buku Cerita</option>
             <option value="Komik">Komik</option>
             <option value="Buku Pelajaran">Buku Pelajaran</option>
