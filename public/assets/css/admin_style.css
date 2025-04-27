@@ -208,6 +208,8 @@ section{
     justify-content: space-between;
     font-size: 2.5rem;
     margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
  }
 
 
@@ -1275,6 +1277,10 @@ button.tutupbutup{
       height: 30rem;
    }
 
+   #plus{
+    font-size: 1.3rem;
+   }
+
 }
 
 @media (max-width:450px){
@@ -1282,6 +1288,7 @@ button.tutupbutup{
    html{
       font-size: 50%;
    }
+
 
    .heading{
       font-size: 2rem;
@@ -1298,6 +1305,10 @@ button.tutupbutup{
 
    .view-content .container .video{
       height: auto;
+   }
+
+   #plus{
+    font-size: 1rem;
    }
 
 }
