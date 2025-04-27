@@ -96,3 +96,7 @@ Route::get('/historybuku', [PagesControllerSp::class, 'historyview'])->name('his
 Route::post('/buku/{id}/rating', [PagesControllerSp::class, 'storeRating'])->name('buku.rating');
 Route::post('/buku/update-comment/{id}', [PagesControllerSp::class, 'updateComment'])->name('buku.updateComment');
 Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteComment'])->name('buku.deleteComment');
+
+Route::get('/profilsiswa', function () {
+    return view('profilsiswa');
+});

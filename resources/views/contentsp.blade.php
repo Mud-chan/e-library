@@ -10,7 +10,7 @@
 
         <div class="search-type-selector">
             <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Biasa</button>
-            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Google</button>
+            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Lanjutan</button>
         </div>
 
         <form id="basicSearchForm" action="{{ route('caricontentsp') }}" method="post" class="search-form">
