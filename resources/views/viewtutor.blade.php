@@ -53,12 +53,12 @@
                         <h3 class="title">Nama : {{ $content->nama }}</h3>
                         <h4 class="title">{{ $content->email }} </h4>
                         <h4 class="title">{{ $content->mengampu }}</h4>
-                            <form action="" method="post" class="flex-btn">
+                            <form action="{{ route('delete_guru') }}" method="post" class="flex-btn">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $content->id }}">
                                 <a href="" class="option-btn">Ubah</a>
                                 <button type="submit" class="delete-btn"
-                                    onclick="return confirm('Anda Yakin Ingin Menghapus Siswa?');">Hapus</button>
+                                    onclick="return confirm('Anda Yakin Ingin Menghapus Guru? Harap Diperhatikan Jika Menghapus Guru Maka Akan Berdampak Pada Buku Yang Pernah Di Upload Guru');">Hapus</button>
                             </form>
                     </div>
                 @endforeach

@@ -232,20 +232,46 @@ class TutorController extends Controller
 
         return redirect()->route('viewtutor')->with('success', 'Tutor berhasil diperbarui.');
     }
-    public function deletetutor($id)
+
+
+    public function deletetutor(Request $request)
     {
-        // Temukan pengguna berdasarkan ID
+        $id = $request->input('id'); // ambil ID dari form POST
+
+        // Temukan guru berdasarkan ID
         $tutor = Guru::find($id);
 
-        // Hapus gambar jika ada
+        if (!$tutor) {
+            return redirect()->route('viewtutor')->with('error', 'Tutor tidak ditemukan.');
+        }
+
+        // Hapus semua buku yang dimiliki guru ini
+        foreach ($tutor->buku as $buku) {
+            // Hapus thumbnail jika ada
+            if ($buku->thumb) {
+                Storage::delete('uploaded_files/' . $buku->thumb);
+            }
+
+            // Hapus file PDF jika ada
+            if ($buku->pdf) {
+                Storage::delete('uploaded_files/' . $buku->pdf);
+            }
+
+            // Hapus data buku dari database
+            $buku->delete();
+        }
+
+        // Hapus gambar guru jika ada
         if ($tutor->image) {
             Storage::delete('public/images/' . $tutor->image);
         }
 
-        // Hapus pengguna
+        // Hapus guru
         $tutor->delete();
 
-        return redirect()->route('viewtutor')->with('success', 'Tutor berhasil dihapus.');
+        return redirect()->route('tutor.index')->with('success', 'Tutor dan semua data terkait berhasil dihapus.');
     }
+
+
 
 }

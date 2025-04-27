@@ -19,7 +19,7 @@ class Guru extends Model
 
     public function buku()
     {
-        return $this->hasMany(Buku::class, 'id_guru');
+        return $this->hasMany(Buku::class, 'guru_id');
     }
 }
 
