@@ -198,10 +198,10 @@
                     <div class="w-25percent flex items-center justify-start xl:w-15percent lg:w-40percent">
                         <div class="flex navbar-brand-plain py-20 sm:hidden"><a class="navbar-brand flex p-0 relative"
                                 href="/" rel="home"><span class="navbar-brand-inner post-rel"><img
-                                        alt="StartInaama" class="logo-sticky"
-                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="StartInaama"
+                                        alt="image" class="logo-sticky"
+                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library"
                                         class="logo-default"
-                                        src="assets/images/demo/start-hub-2/logo/logo.png"></span></a>
+                                        src=""></span></a>
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
@@ -220,18 +220,18 @@
                                     data-localscroll="true"
                                     data-localscroll-options="{&quot;itemsSelector&quot;:&quot;> li > a&quot;, &quot;trackWindowScroll&quot;: true, &quot;includeParentAsOffset&quot;: true}"
                                     data-submenu-options="{&quot;toggleType&quot;: &quot;fade&quot;, &quot;handler&quot;: &quot;mouse-in-out&quot;}">
-                                    <li class="menu-item-home is-active"><a href="#banner"><span>Home</span> </a></li>
-                                    <li><a href="#about"><span>Why Us?</span> </a></li>
-                                    <li class="menu-item-has-children position-applied"><a href="#services"><span>Our
-                                                Courses</span> <span class="submenu-expander"><svg height="32"
+                                    <li class="menu-item-home is-active"><a href="#banner"><span>Beranda</span> </a></li>
+                                    <li><a href="#about"><span>Keunggulan</span> </a></li>
+                                    <li class="menu-item-has-children position-applied"><a href="#koleksi"><span>Koleksi
+                                                Buku</span> <span class="submenu-expander"><svg height="32"
                                                     style="width: 1em; height: 1em;" viewbox="0 0 21 32" width="21"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M10.5 18.375l7.938-7.938c.562-.562 1.562-.562 2.125 0s.562 1.563 0 2.126l-9 9c-.563.562-1.5.625-2.063.062L.437 12.562C.126 12.25 0 11.876 0 11.5s.125-.75.438-1.063c.562-.562 1.562-.562 2.124 0z"
                                                         fill="currentColor"></path>
                                                 </svg> </span> </a></li>
-                                    <li><a href="#clients"><span>Customer Stories</span> </a></li>
-                                    <li><a href="#contact"><span>Contact Us</span> </a></li>
+                                    <li><a href="#informasi"><span>Informasi</span> </a></li>
+                                    <li><a href="#kontak"><span>Hubungi Kami</span> </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -266,8 +266,8 @@
                                             </svg></a></span>
                                 </div>
                             </div>
-                            <a class="btn btn-solid text-white bg-gray-600 rounded-100 ml-10 text-15 font-medium bg-bg hover:text-black hover:bg-white module-btn-sm w-200"
-                                href="/logreg"><span class="btn-txt" data-text="Login">Masuk/Daftar</span></a>
+                            {{-- <a class="btn btn-solid text-white bg-gray-600 rounded-100 ml-10 text-15 font-medium bg-bg hover:text-black hover:bg-white module-btn-sm w-200"
+                                href="/logreg"><span class="btn-txt" data-text="Login">Masuk/Daftar</span></a> --}}
                             <div class="ml-15 ld-module-sd ld-module-sd-hover ld-module-sd-right xxl:hidden lg:block">
                                 <button aria-expanded="false"
                                     class="bg-transparent border-none nav-trigger flex relative items-center justify-center style-6 collapsed"
@@ -294,7 +294,7 @@
                                                         id="primary-nav">
                                                         <li class="menu-item-home is-active"><a
                                                                 class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#banner"><span>Home</span> <span
+                                                                href="#banner"><span>Beranda</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
@@ -305,16 +305,16 @@
                                                         </li>
                                                         <li class="menu-item-has-children"><a
                                                                 class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#services"><span>Our Courses</span> <span
+                                                                href="#koleksi"><span>Koleksi Buku</span> <span
                                                                     class="submenu-expander absolute inline-flex right-0"></span></a>
                                                         </li>
                                                         <li><a class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#clients"><span>Customer Stories</span> <span
+                                                                href="#informasi"><span>Informasi</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                         <li><a class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#contact"><span>Contact Us</span> <span
+                                                                href="#kontak"><span>Hubungi Kami</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
@@ -364,8 +364,8 @@
             <div class="lqd-stickybar-wrap lqd-stickybar-right w-auto items-end pointer-events-none">
                 <div class="static flex flex-col flex-grow-1 items-end justify-center vertical-rl p-10 mr-60"><a
                         class="btn btn-solid btn-sm btn-icon-left btn-icon-circle btn-icon-custom-size btn-icon-solid pointer-events-auto horizontal-tb -ml-60 bg-white text-15 font-medium text-gray-600 shadow-md rounded-100 hover:text-white hover:bg-primary"
-                        data-lity="#contact-modal" href="#contact-modal"><span class="btn-txt"
-                            data-text="Contact us">Contact us</span> <span
+                        data-lity="#contact-modal" href="#kontak"><span class="btn-txt"
+                            data-text="Contact us">Hubungi Kami</span> <span
                             class="btn-icon mr-15 w-35 h-35 text-blue-300 bg-blue-100"><svg class="w-20"
                                 fill="currentColor" height="16.522" viewbox="0 0 19.955 16.522" width="19.955"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -491,11 +491,11 @@
                                                 Kemudahan Membaca Buku Dimana Saja Kapan Saja</p>
                                         </div>
                                         <div class="mb-35 relative animation-element"><a
-                                                class="btn btn-solid btn-hover-txt-liquid-x-alt rounded-100 bg-white font-medium text-15 leading-1/25em text-red-700 module-btn-md"
-                                                data-lity="#contact-modal" href="#contact-modal"><span
-                                                    class="btn-txt text-start"
+                                                class="btn btn-solid btn-hover-txt-liquid-x-alt rounded-100 bg-white font-medium text-15 module-btn-md"
+                                                href="/logreg"><span
+                                                    class="btn-txt text-center"
                                                     data-split-options="{&quot;type&quot;:  &quot;chars, words&quot;}"
-                                                    data-split-text="true">Dashboard</span>
+                                                    data-split-text="true">Login</span>
                                                 </span></a></div>
 
                                     </div>
@@ -535,8 +535,7 @@
                                     </h2>
                                 </div>
                                 <p class="animation-element"><span
-                                        class="text-16 font-medium leading-1/2em text-blue-400">Keunggulan kursus yang
-                                        kami tawarkan</p>
+                                        class="text-16 font-medium leading-1/2em text-blue-400">Keunggulan Website E-Library</p>
                             </div>
                             <div class="col col-12 p-0"></div>
                             <div class="col col-12 col-md-4 mb-30 border-right border-lightgray relative sm:border-0">
@@ -622,7 +621,7 @@
                     </div>
                 </section>
 
-                <section class="py-5 bg-white">
+                <section class="py-5 bg-white" id="koleksi">
                     <div class="container text-center">
                         <h2 class="fw-bold mb-1">Kumpulan Koleksi Buku</h2>
                         <h5 class="text-success fw-semibold mb-4">MI Ar-Roudhoh</h5>
@@ -668,7 +667,7 @@
                         </div>
                     </div>
                 </section>
-                <section style="text-align: center; font-family: sans-serif; padding: 30px;">
+                <section style="text-align: center; font-family: sans-serif; padding: 30px;" id="informasi">
                     <h2 style="font-size: 28px; font-weight: bold;">
                       Informasi Perpustakaan MI <br>
                       <span style="color: #3cb371;">Ar-Roudhoh</span>
@@ -694,7 +693,7 @@
                     </div>
                 </section>
 
-                <section class="hubungi-kami">
+                <section class="hubungi-kami" id="kontak">
                     <h2>Hubungi Kami</h2>
                     <p class="subjudul">Di Sini</p>
                     <div class="kontainer-form">
@@ -819,8 +818,8 @@
                 </div>
                 <div class="container">
                     <div class="row items-center">
-                        <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo Inaama"
-                                height="21" src="assets/images/demo/start-hub-2/logo/logo1.png" width="145">
+                        <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo-ermi"
+                                height="21" src="" width="145">
                         </div>
 
                         <div class="col col-12 mt-5 p-15"><span
