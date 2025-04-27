@@ -42,7 +42,13 @@
 </header>
 
 <section class="contents">
-    <h1 class="heading">Daftar Buku</h1>
+    <div class="heading2">
+        <h1>Daftar Buku</h1> <a href="{{ route('add_content') }}" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+        
+    </div>
+
+
+
 
     @if (session('success'))
         <div class="modal-box" id="success-message">
@@ -71,10 +77,7 @@
     @endif
 
     <div class="box-container">
-        <div class="box" style="text-align: center;">
-            <h3 class="title" style="margin-bottom: .5rem;">Dafatarkan Buku Baru</h3>
-            <a href="{{ route('add_content') }}" class="btn">Tambah</a>
-        </div>
+
 
         @if ($contents->count() > 0)
             @foreach ($contents as $content)
