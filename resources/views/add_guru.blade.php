@@ -38,7 +38,7 @@
 
     <section class="video-form">
 
-        <h1 class="heading">Tambahkan Siswa</h1>
+        <h1 class="heading">Tambahkan Guru</h1>
 
         @if (session('success'))
             <script>
@@ -46,19 +46,15 @@
             </script>
         @endif
 
-        <form action="{{ route('upload_siswa') }}" method="post" enctype="multipart/form-data" id="formup">
+        <form action="{{ route('upload_guru') }}" method="post" enctype="multipart/form-data" id="formup">
             @csrf
-            <p>Nama Siswa <span>*</span></p>
-            <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Siswa" class="box">
+            <input type="hidden" name="role" value="guru">
 
-            <p>Jenis Kelamin<span>*</span></p>
-            <select name="jenis_kelamin" class="box" required>
-                <option value="" selected disabled>-- Jenis Kelamin --</option>
-                <option value="Laki - Laki">Laki - Laki</option>
-                <option value="Perempuan">Perempuan</option>
-            </select>
-            <p>Kelas<span>*</span></p>
-            <select name="kelas" class="box" required>
+            <p>Nama Siswa <span>*</span></p>
+            <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Guru" class="box">
+
+            <p>Mengajar Pada Kelas..<span>*</span></p>
+            <select name="mengampu" class="box" required>
                 <option value="" selected disabled>-- Kelas --</option>
                 <option value="Kelas 1">Kelas 1</option>
                 <option value="Kelas 2">Kelas 2</option>
@@ -67,12 +63,13 @@
                 <option value="Kelas 5">Kelas 5</option>
                 <option value="Kelas 6">Kelas 6</option>
             </select>
-            <p>Email Siswa <span>*</span></p>
-            <input type="text" name="email" maxlength="100" required placeholder="Masukkan Email Siswa" class="box">
+            <p>Email Guru <span>*</span></p>
+
+            <input type="text" name="email" maxlength="100" required placeholder="Masukkan Email Guru" class="box">
             <p>Password <span>*</span></p>
-            <input type="text" name="password" maxlength="100" required placeholder="Masukkan Email Siswa" class="box">
+            <input type="text" name="password" maxlength="100" required placeholder="Masukkan Email Guru" class="box">
             <p>Konfirmasi Password <span>*</span></p>
-            <input type="text" name="password_confirmation" maxlength="100" required placeholder="Konfirmasi Password Siswa" class="box">
+            <input type="text" name="password_confirmation" maxlength="100" required placeholder="Konfirmasi Password Guru" class="box">
 
             <p>Foto Siswa <span>*</span></p>
             <input type="file" name="image" accept="image/*"  class="box" id="image">

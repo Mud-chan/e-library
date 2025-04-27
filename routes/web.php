@@ -65,7 +65,11 @@ Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('
 
 Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
 Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');
-
+Route::get('/add-guru', [TutorController::class, 'tambahtutor'])->name('add_guru');
+Route::post('/upload-guru', [TutorController::class, 'storetutor'])->name('upload_guru');
+Route::post('/delete-guru', [TutorController::class, 'deletetutor'])->name('delete_guru');
+Route::get('/update-guru/{guruId}', [TutorController::class, 'edittutor'])->name('update.guru.form');
+Route::post('update-tutor/{guruId}', [TutorController::class, 'updatetutor'])->name('update.tutor');
 
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');

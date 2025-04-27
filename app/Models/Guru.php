@@ -14,12 +14,12 @@ class Guru extends Model
     public $timestamps = false; // tidak menggunakan kolom timestamps
 
     protected $fillable = [
-        'id ', 'nama', 'mengampu','email','password','image','role'
+        'id', 'nama', 'mengampu','email','password','image','role'
     ];
 
     public function buku()
     {
-        return $this->hasMany(Buku::class, 'id_guru');
+        return $this->hasMany(Buku::class, 'guru_id');
     }
 }
 

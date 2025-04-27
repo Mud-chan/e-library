@@ -39,12 +39,11 @@
 
 
     <section class="contents">
-        <h1 class="heading">Tambah Tutor</h1>
+        <div class="heading2">
+            <h1>Daftar Buku</h1> <a href="{{ route('add_guru') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+
+        </div>
         <div class="box-container">
-            <div class="box" style="text-align: center;">
-                <h3 class="title" style="margin-bottom: .5rem;">Tambah Tutor Baru</h3>
-                <a href="{{ url('/tambahtutor') }}" class="btn">Tambah</a>
-            </div>
             @if (count($playlists) > 0)
                 @foreach ($playlists as $content)
                     <div class="box" style="text-align: center">
@@ -54,12 +53,13 @@
                         <h3 class="title">Nama : {{ $content->nama }}</h3>
                         <h4 class="title">{{ $content->email }} </h4>
                         <h4 class="title">{{ $content->mengampu }}</h4>
-                            <form action="" method="post" class="flex-btn">
+                            <form action="{{ route('delete_guru') }}" method="post" class="flex-btn">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $content->id }}">
-                                <a href="" class="option-btn">Ubah</a>
+                                <a href="{{ route('update.guru.form', ['guruId' => $content->id]) }}"
+                                    class="option-btn">Ubah</a>
                                 <button type="submit" class="delete-btn"
-                                    onclick="return confirm('Anda Yakin Ingin Menghapus Siswa?');">Hapus</button>
+                                    onclick="return confirm('Anda Yakin Ingin Menghapus Guru? Harap Diperhatikan Jika Menghapus Guru Maka Akan Berdampak Pada Buku Yang Pernah Di Upload Guru');">Hapus</button>
                             </form>
                     </div>
                 @endforeach

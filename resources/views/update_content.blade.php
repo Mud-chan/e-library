@@ -7,7 +7,7 @@
 
     <section class="flex">
 
-        <a href="{{ url('/dashboardsp') }}" class="logo">Tutor</a>
+        <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
         {{-- <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
             @csrf
@@ -19,7 +19,6 @@
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
         <div class="profile">
