@@ -4,12 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="Codinggo" name="keywords">
-    <meta content="LiquidThemes" name="author">
-    <meta content="Codinggo" name="description">
-    <meta content="Codinggo" property="og:title">
-    <meta content="Codinggo" property="og:description">
-    <meta content="website" property="og:type">
     <meta content="./assets/images/common/og-image.jpg" property="og:image">
     <link href="assets/vendors/liquid-icon/lqd-essentials/lqd-essentials.min.css" rel="stylesheet">
     <link href="assets/css/theme.min.css" rel="stylesheet">
@@ -24,8 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 
 
-    <title>Codinggo</title>
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    <title>E-Library</title>
+    <link rel="icon" href="{{ asset('assets/images/logodummy.png') }}">
 
     <style>
         .product-container {
@@ -33,7 +27,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 24px;
-            padding: 20px; 
+            padding: 20px;
         }
 
         .product-card {
@@ -189,7 +183,7 @@
         }
 
     </style>
-    
+
 </head>
 
 <body data-disable-animations-onmobile="true" data-mobile-header-builder="true" data-mobile-header-scheme="gray"
@@ -488,14 +482,13 @@
                                                 <span class="txt-rotate-keywords"><span
                                                         class="txt-rotate-keyword active"><span>Ar-Roudhoh</span>
                                                     </span><span class="txt-rotate-keyword"><span>Ar-Roudhoh</span>
-                                                    </span><span class="txt-rotate-keyword"><span>Desktop
-                                                            Development.</span></span></span>
+                                                    </span><span class="txt-rotate-keyword"></span></span>
                                             </h1>
                                         </div>
                                         <div class="ld-fancy-heading relative mx-25percent sm:m-0 animation-element">
                                             <p
                                                 class="ld-fh-element relative text-20 mb-1/65em leading-1/25em font-medium">
-                                                Tempat yang tepat untuk belajar coding cepat</p>
+                                                Kemudahan Membaca Buku Dimana Saja Kapan Saja</p>
                                         </div>
                                         <div class="mb-35 relative animation-element"><a
                                                 class="btn btn-solid btn-hover-txt-liquid-x-alt rounded-100 bg-white font-medium text-15 leading-1/25em text-red-700 module-btn-md"
@@ -589,7 +582,7 @@
                                         </div>
                                         <div class="contents">
                                             <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Meingkatkan Minat Baca</h3>
-                                            <p>Lorem ipsum dolor sit amet kolo jiro mun 
+                                            <p>Lorem ipsum dolor sit amet kolo jiro mun
                                                 hin gurt binstre loperz nuklin hedore setaf
                                                 bulk in jownline jertux zerin mein aneen  </p>
                                         </div>
@@ -633,7 +626,7 @@
                     <div class="container text-center">
                         <h2 class="fw-bold mb-1">Kumpulan Koleksi Buku</h2>
                         <h5 class="text-success fw-semibold mb-4">MI Ar-Roudhoh</h5>
-                
+
                         <!-- row-cols agar auto 4 kolom di desktop, 2 di tablet, 1 di mobile -->
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
                             <div class="col">
@@ -668,38 +661,38 @@
                             </div>
                             <!-- Tambahkan lebih banyak di sini jika ada -->
                         </div>
-                
+
                         <!-- Tombol Lihat Semua -->
                         <div class="text-end mt-4">
                             <a href="#" class="text-success fw-semibold">Lihat Semua Buku &gt;&gt;</a>
                         </div>
                     </div>
-                </section>                                                                                                                  
+                </section>
                 <section style="text-align: center; font-family: sans-serif; padding: 30px;">
                     <h2 style="font-size: 28px; font-weight: bold;">
                       Informasi Perpustakaan MI <br>
                       <span style="color: #3cb371;">Ar-Roudhoh</span>
                     </h2>
-                  
+
                     <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; max-width: 1100px; margin-left: auto; margin-right: auto;">
                       {{-- Kolom kiri: gambar persegi besar dan 2 gambar kecil --}}
                       <div style="display: flex; flex-direction: column; gap: 15px;">
                         {{-- Gambar persegi besar --}}
                         <img src="{{ asset('assets/images/foto2.png') }}" alt="Poster Perpustakaan" style="width: 370px; height: auto; border-radius: 10px;">
-                  
+
                         {{-- Dua gambar kecil di bawah yang ukurannya diperbesar --}}
                         <div style="display: flex; gap: 15px;">
                           <img src="{{ asset('assets/images/foto3.png') }}" alt="Gedung Sekolah" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
                           <img src="{{ asset('assets/images/foto4.png') }}" alt="Siswa Membaca" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
                         </div>
                       </div>
-                  
+
                       {{-- Kolom kanan: gambar panjang --}}
                       <div>
                         <img src="{{ asset('assets/images/foto1.png') }}" alt="Siswa di kelas" style="width: 500px; height: 400px; object-fit: cover; border-radius: 10px;">
                       </div>
                     </div>
-                </section>   
+                </section>
 
                 <section class="hubungi-kami">
                     <h2>Hubungi Kami</h2>
@@ -711,17 +704,17 @@
                       <form class="form-kontak">
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" name="nama" placeholder="Jamiul Mukmininin" />
-                  
+
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="example@mail.com" />
-                  
+
                         <label for="pesan">Isi Form</label>
                         <textarea id="pesan" name="pesan" placeholder="Type Here………"></textarea>
-                  
+
                         <button type="submit">Submit</button>
                       </form>
                     </div>
-                </section>                  
+                </section>
                 <section class="lqd-section connect-top pt-10 relative">
                     <div
                         class="ld-particles-container w-full lqd-particles-as-bg lqd-overlay flex lqd-particle pointer-events-none">
@@ -829,7 +822,7 @@
                         <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo Inaama"
                                 height="21" src="assets/images/demo/start-hub-2/logo/logo1.png" width="145">
                         </div>
-                        
+
                         <div class="col col-12 mt-5 p-15"><span
                                 class="divider w-full flex border-top border-lightgray"></span></div>
                         <div class="col col-12 col-md-8">
