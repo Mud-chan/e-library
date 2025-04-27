@@ -24,7 +24,7 @@ class TutorController extends Controller
         $userName = $tutors->nama; // Ambil nama pengguna
         $userImage = $tutors->image; // Ambil URL gambar profil pengguna
         $userProfesi = $tutors->mengampu;
-        $playlists = Guru::where('role', 'guru')->paginate(5);
+        $playlists = Guru::where('role', 'guru')->paginate(8);
         return view('viewtutor', [
             "title" => "Data Tutors",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
@@ -123,134 +123,129 @@ class TutorController extends Controller
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
     }
+    public function tambahtutor()
+    {
+        // Ambil ID tutor dari cookie
+        $tutor_id = Cookie::get('sp_id');
+        $tutors = Guru::find($tutor_id); // Temukan pengguna berdasarkan ID
+        $userName = $tutors->nama; // Ambil nama pengguna
+        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $userProfesi = $tutors->mengampu;
+
+        return view('add_guru', [
+            "title" => "Tambah Tutor",
+            "userName" => $userName, // Teruskan nama pengguna ke tampilan
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            // Teruskan URL gambar profil pengguna ke tampilan
+        ]);
+    }
+    public function storetutor(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:guru,email',
+            'password' => 'required|string|min:8',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role' => 'required|string',
+            'mengampu' => 'required|string',
+        ]);
+
+        $imageName = null;
+
+        // Upload thumbnail jika ada
+        if ($request->hasFile('image')) {
+            $thumb = $request->file('image');
+            $imageName = time() . '.' . $thumb->getClientOriginalExtension();
+            $thumb->move(public_path('uploaded_files'), $imageName);
+        }
 
 
+        $id = uniqid();
 
+        // Buat pengguna baru
+        Guru::create([
+            'id' => $id,
+            'nama' => $request->input('nama'),
+            'mengampu' => $request->input('mengampu'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'image' => $imageName,
+            'role' => $request->input('role'),
 
-    // public function createTransaction(Request $request)
-    // {
-    //     $userId = Cookie::get('user_id');
-    //     $playlistId = $request->input('playlist_id');
+        ]);
 
-    //     // Check if the user has an ongoing course
-    //     $ongoingCourse = Dtluser::where('id_user', $userId)->where('status', 'ongoing')->exists();
+        return redirect()->route('tutor.index')->with('success', 'Tutor berhasil ditambahkan.');
+    }
+    public function edittutor($id)
+    {
+        // Ambil ID tutor dari cookie
+        $tutor_id = Cookie::get('sp_id');
+        $tutors = Guru::find($tutor_id); // Temukan pengguna berdasarkan ID
+        $userName = $tutors->nama; // Ambil nama pengguna
+        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $userProfesi = $tutors->mengampu;
 
-    //     if ($ongoingCourse) {
-    //         return redirect()->back()->with('error', 'Anda masih memiliki kursus yang belum selesai');
-    //     }
+        $playlists = Guru::find($id);
+        return view('edittutor', [
+            "title" => "Edit Tutor",
+            "userName" => $userName, // Teruskan nama pengguna ke tampilan
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "playlists" => $playlists,
+            // Teruskan URL gambar profil pengguna ke tampilan
+        ]);
+    }
+    public function updatetutor(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:guru,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role' => 'required|string',
+            'mengampu' => 'required|string',
+        ]);
 
-    //     // Check if the user already has this playlist
-    //     $existingCourse = Dtluser::where('id_user', $userId)->where('playlist_id', $playlistId)->exists();
+        // Temukan pengguna berdasarkan ID
+        $tutor = Guru::find($id);
 
-    //     if ($existingCourse) {
-    //         return redirect()->back()->with('error', 'Anda sudah memiliki kursus ini');
-    //     }
+        // Simpan gambar jika ada
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            Storage::putFileAs('public/images', $file, $filename);
+            $tutor->image = $filename;
+        }
 
-    //     if ($userId && $playlistId && $request->hasFile('bukti_pembayaran')) {
-    //         $image = $request->file('bukti_pembayaran');
-    //         $imageName = time() . '.' . $image->extension();
-    //         $image->move(public_path('uploaded_files'), $imageName);
+        // Update data pengguna
+        $tutor->nama = $request->input('nama');
+        $tutor->email = $request->input('email');
+        if ($request->input('password')) {
+            $tutor->password = bcrypt($request->input('password'));
+        }
+        $tutor->role = $request->input('role');
+        $tutor->mengampu = $request->input('mengampu');
+        $tutor->save();
 
-    //         $transaction = new Transaksi();
-    //         $transaction->id_transaksi = bin2hex(random_bytes(10)); // Generate a random 20 character ID
-    //         $transaction->id_user = $userId;
-    //         $transaction->id_playlist = $playlistId;
-    //         $transaction->tanggal = now(); // Assuming you want to store the current date
-    //         $transaction->bukti_pembayaran = $imageName; // Save the image name
+        return redirect()->route('viewtutor')->with('success', 'Tutor berhasil diperbarui.');
+    }
+    public function deletetutor($id)
+    {
+        // Temukan pengguna berdasarkan ID
+        $tutor = Guru::find($id);
 
-    //         $transaction->save();
+        // Hapus gambar jika ada
+        if ($tutor->image) {
+            Storage::delete('public/images/' . $tutor->image);
+        }
 
-    //         // Insert data into dtl_user table
-    //         $playlist = Playlist::find($playlistId); // Retrieve the playlist to get the tutor ID
-    //         if ($playlist) {
-    //             $dtlUser = new Dtluser();
-    //             $dtlUser->id_user = $userId;
-    //             $dtlUser->tutor_id = $playlist->tutor_id;
-    //             $dtlUser->playlist_id = $playlistId;
-    //             $dtlUser->status = 'pending'; // Assuming you want to set a default status
+        // Hapus pengguna
+        $tutor->delete();
 
-    //             $dtlUser->save();
-    //         }
+        return redirect()->route('viewtutor')->with('success', 'Tutor berhasil dihapus.');
+    }
 
-    //         return redirect()->route('courses.index'); // Redirect to a success page
-    //     } else {
-    //         return redirect()->back()->with('error', 'Failed to create transaction');
-    //     }
-    // }
-
-
-
-    // public function trans($id)
-    // {
-    //     $course = Playlist::find($id);
-    //     $tutor = Tutors::find($course->tutor_id);
-    //     $contents = Content::where('playlist_id', $id)->get();
-    //     $userId = Cookie::get('user_id'); // Ambil ID pengguna dari cookie
-    //     $user = User::find($userId);
-    //     if ($user) {
-    //         return view('transaksi', [
-    //             'course' => $course,
-    //             'tutor' => $tutor,
-    //             'contents' => $contents
-    //         ]);
-    //     } else {
-    //         return redirect()->route('loginnn');
-    //     }
-    // }
-
-
-    // public function tampiluptra($id_transaksi)
-    // {
-    //     $tutorsId = Cookie::get('sp_id'); // Ambil ID pengguna dari cookie
-    //     $tutors = Tutors::find($tutorsId); // Temukan pengguna berdasarkan ID
-    //     $userName = $tutors->name; // Ambil nama pengguna
-    //     $userImage = $tutors->image;
-    //     $userProfesi = $tutors->profession;
-
-
-    //     $transaksi = Transaksi::findOrFail($id_transaksi);
-    //     $course = Playlist::find($transaksi->id_playlist);
-    //     $siswa = User::find($transaksi->id_user);
-    //     $dtlsiswa = Dtluser::where('id_user', $transaksi->id_user)->first();
-    //     $transaksi->status = $dtlsiswa ? $dtlsiswa->status : 'Status Tidak Tersedia';
-    //     return view('update_transaksi', [
-    //         'transaksi' => $transaksi,
-    //         'course' => $course,
-    //         'siswa' => $siswa,
-    //         "userName" => $userName, // Teruskan nama pengguna ke tampilan
-    //         "userImage" => $userImage,
-    //         "userProfesi" => $userProfesi,
-    //         "tutorsId" => $tutorsId,
-    //         "dtlsiswa" => $dtlsiswa
-    //     ]);
-    // }
-
-
-
-
-
-    // public function updateTransaksi(Request $request, $id_transaksi)
-    // {
-    //     // Validasi data yang diterima dari form jika diperlukan
-    //     $request->validate([
-    //         'status' => 'required', // Validasi status
-    //         // Mungkin ada validasi tambahan untuk bidang lainnya
-    //     ]);
-
-    //     // Temukan transaksi berdasarkan ID
-    //     $transaksi = Transaksi::findOrFail($id_transaksi);
-
-    //     // Temukan atau buat catatan detail user berdasarkan id_user
-    //     $dtluser = Dtluser::firstOrNew(['id_user' => $transaksi->id_user, 'playlist_id' => $transaksi->id_playlist]);
-
-    //     // Perbarui status di dtl_user
-    //     $dtluser->status = $request->status;
-    //     $dtluser->save();
-
-    //     // Catat tindakan ini ke dalam log
-    //     Log::info('Transaksi berhasil diperbarui', ['transaksi_id' => $id_transaksi, 'user_id' => $transaksi->id_user, 'playlist_id' => $transaksi->id_playlist]);
-
-    //     // Redirect ke halaman yang sesuai, misalnya ke halaman detail transaksi
-    //     return redirect()->route('pages.datatransaksi')->with('success', 'Transaksi berhasil diperbarui.');
-    // }
 }

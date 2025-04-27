@@ -39,12 +39,11 @@
 
 
     <section class="contents">
-        <h1 class="heading">Tambah Tutor</h1>
+        <div class="heading2">
+            <h1>Daftar Buku</h1> <a href="{{ route('add_guru') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+
+        </div>
         <div class="box-container">
-            <div class="box" style="text-align: center;">
-                <h3 class="title" style="margin-bottom: .5rem;">Tambah Tutor Baru</h3>
-                <a href="{{ url('/tambahtutor') }}" class="btn">Tambah</a>
-            </div>
             @if (count($playlists) > 0)
                 @foreach ($playlists as $content)
                     <div class="box" style="text-align: center">
