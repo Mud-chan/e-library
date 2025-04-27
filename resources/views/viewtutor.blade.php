@@ -56,7 +56,8 @@
                             <form action="{{ route('delete_guru') }}" method="post" class="flex-btn">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $content->id }}">
-                                <a href="" class="option-btn">Ubah</a>
+                                <a href="{{ route('update.guru.form', ['guruId' => $content->id]) }}"
+                                    class="option-btn">Ubah</a>
                                 <button type="submit" class="delete-btn"
                                     onclick="return confirm('Anda Yakin Ingin Menghapus Guru? Harap Diperhatikan Jika Menghapus Guru Maka Akan Berdampak Pada Buku Yang Pernah Di Upload Guru');">Hapus</button>
                             </form>

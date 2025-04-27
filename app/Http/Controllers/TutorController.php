@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Peminjaman;
 use App\Models\Dtl_Siswa;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 class TutorController extends Controller
@@ -170,7 +171,7 @@ class TutorController extends Controller
             'nama' => $request->input('nama'),
             'mengampu' => $request->input('mengampu'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'password' => Hash::make($request->input('password')),
             'image' => $imageName,
             'role' => $request->input('role'),
 
@@ -188,7 +189,7 @@ class TutorController extends Controller
         $userProfesi = $tutors->mengampu;
 
         $playlists = Guru::find($id);
-        return view('edittutor', [
+        return view('update_guru', [
             "title" => "Edit Tutor",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
             "userImage" => $userImage,
@@ -197,40 +198,65 @@ class TutorController extends Controller
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
     }
-    public function updatetutor(Request $request, $id)
+    public function updatetutor(Request $request, $guruId)
     {
         // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:guru,email,' . $id,
-            'password' => 'nullable|string|min:8',
+            'email' => 'required|email|unique:guru,email,' . $guruId,
+            'old_pass' => 'nullable|string',
+            'new_pass' => 'nullable|string',
+            'cpass' => 'nullable|string|same:new_pass',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'role' => 'required|string',
             'mengampu' => 'required|string',
         ]);
 
         // Temukan pengguna berdasarkan ID
-        $tutor = Guru::find($id);
+        $tutor = Guru::find($guruId);
 
-        // Simpan gambar jika ada
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            Storage::putFileAs('public/images', $file, $filename);
-            $tutor->image = $filename;
+        try {
+            // Ambil data siswa
+            $guru = Guru::findOrFail($guruId);
+            Log::info("Data siswa ditemukan: ", $guru->toArray());
+
+            // Update data dasar
+            $guru->nama = $request->nama;
+            $guru->email = $request->email;
+            $guru->mengampu = $request->mengampu;
+            $guru->role = $request->role;
+            Log::info("Data dasar siswa berhasil di-set");
+
+            // Update gambar jika ada
+            if ($request->hasFile('image')) {
+                $imagename = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('uploaded_files'), $imagename);
+                $guru->image = $imagename;
+            } elseif (!$request->hasFile('image') && $guru->image) {
+                // If thumbnail is not uploaded and there is an existing thumbnail, keep the existing one
+                $imagename = $guru->image;
+            }
+
+            // Update password jika diminta
+            if ($request->filled('old_pass') && $request->filled('new_pass')) {
+                if (Hash::check($request->old_pass, $guru->password)) {
+                    $guru->password = Hash::make($request->new_pass);
+                    Log::info("Password siswa berhasil diperbarui.");
+                } else {
+                    Log::warning("Gagal memperbarui password: password lama salah.");
+                    return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah.');
+                }
+            }
+
+            // Simpan semua perubahan
+            $guru->save();
+            Log::info("Data siswa berhasil disimpan ke database.");
+
+            return redirect()->route('tutor.index')->with('success', 'Data Guru berhasil diperbarui!');
+        } catch (\Exception $e) {
+            Log::error('Gagal memperbarui data siswa: ' . $e->getMessage());
+            return redirect()->back()->with('errorup', 'Guru memperbarui data siswa: ' . $e->getMessage());
         }
-
-        // Update data pengguna
-        $tutor->nama = $request->input('nama');
-        $tutor->email = $request->input('email');
-        if ($request->input('password')) {
-            $tutor->password = bcrypt($request->input('password'));
-        }
-        $tutor->role = $request->input('role');
-        $tutor->mengampu = $request->input('mengampu');
-        $tutor->save();
-
-        return redirect()->route('viewtutor')->with('success', 'Tutor berhasil diperbarui.');
     }
 
 

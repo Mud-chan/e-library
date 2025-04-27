@@ -42,32 +42,25 @@
 
         <h1 class="heading">Update Buku</h1>
 
-        @if ($siswa)
-        <form action="{{ route('update.siswa', ['siswaId' => $siswa->id]) }}" method="post" enctype="multipart/form-data" id="formup">
-            @csrf
-            <input type="hidden" name="siswa_id" value="{{ $siswa->id }}">
-            <input type="hidden" name="old_image" value="{{ $siswa->image }}">
+        @if ($playlists)
+    <form action="{{ route('update.tutor', ['guruId' => $playlists->id]) }}" method="post" enctype="multipart/form-data" id="formup">
+        @csrf
+        <input type="hidden" name="guru_id" value="{{ $playlists->id }}">
+        <input type="hidden" name="role" value="{{ $playlists->role }}">
 
-            <p>Foto Siswa</p>
-            @if ($siswa->image)
-                <img src="{{ asset('uploaded_files/' . $siswa->image) }}" alt="Foto Siswa" width="150">
-            @endif
-            <input type="file" name="image" accept="image/*" class="box">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+        <p>Foto Guru</p>
+        @if ($playlists->image)
+            <img src="{{ asset('uploaded_files/' . $playlists->image) }}" alt="Foto Guru" width="150">
+        @endif
+        <input type="file" name="image" accept="image/*" class="box" id="image">
+        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
 
-            <p>Nama Siswa <span>*</span></p>
-            <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Siswa" class="box" value="{{ $siswa->nama }}">
+        <p>Nama Guru <span>*</span></p>
+        <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Guru" class="box" value="{{ $playlists->nama }}">
 
-            <p>Jenis Kelamin<span>*</span></p>
-            <select name="jenis_kelamin" class="box" required>
-                <option value="{{ $siswa->jenis_kelamin }}" selected>{{ $siswa->jenis_kelamin }}</option>
-                <option value="Laki - Laki">Laki - Laki</option>
-                <option value="Perempuan">Perempuan</option>
-            </select>
-
-            <p>Kelas<span>*</span></p>
-            <select name="kelas" class="box" required>
-                <option value="{{ $siswa->kelas }}" selected>{{ $siswa->kelas }}</option>
+        <p>Mengajar Pada Kelas..<span>*</span></p>
+            <select name="mengampu" class="box" required>
+                <option value="{{ $playlists->mengampu }}" selected>{{ $playlists->mengampu }}</option>
                 <option value="Kelas 1">Kelas 1</option>
                 <option value="Kelas 2">Kelas 2</option>
                 <option value="Kelas 3">Kelas 3</option>
@@ -76,27 +69,23 @@
                 <option value="Kelas 6">Kelas 6</option>
             </select>
 
+        <p>Email Guru <span>*</span></p>
+        <input type="email" name="email" maxlength="100" required placeholder="Masukkan Email Guru" class="box" value="{{ $playlists->email }}">
 
-            <p>Email Siswa <span>*</span></p>
-            <input type="email" name="email" maxlength="1000" required placeholder="Masukkan Email Siswa" class="box" value="{{ $siswa->email }}">
+        <p>Password Lama</p>
+        <input type="password" name="old_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
-            <p>Password Lama</p>
-            <input type="password" name="old_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
+        <p>Password Baru</p>
+        <input type="password" name="new_pass" placeholder="Password baru" class="box">
 
-            <p>Password Baru</p>
-            <input type="password" name="new_pass" placeholder="Password baru" class="box">
+        <p>Konfirmasi Password</p>
+        <input type="password" name="cpass" placeholder="Konfirmasi password" class="box">
 
-            <p>Konfirmasi Password</p>
-            <input type="password" name="cpass" placeholder="Konfirmasi password" class="box">
-
-
-
-
-            <input type="submit" value="Update Siswa" name="update" class="btn">
-        </form>
-        @else
-            <p class="empty">Siswa tidak ditemukan!</p>
-        @endif
+        <input type="submit" value="Update Guru" name="update" class="btn">
+    </form>
+    @else
+        <p class="empty">Guru tidak ditemukan!</p>
+    @endif
 
 
 <script>
