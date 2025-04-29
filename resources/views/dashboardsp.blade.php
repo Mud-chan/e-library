@@ -88,12 +88,12 @@
                     </a>
 
                     <a href="#" style="color: black">
-                        <li><i class='bx bx-dollar-circle'></i>
+                        <li><i class='bx bx-exclamation-circle-solid'></i>
                             <span class="info">
                                 <h4 style="font-size: 17px">
                                     {{-- Rp  {{ number_format($totalHargaTransaksi, 0, ',', '.') }} --}}
                                 </h4>
-                                <p>Total Pendapatan</p>
+                                <p>Informasi</p>
                             </span>
                         </li>
                     </a>
