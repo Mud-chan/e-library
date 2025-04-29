@@ -76,17 +76,17 @@
 }
 
 .module-btn-sm {
-    --btn-pt: 10px;
-    --btn-pe: 18px;
-    --btn-pb: 10px;
-    --btn-ps: 18px
+    --btn-pt: 18px;
+    --btn-pe: 26px;
+    --btn-pb: 18px;
+    --btn-ps: 26px
 }
 
 .module-btn-md {
     --btn-pt: 15px;
-    --btn-pe: 65px;
+    --btn-pe: 15px;
     --btn-pb: 15px;
-    --btn-ps: 30px
+    --btn-ps: 15px
 }
 
 .main-header .header-desktop .main-nav {
@@ -1169,7 +1169,3 @@ section.active .show-modal {
     padding: 6px 12px;
     margin: 0 10px;
 }
-
-
-
-
