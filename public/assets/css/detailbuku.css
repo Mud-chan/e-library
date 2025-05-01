@@ -27,6 +27,7 @@
 
 
  *{
+    box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
     margin: 0; padding: 0;
     box-sizing: border-box;
@@ -539,12 +540,18 @@ body{
 }
 
 @media screen and (max-width: 576px) {
-    .content main .bottom-data .header{
-        min-width: 340px;
-    }
+  .pdf-view .container {
+      width: 100%;
+      border: none;
+      margin-top: 5vh;
+  }
 
-    .body{
-        padding-left: 0rem;
-        padding-right: 0rem;
-    }
+  .pdf-viewer {
+      height: 100vh;
+  }
+
+  .body {
+      padding-left: 0rem;
+      padding-right: 0rem;
+  }
 }
