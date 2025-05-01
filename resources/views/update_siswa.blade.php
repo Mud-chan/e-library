@@ -7,7 +7,7 @@
 
     <section class="flex">
 
-        <a href="{{ url('/dashboardsp') }}" class="logo">Tutor</a>
+        <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
         {{-- <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
             @csrf
@@ -19,7 +19,6 @@
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
         <div class="profile">
@@ -46,8 +45,8 @@
         @if ($siswa)
         <form action="{{ route('update.siswa', ['siswaId' => $siswa->id]) }}" method="post" enctype="multipart/form-data" id="formup">
             @csrf
-            <input type="text" name="siswa_id" value="{{ $siswa->id }}">
-            <input type="text" name="old_image" value="{{ $siswa->image }}">
+            <input type="hidden" name="siswa_id" value="{{ $siswa->id }}">
+            <input type="hidden" name="old_image" value="{{ $siswa->image }}">
 
             <p>Foto Siswa</p>
             @if ($siswa->image)

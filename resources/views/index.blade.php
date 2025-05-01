@@ -4,12 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width,initial-scale=1" name="viewport">
-    <meta content="Codinggo" name="keywords">
-    <meta content="LiquidThemes" name="author">
-    <meta content="Codinggo" name="description">
-    <meta content="Codinggo" property="og:title">
-    <meta content="Codinggo" property="og:description">
-    <meta content="website" property="og:type">
     <meta content="./assets/images/common/og-image.jpg" property="og:image">
     <link href="assets/vendors/liquid-icon/lqd-essentials/lqd-essentials.min.css" rel="stylesheet">
     <link href="assets/css/theme.min.css" rel="stylesheet">
@@ -22,10 +16,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="icon" href="{{ asset('assets/images/logodummy.png') }}">
 
 
-    <title>Codinggo</title>
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    <title>E-Library</title>
 
     <style>
         .product-container {
@@ -33,7 +27,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 24px;
-            padding: 20px; 
+            padding: 20px;
         }
 
         .product-card {
@@ -59,17 +53,6 @@
             border-radius: 12px;
             background-color: #e0e7ff;
             object-fit: cover;
-        }
-
-        .badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background-color: #dc3545;
-            color: white;
-            padding: 4px 8px;
-            font-size: 12px;
-            border-radius: 8px;
         }
 
         .title {
@@ -136,8 +119,8 @@
         }
 
         .gambar img {
-            width: 225px; /* Sesuaikan dengan lebar ideal */
-            height: 325px; /* Tinggi lebih besar, seperti bentuk portrait */
+            width: 225px;
+            height: 325px;
             border-radius: 20px;
             object-fit: cover;
             display: block;
@@ -188,8 +171,71 @@
             display: none;
         }
 
+        .badge {
+        background-color: #28c76f;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        }
+
+
+        .grid-buku {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 15rem);
+        gap: 20px;
+        margin-bottom: 30px;
+        /* display: flex; */
+        gap: 20px;
+        justify-content: center;
+
+        }
+
+
+        .kartu-buku {
+        background: white;
+        width: 250px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        text-align: center;
+        }
+
+        .kartu-buku img {
+        width: 230px;
+        height: 80%;
+        border-radius: 10px;
+        object-fit: cover;
+        }
+
+        .kartu-buku .judul {
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: bold;
+        }
+
+        @media only screen and (max-width: 500px) {
+
+        .grid-buku {
+
+        flex-wrap: wrap;
+        }
+
+        .kartu-buku {
+        width: 150px;
+        }
+
+        .kartu-buku img {
+        width: 130px;
+        height: 160px;
+        border-radius: 10px;
+        object-fit: cover;
+        }
+
+
     </style>
-    
+
 </head>
 
 <body data-disable-animations-onmobile="true" data-mobile-header-builder="true" data-mobile-header-scheme="gray"
@@ -204,16 +250,16 @@
                     <div class="w-25percent flex items-center justify-start xl:w-15percent lg:w-40percent">
                         <div class="flex navbar-brand-plain py-20 sm:hidden"><a class="navbar-brand flex p-0 relative"
                                 href="/" rel="home"><span class="navbar-brand-inner post-rel"><img
-                                        alt="StartInaama" class="logo-sticky"
-                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="StartInaama"
+                                        alt="image" class="logo-sticky"
+                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library"
                                         class="logo-default"
-                                        src="assets/images/demo/start-hub-2/logo/logo.png"></span></a>
+                                        src=""></span></a>
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
-                                    class="navbar-brand-inner post-rel"><img alt="StartInaama" class="logo-sticky"
+                                    class="navbar-brand-inner post-rel"><img alt="image" class="logo-sticky"
                                         src="assets/images/demo/start-hub-2/logo/logo-mob-d.svg">
-                                    <img alt="StartInaama" class="logo-default"
+                                    <img alt="image" class="logo-default"
                                         src="assets/images/demo/start-hub-2/logo/logo.png"></span></a>
                         </div>
                     </div>
@@ -226,54 +272,25 @@
                                     data-localscroll="true"
                                     data-localscroll-options="{&quot;itemsSelector&quot;:&quot;> li > a&quot;, &quot;trackWindowScroll&quot;: true, &quot;includeParentAsOffset&quot;: true}"
                                     data-submenu-options="{&quot;toggleType&quot;: &quot;fade&quot;, &quot;handler&quot;: &quot;mouse-in-out&quot;}">
-                                    <li class="menu-item-home is-active"><a href="#banner"><span>Home</span> </a></li>
-                                    <li><a href="#about"><span>Why Us?</span> </a></li>
-                                    <li class="menu-item-has-children position-applied"><a href="#services"><span>Our
-                                                Courses</span> <span class="submenu-expander"><svg height="32"
+                                    <li class="menu-item-home is-active"><a href="#banner"><span>Beranda</span> </a></li>
+                                    <li><a href="#about"><span>Keunggulan</span> </a></li>
+                                    <li class="menu-item-has-children position-applied"><a href="#koleksi"><span>Koleksi
+                                                Buku</span> <span class="submenu-expander"><svg height="32"
                                                     style="width: 1em; height: 1em;" viewbox="0 0 21 32" width="21"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M10.5 18.375l7.938-7.938c.562-.562 1.562-.562 2.125 0s.562 1.563 0 2.126l-9 9c-.563.562-1.5.625-2.063.062L.437 12.562C.126 12.25 0 11.876 0 11.5s.125-.75.438-1.063c.562-.562 1.562-.562 2.124 0z"
                                                         fill="currentColor"></path>
                                                 </svg> </span> </a></li>
-                                    <li><a href="#clients"><span>Customer Stories</span> </a></li>
-                                    <li><a href="#contact"><span>Contact Us</span> </a></li>
+                                    <li><a href="#informasi"><span>Informasi</span> </a></li>
+                                    <li><a href="#kontak"><span>Hubungi Kami</span> </a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="w-25percent flex items-center justify-end mr-20 lg:w-60percent lg:mr-0">
                         <div class="flex items-center justify-end">
-                            <div class="module-social lg:hidden">
-                                <div class="social-icons-wrapper justify-end"><span class="grid-item"><a
-                                            class="icon social-icon animation-pulse-grow items-center text-15 text-white-30"
-                                            href="#" target="_blank"><span class="sr-only">Facebook</span> <svg
-                                                class="text-15" fill="currentColor" height="1em"
-                                                viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z">
-                                                </path>
-                                            </svg> </a></span><span class="grid-item"><a
-                                            class="icon social-icon animation-pulse-grow items-center text-15 text-white-30"
-                                            href="#" target="_blank"><span class="sr-only">Twitter</span> <svg
-                                                class="text-15" fill="currentColor" height="1em"
-                                                viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
-                                                </path>
-                                            </svg> </a></span><span class="grid-item"><a
-                                            class="icon social-icon animation-pulse-grow items-center text-15 text-white-30"
-                                            href="#" target="_blank"><span class="sr-only">Github</span> <svg
-                                                class="text-15" fill="currentColor" height="1em"
-                                                viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
-                                                </path>
-                                            </svg></a></span>
-                                </div>
-                            </div>
-                            <a class="btn btn-solid text-white bg-gray-600 rounded-100 ml-10 text-15 font-medium bg-bg hover:text-black hover:bg-white module-btn-sm w-200"
-                                href="/logreg"><span class="btn-txt" data-text="Login">Masuk/Daftar</span></a>
+
                             <div class="ml-15 ld-module-sd ld-module-sd-hover ld-module-sd-right xxl:hidden lg:block">
                                 <button aria-expanded="false"
                                     class="bg-transparent border-none nav-trigger flex relative items-center justify-center style-6 collapsed"
@@ -300,34 +317,35 @@
                                                         id="primary-nav">
                                                         <li class="menu-item-home is-active"><a
                                                                 class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#banner"><span>Home</span> <span
+                                                                href="#banner"><span>Beranda</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                         <li><a class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#about"><span>Why Us?</span> <span
+                                                                href="#about"><span>Keunggulan</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                         <li class="menu-item-has-children"><a
                                                                 class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#services"><span>Our Courses</span> <span
-                                                                    class="submenu-expander absolute inline-flex right-0"></span></a>
+                                                                href="#koleksi"><span>Koleksi Buku</span> <span
+                                                                class="link-icon inline-flex hide-if-empty right-icon"><i
+                                                                    class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                         <li><a class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#clients"><span>Customer Stories</span> <span
+                                                                href="#informasi"><span>Informasi</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                         <li><a class="w-full text-20 text-black font-medium leading-1/5em"
-                                                                href="#contact"><span>Contact Us</span> <span
+                                                                href="#kontak"><span>Hubungi Kami</span> <span
                                                                     class="link-icon inline-flex hide-if-empty right-icon"><i
                                                                         class="lqd-icn-ess icon-ion-ios-arrow-down"></i></span></a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="flex justify-start mt-25 gap-25"><a
+                                            {{-- <div class="flex justify-start mt-25 gap-25"><a
                                                     class="icon social-icon social-icon-facebook animation-pulse-grow text-26 w-25"
                                                     href="#" target="_blank"><span
                                                         class="sr-only">Facebook</span>
@@ -358,7 +376,7 @@
                                                         </path>
                                                     </svg>
                                                 </a></div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="lqd-module-backdrop"></div>
@@ -370,8 +388,8 @@
             <div class="lqd-stickybar-wrap lqd-stickybar-right w-auto items-end pointer-events-none">
                 <div class="static flex flex-col flex-grow-1 items-end justify-center vertical-rl p-10 mr-60"><a
                         class="btn btn-solid btn-sm btn-icon-left btn-icon-circle btn-icon-custom-size btn-icon-solid pointer-events-auto horizontal-tb -ml-60 bg-white text-15 font-medium text-gray-600 shadow-md rounded-100 hover:text-white hover:bg-primary"
-                        data-lity="#contact-modal" href="#contact-modal"><span class="btn-txt"
-                            data-text="Contact us">Contact us</span> <span
+                        data-lity="#contact-modal" href="#kontak"><span class="btn-txt"
+                            data-text="Contact us">Hubungi Kami</span> <span
                             class="btn-icon mr-15 w-35 h-35 text-blue-300 bg-blue-100"><svg class="w-20"
                                 fill="currentColor" height="16.522" viewbox="0 0 19.955 16.522" width="19.955"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -388,7 +406,7 @@
         </header>
         <main class="content">
             <div id="lqd-contents-wrap">
-                <section class="lqd-section banner pt-140 pb-200 transition-all bg-transparent text-white-50 relative"
+                <section class="lqd-section banner pt-140 pb-400 transition-all bg-transparent text-white-50 relative"
                     id="banner" style="background-image: linear-gradient(120deg, #62E19F 0%, #2BCA77 100%);">
                     <div class="lqd-shape lqd-shape-bottom" data-negative="false">
                         <svg class="lqd-custom-shape" fill="none" height="461" preserveaspectratio="none"
@@ -488,22 +506,18 @@
                                                 <span class="txt-rotate-keywords"><span
                                                         class="txt-rotate-keyword active"><span>Ar-Roudhoh</span>
                                                     </span><span class="txt-rotate-keyword"><span>Ar-Roudhoh</span>
-                                                    </span><span class="txt-rotate-keyword"><span>Desktop
-                                                            Development.</span></span></span>
+                                                    </span><span class="txt-rotate-keyword"></span></span>
                                             </h1>
                                         </div>
                                         <div class="ld-fancy-heading relative mx-25percent sm:m-0 animation-element">
                                             <p
                                                 class="ld-fh-element relative text-20 mb-1/65em leading-1/25em font-medium">
-                                                Tempat yang tepat untuk belajar coding cepat</p>
+                                                Kemudahan Membaca Buku Dimana Saja Kapan Saja</p>
                                         </div>
-                                        <div class="mb-35 relative animation-element"><a
-                                                class="btn btn-solid btn-hover-txt-liquid-x-alt rounded-100 bg-white font-medium text-15 leading-1/25em text-red-700 module-btn-md"
-                                                data-lity="#contact-modal" href="#contact-modal"><span
-                                                    class="btn-txt text-start"
-                                                    data-split-options="{&quot;type&quot;:  &quot;chars, words&quot;}"
-                                                    data-split-text="true">Dashboard</span>
-                                                </span></a></div>
+                                        <div class="relative animation-element">
+                                            <a class="btn btn-solid  rounded-100 bg-white font-medium" style="padding:15px 40px; font-weight:600; color:rgb(77, 77, 77);"
+                                                href="/logreg">Login
+                                                </a>
 
                                     </div>
 
@@ -542,8 +556,7 @@
                                     </h2>
                                 </div>
                                 <p class="animation-element"><span
-                                        class="text-16 font-medium leading-1/2em text-blue-400">Keunggulan kursus yang
-                                        kami tawarkan</p>
+                                        class="text-16 font-medium leading-1/2em text-blue-400">Keunggulan Website E-Library</p>
                             </div>
                             <div class="col col-12 p-0"></div>
                             <div class="col col-12 col-md-4 mb-30 border-right border-lightgray relative sm:border-0">
@@ -557,10 +570,7 @@
                                         <div class="contents">
                                             <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Akses 24 Jam Baca Buku
                                             </h3>
-                                            <p>Lorem Ipsum Dolor Sit Amet Constetetur Adipiscing
-                                                sit amet Lorem Ipsum Dolor Sit  Constetetur Adipiscing
-                                                adipiscing Dolor Lorem Ipsum Dolor Sit Adipiscing
-                                            <p>
+                                            <p>Dengan platform E-Library, kamu bisa membaca ribuan koleksi buku hanya dengan satu klik. Tidak perlu repot membawa buku fisik, cukup buka website kapan saja, di mana saja, lewat smartphone, tablet, atau laptop. Fleksibel untuk semua kebutuhan belajar dan hiburanmu, tanpa batasan waktu.<p>
                                         </div>
                                     </div>
                                 </div>
@@ -588,10 +598,8 @@
                                             </div>
                                         </div>
                                         <div class="contents">
-                                            <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Meingkatkan Minat Baca</h3>
-                                            <p>Lorem ipsum dolor sit amet kolo jiro mun 
-                                                hin gurt binstre loperz nuklin hedore setaf
-                                                bulk in jownline jertux zerin mein aneen  </p>
+                                            <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Meningkatkan Minat Baca</h3>
+                                            <p>Website E-Library kami dirancang untuk membuat pengalaman membaca menjadi lebih menarik dan menyenangkan. Dengan tampilan yang user-friendly, rekomendasi buku yang dipersonalisasi, serta fitur untuk memberikan ulasan, kami berkomitmen untuk membangun budaya membaca di era yang serba digital ini.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -619,8 +627,7 @@
                                         <div class="contents">
                                             <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Simpan Buku yang Disukai
                                             </h3>
-                                            <p>Lorem ipsum asik sit amet menjadi wey
-                                                aku bisa di  apaan tuh bisa gitu anjay</p>
+                                            <p>Tak perlu khawatir kehilangan buku favorit! Di E-Library, kamu bisa menyimpan buku-buku pilihan ke dalam koleksi pribadi. Kelola daftar bacaanmu, tandai buku yang ingin dibaca, dan lanjutkan membaca kapan pun kamu mau. Semua dalam satu platform yang mudah diakses dan nyaman.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -629,99 +636,289 @@
                     </div>
                 </section>
 
-                <section class="py-5 bg-white">
+                <section class="py-5 bg-white" id="koleksi">
                     <div class="container text-center">
                         <h2 class="fw-bold mb-1">Kumpulan Koleksi Buku</h2>
                         <h5 class="text-success fw-semibold mb-4">MI Ar-Roudhoh</h5>
-                
-                        <!-- row-cols agar auto 4 kolom di desktop, 2 di tablet, 1 di mobile -->
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku2.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku3.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku4.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku5.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku6.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <!-- Tambahkan lebih banyak di sini jika ada -->
-                        </div>
-                
+
+                        <div class="grid-buku">
+                            {{-- @foreach ($popularBooks as $book) --}}
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                            {{-- @endforeach --}}
+                          </div>
+
                         <!-- Tombol Lihat Semua -->
                         <div class="text-end mt-4">
                             <a href="#" class="text-success fw-semibold">Lihat Semua Buku &gt;&gt;</a>
                         </div>
                     </div>
-                </section>                                                                                                                  
-                <section style="text-align: center; font-family: sans-serif; padding: 30px;">
-                    <h2 style="font-size: 28px; font-weight: bold;">
-                      Informasi Perpustakaan MI <br>
-                      <span style="color: #3cb371;">Ar-Roudhoh</span>
-                    </h2>
-                  
-                    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; max-width: 1100px; margin-left: auto; margin-right: auto;">
-                      {{-- Kolom kiri: gambar persegi besar dan 2 gambar kecil --}}
-                      <div style="display: flex; flex-direction: column; gap: 15px;">
-                        {{-- Gambar persegi besar --}}
-                        <img src="{{ asset('assets/images/foto2.png') }}" alt="Poster Perpustakaan" style="width: 370px; height: auto; border-radius: 10px;">
-                  
-                        {{-- Dua gambar kecil di bawah yang ukurannya diperbesar --}}
-                        <div style="display: flex; gap: 15px;">
-                          <img src="{{ asset('assets/images/foto3.png') }}" alt="Gedung Sekolah" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
-                          <img src="{{ asset('assets/images/foto4.png') }}" alt="Siswa Membaca" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
-                        </div>
-                      </div>
-                  
-                      {{-- Kolom kanan: gambar panjang --}}
-                      <div>
-                        <img src="{{ asset('assets/images/foto1.png') }}" alt="Siswa di kelas" style="width: 500px; height: 400px; object-fit: cover; border-radius: 10px;">
-                      </div>
-                    </div>
-                </section>   
+                </section>
+                <section class="lqd-section case-studies pt-55 pb-120">
+                    <div class="container">
+                        <div class="row justify-center">
+                            <div class="col col-12 col-xl-4 col-md-8 mb-25 p-0 text-center module-title">
+                                <div class="ld-fancy-heading relative">
+                                    <h2 class="ld-fh-element relative mb-0/5em">Berita dan Informasi</h2>
+                                </div>
+                                <div class="ld-fancy-heading relative">
+                                    <p class="ld-fh-element mb-0/5em inline-block relative text-16 leading-1/6em">
+                                        Berita dan Informasi Seputar E-Library MI Ar-Roudhoh</p>
+                                </div>
+                            </div>
+                            <div class="col col-12">
+                                <div class="lqd-pf-grid">
 
-                <section class="hubungi-kami">
+                                    <div class="lqd-pf-row row flex flex-wrap relative -mr-10 -ml-10"
+                                        data-liquid-masonry="true"
+                                        data-masonry-options="{ &quot;filtersID&quot;:  &quot;#pf-filter-case-stuies&quot; ,  &quot;filtersCounter&quot;:  true }">
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-12 col-xs-12 masonry-item digital-design ecommerce portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-digital-design liquid-portfolio-category-ecommerce liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="524"
+                                                                    src="assets/images/poster5.jpg"
+                                                                    width="1116">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Pemahaman Membaca</h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Digital Design</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/poster5.jpg"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-12 col-xs-12 masonry-item ecommerce masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-ecommerce liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="1106"
+                                                                    src="assets/images/poster3.jpg"
+                                                                    width="1116">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Selamat Hari Buku Sedunia!
+                                                            </h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Ecommerce</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/poster3.jpg"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-lg-3 col-12 col-xs-12 masonry-item branding custom-print masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-branding liquid-portfolio-category-custom-print liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="520"
+                                                                    src="assets/images/poster2.jpg"
+                                                                    width="520">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h6 class="lqd-pf-title mt-0 mb-0">Yuk! Baca Yuk</h6>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Branding</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/poster2.jpg"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-lg-3 col-12 col-xs-12 masonry-item branding digital-design masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-branding liquid-portfolio-category-digital-design liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="520"
+                                                                    src="assets/images/poster1.jpg"
+                                                                    width="520">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Buku Baru Sudah Tersedia
+                                                            </h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Branding</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/poster1.jpg"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col col-12 text-center"><a
+                                    class="btn btn-naked btn-icon-right btn-icon-circle btn-icon-custom-size btn-icon-solid btn-icon-ripple text-black"
+                                    href="#" target="_blank"><span class="btn-txt"
+                                        data-text="See more projects">Lihat Selengkapnya</span>
+                                    <span class="btn-icon w-30 h-30 text-black bg-slate-100"><i aria-hidden="true"
+                                            class="lqd-icn-ess icon-ion-ios-add"></i></span></a>
+                            </div> --}}
+                        </div>
+                    </div>
+                </section>
+
+                <section class="hubungi-kami" id="kontak">
                     <h2>Hubungi Kami</h2>
-                    <p class="subjudul">Di Sini</p>
                     <div class="kontainer-form">
                       <div class="gambar">
                         <img src="{{ asset('assets/images/tlpn.png') }}" alt="Telepon" />
                       </div>
-                      <form class="form-kontak">
+                      <form class="form-kontak" method="POST" action="{{ route('kirim.email') }}">
+                        @csrf
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" name="nama" placeholder="Jamiul Mukmininin" />
-                  
+
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="example@mail.com" />
-                  
+
                         <label for="pesan">Isi Form</label>
                         <textarea id="pesan" name="pesan" placeholder="Type Here………"></textarea>
-                  
+
                         <button type="submit">Submit</button>
                       </form>
                     </div>
-                </section>                  
+                </section>
                 <section class="lqd-section connect-top pt-10 relative">
                     <div
                         class="ld-particles-container w-full lqd-particles-as-bg lqd-overlay flex lqd-particle pointer-events-none">
@@ -826,43 +1023,18 @@
                 </div>
                 <div class="container">
                     <div class="row items-center">
-                        <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo Inaama"
-                                height="21" src="assets/images/demo/start-hub-2/logo/logo1.png" width="145">
+                        <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo-ermi"
+                                height="21" src="" width="145">
                         </div>
-                        
+
                         <div class="col col-12 mt-5 p-15"><span
                                 class="divider w-full flex border-top border-lightgray"></span></div>
                         <div class="col col-12 col-md-8">
                             <div class="ld-fancy-heading relative">
-                                <p class="ld-fh-element mb-0/5em inline-block relative text-12 leading-1/75em">These
-                                    Terms
-                                    will be applied fully and affect to your use of this Website. By using this Website,
-                                    you
-                                    agreed to accept all terms and conditions written in here. You must not use this
-                                    Website if
-                                    you disagree with any of these Website Standard Terms and Conditions.</p>
                             </div>
                         </div>
                         <div class="col col-12 col-md-4">
-                            <div class="flex flex-row justify-end items-center gap-10 sm:justify-start"><a
-                                    class="icon social-icon animation-grow mr-25 text-24 w-25 h-25 leading-24"
-                                    href="#" target="_blank"><span class="sr-only">Instagram</span>
-                                    <svg class="w-1em h-1em relative block" viewbox="0 0 448 512"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
-                                            fill="#5F7A9E"></path>
-                                    </svg>
-                                </a><a class="icon social-icon animation-grow text-24 w-25 h-25 leading-24"
-                                    href="#" target="_blank"><span class="sr-only">Twitter</span>
-                                    <svg class="w-1em h-1em relative block" viewbox="0 0 512 512"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
-                                            fill="#5F7A9E"></path>
-                                    </svg>
-                                </a></div>
-                        </div>
+
                     </div>
                 </div>
             </section>
@@ -1083,21 +1255,10 @@
         </div>
     </div>
     <div class="lqd-cc lqd-cc--outer fixed top-0 left-0 pointer-events-none"></div>
-    {{-- <Inaama id="lqd-temp-snickersbar">
-        <div class="lqd-snickersbar flex flex-wrap lqd-snickersbar-in" data-item-id="">
-            <div class="lqd-snickersbar-inner flex flex-wrap items-center">
-                <div class="lqd-snickersbar-detail"><p class="lqd-snickersbar-addding-temp mt-0 mb-0 hidden">Adding
-                {{itemName}} to cart</p>
-                <p class="lqd-snickersbar-added-temp mt-0 mb-0 hidden">Added {{itemName}} to cart</p>
-                <p class="lqd-snickersbar-msg flex items-center mt-0 mb-0"></p>
-                <p class="lqd-snickersbar-msg-done flex items-center mt-0 mb-0"></p></div>
-            <div class="lqd-snickersbar-ext ml-1/5em"></div>
-            </div>
-        </div>
-    </Inaama> --}}
-    <Inaama id="lqd-temp-sticky-header-sentinel">
+
+    <elemen id="lqd-temp-sticky-header-sentinel">
         <div class="lqd-sticky-sentinel invisible absolute pointer-events-none"></div>
-    </Inaama>
+    </elemen>
     <div aria-label="Dialog Window (Press escape to close)" class="lity hidden" data-modal-type="default"
         role="dialog" tabindex="-1">
         <div class="lity-backdrop"></div>

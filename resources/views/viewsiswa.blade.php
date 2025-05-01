@@ -39,13 +39,12 @@
 
     <section class="contents">
 
-        <h1 class="heading">Student</h1>
+        <div class="heading2">
+            <h1>Daftar Buku</h1> <a href="{{ route('add_siswa') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+
+        </div>
 
         <div class="box-container">
-            <div class="box" style="text-align: center;">
-                <h3 class="title" style="margin-bottom: .5rem;">Dafatarkan Siswa Baru</h3>
-                <a href="{{ route('add_siswa') }}" class="btn">Tambah</a>
-            </div>
             @if (count($contents) > 0)
                 @foreach ($contents as $content)
                     <div class="box" style="text-align: center">
@@ -65,7 +64,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="empty">No contents added yet!</p>
+                <p class="empty">Belum ada Siswa Yang di Tambahkan</p>
             @endif
 
         </div>

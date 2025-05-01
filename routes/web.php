@@ -8,6 +8,7 @@ use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ContentspController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KontakController;
 
 Route::get('/', function () {
     return view('index');
@@ -28,15 +29,18 @@ Route::post('/update-password', [LoginController::class, 'updatePassword'])->nam
 Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
 Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
-
+Route::get('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logoutsiswa');
 
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PagesControllerSp;
+
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
 Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass');
 
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/dashboardsp', 'PagesControllerSp@dashboard')->name('pages.dashboardsp');
+    Route::get('/katalogbuku', 'PagesControllerSp@katalogbuku')->name('pages.katalogbuku');
     // Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
     // Route::post('/carisiswasp', 'PagesControllerSp@carisiswasp')->name('pages.carisiswasp');
     // Route::get('/datatransaksi', 'PagesControllerSp@datatransaksi')->name('pages.datatransaksi');
@@ -53,16 +57,22 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
-
+    Route::get('/profilesiswa', 'ProfilespController@profilesiswa')->name('pages.profilesiswa');
 });
 
 // Route::get('/profilesp', [ProfilespController::class, 'profilesp'])->name('tutors.profilesp');
 Route::get('/tutors/editsp', [ProfilespController::class, 'editsp'])->name('tutors.editsp');
 Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('tutors.updatesp');
+Route::get('/tutors/editsiswa', [ProfilespController::class, 'editsiswa'])->name('tutors.editsiswa');
+Route::put('/tutors/updatesiswa', [ProfilespController::class, 'updatesiswa'])->name('tutors.updatesiswa');
 
 Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
 Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');
-
+Route::get('/add-guru', [TutorController::class, 'tambahtutor'])->name('add_guru');
+Route::post('/upload-guru', [TutorController::class, 'storetutor'])->name('upload_guru');
+Route::post('/delete-guru', [TutorController::class, 'deletetutor'])->name('delete_guru');
+Route::get('/update-guru/{guruId}', [TutorController::class, 'edittutor'])->name('update.guru.form');
+Route::post('update-tutor/{guruId}', [TutorController::class, 'updatetutor'])->name('update.tutor');
 
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');

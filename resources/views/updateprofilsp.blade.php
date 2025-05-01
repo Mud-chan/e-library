@@ -47,7 +47,7 @@
        <div class="flex">
         <div class="col">
            <p>Nama Anda : </p>
-           <input type="text" name="name" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
+           <input type="text" name="nama" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
            <p>Profesi Anda :</p>
            <input type="text" name="profession" placeholder="{{ $tutor->mengampu }}" maxlength="100"  class="box">
            {{-- <select name="profession" class="box">
