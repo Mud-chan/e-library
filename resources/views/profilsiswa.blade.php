@@ -23,8 +23,8 @@
         <div class="profile">
 
             <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-            <h3></h3>
-            <span></span>
+            <h3>{{ $userName }}</h3>
+                <span>Siswa</span>
             <a href="{{ url('/katalogbuku') }}" class="btn">Katalog Buku</a>
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
@@ -60,7 +60,7 @@
         <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
         <h3>{{ $userName }}</h3>
         <span>{{ $userProfesi }}</span>
-        <a href="{{ route('tutors.editsp') }}" class="inline-btn">update profile</a>
+        <a href="{{ route('tutors.editsiswa') }}" class="inline-btn">update profile</a>
        </div>
 
        <div class="flex">
