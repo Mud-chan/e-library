@@ -745,59 +745,16 @@
                         <div class="row justify-center">
                             <div class="col col-12 col-xl-4 col-md-8 mb-25 p-0 text-center module-title">
                                 <div class="ld-fancy-heading relative">
-                                    <h2 class="ld-fh-element relative mb-0/5em">Sedang hangat</h2>
+                                    <h2 class="ld-fh-element relative mb-0/5em">Berita dan Informasi</h2>
                                 </div>
                                 <div class="ld-fancy-heading relative">
                                     <p class="ld-fh-element mb-0/5em inline-block relative text-16 leading-1/6em">
-                                        Ada yang diskon nih! Yakin ga mau gabung? Rugi dong!</p>
+                                        Berita dan Informasi Seputar E-Library MI Ar-Roudhoh</p>
                                 </div>
                             </div>
                             <div class="col col-12">
                                 <div class="lqd-pf-grid">
-                                    <div class="liquid-filter-items items-center justify-between">
-                                        <div class="liquid-filter-items-inner flex-grow-1"><span
-                                                class="liquid-filter-items-label">Filter by</span>
-                                            <ul class="filter-list filter-list-inline flex items-center md:hidden"
-                                                id="pf-filter-case-stuies">
-                                                <li class="active text-black" data-filter="*"><span>All</span> <sup
-                                                        class="lqd-filter-counter"></sup></li>
-                                                <li class="text-black" data-filter=".branding"><span>New</span>
-                                                    <sup class="lqd-filter-counter"></sup>
-                                                </li>
-                                                <li class="text-black" data-filter=".digital-design">
-                                                    <span>Trending</span> <sup class="lqd-filter-counter"></sup>
-                                                </li>
-                                                <li class="text-black" data-filter=".ecommerce"><span>Up to 70%</span>
-                                                    <sup class="lqd-filter-counter"></sup>
-                                                </li>
-                                            </ul>
-                                            <div class="lqd-filter-dropdown hidden md:block"
-                                                data-form-options="{ &quot;dropdownAppendTo&quot;:  &quot;self&quot; }">
-                                                <div class="lqd-select-dropdown">
-                                                    <div class="ui-selectmenu-menu ui-front">
-                                                        <ul aria-hidden="true"
-                                                            aria-labelledby="lqd-filter-dropdown-pf-filter-case-stuies-button"
-                                                            class="ui-menu ui-corner-bottom ui-widget ui-widget-content"
-                                                            id="lqd-filter-dropdown-pf-filter-case-stuies-menu"
-                                                            role="listbox" tabindex="0"></ul>
-                                                    </div>
-                                                </div>
-                                                <span aria-autocomplete="list" aria-expanded="false"
-                                                    aria-haspopup="true"
-                                                    aria-owns="lqd-filter-dropdown-pf-filter-case-stuies-menu"
-                                                    class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"
-                                                    id="lqd-filter-dropdown-pf-filter-case-stuies-button"
-                                                    role="combobox" tabindex="0"><span
-                                                        class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span>
-                                                    <span class="ui-selectmenu-text">All</span></span>
-                                            </div>
-                                            <a class="btn btn-naked btn-icon-right text-15 font-medium text-gray-400 hover:text-primary"
-                                                data-lity="#contact-modal" href="#contact-modal"><span
-                                                    class="flex items-center"><span class="btn-txt"
-                                                        data-text="See More">See More</span> <span class="btn-icon"><i
-                                                            class="lqd-icn-ess icon-md-arrow-forward"></i></span></span></a>
-                                        </div>
-                                    </div>
+
                                     <div class="lqd-pf-row row flex flex-wrap relative -mr-10 -ml-10"
                                         data-liquid-masonry="true"
                                         data-masonry-options="{ &quot;filtersID&quot;:  &quot;#pf-filter-case-stuies&quot; ,  &quot;filtersCounter&quot;:  true }">
@@ -810,7 +767,7 @@
                                                         <figure>
                                                             <figure class="w-full"><img alt="case Studies"
                                                                     class="w-full" height="524"
-                                                                    src="assets/images/demo/start-hub-2/case-study/poto3.png"
+                                                                    src="assets/images/poster5.jpg"
                                                                     width="1116">
                                                             </figure>
                                                         </figure>
@@ -819,8 +776,7 @@
                                                             class="lqd-pf-overlay-bg lqd-overlay flex"></span>
                                                         <div
                                                             class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
-                                                            <h5 class="lqd-pf-title mt-0 mb-0">Diskon 50% untuk kamu
-                                                                pecinta desain</h5>
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Pemahaman Membaca</h5>
                                                             <ul
                                                                 class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
                                                                 {{-- <li><a href="#">Digital Design</a></li> --}}
@@ -829,7 +785,7 @@
                                                     </div>
                                                     <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
                                                         data-fresco-group="portfolio"
-                                                        href="assets/images/demo/start-hub-2/case-study/poto3.png"></a>
+                                                        href="assets/images/poster5.jpg"></a>
                                                 </div>
                                             </article>
                                         </div>
@@ -842,7 +798,7 @@
                                                         <figure>
                                                             <figure class="w-full"><img alt="case Studies"
                                                                     class="w-full" height="1106"
-                                                                    src="assets/images/demo/start-hub-2/case-study/poto2.png"
+                                                                    src="assets/images/poster3.jpg"
                                                                     width="1116">
                                                             </figure>
                                                         </figure>
@@ -851,8 +807,7 @@
                                                             class="lqd-pf-overlay-bg lqd-overlay flex"></span>
                                                         <div
                                                             class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
-                                                            <h5 class="lqd-pf-title mt-0 mb-0">Baru! Kursus Chatbot
-                                                                Telegram
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Selamat Hari Buku Sedunia!
                                                             </h5>
                                                             <ul
                                                                 class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
@@ -862,7 +817,7 @@
                                                     </div>
                                                     <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
                                                         data-fresco-group="portfolio"
-                                                        href="assets/images/demo/start-hub-2/case-study/poto2.png"></a>
+                                                        href="assets/images/poster3.jpg"></a>
                                                 </div>
                                             </article>
                                         </div>
@@ -875,7 +830,7 @@
                                                         <figure>
                                                             <figure class="w-full"><img alt="case Studies"
                                                                     class="w-full" height="520"
-                                                                    src="assets/images/demo/start-hub-2/case-study/poto1.png"
+                                                                    src="assets/images/poster2.jpg"
                                                                     width="520">
                                                             </figure>
                                                         </figure>
@@ -884,8 +839,7 @@
                                                             class="lqd-pf-overlay-bg lqd-overlay flex"></span>
                                                         <div
                                                             class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
-                                                            <h6 class="lqd-pf-title mt-0 mb-0">Lagi Viral! Cara desain
-                                                                interface dengan Figma</h6>
+                                                            <h6 class="lqd-pf-title mt-0 mb-0">Yuk! Baca Yuk</h6>
                                                             <ul
                                                                 class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
                                                                 {{-- <li><a href="#">Branding</a></li> --}}
@@ -894,7 +848,7 @@
                                                     </div>
                                                     <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
                                                         data-fresco-group="portfolio"
-                                                        href="assets/images/demo/start-hub-2/case-study/poto1.png"></a>
+                                                        href="assets/images/poster2.jpg"></a>
                                                 </div>
                                             </article>
                                         </div>
@@ -907,7 +861,7 @@
                                                         <figure>
                                                             <figure class="w-full"><img alt="case Studies"
                                                                     class="w-full" height="520"
-                                                                    src="assets/images/demo/start-hub-2/case-study/pf-4.jpg"
+                                                                    src="assets/images/poster1.jpg"
                                                                     width="520">
                                                             </figure>
                                                         </figure>
@@ -916,8 +870,7 @@
                                                             class="lqd-pf-overlay-bg lqd-overlay flex"></span>
                                                         <div
                                                             class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
-                                                            <h5 class="lqd-pf-title mt-0 mb-0">Diskon 30% karena udah
-                                                                setia dengan Codinggo
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Buku Baru Sudah Tersedia
                                                             </h5>
                                                             <ul
                                                                 class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
@@ -927,7 +880,7 @@
                                                     </div>
                                                     <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
                                                         data-fresco-group="portfolio"
-                                                        href="assets/images/demo/start-hub-2/case-study/pf-4.jpg"></a>
+                                                        href="assets/images/poster1.jpg"></a>
                                                 </div>
                                             </article>
                                         </div>
