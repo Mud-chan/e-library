@@ -57,7 +57,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
-
+    Route::get('/profilesiswa', 'ProfilespController@profilesiswa')->name('pages.profilesiswa');
 });
 
 // Route::get('/profilesp', [ProfilespController::class, 'profilesp'])->name('tutors.profilesp');

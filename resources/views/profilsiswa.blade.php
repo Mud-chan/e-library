@@ -6,7 +6,7 @@
 
     <section class="flex">
 
-        <a href="{{ url('/dashboardsp') }}" class="logo">Siswa</a>
+        <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
         {{-- <form action="{{ route('detailsiswa.carisiswadalam') }}" method="post" class="search-form">
             @csrf
@@ -15,19 +15,19 @@
         </form> --}}
 
         <div class="icons">
-            <div id="menu-btn" class="fas fa-bars"></div>
-            <div id="search-btn" class="fas fa-search"></div>
+
+
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
         <div class="profile">
 
-            <img src="{{ asset('uploaded_files/') }}" alt="">
+            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
             <h3></h3>
             <span></span>
-            <a href="{{ url('/profilesp') }}" class="btn">view profile</a>
-
+            <a href="{{ url('/katalogbuku') }}" class="btn">Katalog Buku</a>
+            <a href="{{ url('/historybuku') }}" class="btn">History</a>
+            <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>
 
@@ -57,22 +57,22 @@
     <div class="details">
 
        <div class="tutor">
-        <img src="assets/images/frame1.png" alt="">
-        <h3>Kholis Abdullah</h3>
-        <span>Kelas 6</span>
+        <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
+        <h3>{{ $userName }}</h3>
+        <span>{{ $userProfesi }}</span>
         <a href="{{ route('tutors.editsp') }}" class="inline-btn">update profile</a>
        </div>
 
        <div class="flex">
         <div class="box">
-           <span>26</span>
+           <span>{{ $totalBookmark }}</span>
            <p style="font-size: 1.5rem">Buku Dibookmark</p>
-           <a href="{{ route('tutor.index') }}" class="btn">Lihat Bookmark</a>
+           <a href="{{ url('/bookmarkbuku') }}" class="btn">Lihat Bookmark</a>
         </div>
         <div class="box">
-           <span>37</span>
+           <span>{{ $totalHistori }}</span>
            <p style="font-size: 1.5rem">Buku Dibaca</p>
-           <a href="" class="btn">Lihat Riwayat</a>
+           <a href="{{ url('/historybuku') }}" class="btn">Lihat Riwayat</a>
         </div>
         {{-- <div class="box">
            <span></span>
