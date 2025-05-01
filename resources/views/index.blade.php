@@ -904,7 +904,8 @@
                       <div class="gambar">
                         <img src="{{ asset('assets/images/tlpn.png') }}" alt="Telepon" />
                       </div>
-                      <form class="form-kontak">
+                      <form class="form-kontak" method="POST" action="{{ route('kirim.email') }}">
+                        @csrf
                         <label for="nama">Nama</label>
                         <input type="text" id="nama" name="nama" placeholder="Jamiul Mukmininin" />
 

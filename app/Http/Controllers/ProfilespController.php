@@ -5,6 +5,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Guru;
+use App\Models\Bookmark;
+use App\Models\Histori;
 // use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,38 +43,35 @@ class ProfilespController extends Controller
         ]);
     }
 
-    // public function store(Request $request)
-    // {
-    //     if ($request->isMethod('post')) {
-    //         $request->validate([
-    //             'name' => 'required|string|max:50',
-    //             'email' => 'required|email|unique:users',
-    //             'password' => 'required|string|min:6|confirmed',
-    //             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    //         ]);
+    public function profilesiswa()
+    {
+        $siswaId = Cookie::get('user_id'); // Ambil ID pengguna dari cookie
+        $siswa = User::find($siswaId); // Temukan pengguna berdasarkan ID
 
-    //         $id = substr(Str::uuid(), 0, 20);
-    //         $image = $request->file('image');
-    //         $imageName = time().'.'.$image->extension();
-    //         $image->move(public_path('uploaded_files'), $imageName);
+        if (!$siswa) {
+            return redirect()->back()->withErrors('User tidak ditemukan');
+        }
 
-    //         $user = User::create([
-    //             'id' => $id,
-    //             'name' => $request->input('name'),
-    //             'email' => $request->input('email'),
-    //             'password' => Hash::make($request->input('password')), // Gunakan Hash::make() untuk meng-hash password
-    //             'image' => $imageName
-    //         ]);
+        // Ambil data dari user
+        $userName = $siswa->nama;
+        $userImage = $siswa->image;
+        $userProfesi = $siswa->kelas;
 
-    //         if ($user) {
-    //             return redirect('/logreg')->with('success', 'Akun berhasil dibuat. Silakan login.');
-    //         } else {
-    //             return redirect()->back()->with('error', 'Gagal membuat akun pengguna.');
-    //         }
-    //     }
+        // Hitung total bookmark dan histori dari siswa ini
+        $totalBookmark = Bookmark::where('id_siswa', $siswaId)->count();
+        $totalHistori = Histori::where('id_siswa', $siswaId)->count();
 
-    //     // return view('auth.logreg');
-    // }
+        return view('profilsiswa', [
+            "title" => "Profile Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "siswaId" => $siswaId,
+            "totalBookmark" => $totalBookmark,
+            "totalHistori" => $totalHistori
+        ]);
+    }
+
 
 
     public function editsp()
