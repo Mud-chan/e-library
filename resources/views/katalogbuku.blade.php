@@ -3,170 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Katalog Buku</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #28c76f;
-      padding: 10px 20px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .search-section {
-      display: flex;
-      gap: 5px;
-    }
-
-    .search-section input[type="text"] {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .search-section button {
-      padding: 5px 15px;
-      background-color: white;
-      color: #28c76f;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .content {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .overlay .credit {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 5px 10px;
-      font-size: 12px;
-      border-radius: 5px;
-    }
-
-    .katalog-buku {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h3 {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 30px 0 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ikon-bulet {
-      width: 12px;
-      height: 12px;
-      background-color: #28c76f;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .grid-buku {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .kartu-buku {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 10px;
-      text-align: center;
-    }
-
-    .kartu-buku img {
-      width: 100%;
-      height: 200px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .kartu-buku .judul {
-      font-size: 14px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .label-genre {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      background-color: #28c76f;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .genre {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .genre button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 20px;
-      background-color: #28c76f;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="{{ asset('assets/css/katalog_buku.css') }}">
 </head>
 <body>
 
   <!-- Navbar -->
-  <div class="navbar">
+  {{-- <div class="navbar">
     <div>Home</div>
     <div class="search-section">
       <input type="text" placeholder="Search here............" />
       <button>Search</button>
     </div>
     <div>👤 Diego</div>
-  </div>
+  </div> --}}
+
+
+  <header class="header">
+
+    <section class="flex">
+
+        <a href="{{ url('/dashboardsp') }}" class="logo">Tutor</a>
+
+        <form action="post" method="post" class="search-form">
+            @csrf
+            <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_btn"></button>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+
+            <img src="{{ asset('assets/images/demo/frame1.png') }}" alt="">
+            <h3>Rohman</h3>
+            <span>Admin</span>
+            <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">log out</a>
+
+        </div>
+
+    </section>
+
+</header>
+
 
   <!-- Katalog Buku -->
   <section class="katalog-buku">
@@ -251,6 +138,6 @@
       <button>Non-Pelajaran</button>
     </div>
   </section>
-
+  <script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>
 </html>

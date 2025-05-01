@@ -69,3 +69,7 @@ Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
+
+Route::get('/katalogbuku', function () {
+    return view('katalogbuku');
+});
