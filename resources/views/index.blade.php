@@ -55,17 +55,6 @@
             object-fit: cover;
         }
 
-        .badge {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background-color: #dc3545;
-            color: white;
-            padding: 4px 8px;
-            font-size: 12px;
-            border-radius: 8px;
-        }
-
         .title {
             margin-top: 16px;
             font-weight: 600;
@@ -181,6 +170,69 @@
         ::-webkit-scrollbar {
             display: none;
         }
+
+        .badge {
+        background-color: #28c76f;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        }
+
+
+        .grid-buku {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 15rem);
+        gap: 20px;
+        margin-bottom: 30px;
+        /* display: flex; */
+        gap: 20px;
+        justify-content: center;
+
+        }
+
+
+        .kartu-buku {
+        background: white;
+        width: 250px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 10px;
+        text-align: center;
+        }
+
+        .kartu-buku img {
+        width: 230px;
+        height: 80%;
+        border-radius: 10px;
+        object-fit: cover;
+        }
+
+        .kartu-buku .judul {
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: bold;
+        }
+
+        @media only screen and (max-width: 500px) {
+
+        .grid-buku {
+
+        flex-wrap: wrap;
+        }
+
+        .kartu-buku {
+        width: 150px;
+        }
+
+        .kartu-buku img {
+        width: 130px;
+        height: 160px;
+        border-radius: 10px;
+        object-fit: cover;
+        }
+
 
     </style>
 
@@ -589,40 +641,98 @@
                         <h2 class="fw-bold mb-1">Kumpulan Koleksi Buku</h2>
                         <h5 class="text-success fw-semibold mb-4">MI Ar-Roudhoh</h5>
 
-                        <!-- row-cols agar auto 4 kolom di desktop, 2 di tablet, 1 di mobile -->
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku2.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku3.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku4.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku5.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2">
-                                    <img src="{{ asset('assets/images/buku6.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                </div>
-                            </div>
+                        <div class="grid-buku">
+                            {{-- @foreach ($popularBooks as $book) --}}
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
 
-                        </div>
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                              <div class="kartu-buku">
+                                <a href="" style="text-decoration: none; color: black;">
+                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">Aku Mengenal Hewan</p>
+                                    <div class="label-genre">
+                                    <span class="badge">Buku Cerita</span>
+                                    <span class="badge">Umum</span>
+                                    </div>
+                                </a>
+                              </div>
+
+                            {{-- @endforeach --}}
+                          </div>
 
                         <!-- Tombol Lihat Semua -->
                         <div class="text-end mt-4">
