@@ -630,29 +630,208 @@
                         </div>
                     </div>
                 </section>
-                <section style="text-align: center; font-family: sans-serif; padding: 30px;" id="informasi">
-                    <h2 style="font-size: 28px; font-weight: bold;">
-                      Informasi Perpustakaan MI <br>
-                      <span style="color: #3cb371;">Ar-Roudhoh</span>
-                    </h2>
-
-                    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; max-width: 1100px; margin-left: auto; margin-right: auto;">
-                      {{-- Kolom kiri: gambar persegi besar dan 2 gambar kecil --}}
-                      <div style="display: flex; flex-direction: column; gap: 15px;">
-                        {{-- Gambar persegi besar --}}
-                        <img src="{{ asset('assets/images/foto2.png') }}" alt="Poster Perpustakaan" style="width: 370px; height: auto; border-radius: 10px;">
-
-                        {{-- Dua gambar kecil di bawah yang ukurannya diperbesar --}}
-                        <div style="display: flex; gap: 15px;">
-                          <img src="{{ asset('assets/images/foto3.png') }}" alt="Gedung Sekolah" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
-                          <img src="{{ asset('assets/images/foto4.png') }}" alt="Siswa Membaca" style="width: 180px; height: 190px; object-fit: cover; border-radius: 10px;">
+                <section class="lqd-section case-studies pt-55 pb-120">
+                    <div class="container">
+                        <div class="row justify-center">
+                            <div class="col col-12 col-xl-4 col-md-8 mb-25 p-0 text-center module-title">
+                                <div class="ld-fancy-heading relative">
+                                    <h2 class="ld-fh-element relative mb-0/5em">Sedang hangat</h2>
+                                </div>
+                                <div class="ld-fancy-heading relative">
+                                    <p class="ld-fh-element mb-0/5em inline-block relative text-16 leading-1/6em">
+                                        Ada yang diskon nih! Yakin ga mau gabung? Rugi dong!</p>
+                                </div>
+                            </div>
+                            <div class="col col-12">
+                                <div class="lqd-pf-grid">
+                                    <div class="liquid-filter-items items-center justify-between">
+                                        <div class="liquid-filter-items-inner flex-grow-1"><span
+                                                class="liquid-filter-items-label">Filter by</span>
+                                            <ul class="filter-list filter-list-inline flex items-center md:hidden"
+                                                id="pf-filter-case-stuies">
+                                                <li class="active text-black" data-filter="*"><span>All</span> <sup
+                                                        class="lqd-filter-counter"></sup></li>
+                                                <li class="text-black" data-filter=".branding"><span>New</span>
+                                                    <sup class="lqd-filter-counter"></sup>
+                                                </li>
+                                                <li class="text-black" data-filter=".digital-design">
+                                                    <span>Trending</span> <sup class="lqd-filter-counter"></sup>
+                                                </li>
+                                                <li class="text-black" data-filter=".ecommerce"><span>Up to 70%</span>
+                                                    <sup class="lqd-filter-counter"></sup>
+                                                </li>
+                                            </ul>
+                                            <div class="lqd-filter-dropdown hidden md:block"
+                                                data-form-options="{ &quot;dropdownAppendTo&quot;:  &quot;self&quot; }">
+                                                <div class="lqd-select-dropdown">
+                                                    <div class="ui-selectmenu-menu ui-front">
+                                                        <ul aria-hidden="true"
+                                                            aria-labelledby="lqd-filter-dropdown-pf-filter-case-stuies-button"
+                                                            class="ui-menu ui-corner-bottom ui-widget ui-widget-content"
+                                                            id="lqd-filter-dropdown-pf-filter-case-stuies-menu"
+                                                            role="listbox" tabindex="0"></ul>
+                                                    </div>
+                                                </div>
+                                                <span aria-autocomplete="list" aria-expanded="false"
+                                                    aria-haspopup="true"
+                                                    aria-owns="lqd-filter-dropdown-pf-filter-case-stuies-menu"
+                                                    class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"
+                                                    id="lqd-filter-dropdown-pf-filter-case-stuies-button"
+                                                    role="combobox" tabindex="0"><span
+                                                        class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span>
+                                                    <span class="ui-selectmenu-text">All</span></span>
+                                            </div>
+                                            <a class="btn btn-naked btn-icon-right text-15 font-medium text-gray-400 hover:text-primary"
+                                                data-lity="#contact-modal" href="#contact-modal"><span
+                                                    class="flex items-center"><span class="btn-txt"
+                                                        data-text="See More">See More</span> <span class="btn-icon"><i
+                                                            class="lqd-icn-ess icon-md-arrow-forward"></i></span></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="lqd-pf-row row flex flex-wrap relative -mr-10 -ml-10"
+                                        data-liquid-masonry="true"
+                                        data-masonry-options="{ &quot;filtersID&quot;:  &quot;#pf-filter-case-stuies&quot; ,  &quot;filtersCounter&quot;:  true }">
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-12 col-xs-12 masonry-item digital-design ecommerce portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-digital-design liquid-portfolio-category-ecommerce liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="524"
+                                                                    src="assets/images/demo/start-hub-2/case-study/poto3.png"
+                                                                    width="1116">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Diskon 50% untuk kamu
+                                                                pecinta desain</h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Digital Design</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/demo/start-hub-2/case-study/poto3.png"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-12 col-xs-12 masonry-item ecommerce masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-ecommerce liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="1106"
+                                                                    src="assets/images/demo/start-hub-2/case-study/poto2.png"
+                                                                    width="1116">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Baru! Kursus Chatbot
+                                                                Telegram
+                                                            </h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Ecommerce</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/demo/start-hub-2/case-study/poto2.png"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-lg-3 col-12 col-xs-12 masonry-item branding custom-print masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-branding liquid-portfolio-category-custom-print liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="520"
+                                                                    src="assets/images/demo/start-hub-2/case-study/poto1.png"
+                                                                    width="520">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h6 class="lqd-pf-title mt-0 mb-0">Lagi Viral! Cara desain
+                                                                interface dengan Figma</h6>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Branding</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/demo/start-hub-2/case-study/poto1.png"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div
+                                            class="lqd-pf-column col-md-6 col-lg-3 col-12 col-xs-12 masonry-item branding digital-design masonry portfolio-single py-0 px-10">
+                                            <article
+                                                class="lqd-pf-item lqd-pf-item-style-1 lqd-pf-dark pf-details-h-end relative overflow-hidden liquid-portfolio type-liquid-portfolio status-publish format-standard has-post-thumbnail hentry liquid-portfolio-category-branding liquid-portfolio-category-digital-design liquid-portfolio-category-masonry liquid-portfolio-category-portfolio-single mb-25 rounded-10">
+                                                <div class="lqd-pf-item-inner">
+                                                    <div class="lqd-pf-img">
+                                                        <figure>
+                                                            <figure class="w-full"><img alt="case Studies"
+                                                                    class="w-full" height="520"
+                                                                    src="assets/images/demo/start-hub-2/case-study/pf-4.jpg"
+                                                                    width="520">
+                                                            </figure>
+                                                        </figure>
+                                                    </div>
+                                                    <div class="lqd-pf-details flex flex-wrap relative"><span
+                                                            class="lqd-pf-overlay-bg lqd-overlay flex"></span>
+                                                        <div
+                                                            class="lqd-pf-info flex flex-wrap items-center justify-between w-full px-1/5em py-1/5em bg-white rounded-4">
+                                                            <h5 class="lqd-pf-title mt-0 mb-0">Diskon 30% karena udah
+                                                                setia dengan Codinggo
+                                                            </h5>
+                                                            <ul
+                                                                class="reset-ul inline-nav lqd-pf-cat inline-flex relative z-2">
+                                                                {{-- <li><a href="#">Branding</a></li> --}}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a class="lqd-overlay flex lqd-pf-overlay-link fresco"
+                                                        data-fresco-group="portfolio"
+                                                        href="assets/images/demo/start-hub-2/case-study/pf-4.jpg"></a>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col col-12 text-center"><a
+                                    class="btn btn-naked btn-icon-right btn-icon-circle btn-icon-custom-size btn-icon-solid btn-icon-ripple text-black"
+                                    href="#" target="_blank"><span class="btn-txt"
+                                        data-text="See more projects">Lihat Selengkapnya</span>
+                                    <span class="btn-icon w-30 h-30 text-black bg-slate-100"><i aria-hidden="true"
+                                            class="lqd-icn-ess icon-ion-ios-add"></i></span></a>
+                            </div> --}}
                         </div>
-                      </div>
-
-                      {{-- Kolom kanan: gambar panjang --}}
-                      <div>
-                        <img src="{{ asset('assets/images/foto1.png') }}" alt="Siswa di kelas" style="width: 500px; height: 400px; object-fit: cover; border-radius: 10px;">
-                      </div>
                     </div>
                 </section>
 
