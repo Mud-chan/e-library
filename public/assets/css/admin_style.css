@@ -1,10 +1,10 @@
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600&display=swap');
 
 :root{
-   --main-color:#17726d;
+   --main-color:#28c76f;
    --birucodinggo:#a0b3f7;
    --red:#e74c3c;
-   --light-orange:  #17726d;
+   --light-orange:  #28c76f;
    --oragen:#f39c12;
    --white:#fff;
    --black:#2c3e50;
@@ -201,14 +201,17 @@ section{
    color: var(--red);
 }
 
-.heading{
-   padding-bottom: 1.8rem;
-   border-bottom: var(--border);
-   font-size: 2.5rem;
-   color: var(--black);
-   text-transform: capitalize;
-   margin-bottom: 2rem;
-}
+
+.heading2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
+ }
+
 
 .header{
    background-color: var(--white);
@@ -307,22 +310,10 @@ section{
    margin-bottom: .5rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .header .flex .profile h3{
    font-size: 2rem;
    color: var(--black);
-   
+
 }
 
 .header .flex .profile span{
@@ -341,7 +332,7 @@ section{
    width: 30rem;
    background-color: var(--white);
    border-right: var(--border);
-   z-index: 1200;
+   z-index: 0;
 }
 
 .side-bar .close-side-bar{
@@ -1286,6 +1277,10 @@ button.tutupbutup{
       height: 30rem;
    }
 
+   #plus{
+    font-size: 1.3rem;
+   }
+
 }
 
 @media (max-width:450px){
@@ -1293,6 +1288,7 @@ button.tutupbutup{
    html{
       font-size: 50%;
    }
+
 
    .heading{
       font-size: 2rem;
@@ -1309,6 +1305,10 @@ button.tutupbutup{
 
    .view-content .container .video{
       height: auto;
+   }
+
+   #plus{
+    font-size: 1rem;
    }
 
 }
@@ -1707,7 +1707,7 @@ button.tutupbutup{
     box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
   }
   .pagination ul li{
-    color: #0391c5;
+    color: #28c76f;
     list-style: none;
     line-height: 45px;
     text-align: center;
@@ -1744,5 +1744,57 @@ button.tutupbutup{
   .pagination ul li:first-child:hover,
   .pagination ul li:last-child:hover{
     color: #fff;
-    background: #0391c5;
+    background: #28c76f;
   }
+
+/* Search type selector styles */
+.search-type-selector {
+    display: flex;
+    margin-right: 15px;
+}
+
+.search-type-btn {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-type-btn.active {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.search-type-btn:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.search-type-btn:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.gcse-search-wrapper.inactive {
+    display: none !important;
+}
+
+.search-form.inactive {
+    display: none !important;
+}
+
+
+/* Google Search box styling */
+.gsc-search-box {
+    margin-bottom: 0;
+}
+
+.gsc-input-box {
+    height: 40px;
+    width: 400px;
+    border-radius: 5px;
+    z-index: 9999999;
+}
+
+.gsc-search-button {
+    margin-left: 5px;
+}

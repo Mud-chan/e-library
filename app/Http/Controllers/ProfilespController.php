@@ -5,6 +5,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Guru;
+use App\Models\Bookmark;
+use App\Models\Histori;
 // use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,47 +43,71 @@ class ProfilespController extends Controller
         ]);
     }
 
-    // public function store(Request $request)
-    // {
-    //     if ($request->isMethod('post')) {
-    //         $request->validate([
-    //             'name' => 'required|string|max:50',
-    //             'email' => 'required|email|unique:users',
-    //             'password' => 'required|string|min:6|confirmed',
-    //             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
-    //         ]);
+    public function profilesiswa()
+    {
+        $siswaId = Cookie::get('user_id'); // Ambil ID pengguna dari cookie
+        $siswa = User::find($siswaId); // Temukan pengguna berdasarkan ID
 
-    //         $id = substr(Str::uuid(), 0, 20);
-    //         $image = $request->file('image');
-    //         $imageName = time().'.'.$image->extension();
-    //         $image->move(public_path('uploaded_files'), $imageName);
+        if (!$siswa) {
+            return redirect()->back()->withErrors('User tidak ditemukan');
+        }
 
-    //         $user = User::create([
-    //             'id' => $id,
-    //             'name' => $request->input('name'),
-    //             'email' => $request->input('email'),
-    //             'password' => Hash::make($request->input('password')), // Gunakan Hash::make() untuk meng-hash password
-    //             'image' => $imageName
-    //         ]);
+        // Ambil data dari user
+        $userName = $siswa->nama;
+        $userImage = $siswa->image;
+        $userProfesi = $siswa->kelas;
 
-    //         if ($user) {
-    //             return redirect('/logreg')->with('success', 'Akun berhasil dibuat. Silakan login.');
-    //         } else {
-    //             return redirect()->back()->with('error', 'Gagal membuat akun pengguna.');
-    //         }
-    //     }
+        // Hitung total bookmark dan histori dari siswa ini
+        $totalBookmark = Bookmark::where('id_siswa', $siswaId)->count();
+        $totalHistori = Histori::where('id_siswa', $siswaId)->count();
 
-    //     // return view('auth.logreg');
-    // }
+        return view('profilsiswa', [
+            "title" => "Profile Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "" => $siswaId,
+            "totalBookmark" => $totalBookmark,
+            "totalHistori" => $totalHistori
+        ]);
+    }
+
 
 
     public function editsp()
     {
         // Ambil ID tutor dari cookie
-        $tutorsId = Cookie::get('sp_id');
+        $siswaId = Cookie::get('user_id');
 
         // Temukan data tutor berdasarkan ID
-        $tutor = Guru::find($tutorsId);
+        $tutor = User::find($siswaId);
+
+        // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
+
+        // Kirim data ke tampilan editpasien.blade.php
+        $userImage = $tutor->image;
+        $userName = $tutor->nama;
+        $userProfesi = $tutor->kelas;
+
+        // Mengirim variabel $tutorId ke view
+        return view('updateprofilsp', [
+            "title" => "Profile User",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "siswaId" => $siswaId,
+            "userProfesi" => $userProfesi,
+            "tutor" => $tutor // Memasukkan variabel $tutor ke dalam array untuk digunakan di dalam view
+        ]);
+    }
+
+
+    public function editsiswa()
+    {
+        // Ambil ID tutor dari cookie
+        $tutorsId = Cookie::get('user_id');
+
+        // Temukan data tutor berdasarkan ID
+        $tutor = User::find($tutorsId);
 
         // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
 
@@ -91,7 +117,7 @@ class ProfilespController extends Controller
         $userProfesi = $tutor->mengampu;
 
         // Mengirim variabel $tutorId ke view
-        return view('updateprofilsp', [
+        return view('updateprofilsiswa', [
             "title" => "Profile User",
             "userName" => $userName,
             "userImage" => $userImage,
@@ -162,6 +188,60 @@ class ProfilespController extends Controller
 
         return redirect()->back()->with('success', 'Berhasil Memperbarui Profil!');
     }
+
+
+    public function updatesiswa(Request $request)
+    {
+        // Ambil ID tutor dari cookie
+        $siswaId = Cookie::get('user_id');
+
+        // Temukan data tutor berdasarkan ID
+        $tutor = User::find($siswaId);
+
+        // Validasi input
+        $request->validate([
+            'nama' => 'nullable|string',
+            'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'old_pass' => 'nullable|string',
+            'new_pass' => 'nullable|string',
+            'cpass' => 'nullable|string|same:new_pass',
+        ]);
+
+        // Proses update data tutor
+        if ($request->filled('nama')) {
+            $tutor->nama = $request->nama;
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploaded_files'), $imageName);
+            // Hapus gambar sebelumnya jika ada
+            if (!empty($tutor->image)) {
+                File::delete(public_path('uploaded_files/' . $tutor->image));
+            }
+            $tutor->image = $imageName;
+        }
+
+        if ($request->filled('old_pass') && $request->filled('new_pass')) {
+            if (Hash::check($request->old_pass, $tutor->password)) {
+                $tutor->password = Hash::make($request->new_pass);
+            } else {
+                return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah');
+            }
+        }
+
+        // Simpan perubahan
+        $tutor->save();
+
+        return redirect('profilesiswa')->with('success', 'Berhasil Memperbarui Profil!');
+    }
+
+
+
+
 }
+
+
 
 

@@ -37,7 +37,7 @@
 
 
 .header{
-    background-color: var(--white);
+    background-color: #28c76f;
     border-bottom: var(--border);
     position: sticky;
     top: 0; left: 0; right: 0;
@@ -50,7 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 10vh;
+    height: 8vh;
 
  }
 
@@ -62,7 +62,7 @@
 
  .header .flex .search-form{
     width: 50rem;
-    height: 7vh;
+    height: 5vh;
     border-radius: .5rem;
     display: flex;
     align-items: center;
@@ -140,6 +140,7 @@
     transform: scale(1);
     transition: .2s linear;
     display: flex;
+    text-align: center;
     flex-direction: column;
     justify-content: center;
 
@@ -277,7 +278,7 @@ body{
    text-transform: capitalize;
    cursor: pointer;
    text-align: center;
-   background-color: var(--dark-grey);
+   background-color: #28c76f;
 }
 
 
@@ -290,7 +291,7 @@ body{
    text-transform: capitalize;
    cursor: pointer;
    text-align: center;
-   background-color: rgb(70, 0, 0);
+   background-color: #e74c3c;
 }
 
 .article-info img {

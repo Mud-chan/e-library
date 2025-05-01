@@ -3,254 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <title>Katalog Buku</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #28c76f;
-      padding: 10px 20px;
-      color: white;
-      font-weight: bold;
-    }
-
-    .search-section {
-      display: flex;
-      gap: 5px;
-    }
-
-    .search-section input[type="text"] {
-      padding: 5px 10px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    .search-section button {
-      padding: 5px 15px;
-      background-color: white;
-      color: #28c76f;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .content {
-      position: relative;
-      width: 100%;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .overlay .credit {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 5px 10px;
-      font-size: 12px;
-      border-radius: 5px;
-    }
-
-    .katalog-buku {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h3 {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 30px 0 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ikon-bulet {
-      width: 12px;
-      height: 12px;
-      background-color: #28c76f;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .grid-buku {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .kartu-buku {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 10px;
-      text-align: center;
-    }
-
-    .kartu-buku img {
-      width: 100%;
-      height: 200px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    .kartu-buku .judul {
-      font-size: 14px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    .label-genre {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 10px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      background-color: #28c76f;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .genre {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .genre button {
-      padding: 8px 15px;
-      border: none;
-      border-radius: 20px;
-      background-color: #28c76f;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('assets/css/katalogbuku.css') }}">
 </head>
 <body>
 
   <!-- Navbar -->
-  <div class="navbar">
-    <div>Home</div>
-    <div class="search-section">
-      <input type="text" placeholder="Search here............" />
-      <button>Search</button>
-    </div>
-    <div>👤 Diego</div>
-  </div>
+  <header class="header">
+
+    <section class="flex">
+
+        <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
+
+        <form action="{{ route('caribuku') }}" method="post" class="search-form">
+            @csrf
+            <input type="text" name="search" placeholder="Cari Buku..." required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_btn"></button>
+        </form>
+
+        <div class="icons">
+            {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+        </div>
+
+        <div class="profile">
+
+            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
+                <h3>{{ $userName }}</h3>
+                <span>Siswa</span>
+            <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
+            <a href="{{ url('/historybuku') }}" class="btn">History</a>
+            <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
+
+            <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            class="delete-btn">log out</a>
+
+        </div>
+
+    </section>
+
+</header>
 
   <!-- Katalog Buku -->
   <section class="katalog-buku">
-    <h3><span class="ikon-bulet"></span> Buku Cerita Terbaru</h3>
+    <h3><span class="ikon-bulet"></span> Buku Populer</h3>
     <div class="grid-buku">
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Nusantara</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
+        @foreach ($popularBooks as $book)
+          <div class="kartu-buku">
+            <a href="{{ route('detailbukusiswa.content', ['videoId' => $book->id]) }}" style="text-decoration: none; color: black;">
+                <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                <p class="judul">{{ $book->judul }}</p>
+                <div class="label-genre">
+                <span class="badge">{{ $book->kategori }}</span>
+                <span class="badge">{{ $book->tingkatan }}</span>
+                </div>
+            </a>
+          </div>
+        @endforeach
       </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Si Kancil</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Menulis Alphabet</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Belajar Ganti Busi</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-    </div>
 
     <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
     <div class="grid-buku">
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Talaga Warna</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
+
+      @if ($contents->count() > 0)
+            @foreach ($contents as $content)
+            <div class="kartu-buku">
+                <a href="{{ route('detailbukusiswa.content', ['videoId' => $content->id]) }}" style="text-decoration: none; color: black;">
+                    <img src="../uploaded_files/{{ $content->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                    <p class="judul">{{ $content->judul }}</p>
+                    <div class="label-genre">
+                    <span class="badge">{{ $content->kategori }}</span>
+                    <span class="badge">{{ $content->tingkatan }}</span>
+                    </div>
+                </a>
+            </div>
+
+            @endforeach
+        @else
+            <p class="empty">Tidak ada buku yang ditambahkan!</p>
+        @endif
+
+    </div>
+    <div class="page">
+        <div class="pagination">
+            <ul> <!-- pages or li are comes from javascript --> </ul>
         </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Cerita Rakyat</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Harry Pura</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
-      <div class="kartu-buku">
-        <img src="{{ asset('assets/images/buku1.png') }}" alt="Buku" class="img-fluid rounded shadow-sm" />
-        <p class="judul">Timun Silver</p>
-        <div class="label-genre">
-          <span class="badge">Budaya</span>
-          <span class="badge">Fiksi</span>
-        </div>
-      </div>
     </div>
 
-    <h3><span class="ikon-bulet"></span> Eksplorasi Genre</h3>
-    <div class="genre">
-      <button>Budaya</button>
-      <button>Fiksi</button>
-      <button>Pelajaran</button>
-      <button>Non-Fiksi</button>
-      <button>Non-Pelajaran</button>
+    <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
+    <div class="genre" style="display: flex; gap: 10px;">
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Komik">
+            <button type="submit">Komik</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Cerita">
+            <button type="submit">Buku Cerita</button>
+        </form>
+
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Pelajaran">
+            <button type="submit">Buku Pelajaran</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Novel">
+            <button type="submit">Novel</button>
+        </form>
     </div>
+
   </section>
 
+  <script>
+    function closeModalAndClearSession() {
+        document.getElementById('success-message').style.display = 'none';
+        // Tambahkan kode untuk menghapus sesi jika diperlukan
+    }
+
+    const element = document.querySelector(".pagination ul");
+    const totalPages = {{ $totalPages }};
+    const currentPage = {{ $currentPage }};
+
+    element.innerHTML = createPagination(totalPages, currentPage);
+
+    function createPagination(totalPages, page) {
+        let liTag = '';
+        let active;
+        let beforePage = page - 1;
+        let afterPage = page + 1;
+        if (page > 1) {
+            liTag += `<li class="newbtn prev" onclick="changePage(${page - 1})"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+        }
+
+        if (page > 2) {
+            liTag += `<li class="first numb" onclick="changePage(1)"><span>1</span></li>`;
+            if (page > 3) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
+
+        // if (page == totalPages) {
+        //     beforePage = beforePage - 2;
+        // } else if (page == totalPages - 1) {
+        //     beforePage = beforePage - 1;
+        // }
+        if (page == 1) {
+            afterPage = afterPage + 2;
+        } else if (page == 2) {
+            afterPage = afterPage + 1;
+        }
+
+        for (var plength = beforePage; plength <= afterPage; plength++) {
+            if (plength > totalPages) {
+                continue;
+            }
+            if (plength == 0) {
+                plength = plength + 1;
+            }
+            if (page == plength) {
+                active = "active";
+            } else {
+                active = "";
+            }
+            liTag += `<li class="numb ${active}" onclick="changePage(${plength})"><span>${plength}</span></li>`;
+        }
+
+        if (page < totalPages - 1) {
+            if (page < totalPages - 2) {
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+            liTag += `<li class="last numb" onclick="changePage(${totalPages})"><span>${totalPages}</span></li>`;
+        }
+
+        if (page < totalPages) {
+            liTag += `<li class="newbtn next" onclick="changePage(${page + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        }
+        element.innerHTML = liTag;
+        return liTag;
+    }
+
+    function changePage(page) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('page', page);
+        window.location.href = url.toString();
+    }
+</script>
+<script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>
 </html>

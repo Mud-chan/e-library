@@ -38,7 +38,7 @@
 
     <section class="video-form">
 
-        <h1 class="heading">Buat Materi</h1>
+        <h1 class="heading">Tambahkan Siswa</h1>
 
         @if (session('success'))
             <script>

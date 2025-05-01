@@ -31,7 +31,7 @@ class LoginController extends Controller
             if ($user && Hash::check($request->password, $user->password)) {
                 Cookie::queue('user_id', $user->id, 4320);
                 // Jika login berhasil sebagai user
-                return redirect()->intended('/dashboarduser');
+                return redirect()->intended('/katalogbuku');
             } elseif ($tutor && Hash::check($request->password, $tutor->password)) {
                 if ($tutor->role === 'guru') {
                     Cookie::queue('tutor_id', $tutor->id, 4320);

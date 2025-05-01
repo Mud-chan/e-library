@@ -93,17 +93,25 @@
         </form>
 
         <div class="comments">
-          
-
-          <div class="comment">
-            <img class="circle" src="{{ asset('uploaded_files/' . $content->thumb) }}" alt="">
-            {{-- <div class="circle"></div> --}}
-            <div class="content">
-              <p><strong>Lorem Ip</strong><br/>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-              <div class="meta">12.30 Saturday 18 August 2025</div>
-            </div>
+            @if($comments->count() > 0)
+              @foreach($comments as $comment)
+                @php
+                  $user = $users->where('id', $comment->id_siswa)->first();
+                @endphp
+                @if($user)
+                  <div class="comment" style="{{ $comment->id_siswa == $userId ? 'order:-1;' : '' }}">
+                    <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
+                    <div class="content">
+                      <p><strong>{{ $user->nama }}</strong><br/>{{ $comment->comment }}</p>
+                      <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
+                    </div>
+                  </div>
+                @endif
+              @endforeach
+            @else
+              <p class="empty">Tidak ada komentar!</p>
+            @endif
           </div>
-        </div>
       </div>
 
   </div>

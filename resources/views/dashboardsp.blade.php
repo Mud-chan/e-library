@@ -1,6 +1,7 @@
 @extends('components.spheader')
 @section('main')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <header class="header">
 
@@ -63,19 +64,19 @@
 
                 <!-- Insights -->
                 <ul class="insights">
-                    <a href="">
+                    <a href="{{ route('contentsp.index') }}">
                         <li>
                             <i class='bx bx-book-open'></i>
                             <span class="info">
                                 <h3>
-                                    {{ $totalTutors }}
+                                    {{ $totalBuku }}
                                 </h3>
-                                <p>Total Tutor</p>
+                                <p>Total Buku</p>
                             </span>
                         </li>
                     </a>
 
-                    <a href="">
+                    <a href="{{ route('siswa.index') }}">
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
@@ -87,28 +88,35 @@
                     </a>
 
                     <a href="#" style="color: black">
-                        <li><i class='bx bx-dollar-circle'></i>
+                        <li><i class='bx bx-exclamation-circle-solid'></i>
                             <span class="info">
                                 <h4 style="font-size: 17px">
                                     {{-- Rp  {{ number_format($totalHargaTransaksi, 0, ',', '.') }} --}}
                                 </h4>
-                                <p>Total Pendapatan</p>
+                                <p>Informasi</p>
                             </span>
                         </li>
                     </a>
 
-                    <a href="">
+                    <a href="{{ route('tutor.index') }}">
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
-                                    {{-- {{ $jumlahTransaksiPending }} --}}
+                                    {{ $totalTutors }}
                                 </h3>
-                                <p>Total Transaksi Pending</p>
+                                <p>Total Guru</p>
                             </span>
                         </li>
                     </a>
                 </ul>
                 <!-- End of Insights -->
+
+                <div class="bottom-data">
+                    <div class="orders">
+                        <div class="col"><h3>Area Chart</h3>{!! $areaChart->container() !!}</div>
+                    </div>
+
+                </div>
 
 
 
@@ -119,5 +127,8 @@
 
 
 
+
     </section>
+    <script src="{{ $areaChart->cdn() }}"></script>
+    {{ $areaChart->script() }}
 @endsection

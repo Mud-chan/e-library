@@ -64,11 +64,11 @@ class ContentspController extends Controller
             $keyword = $request->input('search');
             $contents = Buku::where('judul', 'LIKE', "%$keyword%")
                 ->orderBy('date', 'DESC')
-                ->paginate(5);
+                ->paginate(8);
         } else {
             $contents = Buku::where('guru_id', $tutor_id)
                 ->orderBy('date', 'DESC')
-                ->paginate(5);
+                ->paginate(8);
         }
 
         return view('contentsp', compact('contents'), [
@@ -326,18 +326,24 @@ public function uploadContent(Request $request)
             ->first();
 
         if (!$content) {
-            return redirect()->route('contentsp')->with('error', 'Video not found!');
+            return redirect()->route('contentsp.index')->with('error', 'Video not found!');
         }
 
         // Load the playlists associated with the tutor
         $playlists = Buku::where('guru_id', $tutorId)->get();
 
+        $comments = Comments::where('id_buku', $videoId)->get();
+        $userIds = $comments->pluck('id_siswa')->unique();
+        $users = User::whereIn('id', $userIds)->get();
+
         // Render the update content form view with the $content data and playlists
-        return view('detailbukusp', compact('content', 'playlists'), [
+        return view('detailbukusp', compact('content', 'playlists', 'comments', 'users'), [
             "title" => "Content Admin",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
             "userImage" => $userImage,
-            "userProfesi" => $userProfesi
+            "userProfesi" => $userProfesi,
+            'comments' => $comments,
+            "userId" => $tutorId,
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
     }

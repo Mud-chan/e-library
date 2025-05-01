@@ -5,15 +5,23 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Guru;
 use App\Models\Buku;
-use App\Models\Dtl_Siswa;
+use App\Models\Bookmark;
+use App\Models\Rating;
 use App\Models\Comments;
-use App\Models\Peminjaman;
+use App\Models\Conterbaca;
+use App\Models\Histori;
+use App\Charts\SiswaChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class PagesControllerSp extends Controller
 {
@@ -34,7 +42,7 @@ class PagesControllerSp extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(SiswaChart $areaChart)
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('sp_id');
@@ -50,28 +58,7 @@ class PagesControllerSp extends Controller
         // Hitung total user
         $totalUsers = User::count();
         $siswa = User::all();
-        // foreach ($siswa as $item) {
-        //     $plays = Playlist::find($item->playlist_id);
-        //     $item->playlist = $plays;
-        // }
-        // $dtlsiswa = Dtluser::all();
-        // foreach ($dtlsiswa as $item) {
-        //     $user = User::find($item->id_user);
-        //     $plays = Playlist::find($item->playlist_id);
-        //     $item->playlist = $plays;
-        //     $item->user = $user;
-        // }
-
-        // Hitung total harga transaksi
-        // $totalHargaTransaksi = Transaksi::join('playlist', 'transaksi.id_playlist', '=', 'playlist.id')
-        //     ->sum('playlist.harga');
-
-        // Hitung jumlah transaksi dengan status 'pending'
-        // $jumlahTransaksiPending = Transaksi::join('dtl_user', 'transaksi.id_user', '=', 'dtl_user.id_user')
-        // ->where('dtl_user.status', 'pending')
-        // ->select('transaksi.id') // Select only the transaction IDs
-        // ->distinct() // Ensure we count only distinct transactions
-        // ->count();
+        $totalBuku = Buku::count();
 
         return view('dashboardsp', [
             "title" => "Dashboard Admin",
@@ -81,9 +68,8 @@ class PagesControllerSp extends Controller
             "totalTutors" => $totalTutors,
             "totalUsers" => $totalUsers,
             "siswa" => $siswa,
-            // "totalHargaTransaksi" => $totalHargaTransaksi,
-            // "jumlahTransaksiPending" => $jumlahTransaksiPending,
-            // "dtlsiswa"=> $dtlsiswa
+            "totalBuku" => $totalBuku,
+            "areaChart" => $areaChart->areaChart(),
         ]);
     } else {
         return redirect()->route('loginnn');
@@ -220,7 +206,340 @@ class PagesControllerSp extends Controller
 //     return $this->datatransaksi($request);
 // }
 
+public function katalogbuku()
+{
+    // Ambil ID tutor dari cookie
+    $tutorId = Cookie::get('user_id');
+    $tutor = User::find($tutorId);
 
+    if ($tutor) {
+        $userName = $tutor->nama;
+        $userImage = $tutor->image;
+        $userProfesi = $tutor->email;
+
+        // Ambil buku hanya dengan kategori yang diizinkan
+        $contents = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+            ->orderBy('date', 'DESC')
+            ->paginate(8);
+
+        $popularBooks = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+            ->select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
+            ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
+            ->groupBy('buku.id', 'buku.guru_id', 'buku.judul', 'buku.deskripsi', 'buku.kategori', 'buku.tingkatan', 'buku.thumb', 'buku.pdf', 'buku.date')
+            ->orderByDesc('total_views')
+            ->limit(4)
+            ->get();
+
+        return view('katalogbuku', [
+            "title" => "Dashboard Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "contents" => $contents,
+            "totalPages" => $contents->lastPage(),
+            "currentPage" => $contents->currentPage(),
+            "popularBooks" => $popularBooks,
+        ]);
+    } else {
+        return redirect()->route('loginnn');
+    }
+}
+
+public function carikatalogbuku(Request $request)
+{
+    $tutorId = Cookie::get('user_id');
+    $tutor = User::find($tutorId);
+
+    if ($tutor) {
+        $userName = $tutor->nama;
+        $userImage = $tutor->image;
+        $userProfesi = $tutor->email;
+
+        $allowedCategories = ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'];
+
+        if ($request->has('search')) {
+            $keyword = $request->input('search');
+
+            $contents = Buku::whereIn('kategori', $allowedCategories)
+                ->where(function ($query) use ($keyword) {
+                    $query->where('judul', 'like', '%' . $keyword . '%')
+                        ->orWhere('kategori', 'like', '%' . $keyword . '%')
+                        ->orWhere('tingkatan', 'like', '%' . $keyword . '%');
+                })
+                ->paginate(8);
+        } else {
+            $contents = Buku::whereIn('kategori', $allowedCategories)
+                ->orderBy('date', 'DESC')
+                ->paginate(8);
+        }
+
+        return view('caribuku', [
+            "title" => "Dashboard Siswa",
+            "userName" => $userName,
+            "userImage" => $userImage,
+            "userProfesi" => $userProfesi,
+            "contents" => $contents,
+            "totalPages" => $contents->lastPage(),
+            "currentPage" => $contents->currentPage(),
+        ]);
+    } else {
+        return redirect()->route('loginnn');
+    }
+}
+
+
+public function bookmarkview()
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $tutor = User::find($userId);
+    if (!$tutor) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $userName = $tutor->nama;
+    $userImage = $tutor->image;
+    $userProfesi = $tutor->email;
+
+    $bookmarks = Bookmark::where('id_siswa', $userId)->get();
+
+    $bookmarkedBooks = Buku::whereIn('id', $bookmarks->pluck('id_buku'))
+                            ->paginate(8); // <-- paginate 8 data!
+
+    return view('bookmarkbuku', [
+        "title" => "Bookmark",
+        "bookmarkedBooks" => $bookmarkedBooks,
+        "bookmarks" => $bookmarks,
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $userId,
+        "totalPages" => $bookmarkedBooks->lastPage(),
+        "currentPage" => $bookmarkedBooks->currentPage(),
+    ]);
+}
+
+
+
+
+public function toggleBookmark(Request $request, $id)
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    // Cek apakah bookmark sudah ada
+    $bookmark = Bookmark::where('id_siswa', $userId)->where('id_buku', $id)->first();
+
+    if ($bookmark) {
+        // Jika sudah di-bookmark, hapus
+        $bookmark->delete();
+        return redirect()->back()->with('success', 'Bookmark dihapus!');
+    } else {
+        // Jika belum, tambahkan
+        Bookmark::create([
+            'id_bookmark' => Str::random(20), // ID acak untuk bookmark
+            'id_siswa' => $userId,
+            'id_buku' => $id
+        ]);
+        return redirect()->back()->with('success', 'Berhasil di-bookmark!');
+    }
+}
+
+public function historyview()
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $tutor = User::find($userId);
+    if (!$tutor) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $userName = $tutor->nama;
+    $userImage = $tutor->image;
+    $userProfesi = $tutor->email;
+
+    $histories = Histori::where('id_siswa', $userId)->get();
+
+    $historyBooks = Buku::whereIn('id', $histories->pluck('id_buku'))
+                            ->paginate(8); // <-- paginate 8 data!
+
+    return view('historybuku', [
+        "title" => "History",
+        "historyBooks" => $historyBooks,
+        "histories" => $histories,
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $userId,
+        "totalPages" => $historyBooks->lastPage(),
+        "currentPage" => $historyBooks->currentPage(),
+    ]);
+}
+
+ // Pastikan sudah use Rating
+
+public function DetailBukusiswa($videoId)
+{
+    $tutorId = Cookie::get('user_id');
+    if (!$tutorId) {
+        return redirect()->route('logreg');
+    }
+
+    // Tambah view ke counter baca
+    Conterbaca::create([
+        'id' => uniqid(),
+        'id_buku' => $videoId,
+        'id_siswa' => $tutorId,
+        'date' => Carbon::now()->format('Y-m-d'),
+    ]);
+
+    Histori::create([
+        'id' => uniqid(),
+        'id_buku' => $videoId,
+        'id_siswa' => $tutorId,
+        'date' => Carbon::now()->format('Y-m-d'),
+    ]);
+
+    $tutors = User::find($tutorId);
+    $userName = $tutors->nama;
+    $userImage = $tutors->image;
+    $userProfesi = $tutors->email;
+
+    $content = Buku::find($videoId);
+    if (!$content) {
+        return redirect()->route('contentsp')->with('error', 'Buku tidak ditemukan!');
+    }
+
+    $comments = Comments::where('id_buku', $videoId)->get();
+    $userIds = $comments->pluck('id_siswa')->unique();
+    $users = User::whereIn('id', $userIds)->get();
+    $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
+    $existingRating = Rating::where('id_siswa', $tutorId)->where('id_buku', $videoId)->value('rating') ?? 0;
+
+    $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
+
+    // Tambahkan: Hitung rata-rata rating
+    $averageRatingRaw = Rating::where('id_buku', $videoId)->avg('rating');
+    $averageRating = round($averageRatingRaw * 2) / 2;
+
+
+    return view('detailbukusiswa', compact(
+        'content',
+        'comments',
+        'users',
+        'isBookmarked',
+        'jumlahView',
+        'existingRating',
+        'averageRating' // jangan lupa ini
+    ), [
+        "title" => "Detail Buku Siswa",
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        "userId" => $tutorId
+    ]);
+}
+
+
+
+    public function storeCommentsiswa(Request $request, $videoId)
+    {
+
+        $tutorId = Cookie::get('user_id');
+        $tutors = User::find($tutorId);
+        $userid = $tutors->id;
+        // Validasi data yang diterima dari formulir
+        $validator = Validator::make($request->all(), [
+            'content_id' => 'required|exists:contents,id',
+            'comment_box' => 'required|max:1000',
+        ]);
+        $content = Buku::findOrFail($request->input('content_id'));
+        // Simpan komentar ke dalam database
+        $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter
+
+        // Membuat komentar dengan menggunakan karakter random sebagai ID
+        Comments::create([
+            'id' => $randomId,
+            'id_buku' => $request->input('content_id'),
+            'id_siswa' => $userid,
+            'comment' => $request->input('comment_box'),
+            'date' => Carbon::now()->format('Y-m-d'),
+
+        ]);
+
+        // Redirect kembali ke halaman detailbukusp setelah komentar disimpan
+        return redirect()->route('detailbukusiswa.content', ['videoId' => $videoId])
+        ->with('success', 'Komentar berhasil ditambahkan!');
+    }
+
+
+    public function updateComment(Request $request, $id)
+{
+    $request->validate([
+        'comment_box' => 'required|max:1000',
+    ]);
+
+    $comment = Comments::findOrFail($id);
+
+    $userId = Cookie::get('user_id');
+    $tutors = User::find($userId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh edit komentar orang lain!');
+    }
+
+    $comment->comment = $request->comment_box;
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
+}
+
+public function deleteComment($id)
+{
+    $comment = Comments::findOrFail($id);
+
+    $userId = Cookie::get('user_id');
+    $tutors = User::find($userId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh hapus komentar orang lain!');
+    }
+
+    $comment->delete();
+
+    return redirect()->back()->with('success', 'Komentar berhasil dihapus!');
+}
+
+
+
+
+
+    public function storeRating(Request $request, $id)
+{
+    $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
+
+    if (!$userId) {
+        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+    }
+
+    $rating = Rating::updateOrCreate(
+        ['id_siswa' => $userId, 'id_buku' => $id],
+        ['rating' => $request->rating]
+    );
+
+    return back();
+}
 
 
 }

@@ -8,19 +8,21 @@
     <section class="flex">
         <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
-        <form action="{{ route('caricontentsp') }}" method="post" class="search-form">
+        <div class="search-type-selector">
+            <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Biasa</button>
+            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Lanjutan</button>
+        </div>
+
+        <form id="basicSearchForm" action="{{ route('caricontentsp') }}" method="post" class="search-form">
             @csrf
-            <input  type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
+            <input type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
-            {{-- <div class="gcse-search"></div>  --}}
-
         </form>
-        <div class="gcse-search"></div>
 
+        <div id="gcseSearchWrapper" class="gcse-search-wrapper inactive">
+            <div class="gcse-search"></div>
+        </div>
 
-
-{{--
-        <div class="gcse-search"></div> --}}
 
         <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
@@ -40,7 +42,13 @@
 </header>
 
 <section class="contents">
-    <h1 class="heading">Daftar Buku</h1>
+    <div class="heading2">
+        <h1>Daftar Buku</h1> <a href="{{ route('add_content') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+
+    </div>
+
+
+
 
     @if (session('success'))
         <div class="modal-box" id="success-message">
@@ -69,10 +77,7 @@
     @endif
 
     <div class="box-container">
-        <div class="box" style="text-align: center;">
-            <h3 class="title" style="margin-bottom: .5rem;">Dafatarkan Buku Baru</h3>
-            <a href="{{ route('add_content') }}" class="btn">Tambah</a>
-        </div>
+
 
         @if ($contents->count() > 0)
             @foreach ($contents as $content)
@@ -183,6 +188,32 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+
+
+    function setSearchType(type) {
+    const basicForm = document.getElementById('basicSearchForm');
+    const gcseWrapper = document.getElementById('gcseSearchWrapper');
+    const buttons = document.querySelectorAll('.search-type-btn');
+
+    if (type === 'basic') {
+        basicForm.classList.remove('inactive');
+        gcseWrapper.classList.add('inactive');
+    } else if (type === 'gcse') {
+        basicForm.classList.add('inactive');
+        gcseWrapper.classList.remove('inactive');
+    }
+
+    // Atur tombol aktif
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.search-type-btn[onclick*="${type}"]`).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setSearchType('basic');
+});
+
+
+
 </script>
 
 
