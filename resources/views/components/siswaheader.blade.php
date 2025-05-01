@@ -14,7 +14,7 @@
 
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="{{ asset('assets/css/siswa_style.css') }}">
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    <link rel="icon" href="{{ asset('assets/images/logo2.png') }}">
 
 </head>
 

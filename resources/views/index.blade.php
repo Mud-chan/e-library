@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="icon" href="{{ asset('assets/images/logodummy.png') }}">
+    <link rel="icon" href="{{ asset('assets/images/logo2.png') }}">
 
 
     <title>E-Library</title>
@@ -45,6 +45,11 @@
 
         .image-wrapper {
             position: relative;
+        }
+        
+        .logo-default {
+            width: 40px;
+            margin-top: -20%;
         }
 
         .product-thumb {
@@ -192,6 +197,10 @@
 
         }
 
+        .logo-ermi {
+            max-width: 30%;
+            height: auto;
+        }
 
         .kartu-buku {
         background: white;
@@ -253,14 +262,15 @@
                                         alt="image" class="logo-sticky"
                                         src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library"
                                         class="logo-default"
-                                        src=""></span></a>
+                                        src="{{ asset('assets/images/logo2.png') }}"></span></a>
+                                        <span class="text-white text-lg font-semibold" style="margin-left: 8px; margin-top: 5px;">E-Library</span>
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
                                     class="navbar-brand-inner post-rel"><img alt="image" class="logo-sticky"
                                         src="assets/images/demo/start-hub-2/logo/logo-mob-d.svg">
                                     <img alt="image" class="logo-default"
-                                        src="assets/images/demo/start-hub-2/logo/logo.png"></span></a>
+                                        src="{{ asset('assets/images/logo2.png') }}"></span></a>
                         </div>
                     </div>
                     <div class="w-50percent flex items-center justify-center header-desktop xl:w-55percent lg:hidden">
@@ -1024,7 +1034,8 @@
                 <div class="container">
                     <div class="row items-center">
                         <div class="col col-12 col-md-3 flex items-center justify-start"><img alt="logo-ermi"
-                                height="21" src="" width="145">
+                                height="10" src="{{ asset('assets/images/logo2.png') }}" width="80" >
+                                <span class="text-green text-lg font-semibold" style="margin-left: 8px; margin-top: 5px;">E-Library</span>
                         </div>
 
                         <div class="col col-12 mt-5 p-15"><span

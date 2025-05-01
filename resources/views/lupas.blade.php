@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/lupas.css') }}" />
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <link rel="icon" href="{{ asset('assets/images/demo/start-hub-2/logo/sidelogo.png') }}">
+    <link rel="icon"href="{{ asset('assets/images/logo2.png') }}">
 </head>
     <title>Verifikasi</title>
 </head>
