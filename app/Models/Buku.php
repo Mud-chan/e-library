@@ -34,4 +34,14 @@ class Buku extends Model
     {
         return $this->hasMany(Peminjaman::class, 'id_buku');
     }
+
+    public function rating()
+    {
+    return $this->hasMany(Rating::class, 'id_buku');
+    }
+
+    public function getAverageRatingAttribute()
+    {
+    return $this->rating()->average('rating') ?? 0;
+    }
 }
