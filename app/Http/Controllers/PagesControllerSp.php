@@ -208,20 +208,68 @@ class PagesControllerSp extends Controller
 
 public function katalogbuku()
 {
-    // Ambil ID tutor dari cookie
-    $tutorId = Cookie::get('user_id');
-    $tutor = User::find($tutorId);
+    // Ambil ID siswa dari cookie
+    $siswaId = Cookie::get('user_id');
+    $siswa = User::find($siswaId);
 
-    if ($tutor) {
-        $userName = $tutor->nama;
-        $userImage = $tutor->image;
-        $userProfesi = $tutor->email;
+    if ($siswa) {
+        $userName = $siswa->nama;
+        $userImage = $siswa->image;
+        $userProfesi = $siswa->email;
 
-        // Ambil buku hanya dengan kategori yang diizinkan
+        // Ambil daftar buku berdasarkan kategori
         $contents = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
             ->orderBy('date', 'DESC')
             ->paginate(8);
 
+        // === SISTEM REKOMENDASI CERDAS ===
+
+        // Ambil histori baca siswa
+        $history = Histori::with('buku')
+            ->where('id_siswa', $siswaId)
+            ->get();
+
+        // Cek apakah siswa belum membaca buku
+        if ($history->isEmpty()) {
+            // Jika belum ada histori baca, set rekomendasi menjadi kosong
+            $recommendedBooks = collect([]);
+        } else {
+            // Hitung preferensi berdasarkan kategori & tingkatan
+            $preferences = [];
+            foreach ($history as $item) {
+                if ($item->buku) {
+                    $key = $item->buku->kategori . '_' . $item->buku->tingkatan;
+                    if (!isset($preferences[$key])) {
+                        $preferences[$key] = 0;
+                    }
+                    $preferences[$key]++;
+                }
+            }
+
+            // Ambil buku yang belum dibaca
+            $readBookIds = $history->pluck('id_buku')->toArray();
+            $unreadBooks = Buku::whereNotIn('id', $readBookIds)
+                ->whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+                ->get();
+
+            // Hitung skor berdasarkan preferensi
+            $recommendations = [];
+            foreach ($unreadBooks as $book) {
+                $key = $book->kategori . '_' . $book->tingkatan;
+                $score = $preferences[$key] ?? 0;
+
+                $recommendations[] = [
+                    'book' => $book,
+                    'score' => $score
+                ];
+            }
+
+            // Urutkan dan ambil 4 teratas
+            usort($recommendations, fn($a, $b) => $b['score'] <=> $a['score']);
+            $recommendedBooks = collect($recommendations)->pluck('book')->take(4);
+        }
+
+        // === BUKU POPULER ===
         $popularBooks = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
             ->select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
             ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
@@ -238,12 +286,14 @@ public function katalogbuku()
             "contents" => $contents,
             "totalPages" => $contents->lastPage(),
             "currentPage" => $contents->currentPage(),
-            "popularBooks" => $popularBooks,
+            "recommendedBooks" => $recommendedBooks,  // Rekomendasi berdasarkan histori
+            "popularBooks" => $popularBooks,         // Buku populer berdasarkan views
         ]);
     } else {
         return redirect()->route('loginnn');
     }
 }
+
 
 public function carikatalogbuku(Request $request)
 {
@@ -393,7 +443,7 @@ public function DetailBukusiswa($videoId)
 {
     $tutorId = Cookie::get('user_id');
     if (!$tutorId) {
-        return redirect()->route('logreg');
+        return redirect()->route('loginnn');
     }
 
     // Tambah view ke counter baca
@@ -539,6 +589,32 @@ public function deleteComment($id)
     );
 
     return back();
+}
+
+
+public function halamanutama()
+{
+    // Ambil buku dengan kategori tertentu
+    $contents = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+        ->orderBy('date', 'DESC')
+        ->paginate(8);
+
+    // Ambil buku populer berdasarkan jumlah baca
+    $popularBooks = Buku::whereIn('kategori', ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'])
+        ->select('buku.*', DB::raw('COUNT(counter_baca.id_buku) as total_views'))
+        ->leftJoin('counter_baca', 'buku.id', '=', 'counter_baca.id_buku')
+        ->groupBy('buku.id', 'buku.guru_id', 'buku.judul', 'buku.deskripsi', 'buku.kategori', 'buku.tingkatan', 'buku.thumb', 'buku.pdf', 'buku.date')
+        ->orderByDesc('total_views')
+        ->limit(4)
+        ->get();
+
+    return view('index', [
+        "title" => "Dashboard Siswa",
+        "contents" => $contents,
+        "totalPages" => $contents->lastPage(),
+        "currentPage" => $contents->currentPage(),
+        "popularBooks" => $popularBooks,
+    ]);
 }
 
 

@@ -66,6 +66,28 @@
         @endforeach
       </div>
 
+      
+      @if(isset($recommendedBooks) && count($recommendedBooks) > 0)
+      <h3><span class="ikon-bulet"></span> Rekomendasi untuk Kamu</h3>
+      <div class="grid-buku">
+          @foreach ($recommendedBooks as $book)
+              <div class="kartu-buku">
+                  <a href="{{ route('detailbukusiswa.content', ['videoId' => $book->id]) }}" style="text-decoration: none; color: black;">
+                      <img src="../uploaded_files/{{ $book->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                      <p class="judul">{{ $book->judul }}</p>
+                      <div class="label-genre">
+                          <span class="badge">{{ $book->kategori }}</span>
+                          <span class="badge">{{ $book->tingkatan }}</span>
+                      </div>
+                  </a>
+              </div>
+          @endforeach
+      </div>
+  @else
+      <h3><span class="ikon-bulet"></span> Rekomendasi Buku</h3>
+      <p>Tidak ada rekomendasi khusus untuk kamu saat ini. Silakan baca beberapa buku terlebih dahulu 😄</p>
+  @endif
+
     <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
     <div class="grid-buku">
 
