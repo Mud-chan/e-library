@@ -10,9 +10,9 @@ use App\Http\Controllers\ContentspController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KontakController;
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 Route::get('/detail', function () {
     return view('detail');
 });
@@ -74,6 +74,8 @@ Route::post('/delete-guru', [TutorController::class, 'deletetutor'])->name('dele
 Route::get('/update-guru/{guruId}', [TutorController::class, 'edittutor'])->name('update.guru.form');
 Route::post('update-tutor/{guruId}', [TutorController::class, 'updatetutor'])->name('update.tutor');
 
+
+Route::get('/', [PagesControllerSp::class, 'halamanutama'])->name('contentsp.halamanutama');
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
 Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
@@ -104,8 +106,8 @@ Route::post('/buku/{id}/rating', [PagesControllerSp::class, 'storeRating'])->nam
 Route::post('/buku/update-comment/{id}', [PagesControllerSp::class, 'updateComment'])->name('buku.updateComment');
 Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteComment'])->name('buku.deleteComment');
 
-Route::get('/profilsiswa', function () {
-    return view('profilsiswa');
-});
+// Route::get('/profilsiswa', function () {
+//     return view('profilsiswa');
+// });
 
 Route::post('/kirim-email', [KontakController::class, 'kirimEmail'])->name('kirim.email');

@@ -47,7 +47,7 @@
        <div class="flex">
         <div class="col">
            <p>Nama Anda : </p>
-           <input type="text" name="nama" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
+           <input type="text" name="nama" value="{{ $tutor->nama }}" maxlength="100"  class="box">
 
            <p>Foto Siswa</p>
            @if ($tutor->image)

@@ -642,101 +642,32 @@
                         <h5 class="text-success fw-semibold mb-4">MI Ar-Roudhoh</h5>
 
                         <div class="grid-buku">
-                            {{-- @foreach ($popularBooks as $book) --}}
+                            @if ($contents->count() > 0)
+                            @foreach ($contents as $content)
                               <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
+                                <a href="{{ route('detailbukusiswa.content', ['videoId' => $content->id]) }}" style="text-decoration: none; color: black;">
+                                    <img src="../uploaded_files/{{ $content->thumb }}" alt="Buku" class="img-fluid rounded shadow-sm" />
+                                    <p class="judul">{{ $content->judul }}</p>
                                     <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
+                                    <span class="badge">{{ $content->kategori }}</span>
+                                    <span class="badge">{{ $content->tingkatan }}</span>
                                     </div>
                                 </a>
                               </div>
 
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
 
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
 
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
+                              @endforeach
+                            @else
+                                <p class="empty">Tidak ada buku yang ditambahkan!</p>
+                            @endif
+                        </div>
 
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
 
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
-
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
-
-                              <div class="kartu-buku">
-                                <a href="" style="text-decoration: none; color: black;">
-                                    <img src="assets/images/aku.jpg" alt="Buku" class="img-fluid rounded shadow-sm" />
-                                    <p class="judul">Aku Mengenal Hewan</p>
-                                    <div class="label-genre">
-                                    <span class="badge">Buku Cerita</span>
-                                    <span class="badge">Umum</span>
-                                    </div>
-                                </a>
-                              </div>
-
-                            {{-- @endforeach --}}
-                          </div>
 
                         <!-- Tombol Lihat Semua -->
                         <div class="text-end mt-4">
-                            <a href="#" class="text-success fw-semibold">Lihat Semua Buku &gt;&gt;</a>
+                            <a href="{{ url('/katalogbuku') }}" class="text-success fw-semibold">Lihat Semua Buku &gt;&gt;</a>
                         </div>
                     </div>
                 </section>
