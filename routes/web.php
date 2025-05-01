@@ -8,6 +8,7 @@ use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ContentspController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KontakController;
 
 Route::get('/', function () {
     return view('index');
@@ -104,3 +105,5 @@ Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteCom
 Route::get('/profilsiswa', function () {
     return view('profilsiswa');
 });
+
+Route::post('/kirim-email', [KontakController::class, 'kirimEmail'])->name('kirim.email');
