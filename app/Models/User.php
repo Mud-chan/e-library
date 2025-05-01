@@ -13,7 +13,7 @@ class User extends Model
     public $timestamps = false; // tidak menggunakan kolom timestamps
 
     protected $fillable = [
-        'id', 'nama', 'email', 'password', 'kelas', 'image',
+        'id', 'nama', 'email', 'password', 'kelas', 'jenis_kelamin', 'image',
     ];
     public function peminjaman()
     {
