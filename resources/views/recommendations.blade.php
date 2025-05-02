@@ -1,93 +1,152 @@
+{{-- resources/views/recommendations.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
-    <div class="container py-4">
-        <h2 class="mb-4">SPK Rekomendasi Buku</h2>
+<div class="container py-4">
+    <h2 class="mb-4">SPK Rekomendasi Buku</h2>
 
-        <form method="GET" action="{{ route('recommend') }}" class="mb-4" id="recommendation-form">
-            <div class="row g-3">
-                <div class="col-md-3">
-                    <label for="kategori" class="form-label">Kategori</label>
-                    <select name="kategori" id="kategori" class="form-select">
-                        <option value="">Semua Kategori</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category }}" {{ request('kategori') == $category ? 'selected' : '' }}>
-                                {{ $category }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="tingkatan" class="form-label">Tingkatan</label>
-                    <select name="tingkatan" id="tingkatan" class="form-select">
-                        <option value="">Semua Tingkatan</option>
-                        @foreach($levels as $level)
-                            <option value="{{ $level }}" {{ request('tingkatan') == $level ? 'selected' : '' }}>
-                                {{ $level }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="min_rating" class="form-label">Minimum Rating</label>
-                    <input type="number" name="min_rating" id="min_rating"
-                           class="form-control" min="0" max="5" step="0.1"
-                           value="{{ request('min_rating', 0) }}">
-                </div>
-
-                <div class="col-md-3 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100" id="filter-button">
-                        <span id="button-text">Cari Rekomendasi</span>
-                        <span id="button-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
-                    </button>
-                </div>
+    {{-- Form filter --}}
+    <form method="GET" action="{{ route('recommend') }}" class="mb-4" id="recommendation-form">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="kategori" class="form-label">Kategori</label>
+                <select name="kategori" id="kategori" class="form-select">
+                    <option value="">Semua Kategori</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category }}" {{ request('kategori') == $category ? 'selected' : '' }}>
+                            {{ $category }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-        </form>
 
-        @if (!empty($recommendations))
-            <div class="table-responsive mt-4">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Judul</th>
-                            <th>Kategori</th>
-                            <th>Tingkatan</th>
-                            <th>Rating Rata-rata</th>
-                            <th>Skor Rekomendasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($recommendations as $index => $rec)
+            <div class="col-md-3">
+                <label for="tingkatan" class="form-label">Tingkatan</label>
+                <select name="tingkatan" id="tingkatan" class="form-select">
+                    <option value="">Semua Tingkatan</option>
+                    @foreach($levels as $level)
+                        <option value="{{ $level }}" {{ request('tingkatan') == $level ? 'selected' : '' }}>
+                            {{ $level }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="min_rating" class="form-label">Minimum Rating</label>
+                <input type="number" name="min_rating" id="min_rating"
+                       class="form-control" min="0" max="5" step="0.1"
+                       value="{{ request('min_rating', 0) }}">
+            </div>
+
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100" id="filter-button">
+                    <span id="button-text">Cari Rekomendasi</span>
+                    <span id="button-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    @if (!empty($results))
+    <div class="row">
+        {{-- Hasil Rekomendasi --}}
+        <div class="col-md-6">
+            <div class="card bg-white mb-4 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Hasil Rekomendasi</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead class="bg-light">
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <th>Rank</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Tingkatan</th>
+                                <th>Rating</th>
+                                <th>Skor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($results as $idx => $rec)
+                            <tr>
+                                <td>{{ $idx + 1 }}</td>
                                 <td>{{ $rec['book']->judul }}</td>
                                 <td>{{ $rec['book']->kategori }}</td>
                                 <td>{{ $rec['book']->tingkatan }}</td>
-                                <td>{{ number_format($rec['book']->average_rating, 1) }}</td>
-                                <td>{{ number_format($rec['preference'] * 100, 2) }}%</td>
+                                <td>{{ number_format($rec['book']->average_rating,1) }}</td>
+                                <td>{{ number_format($rec['preference']*100,2) }}%</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        @endif
+        </div>
+
+        {{-- Detail Proses TOPSIS --}}
+        <div class="col-md-6">
+            <div class="card bg-white mb-4 shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Detail Proses TOPSIS</h4>
+                </div>
+                <div class="card-body">
+                    @php
+                        $steps = [
+                            'matrix'    => 'Matriks Keputusan',
+                            'normalized'=> 'Normalisasi',
+                            'weighted'  => 'Matriks Terbobot',
+                            'idealPos'  => 'Solusi Ideal Positif',
+                            'idealNeg'  => 'Solusi Ideal Negatif',
+                            'prefs'     => 'Nilai Preferensi',
+                        ];
+                    @endphp
+
+                    @foreach($steps as $key => $label)
+                        @php
+                            $data = $process[$key] ?? [];
+                            $rows = isset($data[0]) && is_array($data[0]) ? $data : [$data];
+                        @endphp
+                        <h5 class="mt-3 text-success">{{ $label }}</h5>
+                        <div class="table-responsive mb-3">
+                            <table class="table table-sm table-bordered">
+                                <thead class="bg-light">
+                                    <tr>
+                                        @foreach(array_keys($rows[0] ?? []) as $col)
+                                        <th>{{ $col }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($rows as $row)
+                                    <tr>
+                                        @foreach($row as $val)
+                                        <td>{{ is_numeric($val) ? number_format($val,4) : $val }}</td>
+                                        @endforeach
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
+    @elseif(isset($message))
+        <div class="alert alert-warning">{{ $message }}</div>
+    @endif
+</div>
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('recommendation-form').addEventListener('submit', function() {
-            const button = document.getElementById('filter-button');
-            const buttonText = document.getElementById('button-text');
-            const spinner = document.getElementById('button-spinner');
-
-            button.disabled = true;
-            buttonText.textContent = 'Memproses...';
-            spinner.classList.remove('d-none');
-        });
-    </script>
+<script>
+    document.getElementById('recommendation-form').addEventListener('submit', function() {
+        const btn = document.getElementById('filter-button');
+        document.getElementById('button-text').textContent = 'Memproses...';
+        btn.disabled = true;
+        document.getElementById('button-spinner').classList.remove('d-none');
+    });
+</script>
 @endsection

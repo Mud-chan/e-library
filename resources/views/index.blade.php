@@ -46,7 +46,7 @@
         .image-wrapper {
             position: relative;
         }
-        
+
         .logo-default {
             width: 40px;
             margin-top: -20%;
@@ -231,13 +231,13 @@
         flex-wrap: wrap;
         }
 
-        .kartu-buku {
-        width: 150px;
-        }
+        /* .kartu-buku {
+        width: 190px;
+        } */
 
         .kartu-buku img {
-        width: 130px;
-        height: 160px;
+        width: 230px;
+        height: 80%;
         border-radius: 10px;
         object-fit: cover;
         }
