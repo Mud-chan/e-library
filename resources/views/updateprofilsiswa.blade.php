@@ -22,8 +22,8 @@
 
         <div class="profile">
 
-            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-            <h3>{{ $userName }}</h3>
+            <img src="{{ asset('uploaded_files/' . $siswaImage) }}" alt="">
+            <h3>{{ $siswaName }}</h3>
                 <span>Siswa</span>
             <a href="{{ url('/katalogbuku') }}" class="btn">Katalog Buku</a>
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
@@ -39,7 +39,7 @@
 
 <section class="form-container" style="min-height: calc(100vh - 19rem);">
 
-    <form action="{{ route('tutors.updatesiswa') }}" method="post" enctype="multipart/form-data" id="formup">
+    <form action="{{ route('siswa.updatesiswa') }}" method="post" enctype="multipart/form-data" id="formup">
 
         @csrf
         @method('put')
@@ -47,11 +47,11 @@
        <div class="flex">
         <div class="col">
            <p>Nama Anda : </p>
-           <input type="text" name="nama" value="{{ $tutor->nama }}" maxlength="100"  class="box">
+           <input type="text" name="nama" value="{{ $siswa->nama }}" maxlength="100"  class="box">
 
            <p>Foto Siswa</p>
-           @if ($tutor->image)
-           <img src="{{ asset('uploaded_files/' . $tutor->image) }}" alt="Foto Siswa" width="150">
+           @if ($siswa->image)
+           <img src="{{ asset('uploaded_files/' . $siswa->image) }}" alt="Foto Siswa" width="150">
        @endif
         </div>
         <div class="col">

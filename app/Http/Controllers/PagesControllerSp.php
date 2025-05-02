@@ -618,4 +618,79 @@ public function halamanutama()
 }
 
 
+public function editsiswa()
+    {
+        // Ambil ID tutor dari cookie
+        $siswaId = Cookie::get('user_id');
+
+        // Temukan data tutor berdasarkan ID
+        $siswa = User::find($siswaId);
+
+        // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
+
+        // Kirim data ke tampilan editpasien.blade.php
+        $siswaImage = $siswa->image;
+        $siswaName = $siswa->nama;
+        $siswaProfesi = $siswa->mengampu;
+
+        // Mengirim variabel $tutorId ke view
+        return view('updateprofilsiswa', [
+            "title" => "Profile User",
+            "siswaImage" => $siswaImage,
+            "siswaName" => $siswaName,
+            "siswaId" => $siswaId,
+            "siswaProfesi" => $siswaProfesi,
+            "siswa" => $siswa // Memasukkan variabel $tutor ke dalam array untuk digunakan di dalam view
+        ]);
+    }
+
+    public function updatesiswa(Request $request)
+    {
+        // Ambil ID tutor dari cookie
+        $siswaId = Cookie::get('user_id');
+
+        // Temukan data tutor berdasarkan ID
+        $siswa = User::find($siswaId);
+
+        // Validasi input
+        $request->validate([
+            'nama' => 'nullable|string',
+            'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'old_pass' => 'nullable|string',
+            'new_pass' => 'nullable|string',
+            'cpass' => 'nullable|string|same:new_pass',
+        ]);
+
+        // Proses update data tutor
+        if ($request->filled('nama')) {
+            $siswa->nama = $request->nama;
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploaded_files'), $imageName);
+            // Hapus gambar sebelumnya jika ada
+            if (!empty($siswa->image)) {
+                File::delete(public_path('uploaded_files/' . $siswa->image));
+            }
+            $siswa->image = $imageName;
+        }
+
+        if ($request->filled('old_pass') && $request->filled('new_pass')) {
+            if (Hash::check($request->old_pass, $siswa->password)) {
+                $siswa->password = Hash::make($request->new_pass);
+            } else {
+                return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah');
+            }
+        }
+
+        // Simpan perubahan
+        $siswa->save();
+
+        return redirect('profilesiswa')->with('success', 'Berhasil Memperbarui Profil!');
+    }
+
+
+
 }
