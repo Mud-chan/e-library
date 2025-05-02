@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ContentspController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KontakController;
+use App\Http\Controllers\BookController;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -111,3 +112,6 @@ Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteCom
 // });
 
 Route::post('/kirim-email', [KontakController::class, 'kirimEmail'])->name('kirim.email');
+
+Route::get('/recommend', [BookController::class, 'recommend'])->name('recommend');
+Route::resource('books', BookController::class);
