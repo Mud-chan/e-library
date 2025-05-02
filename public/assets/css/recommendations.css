@@ -1,0 +1,87 @@
+/* resources/css/recommendations.css */
+
+/* Container */
+.container.py-4 {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Form Filter */
+  #recommendation-form {
+    background-color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #28a745;
+    border-radius: 0.5rem;
+  }
+  #recommendation-form .form-label {
+    color: #28a745;
+    font-weight: 600;
+  }
+  #recommendation-form .form-select,
+  #recommendation-form .form-control {
+    border: 1px solid #28a745;
+    border-radius: 0.25rem;
+  }
+
+  /* Button */
+  .btn-primary {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+  }
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+
+  /* Cards */
+  .card.bg-white {
+    background-color: #ffffff !important;
+    border: 1px solid #28a745;
+    border-radius: 0.5rem;
+  }
+  .card-header.bg-success {
+    background-color: #28a745 !important;
+    color: #ffffff;
+    border-bottom: 1px solid #218838;
+  }
+  .card-body {
+    padding: 1rem;
+  }
+
+  /* Tables */
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+  .table thead th {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+  }
+  .table tbody tr:nth-child(odd) {
+    background-color: #f9fdf9;
+  }
+  .table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  .table-bordered {
+    border: 1px solid #28a745;
+  }
+  .table-bordered th,
+  .table-bordered td {
+    border: 1px solid #28a745;
+  }
+
+  /* Headings */
+  h2.mb-4, h4, h5 {
+    color: #28a745;
+  }
+
+  /* Alert */
+  .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+  }

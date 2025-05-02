@@ -60,7 +60,7 @@
         <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
         <h3>{{ $userName }}</h3>
         <span>{{ $userProfesi }}</span>
-        <a href="{{ route('tutors.editsiswa') }}" class="inline-btn">update profile</a>
+        <a href="{{ route('siswa.editsiswa') }}" class="inline-btn">update profile</a>
        </div>
 
        <div class="flex">

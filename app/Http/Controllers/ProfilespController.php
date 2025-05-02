@@ -66,7 +66,7 @@ class ProfilespController extends Controller
             "userName" => $userName,
             "userImage" => $userImage,
             "userProfesi" => $userProfesi,
-            "" => $siswaId,
+            "siswaId" => $siswaId,
             "totalBookmark" => $totalBookmark,
             "totalHistori" => $totalHistori
         ]);
@@ -77,14 +77,14 @@ class ProfilespController extends Controller
     public function editsp()
     {
         // Ambil ID tutor dari cookie
-        $siswaId = Cookie::get('user_id');
+        $tutorsId = Cookie::get('sp_id');
 
         // Temukan data tutor berdasarkan ID
-        $tutor = User::find($siswaId);
+        $tutor = Guru::find($tutorsId);
 
         // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
 
-        // Kirim data ke tampilan editpasien.blade.php
+
         $userImage = $tutor->image;
         $userName = $tutor->nama;
         $userProfesi = $tutor->kelas;
@@ -94,38 +94,13 @@ class ProfilespController extends Controller
             "title" => "Profile User",
             "userName" => $userName,
             "userImage" => $userImage,
-            "siswaId" => $siswaId,
+            "tutorsId" => $tutorsId,
             "userProfesi" => $userProfesi,
             "tutor" => $tutor // Memasukkan variabel $tutor ke dalam array untuk digunakan di dalam view
         ]);
     }
 
 
-    public function editsiswa()
-    {
-        // Ambil ID tutor dari cookie
-        $tutorsId = Cookie::get('user_id');
-
-        // Temukan data tutor berdasarkan ID
-        $tutor = User::find($tutorsId);
-
-        // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
-
-        // Kirim data ke tampilan editpasien.blade.php
-        $userImage = $tutor->image;
-        $userName = $tutor->nama;
-        $userProfesi = $tutor->mengampu;
-
-        // Mengirim variabel $tutorId ke view
-        return view('updateprofilsiswa', [
-            "title" => "Profile User",
-            "userName" => $userName,
-            "userImage" => $userImage,
-            "tutorId" => $tutorsId,
-            "userProfesi" => $userProfesi,
-            "tutor" => $tutor // Memasukkan variabel $tutor ke dalam array untuk digunakan di dalam view
-        ]);
-    }
 
 
 
@@ -190,52 +165,6 @@ class ProfilespController extends Controller
     }
 
 
-    public function updatesiswa(Request $request)
-    {
-        // Ambil ID tutor dari cookie
-        $siswaId = Cookie::get('user_id');
-
-        // Temukan data tutor berdasarkan ID
-        $tutor = User::find($siswaId);
-
-        // Validasi input
-        $request->validate([
-            'nama' => 'nullable|string',
-            'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'old_pass' => 'nullable|string',
-            'new_pass' => 'nullable|string',
-            'cpass' => 'nullable|string|same:new_pass',
-        ]);
-
-        // Proses update data tutor
-        if ($request->filled('nama')) {
-            $tutor->nama = $request->nama;
-        }
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploaded_files'), $imageName);
-            // Hapus gambar sebelumnya jika ada
-            if (!empty($tutor->image)) {
-                File::delete(public_path('uploaded_files/' . $tutor->image));
-            }
-            $tutor->image = $imageName;
-        }
-
-        if ($request->filled('old_pass') && $request->filled('new_pass')) {
-            if (Hash::check($request->old_pass, $tutor->password)) {
-                $tutor->password = Hash::make($request->new_pass);
-            } else {
-                return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah');
-            }
-        }
-
-        // Simpan perubahan
-        $tutor->save();
-
-        return redirect('profilesiswa')->with('success', 'Berhasil Memperbarui Profil!');
-    }
 
 
 
