@@ -7,7 +7,7 @@
 
     <section class="flex">
 
-        <a href="{{ url('/dashboardguru') }}" class="logo">Admin</a>
+        <a href="{{ url('/dashboardguru') }}" class="logo">Guru</a>
 {{--
         <form action="{{ route('detailsiswa.carisiswadalam') }}" method="post" class="search-form">
             @csrf
