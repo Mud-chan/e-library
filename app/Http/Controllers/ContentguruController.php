@@ -121,25 +121,25 @@ class ContentguruController extends Controller
 
 
 
-    public function showAddContentForm()
+    public function showAddContentFormGuru()
     {
-        $tutor_id = Cookie::get('sp_id');
+        $tutor_id = Cookie::get('tutor_id');
         $tutors = Guru::find($tutor_id);
-        $userName = $tutors->nama; // Ambil nama pengguna
-        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->mengampu;
+        $guruName = $tutors->nama; // Ambil nama pengguna
+        $guruImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $guruProfesi = $tutors->mengampu;
         if (!$tutor_id) {
             return redirect()->route('login'); // Redirect to login if tutor_id is not set
         }
 
         $playlists = Buku::where('guru_id', $tutor_id)->get();
 
-        return view('add_content', [
+        return view('add_content_guru', [
             'playlists' => $playlists,
             "title" => "Tambah Content",
-            "userName" => $userName, // Teruskan nama pengguna ke tampilan
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi
+            "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
+            "guruImage" => $guruImage,
+            "guruProfesi" => $guruProfesi,
         ]);
     }
 

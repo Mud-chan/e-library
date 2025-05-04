@@ -1,4 +1,4 @@
-@extends('components.spheader')
+@extends('components.adminheader')
 @section('main')
     <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}">
     <script src="{{ asset('assets/js/admin_script.js') }}"></script>
@@ -9,7 +9,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
+            <a href="{{ url('/dashboardguru') }}" class="logo">Guru</a>
 
 
 
@@ -21,12 +21,12 @@
 
             <div class="profile">
 
-                <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-                <h3>{{ $userName }}</h3>
-                <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profileasp') }}" class="btn">View Profile</a>
+                <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
+                <h3>{{ $guruName }}</h3>
+                <span>{{ $guruProfesi }}</span>
+                <a href="{{ url('/profileaguru') }}" class="btn">View Profile</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
                     class="delete-btn">Log out</a>
 
             </div>
