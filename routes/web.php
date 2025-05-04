@@ -95,6 +95,7 @@ Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->na
 Route::post('/caricontentguru', [ContentguruController::class, 'caricontentguru'])->name('caricontentguru');
 Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
 Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
+Route::post('/upload-content-guru', [ContentguruController::class, 'uploadContentGuru'])->name('upload_content_guru');
 Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
 Route::get('/add-content-guru', [ContentguruController::class, 'showAddContentFormGuru'])->name('add_content_guru');
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');

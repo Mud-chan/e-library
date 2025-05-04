@@ -45,7 +45,7 @@
             </script>
         @endif
 
-        <form action="{{ route('upload_content') }}" method="post" enctype="multipart/form-data" id="formup">
+        <form action="{{ route('upload_content_guru') }}" method="post" enctype="multipart/form-data" id="formup">
             @csrf
             <p>Kategori<span>*</span></p>
             <select name="kategori" class="box" required>

@@ -147,9 +147,9 @@ class ContentguruController extends Controller
 
 
 
-public function uploadContent(Request $request)
+public function uploadContentGuru(Request $request)
 {
-    $tutor_id = Cookie::get('sp_id');
+    $tutor_id = Cookie::get('tutor_id');
     if (!$tutor_id) {
         return redirect()->route('login');
     }
@@ -212,7 +212,7 @@ public function uploadContent(Request $request)
 
         Log::info('Sesudah create Buku');
 
-        return redirect()->route('contentsp.index')->with('success', 'Buku Baru Berhasil Di Tambahkan');
+        return redirect()->route('contentguru.index')->with('success', 'Buku Baru Berhasil Di Tambahkan');
     } catch (\Exception $e) {
         Log::error('Failed to upload content: ' . $e->getMessage());
         return redirect()->back()->with('error', 'Buku Gagal Di Tambahkan: ' . $e->getMessage());
