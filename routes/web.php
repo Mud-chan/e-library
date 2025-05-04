@@ -13,6 +13,7 @@ use App\Http\Controllers\KontakController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PagesControllerSp;
+use App\Http\Controllers\SiswaguruController;
 use App\Http\Controllers\PagesControllerGuru;
 
 // Route::get('/', function () {
@@ -38,6 +39,7 @@ Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
 Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 Route::get('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logoutsiswa');
+Route::get('/logoutad', [LoginController::class, 'logoutad'])->name('logoutad');
 
 
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
@@ -98,6 +100,7 @@ Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuFor
 Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
 
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::get('/siswaguru', [SiswaguruController::class, 'index'])->name('siswaguru.index');
 Route::post('/carisiswa', [SiswaController::class, 'carisiswa'])->name('siswa.carisiswa');
 Route::get('/add-siswa', [SiswaController::class, 'showAddSiswaform'])->name('add_siswa');
 Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upload_siswa');
