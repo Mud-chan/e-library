@@ -28,7 +28,7 @@
             <span>{{ $guruProfesi }}</span>
             <a href="{{ url('/profileguru') }}" class="btn">view profile</a>
 
-            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">Log out</a>
 
         </div>
