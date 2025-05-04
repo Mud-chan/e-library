@@ -1,4 +1,4 @@
-@extends('components.spheader')
+@extends('components.adminheader')
 @section('main')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -7,7 +7,7 @@
 
     <section class="flex">
 
-        <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
+        <a href="{{ url('/dashboardguru') }}" class="logo">Admin</a>
 
         {{-- <form action="{{ route('pages.carisiswasp') }}" method="post" class="search-form">
             @csrf
@@ -24,16 +24,15 @@
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
 
 
         <div class="profile">
 
-            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-            <h3>{{ $userName }}</h3>
-            <span>{{ $userProfesi }}</span>
+            <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
+            <h3>{{ $guruName }}</h3>
+            <span>{{ $guruProfesi }}</span>
             <a href="" class="btn">view profile</a>
 
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
@@ -102,7 +101,7 @@
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
-                                    {{ $totalTutors }}
+                                   
                                 </h3>
                                 <p>Total Guru</p>
                             </span>
