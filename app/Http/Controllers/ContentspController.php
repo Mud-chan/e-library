@@ -160,7 +160,7 @@ public function uploadContent(Request $request)
         'deskripsi' => 'required|max:1000',
         'kategori' => 'required|max:100',
         'tingkatan' => 'nullable|string|max:100',
-        'thumb' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'thumb' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
         'pdf' => 'nullable|file|mimes:pdf|max:50120',
     ]);
 
@@ -262,7 +262,7 @@ public function uploadContent(Request $request)
             'deskripsi' => 'required|max:1000',
             'kategori' => 'required|max:100',
             'tingkatan' => 'nullable|string|max:100',
-            'thumb' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumb' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
             'pdf' => 'nullable|file|mimes:pdf|max:50120',
         ]);
 
@@ -427,7 +427,7 @@ public function uploadContent(Request $request)
 
 
 
-    
+
 
     public function deleteComment(Request $request)
     {

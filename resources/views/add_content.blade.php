@@ -85,7 +85,7 @@
             </select> --}}
             <p>Sampul Buku <span>*</span></p>
             <input type="file" name="thumb" accept="image/*"  class="box" id="image">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 5MB</small>
             <p>Unggah Buku (pdf) <span>*</span></p>
             <input type="file" name="pdf" accept="application/pdf"  class="box" id="video">
             <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>
@@ -101,7 +101,7 @@
         const videoError = document.getElementById('video-error');
 
         form.addEventListener('submit', function(event) {
-            if (imageField.files[0].size > 2048 * 1024) {
+            if (imageField.files[0].size > 6048 * 3024) {
                 event.preventDefault();
                 imageError.style.display = 'block';
             } else {
