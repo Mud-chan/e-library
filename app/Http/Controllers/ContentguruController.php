@@ -221,13 +221,13 @@ public function uploadContentGuru(Request $request)
 
 
 
-    public function updateContentForm($videoId)
+    public function updateContentFormGuru($videoId)
     {
-        $tutorId = Cookie::get('sp_id');
+        $tutorId = Cookie::get('tutor_id');
         $tutors = Guru::find($tutorId);
-        $userName = $tutors->nama; // Ambil nama pengguna
-        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->mengampu;
+        $guruName = $tutors->nama; // Ambil nama pengguna
+        $guruImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $guruProfesi = $tutors->mengampu;
         if (!$tutorId) {
             return redirect()->route('logreg'); // Redirect to login if tutor_id is not set
         }
@@ -244,11 +244,11 @@ public function uploadContentGuru(Request $request)
         $playlists = Buku::where('guru_id', $tutorId)->get();
 
         // Render the update content form view with the $content data and playlists
-        return view('update_content', compact('content', 'playlists'), [
+        return view('update_content_guru', compact('content', 'playlists'), [
             "title" => "Content Admin",
-            "userName" => $userName, // Teruskan nama pengguna ke tampilan
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi
+            "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
+            "guruImage" => $guruImage,
+            "guruProfesi" => $guruProfesi,
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
     }
