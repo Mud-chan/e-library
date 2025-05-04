@@ -68,7 +68,7 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="{{ url('profilesp') }}" class="btn">Lihat Profile</a>
+            <a href="{{ url('profileguru') }}" class="btn">Lihat Profile</a>
 
         </div>
 

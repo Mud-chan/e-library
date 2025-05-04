@@ -6,10 +6,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
+use App\Http\Controllers\ProfileguruController;
 use App\Http\Controllers\ContentspController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PagesControllerSp;
+use App\Http\Controllers\PagesControllerGuru;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -35,8 +39,6 @@ Route::post('/logreg', [LoginController::class, 'login']);
 Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 Route::get('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logoutsiswa');
 
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\PagesControllerSp;
 
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
 Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass');
@@ -62,6 +64,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
+    Route::get('/profileguru', 'ProfileguruController@profileguru')->name('pages.profileguru');
     Route::get('/profilesiswa', 'ProfilespController@profilesiswa')->name('pages.profilesiswa');
 });
 

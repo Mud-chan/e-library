@@ -33,7 +33,7 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="" class="btn">view profile</a>
+            <a href="{{ url('profileguru') }}" class="btn">view profile</a>
 
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>
@@ -101,7 +101,7 @@
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
-                                   
+
                                 </h3>
                                 <p>Total Guru</p>
                             </span>
