@@ -93,7 +93,7 @@
                     </div>
                     <img src="../uploaded_files/{{ $content->thumb }}" class="thumb" alt="">
                     <h3 class="title">{{ $content->judul }}</h3>
-                    <form action="{{ route('delete_video') }}" method="post" class="flex-btn">
+                    <form action="{{ route('delete_buku_guru') }}" method="post" class="flex-btn">
                         @csrf
                         <input type="hidden" name="id" value="{{ $content->id }}">
                         <a href="{{ route('update.content', ['videoId' => $content->id]) }}" class="option-btn">Ubah</a>

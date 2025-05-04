@@ -81,7 +81,7 @@ class ContentguruController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    public function deletebukuguru(Request $request)
     {
         $delete_id = $request->input('id');
         $content = Buku::find($delete_id);
