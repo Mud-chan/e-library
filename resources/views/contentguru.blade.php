@@ -75,6 +75,18 @@
     @elseif (session('errorup'))
         <div id="error-message" class="popup-message">{{ session('error') }}</div>
     @endif
+    @if (session('errorup'))
+        <div class="modal-sal" id="gagal-message">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <h2>Gagal</h2>
+            <h3>{{ session('errorup') }}</h3>
+            <div class="butsal">
+                <button class="tutupsal" onclick="closeModalAndClearSession()">OK</button>
+            </div>
+        </div>
+    @elseif (session('errorup'))
+
+    @endif
 
     <div class="box-container">
 
@@ -96,7 +108,7 @@
                     <form action="{{ route('delete_buku_guru') }}" method="post" class="flex-btn">
                         @csrf
                         <input type="hidden" name="id" value="{{ $content->id }}">
-                        <a href="{{ route('update.content', ['videoId' => $content->id]) }}" class="option-btn">Ubah</a>
+                        <a href="{{ route('update.content.guru', ['videoId' => $content->id]) }}" class="option-btn">Ubah</a>
                         <button type="submit" class="delete-btn" onclick="return confirm('Anda Yakin Ingin Menghapus Buku?');">Hapus</button>
                     </form>
                     <a href="{{ route('detailbukusp.content', ['videoId' => $content->id]) }}" class="btn">Baca Buku</a>

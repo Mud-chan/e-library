@@ -136,7 +136,7 @@ class ContentguruController extends Controller
 
         return view('add_content_guru', [
             'playlists' => $playlists,
-            "title" => "Tambah Content",
+            "title" => "Tambah Buku",
             "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
             "guruImage" => $guruImage,
             "guruProfesi" => $guruProfesi,
@@ -237,7 +237,7 @@ public function uploadContentGuru(Request $request)
             ->first();
 
         if (!$content) {
-            return redirect()->route('contentsp')->with('error', 'Video not found!');
+            return redirect()->route('contentguru.index')->with('errorup', 'Anda Tidak Memiliki Hak Upadte karena Bukan Anda Yang Menguploadnya!: ');
         }
 
         // Load the playlists associated with the tutor
@@ -245,7 +245,7 @@ public function uploadContentGuru(Request $request)
 
         // Render the update content form view with the $content data and playlists
         return view('update_content_guru', compact('content', 'playlists'), [
-            "title" => "Content Admin",
+            "title" => "Buku Guru",
             "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
             "guruImage" => $guruImage,
             "guruProfesi" => $guruProfesi,
@@ -254,7 +254,7 @@ public function uploadContentGuru(Request $request)
     }
 
 
-    public function updateContent(Request $request, $videoId)
+    public function updateContentGuru(Request $request, $videoId)
     {
         // Validation rules
         $request->validate([
@@ -300,7 +300,7 @@ public function uploadContentGuru(Request $request)
             // Save the updated content
             $content->save();
 
-            return redirect()->route('contentsp.index')->with('sucesup', 'Materi Berhasil Di Perbarui!');
+            return redirect()->route('contentguru.index')->with('sucesup', 'Materi Berhasil Di Perbarui!');
         } catch (\Exception $e) {
             Log::error('Failed to update content: ' . $e->getMessage());
             return redirect()->back()->with('errorup', 'Materi Gagal Di Perbarui!: ' . $e->getMessage());
@@ -326,7 +326,7 @@ public function uploadContentGuru(Request $request)
             ->first();
 
         if (!$content) {
-            return redirect()->route('contentsp.index')->with('error', 'Video not found!');
+            return redirect()->route('contentguru.index')->with('error', 'Video not found!');
         }
 
         // Load the playlists associated with the tutor

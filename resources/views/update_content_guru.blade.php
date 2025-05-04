@@ -43,7 +43,7 @@
         <h1 class="heading">Update Buku</h1>
 
 @if ($content)
-    <form action="{{ route('update.content', ['videoId' => $content->id]) }}" method="post" enctype="multipart/form-data" id="formup">
+    <form action="{{ route('update.content.guru', ['videoId' => $content->id]) }}" method="post" enctype="multipart/form-data" id="formup">
         @csrf
         <input type="hidden" name="video_id" value="{{ $content->id }}">
         <input type="hidden" name="old_thumb" value="{{ $content->thumb }}">

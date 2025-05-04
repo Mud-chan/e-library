@@ -102,6 +102,7 @@ Route::get('/add-content-guru', [ContentguruController::class, 'showAddContentFo
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
 Route::get('/update-content-guru/{videoId}', [ContentguruController::class, 'updateContentFormGuru'])->name('update.content.guru.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
+Route::post('update-content-guru/{videoId}', [ContentguruController::class, 'updateContentGuru'])->name('update.content.guru');
 
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
 Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');

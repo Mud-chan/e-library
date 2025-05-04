@@ -114,3 +114,50 @@ function closeModalAndClearSession() {
     });
 }
 
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        document.querySelectorAll('.popup-message').forEach(function(el) {
+            el.style.display = 'none';
+        });
+    }, 3000);
+
+    // Menutup modal box saat tombol "OK" pada pesan sukses diklik
+    document.querySelectorAll('.butsal').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.getElementById('gagal-message').style.display = 'none';
+        });
+    });
+
+    document.querySelectorAll('.tutupsal').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.getElementById('gagal-message').style.display = 'none';
+        });
+    });
+});
+
+
+function closeModalAndClearSession() {
+    // Menghilangkan modal
+    document.getElementById('gagal-message').style.display = 'none';
+
+    // Mengirim permintaan HTTP untuk menghapus session
+    fetch('/clear-session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to clear session');
+        }
+        // Jika berhasil, perbarui halaman
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
