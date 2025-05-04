@@ -8,6 +8,7 @@ use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
 use App\Http\Controllers\ProfileguruController;
 use App\Http\Controllers\ContentspController;
+use App\Http\Controllers\ContentguruController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\BookController;
@@ -89,6 +90,7 @@ Route::post('update-tutor/{guruId}', [TutorController::class, 'updatetutor'])->n
 
 Route::get('/', [PagesControllerSp::class, 'halamanutama'])->name('contentsp.halamanutama');
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
+Route::get('/contentguru', [ContentguruController::class, 'index'])->name('contentguru.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
 Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
 Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
