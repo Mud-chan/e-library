@@ -81,19 +81,19 @@ class ProfileguruController extends Controller
 
 
 
-    public function updatesp(Request $request)
+    public function updateguru(Request $request)
     {
         // Ambil ID tutor dari cookie
-        $tutorsId = $request->cookie('sp_id');
+        $guruId = $request->cookie('tutor_id');
 
         // Temukan data tutor berdasarkan ID
-        $tutor = Guru::find($tutorsId);
+        $tutor = Guru::find($guruId);
 
         // Validasi input
         $request->validate([
             'nama' => 'nullable|string',
             'mengampu' => 'nullable|string',
-            'email' => 'nullable|email|unique:tutors,email,' . $tutorsId,
+            'email' => 'nullable|email|unique:tutors,email,' . $guruId,
             'image' => 'sometimes|required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'old_pass' => 'nullable|string',
             'new_pass' => 'nullable|string',
@@ -128,14 +128,14 @@ class ProfileguruController extends Controller
             if (Hash::check($request->old_pass, $tutor->password)) {
                 $tutor->password = Hash::make($request->new_pass);
             } else {
-                return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah');
+                return redirect()->route('pages.profileguru')->with('error', 'Password lama yang Anda masukkan salah');
             }
         }
 
         // Simpan perubahan
         $tutor->save();
 
-        return redirect()->back()->with('success', 'Berhasil Memperbarui Profil!');
+        return redirect()->route('pages.profileguru')->with('success', 'Berhasil Memperbarui Profil!');
     }
 
 

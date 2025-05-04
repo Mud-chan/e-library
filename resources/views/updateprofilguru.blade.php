@@ -39,7 +39,7 @@
 
 <section class="form-container" style="min-height: calc(100vh - 19rem);">
 
-    <form action="{{ route('tutors.updatesp', $tutor->id) }}" method="post" enctype="multipart/form-data" id="formup">
+    <form action="{{ route('tutors.updateguru', $tutor->id) }}" method="post" enctype="multipart/form-data" id="formup">
         @csrf
         @method('put')
        <h3>Update Profile Guru</h3>
@@ -47,8 +47,17 @@
         <div class="col">
            <p>Nama Anda : </p>
            <input type="text" name="nama" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
-           <p>Mengajar Pada :</p>
-           <input type="text" name="profession" placeholder="{{ $tutor->mengampu }}" maxlength="100"  class="box">
+
+           <p>Mengajar Pada Kelas..<span>*</span></p>
+            <select name="mengampu" class="box" required>
+                <option value="{{ $tutor->mengampu }}" selected>{{ $tutor->mengampu }}</option>
+                <option value="Kelas 1">Kelas 1</option>
+                <option value="Kelas 2">Kelas 2</option>
+                <option value="Kelas 3">Kelas 3</option>
+                <option value="Kelas 4">Kelas 4</option>
+                <option value="Kelas 5">Kelas 5</option>
+                <option value="Kelas 6">Kelas 6</option>
+            </select>
            {{-- <select name="profession" class="box">
               <option value="" selected>{{ $tutor->profession }}</option>
               <option value="developer">developer</option>

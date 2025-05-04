@@ -72,6 +72,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 Route::get('/tutors/editsp', [ProfilespController::class, 'editsp'])->name('tutors.editsp');
 Route::get('/tutors/editguru', [ProfileguruController::class, 'editguru'])->name('tutors.editguru');
 Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('tutors.updatesp');
+Route::put('/tutors/updateguru', [ProfileguruController::class, 'updateguru'])->name('tutors.updateguru');
 Route::get('/siswa/editsiswa', [PagesControllerSp::class, 'editsiswa'])->name('siswa.editsiswa');
 Route::put('/siswa/updatesiswa', [PagesControllerSp::class, 'updatesiswa'])->name('siswa.updatesiswa');
 
