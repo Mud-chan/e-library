@@ -27,7 +27,7 @@ class SiswaguruController extends Controller
         $guruProfesi = $tutors->mengampu;
         $contents = User::paginate(8);
         return view('viewsiswaguru', [
-            "title" => "Data Tutors",
+            "title" => "Data Siswa",
             "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
             "guruImage" => $guruImage,
             "guruProfesi" => $guruProfesi,
@@ -38,14 +38,14 @@ class SiswaguruController extends Controller
         ]);
     }
 
-    public function carisiswa(Request $request)
+    public function carisiswaguru(Request $request)
     {
         // Ambil ID tutor dari cookie
-        $tutor_id = Cookie::get('sp_id');
+        $tutor_id = Cookie::get('tutor_id');
         $tutors = Guru::find($tutor_id); // Temukan pengguna berdasarkan ID
-        $userName = $tutors->nama; // Ambil nama pengguna
-        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->mengampu;
+        $guruName = $tutors->nama; // Ambil nama pengguna
+        $guruImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $guruProfesi = $tutors->mengampu;
 
         // Ambil semua siswa
         $contents = User::query();
@@ -59,11 +59,11 @@ class SiswaguruController extends Controller
         // Ambil data siswa sesuai dengan kriteria pencarian
         $contents = $contents->paginate(8);
 
-        return view('viewsiswa', [
+        return view('viewsiswaguru', [
             "title" => "Data Siswa",
-            "userName" => $userName, // Teruskan nama pengguna ke tampilan
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi,
+            "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
+            "guruImage" => $guruImage,
+            "guruProfesi" => $guruProfesi,
             "contents" => $contents,
             "totalPages" => $contents->lastPage(),
             "currentPage" => $contents->currentPage()

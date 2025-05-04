@@ -102,6 +102,7 @@ Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'stor
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
 Route::get('/siswaguru', [SiswaguruController::class, 'index'])->name('siswaguru.index');
 Route::post('/carisiswa', [SiswaController::class, 'carisiswa'])->name('siswa.carisiswa');
+Route::post('/carisiswaguru', [SiswaguruController::class, 'carisiswaguru'])->name('siswa.carisiswaguru');
 Route::get('/add-siswa', [SiswaController::class, 'showAddSiswaform'])->name('add_siswa');
 Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upload_siswa');
 Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_siswa');

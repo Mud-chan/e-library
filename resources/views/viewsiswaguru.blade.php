@@ -9,7 +9,7 @@
 
             <a href="{{ url('/dashboardguru') }}" class="logo">Guru.</a>
 
-            <form action="{{ route('siswa.carisiswa') }}" method="post" class="search-form">
+            <form action="{{ route('siswa.carisiswaguru') }}" method="post" class="search-form">
                 @csrf
                 <input type="text" name="search" placeholder="Cari Siswa..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
