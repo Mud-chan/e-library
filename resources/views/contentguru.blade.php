@@ -13,7 +13,7 @@
             <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Lanjutan</button>
         </div>
 
-        <form id="basicSearchForm" action="{{ route('caricontentsp') }}" method="post" class="search-form">
+        <form id="basicSearchForm" action="{{ route('caricontentguru') }}" method="post" class="search-form">
             @csrf
             <input type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>

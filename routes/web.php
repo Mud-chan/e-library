@@ -92,6 +92,7 @@ Route::get('/', [PagesControllerSp::class, 'halamanutama'])->name('contentsp.hal
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
 Route::get('/contentguru', [ContentguruController::class, 'index'])->name('contentguru.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
+Route::post('/caricontentguru', [ContentguruController::class, 'caricontentguru'])->name('caricontentguru');
 Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
 Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
 Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');

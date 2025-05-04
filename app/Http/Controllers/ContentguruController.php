@@ -44,9 +44,9 @@ class ContentguruController extends Controller
         ]);
     }
 
-    public function caricontentsp(Request $request)
+    public function caricontentguru(Request $request)
     {
-        $tutor_id = Cookie::get('sp_id');
+        $tutor_id = Cookie::get('tutor_id');
 
         // Periksa apakah tutor_id tersedia
         if (!$tutor_id) {
@@ -55,9 +55,9 @@ class ContentguruController extends Controller
 
         // Ambil data tutor
         $tutors = Guru::find($tutor_id);
-        $userName = $tutors->nama;
-        $userImage = $tutors->image;
-        $userProfesi = $tutors->mengampu;
+        $guruName = $tutors->nama; // Ambil nama pengguna
+        $guruImage = $tutors->image; // Ambil URL gambar profil pengguna
+        $guruProfesi = $tutors->mengampu;
 
         // Lakukan pencarian jika terdapat input pencarian
         if ($request->has('search')) {
@@ -71,11 +71,11 @@ class ContentguruController extends Controller
                 ->paginate(8);
         }
 
-        return view('contentsp', compact('contents'), [
+        return view('contentguru', compact('contents'), [
             "title" => "Content Admin",
-            "userName" => $userName,
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi,
+           "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
+            "guruImage" => $guruImage,
+            "guruProfesi" => $guruProfesi,
             "totalPages" => $contents->lastPage(),
             "currentPage" => $contents->currentPage()
         ]);
