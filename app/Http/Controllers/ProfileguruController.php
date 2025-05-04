@@ -34,7 +34,7 @@ class ProfileguruController extends Controller
  // Ambil URL gambar profil pengguna
 
         return view('profileguru', [
-            "title" => "Profile Admin",
+            "title" => "Profile Guru",
             "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
             "guruImage" => $guruImage,
             "guruProfesi" => $guruProfesi,
@@ -44,59 +44,32 @@ class ProfileguruController extends Controller
         ]);
     }
 
-    public function profilesiswa()
-    {
-        $siswaId = Cookie::get('user_id'); // Ambil ID pengguna dari cookie
-        $siswa = User::find($siswaId); // Temukan pengguna berdasarkan ID
-
-        if (!$siswa) {
-            return redirect()->back()->withErrors('User tidak ditemukan');
-        }
-
-        // Ambil data dari user
-        $userName = $siswa->nama;
-        $userImage = $siswa->image;
-        $userProfesi = $siswa->kelas;
-
-        // Hitung total bookmark dan histori dari siswa ini
-        $totalBookmark = Bookmark::where('id_siswa', $siswaId)->count();
-        $totalHistori = Histori::where('id_siswa', $siswaId)->count();
-
-        return view('profilsiswa', [
-            "title" => "Profile Siswa",
-            "userName" => $userName,
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi,
-            "siswaId" => $siswaId,
-            "totalBookmark" => $totalBookmark,
-            "totalHistori" => $totalHistori
-        ]);
-    }
 
 
 
-    public function editsp()
+
+    public function editguru()
     {
         // Ambil ID tutor dari cookie
-        $tutorsId = Cookie::get('sp_id');
+        $guruId = Cookie::get('tutor_id');
 
         // Temukan data tutor berdasarkan ID
-        $tutor = Guru::find($tutorsId);
+        $tutor = Guru::find($guruId);
 
         // Jika data tidak ditemukan, berikan pesan atau tindakan yang sesuai
 
 
-        $userImage = $tutor->image;
-        $userName = $tutor->nama;
-        $userProfesi = $tutor->kelas;
+        $guruImage = $tutor->image;
+        $guruName = $tutor->nama;
+        $guruProfesi = $tutor->kelas;
 
         // Mengirim variabel $tutorId ke view
-        return view('updateprofilsp', [
-            "title" => "Profile User",
-            "userName" => $userName,
-            "userImage" => $userImage,
-            "tutorsId" => $tutorsId,
-            "userProfesi" => $userProfesi,
+        return view('updateprofilguru', [
+            "title" => "Profile Guru",
+            "guruName" => $guruName,
+            "guruImage" => $guruImage,
+            "guruId" => $guruId,
+            "guruProfesi" => $guruProfesi,
             "tutor" => $tutor // Memasukkan variabel $tutor ke dalam array untuk digunakan di dalam view
         ]);
     }
