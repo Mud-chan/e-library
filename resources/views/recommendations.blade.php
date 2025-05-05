@@ -1,11 +1,9 @@
-{{-- resources/views/recommendations.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 <div class="container py-4">
     <h2 class="mb-4">SPK Rekomendasi Buku</h2>
 
-    {{-- Form filter --}}
     <form method="GET" action="{{ route('recommend') }}" class="mb-4" id="recommendation-form">
         <div class="row g-3">
             <div class="col-md-3">
@@ -50,7 +48,7 @@
 
     @if (!empty($results))
     <div class="row">
-        {{-- Hasil Rekomendasi --}}
+
         <div class="col-md-6">
             <div class="card bg-white mb-4 shadow-sm">
                 <div class="card-header bg-success text-white">
@@ -85,7 +83,6 @@
             </div>
         </div>
 
-        {{-- Detail Proses TOPSIS --}}
         <div class="col-md-6">
             <div class="card bg-white mb-4 shadow-sm">
                 <div class="card-header bg-success text-white">

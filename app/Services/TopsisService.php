@@ -1,5 +1,5 @@
 <?php
-// app/Services/TopsisService.php
+
 
 namespace App\Services;
 
@@ -11,14 +11,10 @@ class TopsisService
 
     public function __construct()
     {
-        // Ambil bobot dari konfigurasi
+        
         $this->weights = config('topsis.weights');
     }
 
-    /**
-     * Hitung rekomendasi dan detail proses TOPSIS
-     * @return array ['results' => [...], 'process' => [...]]
-     */
     public function calculate(Collection $books): array
     {
         if ($books->isEmpty()) {
