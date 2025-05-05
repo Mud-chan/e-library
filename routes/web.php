@@ -105,6 +105,7 @@ Route::post('update-content/{videoId}', [ContentspController::class, 'updateCont
 Route::post('update-content-guru/{videoId}', [ContentguruController::class, 'updateContentGuru'])->name('update.content.guru');
 
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
+Route::get('/detail-buku-guru/{videoId}', [ContentguruController::class, 'DetailBukuFormGuru'])->name('detailbukuguru.content');
 Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
 
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
