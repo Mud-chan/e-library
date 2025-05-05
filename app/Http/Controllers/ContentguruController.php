@@ -310,7 +310,7 @@ public function uploadContentGuru(Request $request)
 
 
 
-    public function DetailBukuForm($videoId)
+    public function DetailBukuFormGuru($videoId)
     {
         $tutorId = Cookie::get('tutor_id');
         $tutors = Guru::find($tutorId);
