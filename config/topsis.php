@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // Bobot default untuk kriteria, bisa diatur lewat .env
+    // bobot defaultnya kriteriadiatur di .env
     'weights' => [
         'average_rating'   => env('TOPSIS_WEIGHT_RATING', 0.5),
         'kategori_score'   => env('TOPSIS_WEIGHT_KATEGORI', 0.3),
