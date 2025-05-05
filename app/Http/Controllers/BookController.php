@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/BookController.php
 
 namespace App\Http\Controllers;
 
@@ -20,7 +19,6 @@ class BookController extends Controller
             'min_rating' => 'sometimes|numeric|min:0|max:5'
         ]);
 
-        // Pilihan kategori dan tingkatan dari config
         $categories = array_keys(config('topsis.kategori'));
         $levels     = array_keys(config('topsis.tingkatan'));
 

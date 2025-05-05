@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Rating extends Model
 {
     protected $table = 'rating';
-    protected $primaryKey = null; // karena tidak ada primary key tunggal
-    public $incrementing = false; // karena tidak ada kolom auto-increment
-    public $timestamps = false; // tidak menggunakan kolom timestamps
+    protected $primaryKey = null;
+    public $incrementing = false;
+    public $timestamps = false; 
 
     protected $fillable = [
         'id_siswa', 'id_buku', 'rating'

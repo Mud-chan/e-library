@@ -1,5 +1,4 @@
 <?php
-// config/topsis.php
 
 return [
     // Bobot default untuk kriteria, bisa diatur lewat .env
@@ -9,7 +8,6 @@ return [
         'tingkatan_score'  => env('TOPSIS_WEIGHT_TINGKATAN', 0.2),
     ],
 
-    // Pemetaan kategori ke skor
     'kategori' => [
         'Buku Pelajaran' => 1.0,
         'Buku Cerita'    => 0.8,
@@ -17,7 +15,6 @@ return [
         'Komik'          => 0.4,
     ],
 
-    // Pemetaan tingkatan ke skor
     'tingkatan' => [
         'Semua kelas' => 1.0,
         'Umum'        => 0.8,
