@@ -19,7 +19,6 @@
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
         <div class="profile">
@@ -49,7 +48,7 @@
            <p>Nama Anda : </p>
            <input type="text" name="nama" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
            <p>Profesi Anda :</p>
-           <input type="text" name="profession" placeholder="{{ $tutor->mengampu }}" maxlength="100"  class="box">
+           <input type="text" name="mengampu" placeholder="{{ $tutor->mengampu }}" maxlength="100"  class="box">
            {{-- <select name="profession" class="box">
               <option value="" selected>{{ $tutor->profession }}</option>
               <option value="developer">developer</option>

@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor ({{ $userName }})</title>
+    <title>Admin ({{ $guruName }})</title>
 
     <!-- Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script async src="https://cse.google.com/cse.js?cx=50277ad2efc244574"></script>
 
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}">
     <link rel="icon" href="{{ asset('assets/images/logo2.png') }}">
+
 </head>
 
 <body>
@@ -21,7 +23,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardad') }}" class="logo">Tutor.</a>
+            <a href="{{ url('/dashboardsp') }}" class="logo">Admin.</a>
 
             <form action="search_page.php" method="post" class="search-form">
                 <input type="text" name="search" placeholder="search here..." required maxlength="100">
@@ -40,7 +42,7 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profileadmin') }}" class="btn">view profile</a>
+                <a href="{{ url('/profilesp') }}" class="btn">view profile</a>
 
                 <a href="../components/admin_logout.php" onclick="return confirm('logout from this website?');"
                     class="delete-btn">logout</a>
@@ -63,20 +65,20 @@
 
         <div class="profile">
 
-            <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-            <h3>{{ $userName }}</h3>
-            <span>{{ $userProfesi }}</span>
-            <a href="{{ url('/profileadmin') }}" class="btn">View Profile</a>
+            <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
+            <h3>{{ $guruName }}</h3>
+            <span>{{ $guruProfesi }}</span>
+            <a href="{{ url('profileguru') }}" class="btn">Lihat Profile</a>
 
         </div>
 
         <nav class="navbar">
-            <a href="{{ url('/dashboardad') }}"><i class="fas fa-home"></i><span>Beranda</span></a>
-            <a href="{{ route('coursesad.index') }}"><i class="fa-solid fa-bars-staggered"></i><span>Kursus</span></a>
-            <a href="{{ route('contentad.index') }}"><i class="fas fa-graduation-cap"></i><span>Materi</span></a>
-            <a href="{{ route('commentsad') }}"><i class="fas fa-comment"></i><span>Komentar</span></a>
-            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Log out?');"><i
-                    class="fas fa-right-from-bracket"></i><span>Log out</span></a>
+            <a href="{{ url('/dashboardguru') }}"><i class="fas fa-home"></i><span>Beranda</span></a>
+            <a href="{{ route('contentguru.index') }}"><i class="fa-solid fa-book"></i><span>Buku</span></a>
+            <a href="{{ route('siswaguru.index') }}"><i class="fas fa-graduation-cap"></i><span>Siswa</span></a>
+            <a href=""><i class="fa-solid fa-circle-exclamation"></i><span>Informasi</span></a>
+            {{-- <a href=""><i class="fa-solid fa-circle-dollar-to-slot"></i><span>Peminjaman</span></a> --}}
+            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"><i class="fas fa-right-from-bracket"></i><span>Log out</span></a>
 
         </nav>
 

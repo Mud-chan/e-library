@@ -24,7 +24,6 @@
             <div id="menu-btn" class="fas fa-bars"></div>
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <div id="toggle-btn" class="fas fa-sun"></div>
         </div>
 
 
@@ -34,7 +33,7 @@
             <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
             <h3>{{ $userName }}</h3>
             <span>{{ $userProfesi }}</span>
-            <a href="" class="btn">view profile</a>
+            <a href="{{ url('profilesp') }}" class="btn">view profile</a>
 
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>

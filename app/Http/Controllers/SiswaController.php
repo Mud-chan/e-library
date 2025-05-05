@@ -158,28 +158,8 @@ public function delete(Request $request)
         $content = User::find($delete_id);
 
         if ($content) {
-            // 1. Hapus semua likes yang terkait dengan content yang akan dihapus
-            // $likes = Bookmark::where('id_buku', $delete_id);
-            // $likes->delete(); // Eksekusi delete
 
-            // // 2. Hapus semua comments yang terkait dengan content yang akan dihapus
-            // $com = Comments::where('id_buku', $delete_id);
-            // $com->delete(); // Eksekusi delete
-
-            // // 3. Hapus materi itu sendiri, jika file ada
-            // $thumbPath = public_path('uploaded_files/' . $content->thumb);
-            // $videoPath = public_path('uploaded_files/' . $content->pdf);
-
-            // // Hapus file jika ada
-            // if (file_exists($thumbPath)) {
-            //     unlink($thumbPath);
-            // }
-
-            // if (file_exists($videoPath)) {
-            //     unlink($videoPath);
-            // }
-
-            // Hapus record Buku itu sendiri
+            $content->delete();
             $content->delete();
 
             $message = 'Video deleted!';

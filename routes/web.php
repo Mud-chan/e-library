@@ -6,10 +6,16 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\ProfilespController;
+use App\Http\Controllers\ProfileguruController;
 use App\Http\Controllers\ContentspController;
+use App\Http\Controllers\ContentguruController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\PagesControllerSp;
+use App\Http\Controllers\SiswaguruController;
+use App\Http\Controllers\PagesControllerGuru;
 
 // Route::get('/', function () {
 //     return view('index');
@@ -19,6 +25,9 @@ Route::get('/detail', function () {
 });
 Route::get('/bacabuku', function () {
     return view('bacabuku');
+});
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/logreg', [RegisterController::class, 'index'])->name('logreg');
@@ -31,9 +40,8 @@ Route::get('/logreg', [LoginController::class, 'index'])->name('loginnn');
 Route::post('/logreg', [LoginController::class, 'login']);
 Route::get('/logoutsp', [LoginController::class, 'logoutsp'])->name('logoutsp');
 Route::get('/logoutsiswa', [LoginController::class, 'logoutsiswa'])->name('logoutsiswa');
+Route::get('/logoutad', [LoginController::class, 'logoutad'])->name('logoutad');
 
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\PagesControllerSp;
 
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('sendmail');
 Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass');
@@ -41,6 +49,7 @@ Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass')
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/dashboardsp', 'PagesControllerSp@dashboard')->name('pages.dashboardsp');
+    Route::get('/dashboardguru', 'PagesControllerGuru@dashboard')->name('pages.dashboardguru');
     Route::get('/katalogbuku', 'PagesControllerSp@katalogbuku')->name('pages.katalogbuku');
     // Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
     // Route::post('/carisiswasp', 'PagesControllerSp@carisiswasp')->name('pages.carisiswasp');
@@ -58,14 +67,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 });
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
+    Route::get('/profileguru', 'ProfileguruController@profileguru')->name('pages.profileguru');
     Route::get('/profilesiswa', 'ProfilespController@profilesiswa')->name('pages.profilesiswa');
 });
 
 // Route::get('/profilesp', [ProfilespController::class, 'profilesp'])->name('tutors.profilesp');
 Route::get('/tutors/editsp', [ProfilespController::class, 'editsp'])->name('tutors.editsp');
+Route::get('/tutors/editguru', [ProfileguruController::class, 'editguru'])->name('tutors.editguru');
 Route::put('/tutors/updatesp', [ProfilespController::class, 'updatesp'])->name('tutors.updatesp');
-Route::get('/tutors/editsiswa', [ProfilespController::class, 'editsiswa'])->name('tutors.editsiswa');
-Route::put('/tutors/updatesiswa', [ProfilespController::class, 'updatesiswa'])->name('tutors.updatesiswa');
+Route::put('/tutors/updateguru', [ProfileguruController::class, 'updateguru'])->name('tutors.updateguru');
+Route::get('/siswa/editsiswa', [PagesControllerSp::class, 'editsiswa'])->name('siswa.editsiswa');
+Route::put('/siswa/updatesiswa', [PagesControllerSp::class, 'updatesiswa'])->name('siswa.updatesiswa');
 
 Route::get('/tutor', [TutorController::class, 'index'])->name('tutor.index');
 Route::post('/caritutor', [TutorController::class, 'caritutor'])->name('tutor.caritutor');
@@ -78,18 +90,27 @@ Route::post('update-tutor/{guruId}', [TutorController::class, 'updatetutor'])->n
 
 Route::get('/', [PagesControllerSp::class, 'halamanutama'])->name('contentsp.halamanutama');
 Route::get('/contentsp', [ContentspController::class, 'index'])->name('contentsp.index');
+Route::get('/contentguru', [ContentguruController::class, 'index'])->name('contentguru.index');
 Route::post('/caricontentsp', [ContentspController::class, 'caricontentsp'])->name('caricontentsp');
+Route::post('/caricontentguru', [ContentguruController::class, 'caricontentguru'])->name('caricontentguru');
 Route::post('/delete-video', [ContentspController::class, 'delete'])->name('delete_video');
+Route::post('/delete-buku-guru', [ContentguruController::class, 'deletebukuguru'])->name('delete_buku_guru');
 Route::post('/upload-content', [ContentspController::class, 'uploadContent'])->name('upload_content');
+Route::post('/upload-content-guru', [ContentguruController::class, 'uploadContentGuru'])->name('upload_content_guru');
 Route::get('/add-content', [ContentspController::class, 'showAddContentForm'])->name('add_content');
+Route::get('/add-content-guru', [ContentguruController::class, 'showAddContentFormGuru'])->name('add_content_guru');
 Route::get('/update-content/{videoId}', [ContentspController::class, 'updateContentForm'])->name('update.content.form');
+Route::get('/update-content-guru/{videoId}', [ContentguruController::class, 'updateContentFormGuru'])->name('update.content.guru.form');
 Route::post('update-content/{videoId}', [ContentspController::class, 'updateContent'])->name('update.content');
+Route::post('update-content-guru/{videoId}', [ContentguruController::class, 'updateContentGuru'])->name('update.content.guru');
 
 Route::get('/detail-buku/{videoId}', [ContentspController::class, 'DetailBukuForm'])->name('detailbukusp.content');
 Route::post('/video/{videoId}/store-comment', [ContentspController::class, 'storeComment'])->name('video.storeComment');
 
 Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+Route::get('/siswaguru', [SiswaguruController::class, 'index'])->name('siswaguru.index');
 Route::post('/carisiswa', [SiswaController::class, 'carisiswa'])->name('siswa.carisiswa');
+Route::post('/carisiswaguru', [SiswaguruController::class, 'carisiswaguru'])->name('siswa.carisiswaguru');
 Route::get('/add-siswa', [SiswaController::class, 'showAddSiswaform'])->name('add_siswa');
 Route::post('/upload-siswa', [SiswaController::class, 'uploadsiswa'])->name('upload_siswa');
 Route::post('/delete-siswa', [SiswaController::class, 'delete'])->name('delete_siswa');

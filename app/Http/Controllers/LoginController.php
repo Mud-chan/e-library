@@ -36,7 +36,7 @@ class LoginController extends Controller
                 if ($tutor->role === 'guru') {
                     Cookie::queue('tutor_id', $tutor->id, 4320);
                     // Jika login berhasil sebagai tutor guru
-                    return redirect()->intended('/dashboardad');
+                    return redirect()->intended('/dashboardguru');
                 } elseif ($tutor->role === 'superadmin') {
                     Cookie::queue('sp_id', $tutor->id, 4320);
                     // Jika login berhasil sebagai tutor superadmin
