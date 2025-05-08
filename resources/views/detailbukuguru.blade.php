@@ -19,7 +19,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
+            <a href="{{ url('/dashboardsp') }}" class="logo">Guru</a>
 
             <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
                 @csrf
@@ -35,12 +35,12 @@
 
             <div class="profile">
 
-                <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-                <h3>{{ $userName }}</h3>
-                <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+                <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
+                <h3>{{ $guruName }}</h3>
+                <span>{{ $guruProfesi }}</span>
+                <a href="{{ url('/profileguru') }}" class="btn">View Profile</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
+                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
                 class="delete-btn">log out</a>
 
             </div>
