@@ -38,6 +38,7 @@
             <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
+            <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
 
             <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>
@@ -66,7 +67,7 @@
         @endforeach
       </div>
 
-      
+
       @if(isset($recommendedBooks) && count($recommendedBooks) > 0)
       <h3><span class="ikon-bulet"></span> Rekomendasi untuk Kamu</h3>
       <div class="grid-buku">
