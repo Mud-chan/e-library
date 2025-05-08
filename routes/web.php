@@ -23,6 +23,9 @@ use App\Http\Controllers\PagesControllerGuru;
 Route::get('/detail', function () {
     return view('detail');
 });
+Route::get('/login', function () {
+    return view('login');
+});
 Route::get('/bacabuku', function () {
     return view('bacabuku');
 });

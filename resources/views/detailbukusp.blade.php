@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
 </head>
 <body>
@@ -26,6 +28,11 @@
                 <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
             </form>
+
+
+
+
+
 
             <div class="icons">
                 {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
@@ -61,10 +68,14 @@
     <div class="article-info">
         <img src="{{ asset('uploaded_files/' . $content->thumb) }}" alt="thumbnail" />
         <div class="text">
-          <h3>{{ $content->judul }}</h3>
+          <h3>{{ $content->judul }} <span class="badge text-bg-success">Dibaca 12 kali</span></h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
-        <a href="#" class="bookmark">🔖 BookMark</a>
+        <div class="beta" style="display: flex; flex-direction:column;"><a href="#" class="bookmark">🔖 BookMark</a>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Cek Status
+              </button></div>
+
       </div>
 
       <div class="tags">
@@ -84,6 +95,65 @@
             <iframe class="pdf-viewer" src="{{ asset('uploaded_files/' . $content->pdf) }}" frameborder="0"></iframe>
         </div>
     </div>
+
+     <!-- Scrollable modal -->
+
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Status Baca Buku</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+
+
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Kelas</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Nadiem</td>
+                        <td>IV</td>
+                        <td>Sudah Baca</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Nadiem</td>
+                        <td>IV</td>
+                        <td>Sudah Baca</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>Nadiem</td>
+                        <td>IV</td>
+                        <td>Sudah Baca</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <div class="comment-section">
         <form action="{{ route('video.storeComment', ['videoId' => $content->id]) }}" method="post" >
             @csrf
@@ -113,6 +183,7 @@
             @endif
           </div>
       </div>
+
 
   </div>
   <script src="{{ asset('assets/js/admin_script.js') }}"></script>
