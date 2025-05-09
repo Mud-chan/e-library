@@ -172,6 +172,7 @@
 body{
    background-color: var(--light-bg);
    padding: 0rem ;
+
    /* padding-bottom: 7rem; */
 }
 
@@ -238,6 +239,11 @@ body{
   border-radius: 15px;
   padding: 20px;
   margin-top: 0px;
+
+}
+
+.bgbg {
+    background-image: url(../images/bgkatalog2.png);
 }
 
 .main-image {

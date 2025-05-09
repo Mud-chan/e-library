@@ -124,7 +124,7 @@
         <div>{{ $content->date }}</div>
       </div> --}}
 
-
+<div class="bgbg">
     <div class="pdf-view">
         <div class="container">
             <iframe class="pdf-viewer" src="{{ asset('uploaded_files/' . $content->pdf) }}" frameborder="0"></iframe>
@@ -170,6 +170,7 @@
                 <p class="empty">Tidak ada komentar!</p>
             @endif
         </div>
+    </div>
 
 
   </div>
