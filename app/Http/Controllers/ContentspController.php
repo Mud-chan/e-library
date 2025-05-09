@@ -7,6 +7,7 @@ use App\Models\Guru;
 use App\Models\Buku;
 // use App\Models\Playlist;
 use Illuminate\Http\Request;
+use App\Models\Histori;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
 // use App\Models\Likes;
@@ -310,43 +311,56 @@ public function uploadContent(Request $request)
 
 
 
-    public function DetailBukuForm($videoId)
-    {
-        $tutorId = Cookie::get('sp_id');
-        $tutors = Guru::find($tutorId);
-        $userName = $tutors->nama; // Ambil nama pengguna
-        $userImage = $tutors->image; // Ambil URL gambar profil pengguna
-        $userProfesi = $tutors->mengampu;
-        if (!$tutorId) {
-            return redirect()->route('logreg'); // Redirect to login if tutor_id is not set
-        }
+    public function DetailBukuForm(Request $request, $videoId)
+{
+    $tutorId = Cookie::get('sp_id');
+    $tutors = Guru::find($tutorId);
+    $userName = $tutors->nama;
+    $userImage = $tutors->image;
+    $userProfesi = $tutors->mengampu;
 
-        $content = Buku::where('id', $videoId)
-            ->where('guru_id', $tutorId)
-            ->first();
-
-        if (!$content) {
-            return redirect()->route('contentsp.index')->with('error', 'Video not found!');
-        }
-
-        // Load the playlists associated with the tutor
-        $playlists = Buku::where('guru_id', $tutorId)->get();
-
-        $comments = Comments::where('id_buku', $videoId)->get();
-        $userIds = $comments->pluck('id_siswa')->unique();
-        $users = User::whereIn('id', $userIds)->get();
-
-        // Render the update content form view with the $content data and playlists
-        return view('detailbukusp', compact('content', 'playlists', 'comments', 'users'), [
-            "title" => "Content Admin",
-            "userName" => $userName, // Teruskan nama pengguna ke tampilan
-            "userImage" => $userImage,
-            "userProfesi" => $userProfesi,
-            'comments' => $comments,
-            "userId" => $tutorId,
-            // Teruskan URL gambar profil pengguna ke tampilan
-        ]);
+    if (!$tutorId) {
+        return redirect()->route('logreg');
     }
+
+    $content = Buku::where('id', $videoId)->where('guru_id', $tutorId)->first();
+    if (!$content) {
+        return redirect()->route('contentsp.index')->with('error', 'Video not found!');
+    }
+
+    $playlists = Buku::where('guru_id', $tutorId)->get();
+    $comments = Comments::where('id_buku', $videoId)->get();
+
+    $search = $request->query('search');
+
+    // Filter siswa berdasarkan nama atau kelas jika ada pencarian
+    $query = User::query();
+    if ($search) {
+        $query->where(function ($q) use ($search) {
+            $q->where('nama', 'like', "%$search%")
+              ->orWhere('kelas', 'like', "%$search%");
+        });
+    }
+
+    $filteredSiswa = $query->get();
+
+    // Ambil ID siswa yang sudah baca buku ini
+    $historiSiswaIds = Histori::where('id_buku', $videoId)->pluck('id_siswa')->toArray();
+
+    // Tambahkan status baca ke masing-masing siswa
+    $siswaStatus = $filteredSiswa->map(function ($siswa) use ($historiSiswaIds) {
+        return [
+            'id' => $siswa->id,
+            'nama' => $siswa->nama,
+            'kelas' => $siswa->kelas,
+            'status' => in_array($siswa->id, $historiSiswaIds) ? 'Sudah Baca' : 'Belum Baca'
+        ];
+    });
+
+    return view('detailbukusp', compact(
+        'content', 'playlists', 'comments', 'userName', 'userImage', 'userProfesi', 'siswaStatus'
+    ));
+}
 
 
 

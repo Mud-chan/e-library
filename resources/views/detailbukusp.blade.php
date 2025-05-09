@@ -21,7 +21,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
+            <a href="{{ url('/dashboardsp') }}" class="logo" style="text-decoration: none">Admin</a>
 
             <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
                 @csrf
@@ -108,10 +108,11 @@
             <div class="modal-body">
 
 
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <form class="d-flex mb-3" role="search" method="GET">
+                    <input class="form-control me-2" type="search" name="search" value="{{ request('search') }}" placeholder="Cari Nama atau Kelas" aria-label="Search"/>
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
+                </form>
+
 
 
                   <table class="table table-striped">
@@ -124,25 +125,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Nadiem</td>
-                        <td>IV</td>
-                        <td>Sudah Baca</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>Nadiem</td>
-                        <td>IV</td>
-                        <td>Sudah Baca</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>Nadiem</td>
-                        <td>IV</td>
-                        <td>Sudah Baca</td>
-                      </tr>
+                        @foreach ($siswaStatus as $index => $siswa)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $siswa['nama'] }}</td>
+                                <td>{{ $siswa['kelas'] }}</td>
+                                <td>{{ $siswa['status'] }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
+
                   </table>
 
 
