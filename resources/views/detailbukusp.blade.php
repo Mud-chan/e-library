@@ -23,9 +23,9 @@
 
             <a href="{{ url('/dashboardsp') }}" class="logo" style="text-decoration: none">Admin</a>
 
-            <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
+            <form action="{{ route('caricontentsp') }}" method="post" class="search-form">
                 @csrf
-                <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
+                <input type="text" name="search" placeholder="Cari Buku..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
             </form>
 
