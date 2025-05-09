@@ -6,6 +6,7 @@ use App\Models\Bookmark;
 use App\Models\Guru;
 use App\Models\Buku;
 // use App\Models\Playlist;
+use App\Models\Conterbaca;
 use Illuminate\Http\Request;
 use App\Models\Histori;
 use Illuminate\Support\Facades\Log;
@@ -369,6 +370,8 @@ public function uploadContent(Request $request)
         ];
     });
 
+    $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
+
     return view('detailbukusp', compact(
         'content',
         'playlists',
@@ -376,7 +379,8 @@ public function uploadContent(Request $request)
         'userName',
         'userImage',
         'userProfesi',
-        'siswaStatus'
+        'siswaStatus',
+        'jumlahView'
     ));
 }
 

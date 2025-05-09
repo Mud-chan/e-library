@@ -68,7 +68,7 @@
     <div class="article-info">
         <img src="{{ asset('uploaded_files/' . $content->thumb) }}" alt="thumbnail" />
         <div class="text">
-          <h3>{{ $content->judul }} <span class="badge text-bg-success">Dibaca 12 kali</span></h3>
+          <h3>{{ $content->judul }} <span class="badge text-bg-success">Dibaca {{ $jumlahView }} kali</span></h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
         <div class="beta" style="display: flex; flex-direction:column;"><a href="#" class="bookmark">🔖 BookMark</a>
