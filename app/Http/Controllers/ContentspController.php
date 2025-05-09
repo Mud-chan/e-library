@@ -314,27 +314,38 @@ public function uploadContent(Request $request)
     public function DetailBukuForm(Request $request, $videoId)
 {
     $tutorId = Cookie::get('sp_id');
+    if (!$tutorId) {
+        return redirect()->route('logreg');
+    }
+
     $tutors = Guru::find($tutorId);
     $userName = $tutors->nama;
     $userImage = $tutors->image;
     $userProfesi = $tutors->mengampu;
 
-    if (!$tutorId) {
-        return redirect()->route('logreg');
-    }
+    $content = Buku::where('id', $videoId)
+        ->where('guru_id', $tutorId)
+        ->first();
 
-    $content = Buku::where('id', $videoId)->where('guru_id', $tutorId)->first();
     if (!$content) {
-        return redirect()->route('contentsp.index')->with('error', 'Video not found!');
+        return redirect()->route('contentsp.index')->with('error', 'Buku tidak ditemukan!');
     }
 
     $playlists = Buku::where('guru_id', $tutorId)->get();
     $comments = Comments::where('id_buku', $videoId)->get();
 
     $search = $request->query('search');
+    $tingkatanBuku = $content->tingkatan; // contoh: 'Umum', 'Kelas 1', dst
 
-    // Filter siswa berdasarkan nama atau kelas jika ada pencarian
+    // Mulai query siswa
     $query = User::query();
+
+    // Filter siswa jika tingkatan bukan 'Umum'
+    if (strtolower($tingkatanBuku) !== 'umum') {
+        $query->where('kelas', $tingkatanBuku);
+    }
+
+    // Tambahkan pencarian nama atau kelas jika ada input search
     if ($search) {
         $query->where(function ($q) use ($search) {
             $q->where('nama', 'like', "%$search%")
@@ -342,12 +353,13 @@ public function uploadContent(Request $request)
         });
     }
 
+    // Ambil daftar siswa hasil filter
     $filteredSiswa = $query->get();
 
-    // Ambil ID siswa yang sudah baca buku ini
+    // Ambil ID siswa yang sudah membaca buku ini dari histori
     $historiSiswaIds = Histori::where('id_buku', $videoId)->pluck('id_siswa')->toArray();
 
-    // Tambahkan status baca ke masing-masing siswa
+    // Bangun data status baca
     $siswaStatus = $filteredSiswa->map(function ($siswa) use ($historiSiswaIds) {
         return [
             'id' => $siswa->id,
@@ -358,7 +370,13 @@ public function uploadContent(Request $request)
     });
 
     return view('detailbukusp', compact(
-        'content', 'playlists', 'comments', 'userName', 'userImage', 'userProfesi', 'siswaStatus'
+        'content',
+        'playlists',
+        'comments',
+        'userName',
+        'userImage',
+        'userProfesi',
+        'siswaStatus'
     ));
 }
 
