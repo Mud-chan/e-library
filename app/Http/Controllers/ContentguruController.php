@@ -9,8 +9,9 @@ use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
-// use App\Models\Likes;
+
 use App\Models\Comments;
+use App\Models\Conterbacaguru;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -321,9 +322,14 @@ public function uploadContentGuru(Request $request)
             return redirect()->route('logreg'); // Redirect to login if tutor_id is not set
         }
 
-        $content = Buku::where('id', $videoId)
-            ->where('guru_id', $tutorId)
-            ->first();
+        Conterbacaguru::create([
+        'id' => uniqid(),
+        'id_buku' => $videoId,
+        'id_guru' => $tutorId,
+        'date' => Carbon::now()->format('Y-m-d'),
+        ]);
+
+        $content = Buku::find($videoId);
 
         if (!$content) {
             return redirect()->route('contentguru.index')->with('error', 'Video not found!');
