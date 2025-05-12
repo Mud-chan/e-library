@@ -124,21 +124,19 @@
 <div class="logo-kanan">
 
         <div class="icons">
-            {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
-            <!-- Dropdown Button -->
 
 
         </div>
         <div class="dropdown">
                 <button class="dropbtn">
-                    <i class="fas fa-bars"></i> <!-- icon untuk dropdown -->
+                    <i class="fas fa-bars"></i>
                 </button>
                 <div class="dropdown-content">
-                    <a href="{{ url('/profile') }}">Profile</a>
-                    <a href="{{ url('/settings') }}">Settings</a>
-                    <a href="{{ url('/logout') }}">Logout</a>
+                    <a href="">Asik</a>
+                    <a href="">Banget</a>
+                    <a href="">Lo</a>
                 </div>
             </div>
 
@@ -336,11 +334,22 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+    
+    document.querySelector('.dropbtn').addEventListener('click', function () {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const dropdown = document.querySelector('.dropdown');
 
-    document.querySelector('.dropbtn').addEventListener('click', function() {
-        const dropdownContent = document.querySelector('.dropdown-content');
-        dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
-    });
+    // Toggle dropdown content
+    const isVisible = dropdownContent.style.display === 'block';
+    dropdownContent.style.display = isVisible ? 'none' : 'block';
+
+    // Tambah atau hapus class 'active' untuk mengontrol warna background
+    if (isVisible) {
+        dropdown.classList.remove('active');
+    } else {
+        dropdown.classList.add('active');
+    }
+});
 
 
 </script>

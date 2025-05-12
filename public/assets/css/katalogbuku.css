@@ -410,19 +410,24 @@ h3 {
       }
 
   }
-
-  .dropdown {
+.dropdown {
     position: relative;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     border-radius: 5px;
     padding: 3px;
-
+    transition: background-color 0.3s;
 }
 
 .dropdown:hover {
     background-color: #333;
     color: white;
+}
+
+/* Saat aktif (dibuka), kembali ke putih meski hover */
+.dropdown.active {
+    background-color: white !important;
+    color: black !important;
 }
 
 .dropbtn {
@@ -465,6 +470,9 @@ h3 {
 
 .dropdown-content a:hover {
     background-color: #dbdbdb;
+}
+.dropdown-content a:hover .dropbtn i {
+    color: #ffffff;
 }
 
 .logo-kanan{
