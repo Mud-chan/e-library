@@ -19,6 +19,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{ asset('assets/css/recommendations.css') }}">
+    <link rel="icon" href="{{ asset('assets/images/logo2.png') }}">
 </head>
 <body>
     <div id="app">
