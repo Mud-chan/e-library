@@ -14,8 +14,8 @@ class BookController extends Controller
     public function recommend(Request $req)
     {
         $req->validate([
-            'kategori'   => 'sometimes|string',
-            'tingkatan'  => 'sometimes|string',
+            'kategori'   => 'sometimes|string|in:' . implode(',', array_keys(config('topsis.kategori'))),
+            'tingkatan'  => 'sometimes|string|in:' . implode(',', array_keys(config('topsis.tingkatan'))),
             'min_rating' => 'sometimes|numeric|min:0|max:5'
         ]);
 
@@ -42,7 +42,7 @@ class BookController extends Controller
         }
 
         $books = $query->get()->map(fn($b) =>
-            tap($b, fn($m) => $m->average_rating = $m->rating->first()->average_rating ?? 0)
+        tap($b, fn($m) => $m->average_rating = optional($m->rating->first())->average_rating ?? 0)
         );
 
         if ($books->isEmpty()) {
