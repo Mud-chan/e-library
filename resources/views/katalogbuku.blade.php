@@ -121,14 +121,17 @@
 
         </form>
 
-
+<div class="logo-kanan">
 
         <div class="icons">
             {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
             <!-- Dropdown Button -->
-            <div class="dropdown">
+
+
+        </div>
+        <div class="dropdown">
                 <button class="dropbtn">
                     <i class="fas fa-bars"></i> <!-- icon untuk dropdown -->
                 </button>
@@ -139,8 +142,7 @@
                 </div>
             </div>
 
-        </div>
-
+</div>
         <div class="profile">
 
             <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">

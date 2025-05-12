@@ -93,7 +93,7 @@
     color: var(--main-color);
  }
 
- 
+
 
  embed {
     overflow-clip-margin: content-box !important;
@@ -414,7 +414,15 @@ h3 {
   .dropdown {
     position: relative;
     display: inline-block;
-    background-color: grey;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 3px;
+
+}
+
+.dropdown:hover {
+    background-color: #333;
+    color: white;
 }
 
 .dropbtn {
@@ -430,9 +438,6 @@ h3 {
     font-size: 20px;
 }
 
-.dropbtn:hover {
-    background-color: #3d3d3d;
-}
 
 .dropbtn:hover i {
     color: white;
@@ -459,5 +464,12 @@ h3 {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
+    background-color: #dbdbdb;
+}
+
+.logo-kanan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
