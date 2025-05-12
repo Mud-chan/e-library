@@ -6,7 +6,7 @@
     --lqd-container-width-md: 1024px;
     --lqd-row-gutter-y: 30px;
     --lqd-row-gutter-x: 30px;
-    --lqd-color-primary: #FF7F3F;
+    --lqd-color-primary: #2eff4a;
     --lqd-color-secondary: #2D6FE8;
     --lqd-body-text-color: #737588;
     --lqd-color-dark: #292929;
@@ -14,14 +14,14 @@
     --lqd-color-accent: #61CE70;
     --lqd-color-gradient-start: #007fff;
     --lqd-color-gradient-stop: #ff4d54;
-    --lqd-color-orange-500: #ed6a04;
+    --lqd-color-orange-500: #00c92c;
     --lqd-color-blue-50: rgba(45, 111, 232, 0.08);
     --lqd-color-blue-100: #B7EEF5;
     --lqd-color-blue-200: rgba(28, 79, 141, 0.11);
     --lqd-color-blue-300: #008ABA;
     --lqd-color-blue-400: #0e3f58;
     --lqd-color-blue-500: #1C4F8D;
-    --lqd-color-blue-600: #FF7F3F; /* untuk warna hover di We build ideas driven by the future. */
+    --lqd-color-blue-600: #1fff4f;   /* =====================  WARNA HOVER TOMBOL LOGIN  ===================== */
     --lqd-color-green-100: rgba(0, 203, 153, 0.1);
     --lqd-color-green-500: #21A081;
     --lqd-color-gray-300: #9ca3af;
