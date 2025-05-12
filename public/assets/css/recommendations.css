@@ -50,7 +50,7 @@
   }
 
   /* Tables */
-  .table {
+  /* .table {
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
@@ -72,16 +72,21 @@
   .table-bordered th,
   .table-bordered td {
     border: 1px solid #28a745;
-  }
+  } */
 
   /* Headings */
-  h2.mb-4, h4, h5 {
+  /* h2.mb-4, h4, h5 {
     color: #28a745;
-  }
+  } */
 
   /* Alert */
   .alert-warning {
     background-color: #fff3cd;
     border-color: #ffeeba;
     color: #856404;
+  }
+
+  .pagination{
+    display: flex;
+    flex-direction: row;
   }

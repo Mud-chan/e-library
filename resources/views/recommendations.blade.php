@@ -46,16 +46,15 @@
         </div>
     </form>
 
-    @if (!empty($results))
+    @if (!empty($results) && $results->count())
     <div class="row">
-
         <div class="col-md-6">
             <div class="card bg-white mb-4 shadow-sm">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0">Hasil Rekomendasi</h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-striped table-bordered">
                         <thead class="bg-light">
                             <tr>
                                 <th>Rank</th>
@@ -69,7 +68,7 @@
                         <tbody>
                             @foreach ($results as $idx => $rec)
                             <tr>
-                                <td>{{ $idx + 1 }}</td>
+                                <td>{{ ($results->currentPage() - 1) * $results->perPage() + $loop->iteration }}</td>
                                 <td>{{ $rec['book']->judul }}</td>
                                 <td>{{ $rec['book']->kategori }}</td>
                                 <td>{{ $rec['book']->tingkatan }}</td>
@@ -79,6 +78,10 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="pagination">
+                        {{ $results->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,8 +109,8 @@
                             $rows = isset($data[0]) && is_array($data[0]) ? $data : [$data];
                         @endphp
                         <h5 class="mt-3 text-success">{{ $label }}</h5>
-                        <div class="table-responsive mb-3">
-                            <table class="table table-sm table-bordered">
+                        <div class="table-responsive mb-3" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table table-striped table-sm table-bordered">
                                 <thead class="bg-light">
                                     <tr>
                                         @foreach(array_keys($rows[0] ?? []) as $col)
