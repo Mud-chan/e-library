@@ -123,15 +123,10 @@
 
 <div class="logo-kanan">
 
-        <div class="icons">
-            <div id="search-btn" class="fas fa-search"></div>
-            <div id="user-btn" class="fas fa-user"></div>
 
-
-        </div>
         <div class="dropdown">
                 <button class="dropbtn">
-                    <i class="fas fa-bars"></i>
+                    <p style="font-weight: 600">Jenis</p>
                 </button>
                 <div class="dropdown-content">
                     <a href="">Asik</a>
@@ -139,6 +134,13 @@
                     <a href="">Lo</a>
                 </div>
             </div>
+
+            <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <div id="user-btn" class="fas fa-user"></div>
+
+
+        </div>
 
 </div>
         <div class="profile">
@@ -163,8 +165,38 @@
 <div id="search-results" class="autocomplete-box"></div>
 
 
+
   <!-- Katalog Buku -->
   <section class="katalog-buku">
+
+     <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
+    <div class="genre" style="display: flex; gap: 10px;">
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Komik">
+            <button type="submit">Komik</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Cerita">
+            <button type="submit">Buku Cerita</button>
+        </form>
+
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Buku Pelajaran">
+            <button type="submit">Buku Pelajaran</button>
+        </form>
+
+        <form action="{{ route('caribuku') }}" method="POST">
+            @csrf
+            <input type="hidden" name="search" value="Novel">
+            <button type="submit">Novel</button>
+        </form>
+    </div>
+
     <h3><span class="ikon-bulet"></span> Buku Populer</h3>
     <div class="grid-buku">
         @foreach ($popularBooks as $book)
@@ -231,33 +263,7 @@
         </div>
     </div>
 
-    <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
-    <div class="genre" style="display: flex; gap: 10px;">
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Komik">
-            <button type="submit">Komik</button>
-        </form>
 
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Buku Cerita">
-            <button type="submit">Buku Cerita</button>
-        </form>
-
-
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Buku Pelajaran">
-            <button type="submit">Buku Pelajaran</button>
-        </form>
-
-        <form action="{{ route('caribuku') }}" method="POST">
-            @csrf
-            <input type="hidden" name="search" value="Novel">
-            <button type="submit">Novel</button>
-        </form>
-    </div>
 
   </section>
 
@@ -334,7 +340,7 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
-    
+
     document.querySelector('.dropbtn').addEventListener('click', function () {
     const dropdownContent = document.querySelector('.dropdown-content');
     const dropdown = document.querySelector('.dropdown');
