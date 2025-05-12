@@ -30,29 +30,21 @@ class LoginController extends Controller
 
             if ($user && Hash::check($request->password, $user->password)) {
                 Cookie::queue('user_id', $user->id, 4320);
-                // Jika login berhasil sebagai user
                 return redirect()->intended('/katalogbuku');
             } elseif ($tutor && Hash::check($request->password, $tutor->password)) {
                 if ($tutor->role === 'guru') {
                     Cookie::queue('tutor_id', $tutor->id, 4320);
-                    // Jika login berhasil sebagai tutor guru
                     return redirect()->intended('/dashboardguru');
                 } elseif ($tutor->role === 'superadmin') {
                     Cookie::queue('sp_id', $tutor->id, 4320);
-                    // Jika login berhasil sebagai tutor superadmin
                     return redirect()->intended('/dashboardsp');
                 } else {
-                    // Jika rolenya tidak terdefinisi atau tidak valid
                     return redirect()->back()->with('error', 'Role Tidak Terdaftar');
                 }
             } else {
-                // Jika email atau password salah di kedua tabel
                 return redirect()->back()->with('error', 'Kesalahan Pada Email Dan Password');
             }
         }
-
-        // Jika metode bukan POST, kembalikan ke halaman login
-        // return view('logreg');
     }
 
     public function updatePassword(Request $request)

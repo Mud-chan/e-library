@@ -140,3 +140,4 @@ Route::post('/kirim-email', [KontakController::class, 'kirimEmail'])->name('kiri
 
 Route::get('/recommend', [BookController::class, 'recommend'])->name('recommend');
 Route::resource('books', BookController::class);
+Route::get('/ajax-cari-buku', [PagesControllerSp::class, 'ajaxCariBuku'])->name('ajax.cari.buku');

@@ -89,6 +89,8 @@
     color: var(--main-color);
  }
 
+ 
+
  embed {
     overflow-clip-margin: content-box !important;
     overflow: clip !important;

@@ -71,7 +71,7 @@
           <h3>{{ $content->judul }} <span class="badge text-bg-success">Dibaca {{ $jumlahView }} kali</span></h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
-        <div class="beta" style="display: flex; flex-direction:column;"><a href="#" class="bookmark">🔖 BookMark</a>
+        <div class="beta" style="display: flex; flex-direction:column;"><a href="#" class="bookmark">🔖 BookMark ({{ $jumlahBookmark }})</a>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Cek Status
               </button></div>

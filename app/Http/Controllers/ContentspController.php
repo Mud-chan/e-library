@@ -371,6 +371,7 @@ public function uploadContent(Request $request)
     });
 
     $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
+    $jumlahBookmark = Bookmark::where('id_buku', $videoId)->count();
 
     return view('detailbukusp', compact(
         'content',
@@ -380,7 +381,8 @@ public function uploadContent(Request $request)
         'userImage',
         'userProfesi',
         'siswaStatus',
-        'jumlahView'
+        'jumlahView',
+        'jumlahBookmark',
     ));
 }
 

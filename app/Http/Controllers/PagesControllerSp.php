@@ -337,6 +337,18 @@ public function carikatalogbuku(Request $request)
     }
 }
 
+public function ajaxCariBuku(Request $request)
+{
+    $keyword = $request->input('query');
+    $results = Buku::where('judul', 'like', '%' . $keyword . '%')
+        ->orWhere('kategori', 'like', '%' . $keyword . '%')
+        ->orWhere('tingkatan', 'like', '%' . $keyword . '%')
+        ->limit(10)
+        ->get(['id', 'judul', 'thumb', 'kategori', 'tingkatan']);
+
+    return response()->json($results);
+}
+
 
 public function bookmarkview()
 {
