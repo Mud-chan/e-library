@@ -262,8 +262,8 @@
                                         alt="image" class="logo-sticky"
                                         src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library"
                                         class="logo-default"
-                                        src="{{ asset('assets/images/fixlogo.png') }}" style="width: 100px; height: 100px;"></span></a>
-                                        <span class="text-white font-semibold" style="margin-left: 8px; margin-top: 20px; font-size: 30px">E-Library</span>
+                                        src="{{ asset('assets/images/fixlogo.png') }}" ></span></a>
+                                        <span class="text-white font-semibold" style="margin-left: 8px; margin-top: 5px; font-size: 20px">E-Library</span>
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
