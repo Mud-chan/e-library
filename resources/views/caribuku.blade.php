@@ -24,11 +24,32 @@
             <button type="submit" class="fas fa-search" name="search_btn"></button>
         </form>
 
-        <div class="icons">
-            {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
-            <div id="search-btn" class="fas fa-search"></div>
-            <div id="user-btn" class="fas fa-user"></div>
-        </div>
+        <div class="logo-kanan">
+
+
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <p style="font-weight: 600">Jenis</p>
+                    </button>
+                    <div class="dropdown-content">
+                        @foreach (['Umum', 'Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6', 'Karya Guru'] as $tingkatan)
+                            <form action="{{ route('caribuku') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="search" value="{{ $tingkatan }}">
+                                <button type="submit">{{ $tingkatan }}</button>
+                            </form>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="icons">
+                    <div id="search-btn" class="fas fa-search"></div>
+                    <div id="user-btn" class="fas fa-user"></div>
+
+
+                </div>
+
+            </div>
 
         <div class="profile">
 

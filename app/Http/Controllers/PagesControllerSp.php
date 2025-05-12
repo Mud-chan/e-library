@@ -306,6 +306,7 @@ public function carikatalogbuku(Request $request)
         $userProfesi = $tutor->email;
 
         $allowedCategories = ['Novel', 'Komik', 'Buku Cerita', 'Buku Pelajaran'];
+        $allowedTingkatan = ['Umum', 'Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6', 'Karya Guru'];
 
         if ($request->has('search')) {
             $keyword = $request->input('search');
@@ -313,8 +314,8 @@ public function carikatalogbuku(Request $request)
             $contents = Buku::whereIn('kategori', $allowedCategories)
                 ->where(function ($query) use ($keyword) {
                     $query->where('judul', 'like', '%' . $keyword . '%')
-                        ->orWhere('kategori', 'like', '%' . $keyword . '%')
-                        ->orWhere('tingkatan', 'like', '%' . $keyword . '%');
+                          ->orWhere('kategori', 'like', '%' . $keyword . '%')
+                          ->orWhere('tingkatan', 'like', '%' . $keyword . '%');
                 })
                 ->paginate(8);
         } else {
@@ -336,6 +337,7 @@ public function carikatalogbuku(Request $request)
         return redirect()->route('loginnn');
     }
 }
+
 
 public function ajaxCariBuku(Request $request)
 {
