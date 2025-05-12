@@ -6,6 +6,7 @@ use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Services\TopsisService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class BookController extends Controller
 {
@@ -14,8 +15,8 @@ class BookController extends Controller
     public function recommend(Request $req)
     {
         $req->validate([
-            'kategori'   => 'sometimes|string',
-            'tingkatan'  => 'sometimes|string',
+            'kategori'   => 'sometimes|string|in:' . implode(',', array_keys(config('topsis.kategori'))),
+            'tingkatan'  => 'sometimes|string|in:' . implode(',', array_keys(config('topsis.tingkatan'))),
             'min_rating' => 'sometimes|numeric|min:0|max:5'
         ]);
 
@@ -42,7 +43,7 @@ class BookController extends Controller
         }
 
         $books = $query->get()->map(fn($b) =>
-            tap($b, fn($m) => $m->average_rating = $m->rating->first()->average_rating ?? 0)
+            tap($b, fn($m) => $m->average_rating = optional($m->rating->first())->average_rating ?? 0)
         );
 
         if ($books->isEmpty()) {
@@ -56,7 +57,24 @@ class BookController extends Controller
 
         ['results' => $results, 'process' => $process] = $this->topsis->calculate($books);
 
-        return view('recommendations', compact('results','process','categories','levels'));
+        // PAGINASI MANUAL
+        $results = collect($results);
+        $page = $req->get('page', 1);
+        $perPage = 10;
+
+        $paginatedResults = new LengthAwarePaginator(
+            $results->forPage($page, $perPage)->values(),
+            $results->count(),
+            $perPage,
+            $page,
+            ['path' => $req->url(), 'query' => $req->query()]
+        );
+
+        return view('recommendations', [
+            'results'    => $paginatedResults,
+            'process'    => $process,
+            'categories' => $categories,
+            'levels'     => $levels,
+        ]);
     }
 }
-?>
