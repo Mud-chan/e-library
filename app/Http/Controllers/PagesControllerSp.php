@@ -486,6 +486,8 @@ public function DetailBukusiswa($videoId)
     $comments = Comments::where('id_buku', $videoId)->get();
     $userIds = $comments->pluck('id_siswa')->unique();
     $users = User::whereIn('id', $userIds)->get();
+    $gurus = Guru::whereIn('id', $userIds)->get();
+    $allUsers = $users->concat($gurus);
     $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
     $existingRating = Rating::where('id_siswa', $tutorId)->where('id_buku', $videoId)->value('rating') ?? 0;
 
@@ -499,7 +501,10 @@ public function DetailBukusiswa($videoId)
     return view('detailbukusiswa', compact(
         'content',
         'comments',
+        'userIds',
         'users',
+        'gurus',
+        'allUsers',
         'isBookmarked',
         'jumlahView',
         'existingRating',
@@ -509,7 +514,11 @@ public function DetailBukusiswa($videoId)
         "userName" => $userName,
         "userImage" => $userImage,
         "userProfesi" => $userProfesi,
-        "userId" => $tutorId
+        "userId" => $tutorId,
+        "users" => $users,
+        "gurus" => $gurus,
+        "allUsers" => $allUsers,
+        "userIds" => $userIds,
     ]);
 }
 

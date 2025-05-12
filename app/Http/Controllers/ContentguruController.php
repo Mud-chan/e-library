@@ -341,17 +341,51 @@ public function uploadContentGuru(Request $request)
         $comments = Comments::where('id_buku', $videoId)->get();
         $userIds = $comments->pluck('id_siswa')->unique();
         $users = User::whereIn('id', $userIds)->get();
-
-        // Render the update content form view with the $content data and playlists
-        return view('detailbukuguru', compact('content', 'playlists', 'comments', 'users'), [
+        $gurus = Guru::whereIn('id', $userIds)->get();
+        $allUsers = $users->concat($gurus);
+        return view('detailbukuguru', compact('content', 'playlists', 'comments', 'users', 'gurus', 'userIds', 'allUsers'), [
             "title" => "Content Admin",
             "guruName" => $guruName, // Teruskan nama pengguna ke tampilan
             "guruImage" => $guruImage,
             "guruProfesi" => $guruProfesi,
             'comments' => $comments,
+            'userIds' => $userIds,
+            'allUsers' => $allUsers,
+            'users' => $users,
+            'gurus' => $gurus,
             "userId" => $tutorId,
             // Teruskan URL gambar profil pengguna ke tampilan
         ]);
+    }
+
+    public function storeCommentGuru(Request $request, $videoId)
+    {
+
+        $tutor_id = Cookie::get('sp_id');
+        $tutors = Guru::find($tutor_id);
+        $userid = $tutors->id;
+        // Validasi data yang diterima dari formulir
+        $validator = Validator::make($request->all(), [
+            'content_id' => 'required|exists:contents,id',
+            'comment_box' => 'required|max:1000',
+        ]);
+        $content = Buku::findOrFail($request->input('content_id'));
+        // Simpan komentar ke dalam database
+        $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter
+
+        // Membuat komentar dengan menggunakan karakter random sebagai ID
+        Comments::create([
+            'id' => $randomId,
+            'id_buku' => $request->input('content_id'),
+            'id_siswa' => $userid,
+            'comment' => $request->input('comment_box'),
+            'date' => Carbon::now()->format('Y-m-d'),
+
+        ]);
+
+        // Redirect kembali ke halaman detailbukusp setelah komentar disimpan
+        return redirect()->route('detailbukuguru.content', ['videoId' => $videoId])
+        ->with('success', 'Komentar berhasil ditambahkan!');
     }
 
 

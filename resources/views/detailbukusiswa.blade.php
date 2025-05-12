@@ -139,21 +139,24 @@
         </form>
 
         <div class="comments">
-            @if($comments->count() > 0)
-                @foreach($comments as $comment)
-                    @php
-                        $user = $users->where('id', $comment->id_siswa)->first();
-                    @endphp
-                    @if($user)
-                        <div class="comment" style="{{ $comment->id_siswa == $userId ? 'order:-1;' : '' }}">
-                            <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
-                            <div class="content">
-                                <p><strong>{{ $user->nama }}</strong><br/>
-                                    <span id="comment-text-{{ $comment->id }}">{{ $comment->comment }}</span>
-                                </p>
-                                <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('l d F Y') }}</div>
-
-                                @if($comment->id_siswa == $userId)
+    @if($comments->count() > 0)
+        @foreach($comments as $comment)
+        @php
+            $user = $allUsers->firstWhere('id', $comment->id_siswa);
+        @endphp
+        @if($user)
+            <div class="comment" style="{{ $comment->id_siswa == $userId ? 'order:-1;' : '' }}">
+                <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
+                <div class="content">
+                    <p>
+                    <strong>
+                        {{ $user->nama }}
+                        ({{ $user instanceof \App\Models\User ? 'Siswa' : 'Guru' }})
+                    </strong><br/>
+                    {{ $comment->comment }}
+                    </p>
+                    <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
+                    @if($comment->id_siswa == $userId)
                                     <button type="button" onclick="editComment('{{ $comment->id }}', '{{ addslashes($comment->comment) }}')" style="background-color: #2ecc71; padding: 5px 9px; font-size:12px;">Edit</button>
 
                                     <form action="{{ route('buku.deleteComment', ['id' => $comment->id]) }}" method="POST" style="display:inline;">
@@ -162,15 +165,14 @@
                                         <button type="submit" onclick="return confirm('Yakin mau hapus komentar ini?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
                                     </form>
                                 @endif
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            @else
-                <p class="empty">Tidak ada komentar!</p>
-            @endif
-        </div>
-    </div>
+                </div>
+            </div>
+        @endif
+        @endforeach
+    @else
+        <p class="empty">Tidak ada komentar!</p>
+    @endif
+</div>
 
 
   </div>

@@ -85,35 +85,40 @@
         </div>
     </div>
     <div class="comment-section">
-        <form action="{{ route('video.storeComment', ['videoId' => $content->id]) }}" method="post" >
+        <form action="{{ route('video.storeCommentGuru', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
             <textarea rows="3" placeholder="Write a comment............" name="comment_box"></textarea>
             <button name="add_comment">Submit</button>
         </form>
 
-        <div class="comments">
-            @if($comments->count() > 0)
-              @foreach($comments as $comment)
-                @php
-                  $user = $users->where('id', $comment->id_siswa)->first();
-                @endphp
-                @if($user)
-                  <div class="comment" style="{{ $comment->id_siswa == $userId ? 'order:-1;' : '' }}">
-                    <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
-                    <div class="content">
-                      <p><strong>{{ $user->nama }}</strong><br/>{{ $comment->comment }}</p>
-                      <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
-                    </div>
-                  </div>
-                @endif
-              @endforeach
-            @else
-              <p class="empty">Tidak ada komentar!</p>
-            @endif
-          </div>
-      </div>
-    </div>
+<div class="comments">
+    @if($comments->count() > 0)
+        @foreach($comments as $comment)
+        @php
+            $user = $allUsers->firstWhere('id', $comment->id_siswa);
+        @endphp
+        @if($user)
+            <div class="comment" style="{{ $comment->id_siswa == $userId ? 'order:-1;' : '' }}">
+                <img class="circle" src="{{ asset('uploaded_files/' . $user->image) }}" alt="{{ $user->nama }}">
+                <div class="content">
+                    <p>
+                    <strong>
+                        {{ $user->nama }}
+                        ({{ $user instanceof \App\Models\User ? 'Siswa' : 'Guru' }})
+                    </strong><br/>
+                    {{ $comment->comment }}
+                    </p>
+                    <div class="meta">{{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
+                </div>
+            </div>
+        @endif
+        @endforeach
+    @else
+        <p class="empty">Tidak ada komentar!</p>
+    @endif
+</div>
+
 
   </div>
   <script src="{{ asset('assets/js/admin_script.js') }}"></script>

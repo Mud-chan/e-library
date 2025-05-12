@@ -334,7 +334,10 @@ public function uploadContent(Request $request)
 
     $playlists = Buku::where('guru_id', $tutorId)->get();
     $comments = Comments::where('id_buku', $videoId)->get();
-
+    $userIds = $comments->pluck('id_siswa')->unique();
+    $users = User::whereIn('id', $userIds)->get();
+    $gurus = Guru::whereIn('id', $userIds)->get();
+    $allUsers = $users->concat($gurus);
     $search = $request->query('search');
     $tingkatanBuku = $content->tingkatan; // contoh: 'Umum', 'Kelas 1', dst
 
@@ -377,6 +380,10 @@ public function uploadContent(Request $request)
         'content',
         'playlists',
         'comments',
+        'users',
+        'userIds',
+        'gurus',
+        'allUsers',
         'userName',
         'userImage',
         'userProfesi',
@@ -439,11 +446,6 @@ public function uploadContent(Request $request)
             'content_id' => 'required|exists:contents,id',
             'comment_box' => 'required|max:1000',
         ]);
-
-        // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan kesalahan
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
         $content = Buku::findOrFail($request->input('content_id'));
         // Simpan komentar ke dalam database
         $randomId = Str::random(20); // Misalnya, menghasilkan string random dengan panjang 10 karakter

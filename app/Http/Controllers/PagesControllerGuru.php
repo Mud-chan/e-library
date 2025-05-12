@@ -130,75 +130,7 @@ class PagesControllerGuru extends Controller
 }
 
 
-// public function user()
-// {
-//     return $this->belongsTo(User::class, 'id_siswa');
-// }
 
-
-// public function datatransaksi(Request $request)
-// {
-//     // Ambil ID tutor dari cookie
-//     $tutorId = Cookie::get('sp_id');
-//     // Temukan data tutor berdasarkan ID
-//     $tutor = Guru::find($tutorId);
-//     if ($tutor) {
-//         $userName = $tutor->name;
-//         $userImage = $tutor->image;
-//         $userProfesi = $tutor->profession;
-//         // Hitung total tutor
-//         $totalTutors = Guru::count();
-//         // Hitung total user
-//         $totalUsers = User::count();
-
-//         // Ambil data transaksi dengan pagination dan pencarian
-//         $query = Peminjaman::query();
-
-//         if ($request->has('search')) {
-//             $keyword = $request->input('search');
-//             $query->whereHas('user', function($q) use ($keyword) {
-//                 $q->where('nama', 'like', "%$keyword%");
-//             });
-//         }
-
-//         $transactions = $query->paginate(10); // 10 merupakan jumlah baris per halaman
-
-//         foreach ($transactions as $transaction) {
-//             // Ambil informasi user berdasarkan id_user di transaksi
-//             $user = User::find($transaction->id_siswa);
-//             $transaction->user = $user;
-
-//             // Ambil status dari dtl_user
-//             $dtlUser = Dtl_Siswa::where('id_siswa', $transaction->id_siswa)
-//                                ->where('id_buku', $transaction->id_buku)
-//                                ->first();
-//             $transaction->status = $dtlUser ? $dtlUser->status : 'Status Tidak Tersedia';
-
-//             // Ambil informasi playlist berdasarkan id_playlist di transaksi
-//             $playlist = Buku::find($transaction->id_buku);
-//             $transaction->buku = $playlist;
-//         }
-
-//         return view('datatransaksi', [
-//             "title" => "Data Transaksi",
-//             "userName" => $userName,
-//             "userImage" => $userImage,
-//             "userProfesi" => $userProfesi,
-//             "totalTutors" => $totalTutors,
-//             "totalUsers" => $totalUsers,
-//             "transactions" => $transactions,
-//             "totalPages" => $transactions->lastPage(),
-//             "currentPage" => $transactions->currentPage()
-//         ]);
-//     } else {
-//         return redirect()->route('loginnn');
-//     }
-// }
-
-// public function caritransaksi(Request $request)
-// {
-//     return $this->datatransaksi($request);
-// }
 
 public function katalogbuku()
 {
@@ -468,6 +400,8 @@ public function DetailBukusiswa($videoId)
     $comments = Comments::where('id_buku', $videoId)->get();
     $userIds = $comments->pluck('id_siswa')->unique();
     $users = User::whereIn('id', $userIds)->get();
+    $gurus = Guru::whereIn('id', $userIds)->get();
+    $allUsers = $users->concat($gurus);
     $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
     $existingRating = Rating::where('id_siswa', $tutorId)->where('id_buku', $videoId)->value('rating') ?? 0;
 
@@ -482,6 +416,8 @@ public function DetailBukusiswa($videoId)
         'content',
         'comments',
         'users',
+        'gurus',
+        'allUsers',
         'isBookmarked',
         'jumlahView',
         'existingRating',
@@ -494,6 +430,8 @@ public function DetailBukusiswa($videoId)
         "userId" => $tutorId
     ]);
 }
+
+    
 
 
 
