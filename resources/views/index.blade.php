@@ -417,7 +417,7 @@
         <main class="content">
             <div id="lqd-contents-wrap">
                 <section class="lqd-section banner pt-140 pb-400 transition-all bg-transparent text-white-50 relative"
-                    id="banner" style="background-image: linear-gradient(to bottom, rgba(0, 128, 0, 0.3) 70%, rgba(255, 255, 255, 1) 100%), url('assets/images/mi.jpg'); background-size: cover; background-position: center;"
+                    id="banner" style="background-image: linear-gradient(to bottom, rgba(0, 128, 0, 0.3) 70%, rgba(255, 255, 255, 1) 100%), url('assets/images/mi.jpg'); background-size: cover; background-position: center; padding-top: 15rem;"
 >
                     <div class="lqd-shape lqd-shape-bottom" data-negative="false">
 
