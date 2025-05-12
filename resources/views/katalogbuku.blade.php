@@ -28,6 +28,18 @@
             {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
             <div id="search-btn" class="fas fa-search"></div>
             <div id="user-btn" class="fas fa-user"></div>
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class="fas fa-bars"></i> <!-- icon untuk dropdown -->
+                </button>
+                <div class="dropdown-content">
+                    <a href="{{ url('/profile') }}">Profile</a>
+                    <a href="{{ url('/settings') }}">Settings</a>
+                    <a href="{{ url('/logout') }}">Logout</a>
+                </div>
+            </div>
+
         </div>
 
         <div class="profile">
@@ -220,6 +232,13 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+
+    document.querySelector('.dropbtn').addEventListener('click', function() {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+    });
+
+
 </script>
 <script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>
