@@ -12,6 +12,7 @@ use App\Models\Conterbaca;
 use App\Models\Histori;
 use App\Charts\SiswaChart;
 use App\Charts\GuruChart;
+use App\Charts\BukuChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -43,7 +44,7 @@ class PagesControllerSp extends Controller
         ]);
     }
 
-    public function dashboard(SiswaChart $siswaChart, GuruChart $guruChart, Request $request)
+    public function dashboard(SiswaChart $siswaChart, GuruChart $guruChart, BukuChart $bukuChart, Request $request)
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('sp_id');
@@ -75,6 +76,7 @@ class PagesControllerSp extends Controller
             "totalBuku" => $totalBuku,
             "barChartSiswa" => $siswaChart->barChart($selectedMonthsis),
             "barChartGuru" => $guruChart->barChart($selectedMonth),
+            "barChartBuku" => $bukuChart->mostReadBooksChart($selectedMonth),
             "selectedMonth" => $selectedMonth,
             "selectedMonthsis" => $selectedMonthsis,
         ]);

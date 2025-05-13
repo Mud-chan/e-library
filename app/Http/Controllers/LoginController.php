@@ -57,7 +57,7 @@ class LoginController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
         // Redirect ke halaman login setelah berhasil mengupdate password
-        return redirect()->intended('/logreg');
+        return redirect()->intended('/login');
 
     }
 
