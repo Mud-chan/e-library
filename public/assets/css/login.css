@@ -31,10 +31,9 @@
         justify-content: center;
         background-size: cover;
         background-position: center;
-        filter: hue-rotate(90deg) saturate(1.5);
       }
 
-      /* Overlay hijau transparan */
+
       .left::after {
         content: '';
         position: absolute;
@@ -43,7 +42,6 @@
         z-index: 1;
       }
 
-      /* Teks di atas */
       .overlay-text {
         position: relative;
         z-index: 2;
