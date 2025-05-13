@@ -174,6 +174,22 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+
+     document.querySelector('.dropbtn').addEventListener('click', function() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            const dropdown = document.querySelector('.dropdown');
+
+
+            const isVisible = dropdownContent.style.display === 'block';
+            dropdownContent.style.display = isVisible ? 'none' : 'block';
+
+
+            if (isVisible) {
+                dropdown.classList.remove('active');
+            } else {
+                dropdown.classList.add('active');
+            }
+        });
 </script>
 <script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>

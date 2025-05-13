@@ -42,7 +42,7 @@ class PagesControllerSp extends Controller
         ]);
     }
 
-    public function dashboard(SiswaChart $areaChart)
+    public function dashboard(SiswaChart $barChart)
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('sp_id');
@@ -69,7 +69,7 @@ class PagesControllerSp extends Controller
             "totalUsers" => $totalUsers,
             "siswa" => $siswa,
             "totalBuku" => $totalBuku,
-            "areaChart" => $areaChart->areaChart(),
+            "barChart" => $barChart->barChart(),
         ]);
     } else {
         return redirect()->route('loginnn');

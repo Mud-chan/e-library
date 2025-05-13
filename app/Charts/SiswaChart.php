@@ -17,16 +17,16 @@ class SiswaChart
         $this->chart = $chart;
     }
 
-    public function areaChart()
+    public function barChart()
     {
         $topSiswa = $this->getTopSiswa();
 
-        return $this->chart->areaChart()
+        return $this->chart->barChart()
             ->setTitle('Top 6 Siswa dengan View Terbanyak Bulan Ini')
             ->setSubtitle(date('F Y')) // tampilkan bulan dan tahun
             ->addData('Jumlah View', $topSiswa['jumlah'])
             ->setXAxis($topSiswa['label']) // label = nama + kelas
-            ->setColors(['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#FF8333', '#33FFF5']);
+            ->setColors(['#28c76f']);
     }
 
     private function getTopSiswa()

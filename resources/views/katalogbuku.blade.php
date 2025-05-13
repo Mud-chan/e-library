@@ -362,11 +362,11 @@
             const dropdownContent = document.querySelector('.dropdown-content');
             const dropdown = document.querySelector('.dropdown');
 
-            // Toggle dropdown content
+
             const isVisible = dropdownContent.style.display === 'block';
             dropdownContent.style.display = isVisible ? 'none' : 'block';
 
-            // Tambah atau hapus class 'active' untuk mengontrol warna background
+            
             if (isVisible) {
                 dropdown.classList.remove('active');
             } else {
