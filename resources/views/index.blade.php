@@ -260,10 +260,10 @@
                         <div class="flex navbar-brand-plain py-20 sm:hidden"><a class="navbar-brand flex p-0 relative"
                                 href="/" rel="home"><span class="navbar-brand-inner post-rel"><img
                                         alt="image" class="logo-sticky"
-                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library"
+                                        src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library" style="width: 5rem"
                                         class="logo-default"
                                         src="{{ asset('assets/images/fixlogo.png') }}" ></span></a>
-                                        <span class="text-white font-semibold" style="margin-left: 8px; margin-top: 5px; font-size: 20px">E-Library</span>
+                                        
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
@@ -434,14 +434,14 @@
                                         data-parallax-options="{&quot;ease&quot;: &quot;linear&quot;, &quot;start&quot;: &quot;top bottom&quot;, &quot;end&quot;: &quot;bottom+=0px top&quot;}"
                                         data-parallax-to="{&quot;x&quot;: &quot;15px&quot;, &quot;y&quot;: &quot;-60px&quot;, &quot;rotationZ&quot; : 20}">
                                         <img alt="3D comment" class="animation-element" height="120"
-                                            src="assets/images/demo/start-hub-2/3D/Image-752.png" width="79">
+                                            src="assets/images/anak.png" width="90">
                                     </div>
                                     <div class="w-auto z-1 absolute module-shape-2 top-25percent" data-parallax="true"
                                         data-parallax-from="{&quot;y&quot;: &quot;-114px&quot;, &quot;scaleX&quot; : 0.8, &quot;scaleY&quot; : 0.8}"
                                         data-parallax-options="{&quot;ease&quot;: &quot;linear&quot;, &quot;start&quot;: &quot;top bottom&quot;, &quot;end&quot;: &quot;bottom+=0px top&quot;}"
                                         data-parallax-to="{&quot;y&quot;: &quot;115px&quot;, &quot;scaleX&quot; : 1.3, &quot;scaleY&quot; : 1.3}">
                                         <img alt="3D person" class="animation-element" height="290"
-                                            src="assets/images/demo/start-hub-2/3D/3.png" width="110">
+                                            src="assets/images/perpus.png" width="150">
                                     </div>
                                     <div class="w-auto absolute module-shape-3 top-10percent sm:hidden"
                                         data-parallax="true"
@@ -449,14 +449,14 @@
                                         data-parallax-options="{&quot;ease&quot;: &quot;linear&quot;, &quot;start&quot;: &quot;top bottom&quot;, &quot;end&quot;: &quot;bottom+=0px top&quot;}"
                                         data-parallax-to="{&quot;y&quot;: &quot;-65px&quot;, &quot;scaleX&quot; : 1.1, &quot;scaleY&quot; : 1.1, &quot;rotationZ&quot; : 25}">
                                         <img alt="3D cloud" class="animation-element" height="196"
-                                            src="assets/images/demo/start-hub-2/3D/1.png" width="87">
+                                            src="assets/images/rak.png" width="100">
                                     </div>
                                     <div class="w-auto z-1 absolute module-shape-4 top-45percent" data-parallax="true"
                                         data-parallax-from="{&quot;y&quot;: &quot;-50px&quot;, &quot;scaleX&quot; : 1, &quot;scaleY&quot; : 1, &quot;rotationZ&quot; : 78}"
                                         data-parallax-options="{&quot;ease&quot;: &quot;linear&quot;, &quot;start&quot;: &quot;top bottom&quot;, &quot;end&quot;: &quot;bottom+=0px top&quot;}"
                                         data-parallax-to="{&quot;y&quot;: &quot;120px&quot;, &quot;scaleX&quot; : 1.1, &quot;scaleY&quot; : 1.1, &quot;rotationZ&quot; : -39}">
                                         <img alt="3D hand" class="animation-element" height="164"
-                                            src="assets/images/demo/start-hub-2/3D/4.png" width="80">
+                                            src="assets/images/gbuku2.png" width="80">
                                     </div>
                                     <div class="relative z-2">
                                         <div class="ld-fancy-heading relative animation-element">
@@ -543,9 +543,9 @@
                             <div class="col col-12 col-md-4 mb-30 border-right border-lightgray relative sm:border-0">
                                 <div class="px-35 transition-all relative lg:p-0">
                                     <div class="relative iconbox flex flex-grow-1 relative flex-col iconbox-default">
-                                        <div class="iconbox-icon-wrap mb-45">
+                                        <div class="iconbox-icon-wrap mb-25">
                                             <div class="iconbox-icon-container inline-flex"><img alt="Coding Courses"
-                                                    class="w-175" src="assets/images/demo/start-hub-2/3D/poto2.png">
+                                                    class="w-175" src="assets/images/jam.png">
                                             </div>
                                         </div>
                                         <div class="contents">
@@ -575,7 +575,7 @@
                                         <div class="iconbox-icon-wrap mb-20">
                                             <div class="iconbox-icon-container inline-flex"><img
                                                     alt="Social Media Advertising" class="w-150"
-                                                    src="assets/images/demo/start-hub-2/3D/poto1.png">
+                                                    src="assets/images/buku.png">
                                             </div>
                                         </div>
                                         <div class="contents">
@@ -599,14 +599,14 @@
                             <div class="col col-12 col-md-4 mb-30">
                                 <div class="px-35 transition-all relative lg:p-0">
                                     <div class="relative iconbox flex flex-grow-1 relative flex-col iconbox-default">
-                                        <div class="iconbox-icon-wrap mb-100">
+                                        <div class="iconbox-icon-wrap mb-20">
                                             <div class="iconbox-icon-container inline-flex"><img
-                                                    alt="eCommerce Solutions" class="w-160"
-                                                    src="assets/images/demo/start-hub-2/3D/poto3.png">
+                                                    alt="eCommerce Solutions" class="w-140"
+                                                    src="assets/images/bookmark.png" style="padding-bottom: -4rem">
                                             </div>
                                         </div>
                                         <div class="contents">
-                                            <h3 class="text-20 mb-0/5em lqd-iconbox-heading">Simpan Buku yang Disukai
+                                            <h3 class="text-20 mb-0/5em lqd-iconbox-heading" style="margin-top: -100px;">Simpan Buku yang Disukai
                                             </h3>
                                             <p>Tak perlu khawatir kehilangan buku favorit! Di E-Library, kamu bisa menyimpan buku-buku pilihan ke dalam koleksi pribadi. Kelola daftar bacaanmu, tandai buku yang ingin dibaca, dan lanjutkan membaca kapan pun kamu mau. Semua dalam satu platform yang mudah diakses dan nyaman.</p>
                                         </div>
@@ -814,18 +814,18 @@
                     <h2>Hubungi Kami</h2>
                     <div class="kontainer-form">
                       <div class="gambar">
-                        <img src="{{ asset('assets/images/tlpn.png') }}" alt="Telepon" />
+                        <img src="{{ asset('assets/images/model.jpg') }}" alt="Telepon" />
                       </div>
                       <form class="form-kontak" method="POST" action="{{ route('kirim.email') }}">
                         @csrf
                         <label for="nama">Nama</label>
-                        <input type="text" id="nama" name="nama" placeholder="Jamiul Mukmininin" />
+                        <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" />
 
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="example@mail.com" />
 
                         <label for="pesan">Isi Form</label>
-                        <textarea id="pesan" name="pesan" placeholder="Type Here………"></textarea>
+                        <textarea id="pesan" name="pesan" placeholder="Tulis Disini...."></textarea>
 
                         <button type="submit">Submit</button>
                       </form>
@@ -858,13 +858,13 @@
                                                 </div>
                                                 <div class="ld-fancy-heading relative">
                                                     <h2 class="ld-fh-element relative text-white text-20 mb-0">
-                                                        daikoasikbetgilak56
+                                                        miarroudhohjember
                                                         @gmail.com</h2>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="w-50percent flex flex-col sm:w-full bg-bg2">
-                                            <a href="https://wa.me/6285850961108">
+                                            <a href="https://wa.me/6287745757572">
                                                 <div class="module py-35 pr-50 pl-65 transition-all">
                                                     <div class="ld-fancy-heading relative">
                                                         <h6
@@ -886,7 +886,7 @@
                                     <div
                                         class="lqd-imggrp-img-container inline-flex relative items-center justify-center">
                                         <figure class="w-full relative"><img alt="shape" height="552"
-                                                src="assets/images/demo/start-hub-2/3D/img.png" width="500">
+                                                src="assets/images/model.png" width="500">
                                         </figure>
                                     </div>
                                 </div>

@@ -203,3 +203,72 @@
         align-self: flex-end;
       }
     }
+
+
+
+    button.tutupsal {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    padding: 14px 22px;
+    border: none;
+    background: #c51d03;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button.tutupsal:hover {
+    background-color: #b51700; /* Warna hover lebih gelap untuk tombol */
+}
+.modal-sal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Efek bayangan yang lebih kuat */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 380px;
+    width: 100%;
+    padding: 30px 20px;
+    border-radius: 24px;
+    background-color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+section.active .show-modal {
+    display: none;
+}
+.modal-sal {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 99;
+}
+.modal-sal i {
+    font-size: 70px;
+    color: #c51d03;
+}
+.modal-sal h2 {
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #333;
+}
+.modal-sal h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+.modal-sal .butsal {
+    margin-top: 25px;
+}
+.modal-sal button {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin: 0 10px;
+}
+
