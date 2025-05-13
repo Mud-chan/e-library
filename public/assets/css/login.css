@@ -46,7 +46,7 @@
         position: relative;
         z-index: 2;
         font-family: 'Poppins', sans-serif;
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: 600;
         color: white;
         text-align: center;
@@ -168,7 +168,7 @@
         flex: 1 1 50%;
       }
 
-    /* RESPONSIVE STYLES */
+
     @media (max-width: 768px) {
 
         .left {
