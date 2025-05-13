@@ -361,7 +361,7 @@ public function uploadContentGuru(Request $request)
     public function storeCommentGuru(Request $request, $videoId)
     {
 
-        $tutor_id = Cookie::get('sp_id');
+        $tutor_id = Cookie::get('tutor_id');
         $tutors = Guru::find($tutor_id);
         $userid = $tutors->id;
         // Validasi data yang diterima dari formulir
@@ -387,6 +387,10 @@ public function uploadContentGuru(Request $request)
         return redirect()->route('detailbukuguru.content', ['videoId' => $videoId])
         ->with('success', 'Komentar berhasil ditambahkan!');
     }
+
+
+
+
 
 
 
@@ -469,18 +473,42 @@ public function uploadContentGuru(Request $request)
 
 
 
-    public function deleteComment(Request $request)
-    {
-        $delete_id = $request->comment_id;
+    public function updateCommentGuru(Request $request, $id)
+{
+    $request->validate([
+        'comment_box' => 'required|max:1000',
+    ]);
 
-        $comment = Comments::find($delete_id);
-        if (!$comment) {
-            return redirect()->back()->with('error', 'Komentar tidak ditemukan!');
-        }
+    $comment = Comments::findOrFail($id);
 
-        $comment->delete();
-        return redirect()->back()->with('success', 'Berhasil menghapus komentar!');
+    $guruId = Cookie::get('tutor_id');
+    $tutors = Guru::find($guruId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh edit komentar orang lain!');
     }
+
+    $comment->comment = $request->comment_box;
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
+}
+
+public function deleteCommentGuru($id)
+{
+    $comment = Comments::findOrFail($id);
+
+    $guruId = Cookie::get('tutor_id');
+    $tutors = Guru::find($guruId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh hapus komentar orang lain!');
+    }
+
+    $comment->delete();
+
+    return redirect()->back()->with('success', 'Komentar berhasil dihapus!');
+}
 
 
 

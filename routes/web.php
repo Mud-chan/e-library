@@ -133,6 +133,10 @@ Route::post('/buku/{id}/rating', [PagesControllerSp::class, 'storeRating'])->nam
 Route::post('/buku/update-comment/{id}', [PagesControllerSp::class, 'updateComment'])->name('buku.updateComment');
 Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteComment'])->name('buku.deleteComment');
 
+
+Route::post('/buku/update-comment-guru/{id}', [ContentguruController::class, 'updateCommentGuru'])->name('buku.updateCommentguru');
+Route::delete('/buku/delete-comment-guru/{id}', [ContentguruController::class, 'deleteCommentGuru'])->name('buku.deleteCommentguru');
+
 // Route::get('/profilsiswa', function () {
 //     return view('profilsiswa');
 // });
