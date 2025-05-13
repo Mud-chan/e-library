@@ -112,7 +112,7 @@
 
                 <div class="bottom-data">
                     <div class="orders">
-                        <div class="col"><h3>Area Chart</h3>{!! $areaChart->container() !!}</div>
+                        <div class="col"><h3>Bar Chart</h3>{!! $barChart->container() !!}</div>
                     </div>
 
                 </div>
@@ -128,6 +128,6 @@
 
 
     </section>
-    <script src="{{ $areaChart->cdn() }}"></script>
-    {{ $areaChart->script() }}
+    <script src="{{ $barChart->cdn() }}"></script>
+    {{ $barChart->script() }}
 @endsection
