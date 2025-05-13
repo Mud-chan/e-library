@@ -11,6 +11,7 @@ use App\Models\Comments;
 use App\Models\Conterbaca;
 use App\Models\Histori;
 use App\Charts\SiswaChart;
+use App\Charts\GuruChart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -42,7 +43,7 @@ class PagesControllerSp extends Controller
         ]);
     }
 
-    public function dashboard(SiswaChart $barChart)
+    public function dashboard(SiswaChart $siswaChart, GuruChart $guruChart, Request $request)
 {
     // Ambil ID tutor dari cookie
     $tutorId = Cookie::get('sp_id');
@@ -60,6 +61,9 @@ class PagesControllerSp extends Controller
         $siswa = User::all();
         $totalBuku = Buku::count();
 
+        $selectedMonth = $request->input('month', now()->format('Y-m'));
+        $selectedMonthsis = $request->input('month', now()->format('Y-m'));
+
         return view('dashboardsp', [
             "title" => "Dashboard Admin",
             "userName" => $userName,
@@ -69,7 +73,10 @@ class PagesControllerSp extends Controller
             "totalUsers" => $totalUsers,
             "siswa" => $siswa,
             "totalBuku" => $totalBuku,
-            "barChart" => $barChart->barChart(),
+            "barChartSiswa" => $siswaChart->barChart($selectedMonthsis),
+            "barChartGuru" => $guruChart->barChart($selectedMonth),
+            "selectedMonth" => $selectedMonth,
+            "selectedMonthsis" => $selectedMonthsis,
         ]);
     } else {
         return redirect()->route('loginnn');

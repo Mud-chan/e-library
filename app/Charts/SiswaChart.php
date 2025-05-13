@@ -17,22 +17,26 @@ class SiswaChart
         $this->chart = $chart;
     }
 
-    public function barChart()
+    public function barChart($monthYear = null)
     {
-        $topSiswa = $this->getTopSiswa();
+        $topSiswa = $this->getTopSiswa($monthYear);
 
         return $this->chart->barChart()
             ->setTitle('Top 6 Siswa dengan View Terbanyak Bulan Ini')
-            ->setSubtitle(date('F Y')) // tampilkan bulan dan tahun
+            ->setSubtitle(Carbon::parse($monthYear . '-01')->translatedFormat('F Y'))
             ->addData('Jumlah View', $topSiswa['jumlah'])
             ->setXAxis($topSiswa['label']) // label = nama + kelas
             ->setColors(['#28c76f']);
     }
 
-    private function getTopSiswa()
+    private function getTopSiswa($monthYear = null)
     {
-        $startOfMonth = Carbon::now()->startOfMonth();
-        $endOfMonth = Carbon::now()->endOfMonth();
+        if (!$monthYear) {
+        $monthYear = now()->format('Y-m');
+    }
+
+    $startOfMonth = Carbon::parse($monthYear . '-01')->startOfMonth();
+    $endOfMonth = Carbon::parse($monthYear . '-01')->endOfMonth();
 
         $topSiswa = Conterbaca::whereBetween('date', [$startOfMonth, $endOfMonth])
             ->select('id_siswa', DB::raw('COUNT(*) as jumlah'))

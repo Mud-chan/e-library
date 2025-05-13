@@ -86,16 +86,6 @@
                         </li>
                     </a>
 
-                    <a href="#" style="color: black">
-                        <li><i class='bx bx-exclamation-circle-solid'></i>
-                            <span class="info">
-                                <h4 style="font-size: 17px">
-                                    {{-- Rp  {{ number_format($totalHargaTransaksi, 0, ',', '.') }} --}}
-                                </h4>
-                                <p>Informasi</p>
-                            </span>
-                        </li>
-                    </a>
 
                     <a href="{{ route('tutor.index') }}">
                         <li><i class='bx bx-user'></i>
@@ -112,7 +102,24 @@
 
                 <div class="bottom-data">
                     <div class="orders">
-                        <div class="col"><h3>Bar Chart</h3>{!! $barChart->container() !!}</div>
+                        <div class="col">
+                            <h3>Siswa Chart</h3>
+                            <form method="GET" action="{{ route('pages.dashboardsp') }}" class="mb-3">
+                                <input type="month" name="month" value="{{ $selectedMonthsis }}" class="form-control" style="width: 200px; background-color: #28c76f; color: white; border: none; padding: 8px; border-radius: 5px;">
+                                <button type="submit" class="btn btn-success mt-2">Tampilkan</button>
+                            </form>
+                            {!! $barChartSiswa->container() !!}
+                        </div>
+                    </div>
+                    <div class="orders">
+                        <div class="col">
+                            <h3>Guru Chart</h3>
+                            <form method="GET" action="{{ route('pages.dashboardsp') }}" class="mb-3">
+                                <input type="month" name="month" value="{{ $selectedMonth }}" class="form-control" style="width: 200px; background-color: #28c76f; color: white; border: none; padding: 8px; border-radius: 5px;">
+                                <button type="submit" class="btn btn-success mt-2">Tampilkan</button>
+                            </form>
+                            {!! $barChartGuru->container() !!}
+                        </div>
                     </div>
 
                 </div>
@@ -128,6 +135,8 @@
 
 
     </section>
-    <script src="{{ $barChart->cdn() }}"></script>
-    {{ $barChart->script() }}
+    <script src="{{ $barChartSiswa->cdn() }}"></script>
+    {{ $barChartSiswa->script() }}
+    <script src="{{ $barChartGuru->cdn() }}"></script>
+    {{ $barChartGuru->script() }}
 @endsection
