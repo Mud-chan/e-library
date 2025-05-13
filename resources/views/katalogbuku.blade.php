@@ -132,7 +132,7 @@
 
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <p style="font-weight: 600">Jenis</p>
+                        <p style="font-weight: 600;">Jenis</p>
                     </button>
                     <div class="dropdown-content">
                         @foreach (['Umum', 'Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6', 'Karya Guru'] as $tingkatan)
@@ -366,7 +366,7 @@
             const isVisible = dropdownContent.style.display === 'block';
             dropdownContent.style.display = isVisible ? 'none' : 'block';
 
-            
+
             if (isVisible) {
                 dropdown.classList.remove('active');
             } else {

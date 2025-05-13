@@ -424,7 +424,7 @@ h3 {
     color: white;
 }
 
-/* Saat aktif (dibuka), kembali ke putih meski hover */
+
 .dropdown.active {
     background-color: white !important;
     color: black !important;
@@ -461,6 +461,22 @@ h3 {
     border-radius: 5px;
   }
 
+  .dropdown-content button{
+
+    padding: 1rem;
+    width: 120px;
+    background-color: #28c76f;
+    color: #fff;
+
+  }
+
+
+  .dropdown-content button:hover{
+
+    background-color: #007635;
+    color: #fff;
+
+  }
 .dropdown-content a {
     color: black;
     padding: 12px 16px;

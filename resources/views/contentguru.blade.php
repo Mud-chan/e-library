@@ -105,12 +105,7 @@
                     </div>
                     <img src="../uploaded_files/{{ $content->thumb }}" class="thumb" alt="">
                     <h3 class="title">{{ $content->judul }}</h3>
-                    <form action="{{ route('delete_buku_guru') }}" method="post" class="flex-btn">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $content->id }}">
-                        <a href="{{ route('update.content.guru', ['videoId' => $content->id]) }}" class="option-btn">Ubah</a>
-                        <button type="submit" class="delete-btn" onclick="return confirm('Anda Yakin Ingin Menghapus Buku?');">Hapus</button>
-                    </form>
+                    
                     <a href="{{ route('detailbukuguru.content', ['videoId' => $content->id]) }}" class="btn">Baca Buku</a>
 
                 </div>
