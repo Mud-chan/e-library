@@ -3,7 +3,8 @@ pipeline {
     environment {
         WORKSPACE_DIR = "${env.WORKSPACE}"
         LARAVEL_CONTAINER = "laravel-app"
-        TARGET_DIR = "/var/www/html"  // Direktori di dalam container Laravel
+        TARGET_DIR = "/var/www/html"
+        DEPLOY_SCRIPT = "/usr/local/bin/deploy-laravel-proxy.sh"  // Path ke script di host
     }
     stages {
         stage('Checkout') {
@@ -14,17 +15,9 @@ pipeline {
         
         stage('Copy to Laravel Container') {
             steps {
-                // Salin kode langsung ke container Laravel
+                // Gunakan script proxy untuk menyalin file
                 sh '''
-                # Buat tar dari workspace
-                tar -czf /tmp/laravel-app.tar.gz -C ${WORKSPACE_DIR} .
-                
-                # Salin tar ke container dan ekstrak
-                docker cp /tmp/laravel-app.tar.gz ${LARAVEL_CONTAINER}:${TARGET_DIR}/laravel-app.tar.gz
-                docker exec -i ${LARAVEL_CONTAINER} bash -c "cd ${TARGET_DIR} && tar -xzf laravel-app.tar.gz && rm laravel-app.tar.gz"
-                
-                # Bersihkan
-                rm /tmp/laravel-app.tar.gz
+                ${DEPLOY_SCRIPT} copy ${WORKSPACE_DIR} ${TARGET_DIR} ${LARAVEL_CONTAINER}
                 '''
             }
         }
@@ -32,8 +25,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                docker exec -i ${LARAVEL_CONTAINER} composer install --no-interaction --no-progress
-                docker exec -i ${LARAVEL_CONTAINER} php artisan migrate --force
+                ${DEPLOY_SCRIPT} composer "" "" ${LARAVEL_CONTAINER}
+                ${DEPLOY_SCRIPT} migrate "" "" ${LARAVEL_CONTAINER}
                 '''
             }
         }
@@ -41,9 +34,7 @@ pipeline {
         stage('Cache Configuration') {
             steps {
                 sh '''
-                docker exec -i ${LARAVEL_CONTAINER} php artisan config:cache
-                docker exec -i ${LARAVEL_CONTAINER} php artisan route:cache
-                docker exec -i ${LARAVEL_CONTAINER} php artisan view:cache
+                ${DEPLOY_SCRIPT} cache "" "" ${LARAVEL_CONTAINER}
                 '''
             }
         }
@@ -51,15 +42,14 @@ pipeline {
         stage('Set Permissions') {
             steps {
                 sh '''
-                docker exec -i ${LARAVEL_CONTAINER} chown -R www-data:www-data storage bootstrap/cache
-                docker exec -i ${LARAVEL_CONTAINER} chmod -R 775 storage bootstrap/cache
+                ${DEPLOY_SCRIPT} permissions "" "" ${LARAVEL_CONTAINER}
                 '''
             }
         }
         
         stage('Restart Application') {
             steps {
-                sh 'docker restart ${LARAVEL_CONTAINER}'
+                sh '${DEPLOY_SCRIPT} restart "" "" ${LARAVEL_CONTAINER}'
                 echo "Deployment completed successfully!"
             }
         }
