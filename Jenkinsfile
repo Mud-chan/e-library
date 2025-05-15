@@ -1,20 +1,41 @@
 pipeline {
     agent any
 
+    environment {
+        APP_DIR = "/opt/elibrary"
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building..'
+                git branch: 'main', url: 'https://github.com/Mud-chan/e-library.git'
             }
         }
-        stage('Test') {
+
+        stage('Copy to Laravel Folder') {
             steps {
-                echo 'Testing..'
+                sh '''
+                rm -rf ${APP_DIR}/*
+                cp -r . ${APP_DIR}
+                '''
             }
         }
-        stage('Deploy') {
+
+        stage('Install Dependencies') {
             steps {
-                echo 'Deploying....'
+                sh '''
+                docker exec -i laravel-app composer install
+                docker exec -i laravel-app php artisan migrate --force
+                '''
+            }
+        }
+
+        stage('Permissions') {
+            steps {
+                sh '''
+                docker exec -i laravel-app chown -R www-data:www-data storage bootstrap/cache
+                docker exec -i laravel-app chmod -R 775 storage bootstrap/cache
+                '''
             }
         }
     }
