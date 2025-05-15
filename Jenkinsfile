@@ -1,36 +1,38 @@
-
 pipeline {
     agent any
     environment {
-        APP_DIR = "/opt/elibrary"
+        WORKSPACE_DIR = "${env.WORKSPACE}"
         LARAVEL_CONTAINER = "laravel-app"
+        TARGET_DIR = "/var/www/html"  // Direktori di dalam container Laravel
     }
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code dari repository
                 git branch: 'main', url: 'https://github.com/Mud-chan/e-library.git'
             }
         }
         
-        stage('Copy to Laravel Folder') {
+        stage('Copy to Laravel Container') {
             steps {
-                // Hapus isi folder dan salin kode baru
+                // Salin kode langsung ke container Laravel
                 sh '''
-                rm -rf ${APP_DIR}/*
-                cp -r . ${APP_DIR}
+                # Buat tar dari workspace
+                tar -czf /tmp/laravel-app.tar.gz -C ${WORKSPACE_DIR} .
+                
+                # Salin tar ke container dan ekstrak
+                docker cp /tmp/laravel-app.tar.gz ${LARAVEL_CONTAINER}:${TARGET_DIR}/laravel-app.tar.gz
+                docker exec -i ${LARAVEL_CONTAINER} bash -c "cd ${TARGET_DIR} && tar -xzf laravel-app.tar.gz && rm laravel-app.tar.gz"
+                
+                # Bersihkan
+                rm /tmp/laravel-app.tar.gz
                 '''
             }
         }
         
         stage('Install Dependencies') {
             steps {
-                // Install dependencies dan jalankan migrasi
                 sh '''
-                echo "Installing composer dependencies..."
                 docker exec -i ${LARAVEL_CONTAINER} composer install --no-interaction --no-progress
-                
-                echo "Running database migrations..."
                 docker exec -i ${LARAVEL_CONTAINER} php artisan migrate --force
                 '''
             }
@@ -38,9 +40,7 @@ pipeline {
         
         stage('Cache Configuration') {
             steps {
-                // Optimalkan Laravel dengan cache
                 sh '''
-                echo "Optimizing Laravel application..."
                 docker exec -i ${LARAVEL_CONTAINER} php artisan config:cache
                 docker exec -i ${LARAVEL_CONTAINER} php artisan route:cache
                 docker exec -i ${LARAVEL_CONTAINER} php artisan view:cache
@@ -50,9 +50,7 @@ pipeline {
         
         stage('Set Permissions') {
             steps {
-                // Set permission yang benar
                 sh '''
-                echo "Setting correct permissions..."
                 docker exec -i ${LARAVEL_CONTAINER} chown -R www-data:www-data storage bootstrap/cache
                 docker exec -i ${LARAVEL_CONTAINER} chmod -R 775 storage bootstrap/cache
                 '''
@@ -61,7 +59,6 @@ pipeline {
         
         stage('Restart Application') {
             steps {
-                // Restart container untuk menerapkan perubahan
                 sh 'docker restart ${LARAVEL_CONTAINER}'
                 echo "Deployment completed successfully!"
             }
