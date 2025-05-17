@@ -263,7 +263,7 @@
                                         src="assets/images/demo/start-hub-2/logo/logo-d-1.svg"> <img alt="E-library" style="width: 5rem"
                                         class="logo-default"
                                         src="{{ asset('assets/images/fixlogo.png') }}" ></span></a>
-                                        
+
                         </div>
                         <div class="navbar-brand-plain py-20 xxl:hidden xl:hidden sm:flex"><a
                                 class="navbar-brand flex p-0 relative" href="/" rel="home"><span
@@ -814,7 +814,7 @@
                     <h2>Hubungi Kami</h2>
                     <div class="kontainer-form">
                       <div class="gambar">
-                        <img src="{{ asset('assets/images/model.jpg') }}" alt="Telepon" />
+                        <img src="{{ asset('assets/images/modelbaru.jpg') }}" alt="Telepon" />
                       </div>
                       <form class="form-kontak" method="POST" action="{{ route('kirim.email') }}">
                         @csrf

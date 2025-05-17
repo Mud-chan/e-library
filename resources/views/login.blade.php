@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
-    
+
 </head>
 
 
@@ -37,7 +37,7 @@
 
 <body>
     <div class="container">
-        <div class="left" style="background-image: url('{{ asset('assets/images/model.jpg') }}');">
+        <div class="left" style="background-image: url('{{ asset('assets/images/modelbaru.jpg') }}');">
             <div class="background"></div>
             <div class="overlay-text">Ar-Roudhoh Digital E-Library</div>
         </div>
