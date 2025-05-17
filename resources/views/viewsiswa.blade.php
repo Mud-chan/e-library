@@ -39,7 +39,7 @@
     <section class="contents">
 
         <div class="heading2">
-            <h1>Daftar Buku</h1> <a href="{{ route('add_siswa') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
+            <h1>Daftar Siswa</h1> <a href="{{ route('add_siswa') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Siswa</a>
 
         </div>
 
