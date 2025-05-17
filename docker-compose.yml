@@ -21,10 +21,10 @@ services:
     container_name: laravel_db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_DATABASE: laravel_test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: root
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
