@@ -70,6 +70,7 @@
                 <option value="Kelas 4">Kelas 4</option>
                 <option value="Kelas 5">Kelas 5</option>
                 <option value="Kelas 6">Kelas 6</option>
+                <option value="Karya Guru">Karya Guru</option>
                 <option value="Umum">Umum</option>
             {{-- <p>Sesi Kursus <span>*</span></p>
             <select name="playlist" class="box" required>
@@ -82,9 +83,11 @@
                     <option value="" disabled>Tidak ada materi yang dibuat!</option>
                 @endif
             </select> --}}
+            </select>
             <p>Sampul Buku <span>*</span></p>
             <input type="file" name="thumb" accept="image/*"  class="box" id="image">
             <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 5MB</small>
+
             <p>Unggah Buku (pdf) <span>*</span></p>
             <input type="file" name="pdf" accept="application/pdf"  class="box" id="video">
             <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>
