@@ -811,7 +811,7 @@
                 </section>
 
                 <section class="hubungi-kami" id="kontak">
-                    <h2>Hubungi Kami</h2>
+                    <h2>Hubungi Kami </h2>
                     <div class="kontainer-form">
                       <div class="gambar">
                         <img src="{{ asset('assets/images/modelbaru.jpg') }}" alt="Telepon" />
