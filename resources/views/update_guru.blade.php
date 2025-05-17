@@ -40,7 +40,7 @@
 
     <section class="video-form">
 
-        <h1 class="heading">Update Buku</h1>
+        <h1 class="heading">Update Guru</h1>
 
         @if ($playlists)
     <form action="{{ route('update.tutor', ['guruId' => $playlists->id]) }}" method="post" enctype="multipart/form-data" id="formup">
