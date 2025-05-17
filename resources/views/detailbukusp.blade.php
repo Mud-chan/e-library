@@ -158,6 +158,13 @@
                     </div>
                 </div>
             </div>
+            <div class="comment-section">
+        <form action="{{ route('video.storeComment', ['videoId' => $content->id]) }}" method="post" >
+            @csrf
+            <input type="hidden" name="content_id" value="{{ $content->id }}">
+            <textarea rows="3" placeholder="Write a comment............" name="comment_box"></textarea>
+            <button name="add_comment">Submit</button>
+        </form>
 
             <div class="comments">
                 @if ($comments->count() > 0)
@@ -178,7 +185,19 @@
                                         {{ $comment->comment }}
                                     </p>
                                     <div class="meta">
-                                        {{ \Carbon\Carbon::parse($comment->date)->format('H:i l d F Y') }}</div>
+                                        {{ \Carbon\Carbon::parse($comment->date)->format('d F Y') }}</div>
+                                    @if($comment->id_siswa == $userId)
+                                    <button type="button" onclick="editComment('{{ $comment->id }}', '{{ addslashes($comment->comment) }}')" style="background-color: #2ecc71; padding: 5px 9px; font-size:12px;">Edit</button>
+
+                        
+                                    @endif
+
+
+                                    <form action="{{ route('buku.deleteComment', ['id' => $comment->id]) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Yakin mau hapus komentar ini?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
+                                    </form>
                                 </div>
                             </div>
                         @endif
@@ -187,10 +206,28 @@
                     <p class="empty">Tidak ada komentar!</p>
                 @endif
             </div>
+            </div>
 
 
         </div>
         <script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>
+<script>
+    let editingCommentId = null;
 
+    function editComment(commentId, commentText) {
+        const textarea = document.querySelector('textarea[name="comment_box"]');
+        const button = document.querySelector('button[name="add_comment"]');
+
+        textarea.value = commentText;
+        editingCommentId = commentId;
+
+        button.innerText = "Edit";
+        button.name = "edit_comment";
+
+        // Ganti form action jadi ke edit route
+        const form = textarea.closest('form');
+        form.action = `/buku/update-comment-guru/${commentId}`; // pastikan route ini ada di web.php
+    }
+    </script>
 </html>

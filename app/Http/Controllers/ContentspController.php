@@ -390,7 +390,18 @@ public function uploadContent(Request $request)
         'siswaStatus',
         'jumlahView',
         'jumlahBookmark',
-    ));
+    ), [
+        "title" => "Detail Buku",
+        "userName" => $userName,
+        "userImage" => $userImage,
+        "userProfesi" => $userProfesi,
+        'comments' => $comments,
+        'userIds' => $userIds,
+        'allUsers' => $allUsers,
+        'users' => $users,
+        'gurus' => $gurus,
+        "userId" => $tutorId,
+    ]);
 }
 
 

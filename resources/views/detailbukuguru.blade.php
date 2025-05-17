@@ -19,7 +19,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Guru</a>
+            <a href="{{ url('/dashboardguru') }}" class="logo">Guru</a>
 
             <form action={{ route('caricontentguru') }}" method="post" class="search-form">
                 @csrf

@@ -594,9 +594,9 @@ public function deleteComment($id)
     $userId = Cookie::get('user_id');
     $tutors = User::find($userId);
 
-    if ($comment->id_siswa !== $tutors->id) {
-        return redirect()->back()->with('error', 'Kamu tidak boleh hapus komentar orang lain!');
-    }
+    // if ($comment->id_siswa !== $tutors->id) {
+    //     return redirect()->back()->with('error', 'Kamu tidak boleh hapus komentar orang lain!');
+    // }
 
     $comment->delete();
 
