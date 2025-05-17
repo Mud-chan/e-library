@@ -76,6 +76,7 @@
             <option value="Kelas 4">Kelas 4</option>
             <option value="Kelas 5">Kelas 5</option>
             <option value="Kelas 6">Kelas 6</option>
+            <option value="Karya Guru">Karya Guru</option>
             <option value="Umum">Umum</option>
         </select>
 
@@ -87,9 +88,9 @@
         <p>Unggah Buku (pdf)</p>
         {{-- <video src="../uploaded_files/{{ $content->pdf }}" controls></video> --}}
         <input type="file" name="pdf" accept="pdf/*" class="box" id="video">
-        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>
+        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran dokumen terlalu besar maksimal 50MB</small>
 
-        <input type="submit" value="Update" name="update" class="btn">
+        <input type="submit" value="Update Buku" name="update" class="btn">
     </form>
 @else
     <p class="empty">Video tidak ditemukan! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">Tambah Video</a></p>
