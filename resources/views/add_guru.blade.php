@@ -73,7 +73,7 @@
             <p>Foto Siswa <span>*</span></p>
             <input type="file" name="image" accept="image/*"  class="box" id="image">
             <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
-            <input type="submit" value="Tambah Siswa" name="submit" class="btn">
+            <input type="submit" value="Tambah Guru" name="submit" class="btn">
         </form>
 
     </section>
