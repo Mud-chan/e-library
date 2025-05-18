@@ -9,7 +9,6 @@ services:
     restart: unless-stopped
     volumes:
       - .:/var/www/html
-      - ./vendor:/var/www/html/vendor
       - ./storage:/var/www/html/storage
     depends_on:
       - db
@@ -27,6 +26,7 @@ services:
       MYSQL_USER: ${DB_USERNAME}
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./library.sql:/docker-entrypoint-initdb.d/library.sql
     networks:
       - laravel_network
 
