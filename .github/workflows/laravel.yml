@@ -57,28 +57,26 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy to VPS
-        env:
-          CI_BRANCH: ${{ github.ref_name }}   # ← hanya “main” atau “master”
         run: |
-          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'DEPLOY'
+          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
             set -e
             PROJECT_DIR=/var/www/laravel-app
-            cd $PROJECT_DIR
+            cd \$PROJECT_DIR
 
             # --- Update repository ---
             git fetch --all
-            git reset --hard origin/$CI_BRANCH        # ← variabel sekarang valid
+            git reset --hard origin/${{ github.ref_name }}
 
             # --- Ensure .env & APP_KEY (host file) ---
             [ -f .env ] || cp .env.example .env
             if ! grep -q '^APP_KEY=base64:' .env; then
-              docker run --rm -v $(pwd):/app -w /app laravelsail/php82-composer:latest \
+              docker run --rm -v \$(pwd):/app -w /app laravelsail/php82-composer:latest \
                 php artisan key:generate --no-interaction
             fi
 
             # --- (Re)build & start containers (upgrade PHP 8.2 jika perlu) ---
-            PHP_VER=$(docker-compose exec -T app php -r "echo PHP_VERSION;" || echo "")
-            if [ "$PHP_VER" != "${PHP_VER/8.1/}" ]; then
+            PHP_VER=\$(docker-compose exec -T app php -r "echo PHP_VERSION;" || echo "")
+            if [ "\$PHP_VER" != "\${PHP_VER/8.1/}" ]; then
               echo "Rebuilding container with PHP 8.2..."
               docker-compose down || true
               docker-compose build --no-cache --build-arg PHP_VERSION=8.2
@@ -89,11 +87,11 @@ jobs:
             # --- Permissions & optimizations ---
             sudo mkdir -p storage/framework/{sessions,views,cache}
             sudo chmod -R 775 storage bootstrap/cache
-            sudo chown -R $(whoami):www-data storage bootstrap/cache
+            sudo chown -R \$(whoami):www-data storage bootstrap/cache
 
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker-compose exec -T app php artisan migrate --force
             docker-compose exec -T app php artisan optimize:clear
             docker-compose exec -T app php artisan optimize
             docker-compose exec -T app php artisan queue:restart
-          DEPLOY
+          EOF
