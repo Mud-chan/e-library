@@ -9,7 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -74,7 +73,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'DEPLOY_SCRIPT'
             set -e
             
             cd /var/www/laravel-app
@@ -83,12 +82,21 @@ jobs:
             git fetch --all
             git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
 
+            # Check and update PHP version in Docker container
+            if docker-compose exec -T app php -v | grep -q "8.1"; then
+              echo "Updating PHP version in Docker container..."
+              docker-compose down || true
+              docker-compose build --no-cache --build-arg PHP_VERSION=8.2
+              docker-compose up -d
+              sleep 15
+            fi
+
             # Ensure .env exists with proper APP_KEY
             if [ ! -f .env ]; then
               cp .env.example .env
-              php artisan key:generate --force
+              docker-compose exec -T app php artisan key:generate --force
             elif ! grep -q 'APP_KEY=base64:' .env; then
-              php artisan key:generate --force
+              docker-compose exec -T app php artisan key:generate --force
             fi
 
             # Set permissions
@@ -96,16 +104,10 @@ jobs:
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R $USER:www-data storage bootstrap/cache
 
-            # Docker workflow
-            docker-compose down || true
-            docker-compose build --no-cache
-            docker-compose up -d
+            # Install dependencies with platform check ignore (temporary)
+            docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev --ignore-platform-reqs
 
-            # Wait for containers
-            sleep 15
-
-            # Run artisan commands in container
-            docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
+            # Run artisan commands
             docker-compose exec -T app php artisan config:clear
             docker-compose exec -T app php artisan cache:clear
             docker-compose exec -T app php artisan view:clear
@@ -113,4 +115,4 @@ jobs:
             docker-compose exec -T app php artisan route:cache
             docker-compose exec -T app php artisan view:cache
             docker-compose exec -T app php artisan queue:restart
-          EOF
+          DEPLOY_SCRIPT
