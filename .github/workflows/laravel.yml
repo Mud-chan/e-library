@@ -13,7 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # PHP & Composer
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -21,34 +20,27 @@ jobs:
           extensions: mbstring, dom, fileinfo, sqlite
           coverage: none
 
-      # ──────────── ENV FILES ────────────
       - name: Prepare environment files
         run: |
-          # Salin .env untuk runtime development
           cp .env.example .env
-
-          # Salin dan ubah .env.testing untuk SQLite in-memory
           cp .env.example .env.testing
           sed -i 's/^APP_ENV=.*/APP_ENV=testing/' .env.testing
           sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing
           sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/' .env.testing
 
-      # ──────────── DEPENDENCIES ────────────
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
-      # ──────────── APP KEYS ────────────
-      - name: Generate app key (development)
-        run: php artisan key:generate --ansi
+      - name: Generate app keys
+        run: |
+          php artisan key:generate --ansi
+          php artisan key:generate --env=testing --ansi
 
-      - name: Generate app key (testing)
-        run: php artisan key:generate --env=testing --ansi
+      - name: Set up storage permissions
+        run: |
+          mkdir -p storage/framework/{sessions,views,cache}
+          chmod -R 775 storage bootstrap/cache
 
-      # Set permissions
-      - name: Directory permissions
-        run: chmod -R 777 storage bootstrap/cache
-
-      # Jalankan migrasi di environment testing agar tabel tersedia di SQLite in-memory
       - name: Run migrations (testing)
         env:
           APP_ENV: testing
@@ -56,8 +48,9 @@ jobs:
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
+      - name: Execute tests
+        run: php artisan test
 
-  # ───────────────────── DEPLOY ─────────────────────
   deploy:
     needs: test
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -73,40 +66,37 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to VPS with Docker
+      - name: Deploy to VPS
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            set -e
+            
             cd /var/www/laravel-app
 
             # Update repository
-            if [ ! -d .git ]; then
-              git clone ${{ github.server_url }}/${{ github.repository }} .
-            else
-              git fetch --all
-              git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
-            fi
+            git fetch --all
+            git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
 
-            # Prepare .env if missing
-            if [ ! -f .env ]; then
-              cp .env.example .env
-              sed -i 's/DB_HOST=.*/DB_HOST=mysql/' .env
-              sed -i 's/DB_DATABASE=.*/DB_DATABASE=laravel/' .env
-              sed -i 's/DB_USERNAME=.*/DB_USERNAME=laravel_user/' .env
-              sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=laravel_password/' .env
-            fi
-
-            # Permissions
-            chmod -R 775 storage bootstrap/cache
+            # Set permissions (run as root or with sudo if needed)
+            sudo mkdir -p storage/framework/{sessions,views,cache}
+            sudo chmod -R 775 storage bootstrap/cache
+            sudo chown -R $USER:www-data storage bootstrap/cache
 
             # Docker workflow
-            docker-compose down
+            docker-compose down || true
             docker-compose build --no-cache
             docker-compose up -d
 
-            # Inside container
+            # Wait for containers
+            sleep 15
+
+            # Run artisan commands in container
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker-compose exec -T app php artisan key:generate --force
             docker-compose exec -T app php artisan migrate --force
+            docker-compose exec -T app php artisan config:clear
+            docker-compose exec -T app php artisan cache:clear
+            docker-compose exec -T app php artisan view:clear
             docker-compose exec -T app php artisan config:cache
             docker-compose exec -T app php artisan route:cache
             docker-compose exec -T app php artisan view:cache
