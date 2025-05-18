@@ -48,6 +48,9 @@ jobs:
       - name: Directory permissions
         run: chmod -R 777 storage bootstrap/cache
 
+      - name: Run migrations (testing)
+        run: php artisan migrate --env=testing --force
+
       # Run tests
       - name: Run PHPUnit / Pest
         run: php artisan test
