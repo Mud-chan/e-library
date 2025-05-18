@@ -24,7 +24,6 @@ jobs:
         run: |
           cp .env.example .env
           cp .env.example .env.testing
-
           sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env
           sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env.testing
           sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
@@ -50,7 +49,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # ------- SSH & REPO -------
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
@@ -60,7 +58,7 @@ jobs:
 
       - name: Deploy to VPS
         env:
-          GIT_BRANCH: ${{ github.ref }}
+          CI_BRANCH: ${{ github.ref_name }}   # ← hanya “main” atau “master”
         run: |
           ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'DEPLOY'
             set -e
@@ -68,35 +66,31 @@ jobs:
             cd $PROJECT_DIR
 
             # --- Update repository ---
-            BRANCH=$(echo "$GIT_BRANCH" | sed 's|refs/heads/||')
             git fetch --all
-            git reset --hard origin/$BRANCH
+            git reset --hard origin/$CI_BRANCH        # ← variabel sekarang valid
 
-            # --- Ensure .env exists + APP_KEY (HOST FILE) ---
-            if [ ! -f .env ]; then
-              cp .env.example .env
-            fi
+            # --- Ensure .env & APP_KEY (host file) ---
+            [ -f .env ] || cp .env.example .env
             if ! grep -q '^APP_KEY=base64:' .env; then
               docker run --rm -v $(pwd):/app -w /app laravelsail/php82-composer:latest \
                 php artisan key:generate --no-interaction
             fi
 
-            # --- (Re)build & start containers (upgrade PHP 8.2 if perlu) ---
+            # --- (Re)build & start containers (upgrade PHP 8.2 jika perlu) ---
             PHP_VER=$(docker-compose exec -T app php -r "echo PHP_VERSION;" || echo "")
             if [ "$PHP_VER" != "${PHP_VER/8.1/}" ]; then
-              echo "Rebuilding container dengan PHP 8.2..."
+              echo "Rebuilding container with PHP 8.2..."
               docker-compose down || true
               docker-compose build --no-cache --build-arg PHP_VERSION=8.2
             fi
             docker-compose up -d --build
             sleep 15
 
-            # --- Permissions ---
+            # --- Permissions & optimizations ---
             sudo mkdir -p storage/framework/{sessions,views,cache}
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R $(whoami):www-data storage bootstrap/cache
 
-            # --- Install prod deps + caches ---
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker-compose exec -T app php artisan migrate --force
             docker-compose exec -T app php artisan optimize:clear
