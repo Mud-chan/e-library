@@ -21,34 +21,32 @@ jobs:
           extensions: mbstring, dom, fileinfo, sqlite
           coverage: none
 
-      # ──────────── ENV & APP KEY ────────────
-      - name: Prepare environment
+      # ──────────── ENV FILES ────────────
+      - name: Prepare environment files
         run: |
           cp .env.example .env
-
-          # buat .env.testing dengan SQLite in‑memory
           cat <<'EOT' > .env.testing
           APP_ENV=testing
           DB_CONNECTION=sqlite
           DB_DATABASE=:memory:
           EOT
 
-          # generate APP_KEY khusus testing
-          php artisan key:generate --env=testing --ansi
-
       # ──────────── DEPENDENCIES ────────────
       - name: Install Composer deps
         run: composer install --no-interaction --no-progress --prefer-dist
 
-      # key untuk env default (development)
-      - name: Generate key
+      # ──────────── APP KEYS ────────────
+      - name: Generate app key (development)
         run: php artisan key:generate --ansi
+
+      - name: Generate app key (testing)
+        run: php artisan key:generate --env=testing --ansi
 
       # Cache & perms
       - name: Directory permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      # Run tests (migrasi otomatis via RefreshDatabase / SQLite)
+      # Run tests
       - name: Run PHPUnit / Pest
         run: php artisan test
 
@@ -81,7 +79,7 @@ jobs:
               git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
             fi
 
-            # Prepare environment file if not exists
+            # Prepare .env if missing
             if [ ! -f .env ]; then
               cp .env.example .env
               sed -i 's/DB_HOST=.*/DB_HOST=mysql/' .env
@@ -90,15 +88,15 @@ jobs:
               sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=laravel_password/' .env
             fi
 
-            # Ensure proper permissions
+            # Permissions
             chmod -R 775 storage bootstrap/cache
 
-            # Docker operations
+            # Docker workflow
             docker-compose down
             docker-compose build --no-cache
             docker-compose up -d
 
-            # Run migrations and optimizations inside container
+            # Inside container
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker-compose exec -T app php artisan key:generate --force
             docker-compose exec -T app php artisan migrate --force
