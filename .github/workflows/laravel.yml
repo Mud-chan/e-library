@@ -22,16 +22,20 @@ jobs:
 
       - name: Prepare environment files
         run: |
+          # Copy environment files
           cp .env.example .env
           cp .env.example .env.testing
-          # Generate random APP_KEY untuk development
-          sed -i "s/^APP_KEY=.*/APP_KEY=base64:$(openssl rand -base64 32)/" .env
-          # Konfigurasi environment testing
-          sed -i 's/^APP_ENV=.*/APP_ENV=testing/' .env.testing
-          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing
-          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/' .env.testing
-          # Generate random APP_KEY untuk testing
-          sed -i "s/^APP_KEY=.*/APP_KEY=base64:$(openssl rand -base64 32)/" .env.testing
+          
+          # Generate APP_KEY with different delimiter (using | instead of /)
+          APP_KEY_DEV="base64:$(openssl rand -base64 32)"
+          sed -i "s|^APP_KEY=.*|APP_KEY=${APP_KEY_DEV}|" .env
+          
+          # Configure testing environment
+          APP_KEY_TEST="base64:$(openssl rand -base64 32)"
+          sed -i "s|^APP_KEY=.*|APP_KEY=${APP_KEY_TEST}|" .env.testing
+          sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
+          sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
+          sed -i "s|^DB_DATABASE=.*|DB_DATABASE=:memory:|" .env.testing
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
