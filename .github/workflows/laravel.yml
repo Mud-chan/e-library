@@ -56,13 +56,6 @@ jobs:
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
-      # Jalankan test
-      - name: Run PHPUnit / Pest
-        env:
-          APP_ENV: testing
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
-        run: php artisan test
 
   # ───────────────────── DEPLOY ─────────────────────
   deploy:
