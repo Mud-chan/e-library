@@ -464,7 +464,7 @@
                                                 data-delay-options="{&quot;elements&quot;: &quot;.lqd-highlight-inner&quot;, &quot;delayType&quot;: &quot;transition&quot;}"
                                                 data-inview="true" data-text-rotator="true"
                                                 data-transition-delay="true">
-                                                <span>Ar-Roudhoh Asik Sekali</span>
+                                                <span>Ar-Roudhoh</span>
                                                 <mark class="lqd-highlight"><span
                                                         class="lqd-highlight-txt">Digital</span>
                                                     <span class="lqd-highlight-inner -bottom-0/1em left-0"><svg
