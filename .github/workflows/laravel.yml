@@ -24,12 +24,14 @@ jobs:
       # ──────────── ENV FILES ────────────
       - name: Prepare environment files
         run: |
+          # .env untuk runtime dev
           cp .env.example .env
-          cat <<'EOT' > .env.testing
-          APP_ENV=testing
-          DB_CONNECTION=sqlite
-          DB_DATABASE=:memory:
-          EOT
+
+          # .env.testing = salin contoh lalu ubah DB ke SQLite memory
+          cp .env.example .env.testing
+          sed -i 's/^APP_ENV=.*/APP_ENV=testing/'      .env.testing
+          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/'   .env.testing
 
       # ──────────── DEPENDENCIES ────────────
       - name: Install Composer deps
