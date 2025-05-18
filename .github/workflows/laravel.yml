@@ -75,13 +75,13 @@ jobs:
             fi
 
             # --- (Re)build & start containers (upgrade PHP 8.2 jika perlu) ---
-            PHP_VER=\$(docker-compose exec -T app php -r "echo PHP_VERSION;" || echo "")
+            PHP_VER=\$(docker compose exec -T app php -r "echo PHP_VERSION;" || echo "")
             if [ "\$PHP_VER" != "\${PHP_VER/8.1/}" ]; then
               echo "Rebuilding container with PHP 8.2..."
-              docker-compose down || true
-              docker-compose build --no-cache --build-arg PHP_VERSION=8.2
+              docker compose down || true
+              docker compose build --no-cache --build-arg PHP_VERSION=8.2
             fi
-            docker-compose up -d --build
+            docker compose up -d --build
             sleep 15
 
             # --- Permissions & optimizations ---
@@ -89,9 +89,9 @@ jobs:
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R \$(whoami):www-data storage bootstrap/cache
 
-            docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
-            docker-compose exec -T app php artisan migrate --force
-            docker-compose exec -T app php artisan optimize:clear
-            docker-compose exec -T app php artisan optimize
-            docker-compose exec -T app php artisan queue:restart
+            docker compose exec -T app composer install --no-interaction --prefer-dist --no-dev
+            docker compose exec -T app php artisan migrate --force
+            docker compose exec -T app php artisan optimize:clear
+            docker compose exec -T app php artisan optimize
+            docker compose exec -T app php artisan queue:restart
           EOF
