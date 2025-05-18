@@ -854,7 +854,7 @@
                                                 <div class="ld-fancy-heading relative">
                                                     <h6
                                                         class="ld-fh-element relative font-normal mb-0/75em text-white">
-                                                        Email Kami</h6>
+                                                        Email Kami </h6>
                                                 </div>
                                                 <div class="ld-fancy-heading relative">
                                                     <h2 class="ld-fh-element relative text-white text-20 mb-0">
