@@ -48,6 +48,7 @@ jobs:
       - name: Directory permissions
         run: chmod -R 777 storage bootstrap/cache
 
+      # Jalankan migrasi untuk environment testing (penting untuk SQLite memory)
       - name: Run migrations (testing)
         run: php artisan migrate --env=testing --force
 
