@@ -24,17 +24,22 @@ jobs:
         run: |
           cp .env.example .env
           cp .env.example .env.testing
+          # Generate random APP_KEY untuk development
+          sed -i "s/^APP_KEY=.*/APP_KEY=base64:$(openssl rand -base64 32)/" .env
+          # Konfigurasi environment testing
           sed -i 's/^APP_ENV=.*/APP_ENV=testing/' .env.testing
           sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing
           sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/' .env.testing
+          # Generate random APP_KEY untuk testing
+          sed -i "s/^APP_KEY=.*/APP_KEY=base64:$(openssl rand -base64 32)/" .env.testing
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
-      - name: Generate app keys
+      - name: Verify environment keys
         run: |
-          php artisan key:generate --ansi
-          php artisan key:generate --env=testing --ansi
+          grep -q 'APP_KEY=base64:' .env || php artisan key:generate --ansi
+          grep -q 'APP_KEY=base64:' .env.testing || php artisan key:generate --env=testing --ansi
 
       - name: Set up storage permissions
         run: |
@@ -48,6 +53,8 @@ jobs:
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
+      - name: Execute tests
+        run: php artisan test
 
   deploy:
     needs: test
@@ -75,7 +82,15 @@ jobs:
             git fetch --all
             git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
 
-            # Set permissions (run as root or with sudo if needed)
+            # Ensure .env exists with proper APP_KEY
+            if [ ! -f .env ]; then
+              cp .env.example .env
+              php artisan key:generate --force
+            elif ! grep -q 'APP_KEY=base64:' .env; then
+              php artisan key:generate --force
+            fi
+
+            # Set permissions
             sudo mkdir -p storage/framework/{sessions,views,cache}
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R $USER:www-data storage bootstrap/cache
@@ -90,8 +105,6 @@ jobs:
 
             # Run artisan commands in container
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
-            docker-compose exec -T app php artisan key:generate --force
-            docker-compose exec -T app php artisan migrate --force
             docker-compose exec -T app php artisan config:clear
             docker-compose exec -T app php artisan cache:clear
             docker-compose exec -T app php artisan view:clear
