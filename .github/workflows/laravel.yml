@@ -7,13 +7,12 @@ on:
     branches: [ main, master ]
 
 jobs:
+# ---------- TEST ----------
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
-      # PHP & Composer
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -21,43 +20,27 @@ jobs:
           extensions: mbstring, dom, fileinfo, sqlite
           coverage: none
 
-      # ──────────── ENV FILES ────────────
       - name: Prepare environment files
         run: |
-          # Salin .env untuk runtime development
           cp .env.example .env
-
-          # Salin dan ubah .env.testing untuk SQLite in-memory
           cp .env.example .env.testing
-          sed -i 's/^APP_ENV=.*/APP_ENV=testing/' .env.testing
-          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env.testing
-          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=:memory:/' .env.testing
+          sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env
+          sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env.testing
+          sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
+          sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
+          sed -i "s|^DB_DATABASE=.*|DB_DATABASE=:memory:|" .env.testing
 
-      # ──────────── DEPENDENCIES ────────────
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
 
-      # ──────────── APP KEYS ────────────
-      - name: Generate app key (development)
-        run: php artisan key:generate --ansi
-
-      - name: Generate app key (testing)
-        run: php artisan key:generate --env=testing --ansi
-
-      # Set permissions
-      - name: Directory permissions
-        run: chmod -R 777 storage bootstrap/cache
-
-      # Jalankan migrasi di environment testing agar tabel tersedia di SQLite in-memory
-      - name: Run migrations (testing)
+      - name: Run test migrations
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
-
-  # ───────────────────── DEPLOY ─────────────────────
+# ---------- DEPLOY ----------
   deploy:
     needs: test
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -73,42 +56,42 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to VPS with Docker
+      - name: Deploy to VPS
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /var/www/laravel-app
+          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
+            set -e
+            PROJECT_DIR=/var/www/laravel-app
+            cd \$PROJECT_DIR
 
-            # Update repository
-            if [ ! -d .git ]; then
-              git clone ${{ github.server_url }}/${{ github.repository }} .
-            else
-              git fetch --all
-              git reset --hard origin/$(echo ${{ github.ref }} | sed 's|refs/heads/||')
+            # --- Update repository ---
+            git fetch --all
+            git reset --hard origin/${{ github.ref_name }}
+
+            # --- Ensure .env & APP_KEY (host file) ---
+            [ -f .env ] || cp .env.example .env
+            if ! grep -q '^APP_KEY=base64:' .env; then
+              docker run --rm -v \$(pwd):/app -w /app laravelsail/php82-composer:latest \
+                php artisan key:generate --no-interaction
             fi
 
-            # Prepare .env if missing
-            if [ ! -f .env ]; then
-              cp .env.example .env
-              sed -i 's/DB_HOST=.*/DB_HOST=mysql/' .env
-              sed -i 's/DB_DATABASE=.*/DB_DATABASE=laravel/' .env
-              sed -i 's/DB_USERNAME=.*/DB_USERNAME=laravel_user/' .env
-              sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=laravel_password/' .env
+            # --- (Re)build & start containers (upgrade PHP 8.2 jika perlu) ---
+            PHP_VER=\$(docker-compose exec -T app php -r "echo PHP_VERSION;" || echo "")
+            if [ "\$PHP_VER" != "\${PHP_VER/8.1/}" ]; then
+              echo "Rebuilding container with PHP 8.2..."
+              docker-compose down || true
+              docker-compose build --no-cache --build-arg PHP_VERSION=8.2
             fi
+            docker-compose up -d --build
+            sleep 15
 
-            # Permissions
-            chmod -R 775 storage bootstrap/cache
+            # --- Permissions & optimizations ---
+            sudo mkdir -p storage/framework/{sessions,views,cache}
+            sudo chmod -R 775 storage bootstrap/cache
+            sudo chown -R \$(whoami):www-data storage bootstrap/cache
 
-            # Docker workflow
-            docker-compose down
-            docker-compose build --no-cache
-            docker-compose up -d
-
-            # Inside container
             docker-compose exec -T app composer install --no-interaction --prefer-dist --no-dev
-            docker-compose exec -T app php artisan key:generate --force
             docker-compose exec -T app php artisan migrate --force
-            docker-compose exec -T app php artisan config:cache
-            docker-compose exec -T app php artisan route:cache
-            docker-compose exec -T app php artisan view:cache
+            docker-compose exec -T app php artisan optimize:clear
+            docker-compose exec -T app php artisan optimize
             docker-compose exec -T app php artisan queue:restart
           EOF
