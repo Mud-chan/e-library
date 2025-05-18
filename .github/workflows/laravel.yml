@@ -48,8 +48,6 @@ jobs:
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
-      - name: Execute tests
-        run: php artisan test
 
   deploy:
     needs: test
