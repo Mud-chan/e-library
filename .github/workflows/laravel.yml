@@ -21,28 +21,38 @@ jobs:
           extensions: mbstring, dom, fileinfo, sqlite
           coverage: none
 
-      # Env files
+      # ──────────── ENV & APP KEY ────────────
       - name: Prepare environment
         run: |
           cp .env.example .env
-          echo "DB_CONNECTION=sqlite" >> .env.testing
-          echo "DB_DATABASE=:memory:" >> .env.testing
 
-      # Dependencies
+          # buat .env.testing dengan SQLite in‑memory
+          cat <<'EOT' > .env.testing
+          APP_ENV=testing
+          DB_CONNECTION=sqlite
+          DB_DATABASE=:memory:
+          EOT
+
+          # generate APP_KEY khusus testing
+          php artisan key:generate --env=testing --ansi
+
+      # ──────────── DEPENDENCIES ────────────
       - name: Install Composer deps
         run: composer install --no-interaction --no-progress --prefer-dist
 
+      # key untuk env default (development)
       - name: Generate key
-        run: php artisan key:generate
+        run: php artisan key:generate --ansi
 
       # Cache & perms
       - name: Directory permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      # Run tests
+      # Run tests (migrasi otomatis via RefreshDatabase / SQLite)
       - name: Run PHPUnit / Pest
         run: php artisan test
 
+  # ───────────────────── DEPLOY ─────────────────────
   deploy:
     needs: test
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
@@ -95,7 +105,5 @@ jobs:
             docker-compose exec -T app php artisan config:cache
             docker-compose exec -T app php artisan route:cache
             docker-compose exec -T app php artisan view:cache
-
-            # If using queue
             docker-compose exec -T app php artisan queue:restart
           EOF
