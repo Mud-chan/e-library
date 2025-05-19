@@ -493,7 +493,7 @@
                                         <div class="ld-fancy-heading relative mx-25percent sm:m-0 animation-element">
                                             <p
                                                 class="ld-fh-element relative text-20 mb-1/65em leading-1/25em font-medium">
-                                                Kemudahan Membaca Buku Dimana Saja Kapan Saja</p>
+                                                Kemudahan Membaca Buku Dimana Saja Kapan Saja </p>
                                         </div>
                                         <div class="relative animation-element">
                                             <a class="btn btn-solid  rounded-100 bg-white font-medium" style="padding:15px 40px; font-weight:600; color:rgb(77, 77, 77);"
