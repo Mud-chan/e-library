@@ -67,29 +67,33 @@ jobs:
             git fetch --all
             git reset --hard origin/${{ github.ref_name }}
 
-            # --- Ensure .env & APP_KEY (host file) ---
+            # --- Ensure .env & APP_KEY ---
             [ -f .env ] || cp .env.example .env
             if ! grep -q '^APP_KEY=base64:' .env; then
               docker run --rm -v \$(pwd):/app -w /app laravelsail/php82-composer:latest \
                 php artisan key:generate --no-interaction
             fi
 
-            # --- (Re)build & start containers (upgrade PHP 8.2 jika perlu) ---
+            # --- (Re)build & start containers ---
             PHP_VER=\$(docker compose exec -T app php -r "echo PHP_VERSION;" || echo "")
             if [ "\$PHP_VER" != "\${PHP_VER/8.1/}" ]; then
-              echo "Rebuilding container with PHP 8.2..."
               docker compose down || true
               docker compose build --no-cache --build-arg PHP_VERSION=8.2
             fi
             docker compose up -d --build
             sleep 15
 
-            # --- Permissions & optimizations ---
+            # --- Permissions ---
             sudo mkdir -p storage/framework/{sessions,views,cache}
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R \$(whoami):www-data storage bootstrap/cache
 
+            # --- Dependencies & assets ---
             docker compose exec -T app composer install --no-interaction --prefer-dist --no-dev
+            docker compose exec -T app npm ci
+            docker compose exec -T app npm run build   
+
+            # --- Migrate & optimise ---
             docker compose exec -T app php artisan migrate --force
             docker compose exec -T app php artisan optimize:clear
             docker compose exec -T app php artisan optimize
