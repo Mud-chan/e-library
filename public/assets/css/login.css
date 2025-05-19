@@ -35,14 +35,6 @@
       }
 
 
-      /* .left::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: rgba(39, 192, 129, 0.4);
-        z-index: 1;
-      } */
-
       .overlay-text {
         position: relative;
         z-index: 2;
@@ -58,6 +50,24 @@
     -1px  1px 0 #000,
      1px  1px 0 #000;
       }
+
+      .backbtn{
+        position: relative;
+        z-index: 3;
+        left: -44vw;
+        top: -45vh;
+        background-color: #1bab6f;
+        color: #ffffff;
+        border-radius: 10%;
+        padding: 0.4rem;
+        font-size: 0.8rem;
+        text-decoration: none;
+      }
+
+      .backbtn:hover{
+        background-color: #078a53;
+      }
+
 
     .right {
       flex: 1;
@@ -188,6 +198,9 @@
 
           .container {
             height: auto;
+          }
+          .backbtn{
+            font-size: 0.7rem;
           }
     }
 
