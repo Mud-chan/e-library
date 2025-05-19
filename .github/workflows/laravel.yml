@@ -39,6 +39,9 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
+        
+      - name: Run Laravel Tests
+        run: php artisan test
 
 # ---------- DEPLOY ----------
   deploy:
