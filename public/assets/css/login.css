@@ -68,6 +68,24 @@
         background-color: #078a53;
       }
 
+      .backbtn2{
+        display: none;
+        position: relative;
+        z-index: 999999;
+        left:-3vw;
+        top: -45vh;
+        background-color: #1bab6f;
+        color: #ffffff;
+        border-radius: 10%;
+        padding: 0.4rem;
+        font-size: 0.6rem;
+        text-decoration: none;
+      }
+
+      .backbtn2:hover{
+        background-color: #078a53;
+      }
+
 
     .right {
       flex: 1;
@@ -189,6 +207,10 @@
 
         .left {
             display: none;
+          }
+
+          .backbtn2{
+            display: block;
           }
 
           .right {

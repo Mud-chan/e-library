@@ -40,9 +40,10 @@
         <div class="left" style="background-image: url('{{ asset('assets/images/modelbaru.jpg') }}');">
             <div class="background"></div>
             <div class="overlay-text">Ar-Roudhoh Digital E-Library</div>
-            <div class="back-button"><a class="backbtn" href="/">Kembali</a></div>
+            <div class="back-button"><a class="backbtn" href="/">Beranda</a></div>
         </div>
         <div class="right">
+            <div class="back-button"><a class="backbtn2" href="/">Beranda</a></div>
             <div class="login-box">
                 <h2>Welcome to <span>E-Library</span></h2>
                 <img class="form-img" src="{{ asset('assets/images/logo2.png') }}" alt="Mini Illustration">
