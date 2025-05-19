@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container py-4">
+
+    <a href="/katalogbuku" class="btn btn-success mb-3">
+        &larr; Kembali
+    </a>
     <h2 class="mb-4">SPK Rekomendasi Buku</h2>
 
     <form method="GET" action="{{ route('recommend') }}" class="mb-4" id="recommendation-form">
