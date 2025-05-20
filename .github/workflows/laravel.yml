@@ -45,7 +45,9 @@ jobs:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
-        run: php artisan db:table
+        run: |
+          php artisan tinker --execute="DB::select('SELECT name FROM sqlite_master WHERE type = \'table\';')"
+
 
       - name: Run test seeders
         env:
