@@ -3,7 +3,7 @@
 @section('content')
 <div class="container py-4">
 
-    <div class="d-flex gap-2 mb-3">
+    <div class="d-flex flex-wrap gap-2 mb-3">
         <a href="/katalogbuku" class="btn btn-success">
             &larr; Kembali
         </a>
@@ -16,7 +16,7 @@
 
     <form method="GET" action="{{ route('recommend') }}" class="mb-4" id="recommendation-form">
         <div class="row g-3">
-            <div class="col-md-3">
+            <div class="col-12 col-md-6 col-lg-3">
                 <label for="kategori" class="form-label">Kategori</label>
                 <select name="kategori" id="kategori" class="form-select">
                     <option value="">Semua Kategori</option>
@@ -28,7 +28,7 @@
                 </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-12 col-md-6 col-lg-3">
                 <label for="tingkatan" class="form-label">Tingkatan</label>
                 <select name="tingkatan" id="tingkatan" class="form-select">
                     <option value="">Semua Tingkatan</option>
@@ -40,14 +40,14 @@
                 </select>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-12 col-md-6 col-lg-3">
                 <label for="min_rating" class="form-label">Minimum Rating</label>
                 <input type="number" name="min_rating" id="min_rating"
                        class="form-control" min="0" max="5" step="0.1"
                        value="{{ request('min_rating', 0) }}">
             </div>
 
-            <div class="col-md-3 d-flex align-items-end">
+            <div class="col-12 col-md-6 col-lg-3 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100" id="filter-button">
                     <span id="button-text">Cari Rekomendasi</span>
                     <span id="button-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
@@ -58,46 +58,48 @@
 
     @if (!empty($results) && $results->count())
     <div class="row">
-        <div class="col-md-6">
-            <div class="card bg-white mb-4 shadow-sm">
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="card bg-white shadow-sm">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0">Hasil Rekomendasi</h4>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Rank</th>
-                                <th>Judul</th>
-                                <th>Kategori</th>
-                                <th>Tingkatan</th>
-                                <th>Rating</th>
-                                <th>Skor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($results as $idx => $rec)
-                            <tr>
-                                <td>{{ ($results->currentPage() - 1) * $results->perPage() + $loop->iteration }}</td>
-                                <td>{{ $rec['book']->judul }}</td>
-                                <td>{{ $rec['book']->kategori }}</td>
-                                <td>{{ $rec['book']->tingkatan }}</td>
-                                <td>{{ number_format($rec['book']->average_rating,1) }}</td>
-                                <td>{{ number_format($rec['preference']*100,2) }}%</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Judul</th>
+                                    <th>Kategori</th>
+                                    <th>Tingkatan</th>
+                                    <th>Rating</th>
+                                    <th>Skor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($results as $idx => $rec)
+                                <tr>
+                                    <td>{{ ($results->currentPage() - 1) * $results->perPage() + $loop->iteration }}</td>
+                                    <td>{{ $rec['book']->judul }}</td>
+                                    <td>{{ $rec['book']->kategori }}</td>
+                                    <td>{{ $rec['book']->tingkatan }}</td>
+                                    <td>{{ number_format($rec['book']->average_rating,1) }}</td>
+                                    <td>{{ number_format($rec['preference']*100,2) }}%</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                    <div class="pagination">
+                    <div class="pagination mt-3 flex-wrap">
                         {{ $results->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card bg-white mb-4 shadow-sm">
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="card bg-white shadow-sm">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0">Detail Proses TOPSIS</h4>
                 </div>
@@ -124,7 +126,7 @@
                                 <thead class="bg-light">
                                     <tr>
                                         @foreach(array_keys($rows[0] ?? []) as $col)
-                                        <th>{{ $col }}</th>
+                                        <th class="text-nowrap">{{ $col }}</th>
                                         @endforeach
                                     </tr>
                                 </thead>
@@ -132,7 +134,7 @@
                                     @foreach($rows as $row)
                                     <tr>
                                         @foreach($row as $val)
-                                        <td>{{ is_numeric($val) ? number_format($val,4) : $val }}</td>
+                                        <td class="text-nowrap">{{ is_numeric($val) ? number_format($val,4) : $val }}</td>
                                         @endforeach
                                     </tr>
                                     @endforeach
