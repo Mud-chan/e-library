@@ -7,60 +7,59 @@ on:
     branches: [ main, master ]
 
 jobs:
-# ---------- TEST ----------
- test:
-  runs-on: ubuntu-latest
-  steps:
-    - uses: actions/checkout@v3
+  # ---------- TEST ----------
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
-        extensions: mbstring, dom, fileinfo, sqlite
-        coverage: none
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom, fileinfo, sqlite
+          coverage: none
 
-    - name: Prepare environment files
-      run: |
-        cp .env.example .env
-        cp .env.example .env.testing
-        sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env
-        sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env.testing
-        sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
-        sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
-        sed -i "s|^DB_DATABASE=.*|DB_DATABASE=:memory:|" .env.testing
+      - name: Prepare environment files
+        run: |
+          cp .env.example .env
+          cp .env.example .env.testing
+          sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env
+          sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env.testing
+          sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
+          sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
+          sed -i "s|^DB_DATABASE=.*|DB_DATABASE=:memory:|" .env.testing
 
-    - name: Install Composer dependencies
-      run: composer install --no-interaction --no-progress --prefer-dist
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
 
-    - name: Run test migrations and seeders
-      env:
-        APP_ENV: testing
-        DB_CONNECTION: sqlite
-        DB_DATABASE: ':memory:'
-      run: |
-        php artisan migrate --force
-        php artisan db:seed --force
+      - name: Run test migrations and seeders
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: |
+          php artisan migrate --force
+          php artisan db:seed --force
 
-    - name: Run PHPUnit tests
-      env:
-        APP_ENV: testing
-        DB_CONNECTION: sqlite
-        DB_DATABASE: ':memory:'
-      run: vendor/bin/phpunit --testdox
+      - name: Run PHPUnit tests
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: vendor/bin/phpunit --testdox
 
-    - name: Run PHPStan (static analysis)
-      run: vendor/bin/phpstan analyse --memory-limit=1G
+      - name: Run PHPStan (static analysis)
+        run: vendor/bin/phpstan analyse --memory-limit=1G
 
-    - name: Run Laravel Pint (code style)
-      run: vendor/bin/pint --test
-        
-# ---------- DEPLOY ----------
+      - name: Run Laravel Pint (code style)
+        run: vendor/bin/pint --test
+
+  # ---------- DEPLOY ----------
   deploy:
     needs: test
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -106,7 +105,7 @@ jobs:
             # --- Dependencies & assets ---
             docker compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker compose exec -T app npm ci
-            docker compose exec -T app npm run build   
+            docker compose exec -T app npm run build
 
             # --- Migrate & optimise ---
             docker compose exec -T app php artisan migrate --force
