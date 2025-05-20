@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CounterBaca extends Model
+class ConterBaca extends Model
 {
     protected $table = 'counter_baca';
     protected $primaryKey = 'id';
