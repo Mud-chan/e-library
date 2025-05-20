@@ -40,6 +40,19 @@ jobs:
           DB_DATABASE: ':memory:'
         run: php artisan migrate --force
 
+      - name: Run PHPUnit tests
+        env:
+          APP_ENV: testing
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: vendor/bin/phpunit --verbose --testdox
+
+      - name: Run PHPStan (static analysis)
+        run: vendor/bin/phpstan analyse --memory-limit=1G
+
+      - name: Run Laravel Pint (code style)
+        run: vendor/bin/pint --test
+        
 # ---------- DEPLOY ----------
   deploy:
     needs: test
