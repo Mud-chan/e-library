@@ -10,7 +10,7 @@ class CreateBukuTable extends Migration
     {
         Schema::create('buku', function (Blueprint $table) {
             $table->id();
-            $table->string('guru_id'); // Sesuai dengan id string di tabel siswa
+            $table->string('guru_id');
             $table->foreign('guru_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->string('judul');
             $table->text('deskripsi')->nullable();

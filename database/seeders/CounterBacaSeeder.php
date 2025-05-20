@@ -12,7 +12,7 @@ class CounterBacaSeeder extends Seeder
         CounterBaca::create([
             'id' => 'view1',
             'id_buku' => 1,
-            'id_siswa' => 'siswa1', // Sesuai dengan id di tabel siswa
+            'id_siswa' => 'siswa1',
             'date' => now(),
         ]);
     }

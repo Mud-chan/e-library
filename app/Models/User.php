@@ -18,8 +18,8 @@ class User extends Model
     protected $fillable = [
         'id', 'nama', 'email', 'password', 'kelas', 'jenis_kelamin', 'image',
     ];
-    public function peminjaman()
-    {
-        return $this->hasMany(Peminjaman::class, 'id_user');
-    }
+    // public function peminjaman()
+    // {
+    //     return $this->hasMany(Peminjaman::class, 'id_user');
+    // }
 }

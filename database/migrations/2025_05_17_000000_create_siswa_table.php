@@ -9,7 +9,7 @@ class CreateSiswaTable extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->string('id')->primary(); 
+            $table->string('id')->primary();
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');

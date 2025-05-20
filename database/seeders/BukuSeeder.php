@@ -10,7 +10,7 @@ class BukuSeeder extends Seeder
     public function run()
     {
         Buku::create([
-            'guru_id' => 'guru1', // Sesuai dengan id di tabel siswa
+            'guru_id' => 'guru1',
             'judul' => 'Novel Contoh',
             'deskripsi' => 'Deskripsi novel contoh',
             'kategori' => 'Novel',
