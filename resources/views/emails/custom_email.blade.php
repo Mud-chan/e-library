@@ -82,7 +82,7 @@ a[x-apple-data-detectors='true'] {
   text-decoration: none !important;
 }
 
-table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: underline; } @media (max-width: 480px) { #u_column_2 .v-col-border { border-top: 5px solid #8d95ff !important;border-left: 5px solid #8d95ff !important;border-right: 5px solid #8d95ff !important;border-bottom: 5px solid #8d95ff !important; } #u_content_image_1 .v-container-padding-padding { padding: 20px 10px 10px !important; } #u_content_image_1 .v-src-width { width: auto !important; } #u_content_image_1 .v-src-max-width { max-width: 31% !important; } #u_content_text_2 .v-container-padding-padding { padding: 20px 10px 10px !important; } #u_content_button_1 .v-container-padding-padding { padding: 10px !important; } #u_content_button_1 .v-size-width { width: 100% !important; } #u_content_text_1 .v-container-padding-padding { padding: 10px 10px 40px !important; } #u_content_social_1 .v-container-padding-padding { padding: 40px 10px 10px !important; } #u_content_text_3 .v-container-padding-padding { padding: 10px 10px 20px !important; } #u_content_image_3 .v-container-padding-padding { padding: 20px 10px 40px !important; } }
+table, td { color: #000000; } #u_body a { color: #28c76f; text-decoration: underline; } @media (max-width: 480px) { #u_column_2 .v-col-border { border-top: 5px solid #28c76f !important;border-left: 5px solid #28c76f !important;border-right: 5px solid #28c76f !important;border-bottom: 5px solid #28c76f !important; } #u_content_image_1 .v-container-padding-padding { padding: 20px 10px 10px !important; } #u_content_image_1 .v-src-width { width: auto !important; } #u_content_image_1 .v-src-max-width { max-width: 31% !important; } #u_content_text_2 .v-container-padding-padding { padding: 20px 10px 10px !important; } #u_content_button_1 .v-container-padding-padding { padding: 10px !important; } #u_content_button_1 .v-size-width { width: 100% !important; } #u_content_text_1 .v-container-padding-padding { padding: 10px 10px 40px !important; } #u_content_social_1 .v-container-padding-padding { padding: 40px 10px 10px !important; } #u_content_text_3 .v-container-padding-padding { padding: 10px 10px 20px !important; } #u_content_image_3 .v-container-padding-padding { padding: 20px 10px 40px !important; } }
     </style>
 
 
@@ -110,7 +110,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
 <!--[if (mso)|(IE)]><td align="center" width="570" class="v-col-border" style="background-color: #ffffff;width: 570px;padding: 0px;border-top: 15px solid #5995fd;border-left: 15px solid #5995fd;border-right: 15px solid #5995fd;border-bottom: 15px solid #5995fd;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
 <div id="u_column_2" class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
   <div style="background-color: #ffffff;height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
-  <!--[if (!mso)&(!IE)]><!--><div class="v-col-border" style="box-sizing: border-box; height: 100%; padding: 0px;border-top: 15px solid #5995fd;border-left: 15px solid #5995fd;border-right: 15px solid #5995fd;border-bottom: 15px solid #5995fd;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
+  <!--[if (!mso)&(!IE)]><!--><div class="v-col-border" style="box-sizing: border-box; height: 100%; padding: 0px;border-top: 15px solid #50e493;border-left: 15px solid #50e493;border-right: 15px solid #50e493;border-bottom: 15px solid #50e493;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
 
 <table id="u_content_image_1" style="font-family:'Raleway',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
   <tbody>
@@ -121,7 +121,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-      <img align="center" border="0" src="https://assets.unlayer.com/projects/0/1715504021861-logo_biru%202.png" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 20%;max-width: 116px;" width="116" class="v-src-width v-src-max-width"/>
+      <img align="center" border="0" src="50e493" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 20%;max-width: 116px;" width="116" class="v-src-width v-src-max-width"/>
 
     </td>
   </tr>
@@ -158,7 +158,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
       <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:20px 40px 10px;font-family:'Raleway',sans-serif;" align="left">
 
   <div style="font-size: 14px; line-height: 140%; text-align: center; word-wrap: break-word;">
-    <p style="line-height: 140%;"><span data-metadata="&lt;!--(figmeta)eyJmaWxlS2V5IjoiTHJJMHBSU20xM203UWc0Tk1XZXVQeCIsInBhc3RlSUQiOjE4NjYyMDI5OTgsImRhdGFUeXBlIjoic2NlbmUifQo=(/figmeta)--&gt;" style="line-height: 19.6px;"></span>Dear Codingers!</p>
+    <p style="line-height: 140%;"><span data-metadata="&lt;!--(figmeta)eyJmaWxlS2V5IjoiTHJJMHBSU20xM203UWc0Tk1XZXVQeCIsInBhc3RlSUQiOjE4NjYyMDI5OTgsImRhdGFUeXBlIjoic2NlbmUifQo=(/figmeta)--&gt;" style="line-height: 19.6px;"></span>Untuk Pengguna Yang Terhormat!</p>
 <p style="line-height: 140%;"> </p>
 <p style="line-height: 140%;"><br />Kami mengirimkan pesan email berisi link untuk mengubah password anda. Link akan kadaluarsa dalam 1 menit.<strong></strong><br /><br /><strong>Klik dibawah!</strong></p>
   </div>
@@ -176,7 +176,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
   <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
 <div align="center">
   <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://unlayer.com" style="height:49px; v-text-anchor:middle; width:521px;" arcsize="61%"  stroke="f" fillcolor="#ff7f3f"><w:anchorlock/><center style="color:#ffffff;"><![endif]-->
-    <a href="{{ route('updatepass') }}" target="_blank" class="v-button v-size-width" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #ff7f3f; border-radius: 30px;-webkit-border-radius: 30px; -moz-border-radius: 30px; width:100%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-width: 0px; border-top-style: solid; border-top-color: #CCC; border-left-width: 0px; border-left-style: solid; border-left-color: #CCC; border-right-width: 0px; border-right-style: solid; border-right-color: #CCC; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: #CCC;font-size: 24px;">
+    <a href="{{ route('updatepass') }}" target="_blank" class="v-button v-size-width" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #28c76f; border-radius: 30px;-webkit-border-radius: 30px; -moz-border-radius: 30px; width:100%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-width: 0px; border-top-style: solid; border-top-color: #CCC; border-left-width: 0px; border-left-style: solid; border-left-color: #CCC; border-right-width: 0px; border-right-style: solid; border-right-color: #CCC; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: #CCC;font-size: 24px;">
       <span style="display:block;padding:10px 20px;line-height:120%;">KLIK</span>
     </a>
     <!--[if mso]></center></v:roundrect><![endif]-->
@@ -239,7 +239,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
 
 <!--[if (mso)|(IE)]><td align="center" width="600" class="v-col-border" style="background-color: #5995fd;width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
 <div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
-  <div style="background-color: #5995fd;height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
+  <div style="background-color: #50e493;height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
   <!--[if (!mso)&(!IE)]><!--><div class="v-col-border" style="box-sizing: border-box; height: 100%; padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"><!--<![endif]-->
 
 <table id="u_content_social_1" style="font-family:'Raleway',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -347,7 +347,7 @@ table, td { color: #000000; } #u_body a { color: #0000ee; text-decoration: under
   <tr>
     <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-      <img align="center" border="0" src="https://assets.unlayer.com/projects/0/1715504262818-coding.png" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 140px;" width="140" class="v-src-width v-src-max-width"/>
+      <img align="center" border="0" src="" alt="image" title="image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 140px;" width="140" class="v-src-width v-src-max-width"/>
 
     </td>
   </tr>
