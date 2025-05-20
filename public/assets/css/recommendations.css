@@ -1,13 +1,17 @@
-/* resources/css/recommendations.css */
-
-/* Container */
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html, body{
+        overflow-x: hidden;
+    }
 .container.py-4 {
     background-color: #ffffff;
     padding: 1.5rem;
     border-radius: 0.5rem;
   }
 
-  /* Form Filter */
   #recommendation-form {
     background-color: #ffffff;
     padding: 1rem;
@@ -24,7 +28,6 @@
     border-radius: 0.25rem;
   }
 
-  /* Button */
   .btn-primary {
     background-color: #28a745;
     color: #ffffff;
