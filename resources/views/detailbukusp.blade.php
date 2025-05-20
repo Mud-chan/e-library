@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ asset('assets/images/logo2.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/detailbukuadmin.css') }}" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
     </script>
@@ -189,7 +189,7 @@
                                     @if($comment->id_siswa == $userId)
                                     <button type="button" onclick="editComment('{{ $comment->id }}', '{{ addslashes($comment->comment) }}')" style="background-color: #2ecc71; padding: 5px 9px; font-size:12px;">Edit</button>
 
-                        
+
                                     @endif
 
 

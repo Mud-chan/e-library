@@ -652,7 +652,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="lqd-section case-studies pt-55 pb-120">
+                <section id="informasi" class="lqd-section case-studies pt-55 pb-120">
                     <div class="container">
                         <div class="row justify-center">
                             <div class="col col-12 col-xl-4 col-md-8 mb-25 p-0 text-center module-title">

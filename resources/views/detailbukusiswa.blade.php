@@ -79,12 +79,13 @@
           <h3>{{ $content->judul }}</h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
-        <p><strong>Rata-rata Rating:</strong> {{ number_format($averageRating, 1, '.', '.') }}/5.0 ⭐</p>
 
 
-        <p><strong>Jumlah Dibaca:</strong> {{ $jumlahView }} kali</p>
 
-        <form id="ratingForm" action="{{ route('buku.rating', ['id' => $content->id]) }}" method="POST">
+      </div>
+
+      <div class="tags">
+        <form id="ratingForm" action="{{ route('buku.rating', ['id' => $content->id]) }}" method="POST" style="margin-bottom: 2vh;">
             @csrf
             <div class="rating-stars">
                 @for ($i = 1; $i <= 5; $i++)
@@ -110,12 +111,10 @@
                 {{ $isBookmarked ? '🔖  Bookmarked' : '🔖  Bookmark' }}
             </button>
         </form>
-
-      </div>
-
-      <div class="tags">
+        <span>Jumlah Dibaca: {{ $jumlahView }} kali</span>
         <span>Kategori : {{ $content->kategori }}</span>
         <span>Kelas : {{ $content->tingkatan ?? 'Tidak ada tingkatan' }}</span>
+        <span><strong>Rata-rata Rating:</strong> {{ number_format($averageRating, 1, '.', '.') }}/5.0 ⭐</span>
       </div>
 
     {{-- <div class="chapters">
