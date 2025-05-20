@@ -21,7 +21,7 @@ class EmailController extends Controller
 
     public function uppas()
     {
-        return view('updatepass');
+        return view('updatepassword');
     }
 }
 
