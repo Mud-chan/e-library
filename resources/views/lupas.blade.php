@@ -82,8 +82,8 @@
                     <p>
                     <ul class="ull" style="text-align: left">
                         <li>Masukkan alamat email yang ingin Anda ubah password</li>
-                        <li>Klik KIRIM OTP untuk mendapatkan kode OTP yang dikirim ke email Anda</li>
-                        <li>Cek email Anda, lalu masukkan kode OTP yang telah kami kirim di kolom pengisian kode OTP
+                        <li>Klik KIRIM untuk mendapatkan link ubah password yang dikirim ke email Anda</li>
+                        <li>Cek email Anda, lalu klik link ubah password yang telah kami kirim di email anda
                         </li>
                         <li>Klik VERIFIKASI untuk masuk ke halaman selanjutnya</li>
                     </ul>
