@@ -3,16 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Conterbaca;
+use App\Models\CounterBaca;
 
 class CounterBacaSeeder extends Seeder
 {
     public function run()
     {
-        Conterbaca::create([
+        CounterBaca::create([
             'id' => 'view1',
             'id_buku' => 1,
-            'id_siswa' => 2,
+            'id_siswa' => 'siswa1', // Sesuai dengan id di tabel siswa
             'date' => now(),
         ]);
     }

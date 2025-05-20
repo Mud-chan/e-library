@@ -1,23 +1,25 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateBukuTable extends Migration
 {
     public function up()
     {
         Schema::create('buku', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('guru_id');
+            $table->id();
+            $table->string('guru_id'); // Sesuai dengan id string di tabel siswa
+            $table->foreign('guru_id')->references('id')->on('siswa')->onDelete('cascade');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->string('kategori');
             $table->string('tingkatan')->nullable();
             $table->string('thumb')->nullable();
             $table->string('pdf')->nullable();
-            $table->date('date')->nullable();
-            $table->timestamps(); // kalau kamu ingin pakai created_at dan updated_at
+            $table->timestamp('date')->useCurrent();
+            $table->timestamps();
         });
     }
 
@@ -25,4 +27,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('buku');
     }
-};
+}

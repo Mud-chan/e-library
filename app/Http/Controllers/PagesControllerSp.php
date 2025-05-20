@@ -8,7 +8,7 @@ use App\Models\Buku;
 use App\Models\Bookmark;
 use App\Models\Rating;
 use App\Models\Comments;
-use App\Models\Conterbaca;
+use App\Models\Counterbaca;
 use App\Models\Histori;
 use App\Charts\SiswaChart;
 use App\Charts\GuruChart;
@@ -470,7 +470,7 @@ public function DetailBukusiswa($videoId)
     }
 
     // Tambah view ke counter baca
-    Conterbaca::create([
+    Counterbaca::create([
         'id' => uniqid(),
         'id_buku' => $videoId,
         'id_siswa' => $tutorId,
@@ -502,7 +502,7 @@ public function DetailBukusiswa($videoId)
     $isBookmarked = Bookmark::where('id_siswa', $tutorId)->where('id_buku', $videoId)->exists();
     $existingRating = Rating::where('id_siswa', $tutorId)->where('id_buku', $videoId)->value('rating') ?? 0;
 
-    $jumlahView = Conterbaca::where('id_buku', $videoId)->count();
+    $jumlahView = Counterbaca::where('id_buku', $videoId)->count();
 
     // Tambahkan: Hitung rata-rata rating
     $averageRatingRaw = Rating::where('id_buku', $videoId)->avg('rating');

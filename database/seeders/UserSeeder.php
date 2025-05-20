@@ -10,16 +10,22 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'id' => 1,
-            'name' => 'Guru Test',
+            'id' => 'guru1',
+            'nama' => 'Guru Test',
             'email' => 'guru@test.com',
             'password' => bcrypt('password'),
+            'kelas' => null,
+            'jenis_kelamin' => 'Laki-laki',
+            'image' => null,
         ]);
         User::create([
-            'id' => 2,
-            'name' => 'Siswa Test',
+            'id' => 'siswa1',
+            'nama' => 'Siswa Test',
             'email' => 'siswa@test.com',
             'password' => bcrypt('password'),
+            'kelas' => 'XII IPA 1',
+            'jenis_kelamin' => 'Perempuan',
+            'image' => null,
         ]);
     }
 }
