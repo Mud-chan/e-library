@@ -45,7 +45,7 @@ jobs:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ':memory:'
-        run: vendor/bin/phpunit --verbose --testdox
+        run: vendor/bin/phpunit --testdox
 
       - name: Run PHPStan (static analysis)
         run: vendor/bin/phpstan analyse --memory-limit=1G
