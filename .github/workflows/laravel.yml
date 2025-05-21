@@ -28,7 +28,12 @@ jobs:
           sed -i "s|^APP_KEY=.*|APP_KEY=base64:$(openssl rand -base64 32)|" .env.testing
           sed -i "s|^APP_ENV=.*|APP_ENV=testing|" .env.testing
           sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
-          sed -i "s|^DB_DATABASE=.*|DB_DATABASE=:memory:|" .env.testing
+          sed -i "s|^DB_DATABASE=.*|DB_DATABASE=$(pwd)/database/testing.sqlite|" .env.testing
+
+      - name: Create SQLite testing database file
+        run: |
+          mkdir -p database
+          touch database/testing.sqlite
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
@@ -37,30 +42,28 @@ jobs:
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php artisan migrate --force
 
       - name: Debug database tables
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
-        run: |
-          php artisan tinker --execute="DB::select('SELECT name FROM sqlite_master WHERE type = \'table\';')"
-
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
+        run: php artisan tinker --execute="DB::select('SELECT name FROM sqlite_master WHERE type = \'table\';')"
 
       - name: Run test seeders
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php artisan db:seed --force
 
       - name: Run PHPUnit tests
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: ':memory:'
+          DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: vendor/bin/phpunit --testdox
 
       - name: Run PHPStan (static analysis)
