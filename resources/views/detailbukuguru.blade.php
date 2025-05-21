@@ -10,10 +10,104 @@
   <link rel="stylesheet" href="{{ asset('assets/css/detailbuku.css') }}" />
 
 </head>
-<body>
+<style>
+    .autocomplete-box {
+        position: absolute;
+        background: #fff;
+        max-height: 300px;
+        overflow-y: auto;
+        color: black;
+        z-index: 999;
+        width: 50%;
+        text-decoration: none;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10%;
 
+
+        /* atur sesuai kebutuhan, atau pakai 50% + translateY(-50%) jika ingin tengah vertikal */
+
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        border-radius: 6px;
+    }
+
+    .autocomplete-box .item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: black;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        text-decoration: none;
+    }
+
+    .autocomplete-box .item:hover {
+        background: #f0f0f0;
+    }
+
+    .autocomplete-box .item img {
+        width: 60px;
+        height:100px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.ajax({
+                        url: '{{ route('ajax.cari.buku') }}',
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            let resultsBox = $('#search-results');
+                            resultsBox.empty();
+
+                            if (data.length === 0) {
+                                resultsBox.append(
+                                    '<div class="item">Buku tidak ditemukan</div>');
+                            } else {
+                                data.forEach(item => {
+                                    resultsBox.append(`
+                                    <a href="/detail-buku-siswa/${item.id}" class="item">
+                                        <img src="/uploaded_files/${item.thumb}" alt="">
+                                        <div>
+                                            <strong>${item.judul}</strong><br>
+                                            <small>${item.kategori}, ${item.tingkatan}</small>
+                                        </div>
+                                    </a>
+                                `);
+                                });
+                            }
+
+                            resultsBox.show();
+                        }
+                    });
+                } else {
+                    $('#search-results').hide();
+                }
+            });
+
+            // Sembunyikan saat klik luar
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#search-input, #search-results').length) {
+                    $('#search-results').hide();
+                }
+            });
+        });
+    </script>
     {{-- <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}"> --}}
     {{-- <script src="{{ asset('assets/js/admin_script.js') }}"></script> --}}
+
 
     <header class="header">
 
@@ -23,7 +117,7 @@
 
             <form action={{ route('caricontentguru') }}" method="post" class="search-form">
                 @csrf
-                <input type="text" name="search" placeholder="Cari Buku..." required maxlength="100">
+                <input type="text" name="search" id="search-input" placeholder="Cari Buku..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
             </form>
 
@@ -48,6 +142,7 @@
         </section>
 
     </header>
+    <div id="search-results" class="autocomplete-box"></div>
 
   <div class="content">
     {{-- <div class="overlay">
