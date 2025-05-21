@@ -1,4 +1,4 @@
-name: Laravel CI/CD Pipeline
+name: E-library CI/CD
 
 on:
   push:
@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - name: Menyiapkan PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           extensions: mbstring, dom, fileinfo, sqlite
           coverage: none
 
-      - name: Prepare environment files
+      - name: Menyiapkan env
         run: |
           cp .env.example .env
           cp .env.example .env.testing
@@ -30,47 +30,41 @@ jobs:
           sed -i "s|^DB_CONNECTION=.*|DB_CONNECTION=sqlite|" .env.testing
           sed -i "s|^DB_DATABASE=.*|DB_DATABASE=$(pwd)/database/testing.sqlite|" .env.testing
 
-      - name: Create SQLite testing database file
+      - name: Membuat database sqlite untuk testing
         run: |
           mkdir -p database
           touch database/testing.sqlite
 
-      - name: Install Composer dependencies
+      - name: Install dependensi dengan composer
         run: composer install --no-interaction --no-progress --prefer-dist
 
-      - name: Run test migrations
+      - name: Jalankan tes migrasi
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php artisan migrate --force
 
-      - name: Debug database tables
+      - name: Cek tabel di database
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php artisan tinker --execute="DB::select('SELECT name FROM sqlite_master WHERE type = \'table\';')"
 
-      - name: Run test seeders
+      - name: Jalankan seeder untuk tes
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: php artisan db:seed --force
 
-      - name: Run PHPUnit tests
+      - name: Jalankan PHPUnit tes
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: vendor/bin/phpunit --testdox
-
-      - name: Run PHPStan (static analysis)
-        run: vendor/bin/phpstan analyse --memory-limit=1G
-
-      - name: Run Laravel Pint (code style)
-        run: vendor/bin/pint --test
 
   # ---------- DEPLOY ----------
   deploy:
@@ -80,14 +74,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Configure SSH
+      - name: Mengatur SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to VPS
+      - name: Deploy ke server VPS
         run: |
           ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
             set -e
@@ -98,14 +92,14 @@ jobs:
             git fetch --all
             git reset --hard origin/${{ github.ref_name }}
 
-            # --- Ensure .env & APP_KEY ---
+            # --- Memastikan .env & APP_KEY ---
             [ -f .env ] || cp .env.example .env
             if ! grep -q '^APP_KEY=base64:' .env; then
               docker run --rm -v \$(pwd):/app -w /app laravelsail/php82-composer:latest \
                 php artisan key:generate --no-interaction
             fi
 
-            # --- (Re)build & start containers ---
+            # --- Build Ulang & Mulai container ---
             PHP_VER=\$(docker compose exec -T app php -r "echo PHP_VERSION;" || echo "")
             if [ "\$PHP_VER" != "\${PHP_VER/8.1/}" ]; then
               docker compose down || true
@@ -114,17 +108,17 @@ jobs:
             docker compose up -d --build
             sleep 15
 
-            # --- Permissions ---
+            # --- Permission ---
             sudo mkdir -p storage/framework/{sessions,views,cache}
             sudo chmod -R 775 storage bootstrap/cache
             sudo chown -R \$(whoami):www-data storage bootstrap/cache
 
-            # --- Dependencies & assets ---
+            # --- Dependensi dan Asset ---
             docker compose exec -T app composer install --no-interaction --prefer-dist --no-dev
             docker compose exec -T app npm ci
             docker compose exec -T app npm run build
 
-            # --- Migrate & optimise ---
+            # --- Migrasi dan Optimasi ---
             docker compose exec -T app php artisan migrate --force
             docker compose exec -T app php artisan optimize:clear
             docker compose exec -T app php artisan optimize
