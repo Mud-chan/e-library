@@ -38,7 +38,7 @@
 
 <section class="tutor-profile" style="min-height: calc(100vh - 19rem);">
 
-    
+
 
     @if (session('success'))
     <div class="modal-box" id="success-message">
@@ -71,12 +71,12 @@
         <div class="box">
            <span>{{ $totalUsers }}</span>
            <p>Total Siswa</p>
-           <a href="" class="btn">view Siswa</a>
+           <a href="{{ route('siswa.index') }}" class="btn">view Siswa</a>
         </div>
         <div class="box">
            <span>{{ $totalBuku }}</span>
            <p>Total Buku</p>
-           <a href="" class="btn">view Buku</a>
+           <a href="{{ route('contentsp.index') }}" class="btn">view Buku</a>
         </div>
         {{-- <div class="box">
            <span></span>
