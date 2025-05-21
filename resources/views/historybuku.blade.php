@@ -10,6 +10,47 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/css/katalogbuku.css') }}">
 </head>
+<style>
+    .autocomplete-box {
+        position: absolute;
+        background: #fff;
+        max-height: 300px;
+        overflow-y: auto;
+        color: black;
+        z-index: 999;
+        width: 50%;
+
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10%;
+        /* atur sesuai kebutuhan, atau pakai 50% + translateY(-50%) jika ingin tengah vertikal */
+
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        border-radius: 6px;
+    }
+
+    .autocomplete-box .item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: black;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+
+    .autocomplete-box .item:hover {
+        background: #f0f0f0;
+    }
+
+    .autocomplete-box .item img {
+        width: 40px;
+        height: 60px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+</style>
 
 <body>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
