@@ -1,7 +1,100 @@
 @extends('components.adminheader')
 @section('main')
 <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}">
+<style>
+    .autocomplete-box {
+        position: absolute;
+        background: #fff;
+        max-height: 300px;
+        overflow-y: auto;
+        color: black;
+        z-index: 999;
+        width: 50%;
+        text-decoration: none;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10%;
 
+
+        /* atur sesuai kebutuhan, atau pakai 50% + translateY(-50%) jika ingin tengah vertikal */
+
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        border-radius: 6px;
+    }
+
+    .autocomplete-box .item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: black;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+        text-decoration: none;
+        font-size: 150%;
+    }
+
+    .autocomplete-box .item:hover {
+        background: #f0f0f0;
+    }
+
+    .autocomplete-box .item img {
+        width: 60px;
+        height:100px;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.ajax({
+                        url: '{{ route('ajax.cari.buku') }}',
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            let resultsBox = $('#search-results');
+                            resultsBox.empty();
+
+                            if (data.length === 0) {
+                                resultsBox.append(
+                                    '<div class="item">Buku tidak ditemukan</div>');
+                            } else {
+                                data.forEach(item => {
+                                    resultsBox.append(`
+                                    <a href="/detail-buku-siswa/${item.id}" class="item">
+                                        <img src="/uploaded_files/${item.thumb}" alt="">
+                                        <div>
+                                            <strong>${item.judul}</strong><br>
+                                            <small>${item.kategori}, ${item.tingkatan}</small>
+                                        </div>
+                                    </a>
+                                `);
+                                });
+                            }
+
+                            resultsBox.show();
+                        }
+                    });
+                } else {
+                    $('#search-results').hide();
+                }
+            });
+
+            // Sembunyikan saat klik luar
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#search-input, #search-results').length) {
+                    $('#search-results').hide();
+                }
+            });
+        });
+    </script>
 
 {{-- <script src="{{ asset('assets/js/admin_script.js') }}"></script> --}}
 <header class="header">
@@ -15,7 +108,7 @@
 
         <form id="basicSearchForm" action="{{ route('caricontentguru') }}" method="post" class="search-form">
             @csrf
-            <input type="text" name="search" placeholder="Cari Materi..." required maxlength="100">
+            <input type="text" name="search" id="search-input" placeholder="Cari Materi..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
 
@@ -42,6 +135,7 @@
 </header>
 
 <section class="contents">
+    <div id="search-results" class="autocomplete-box"></div>
     <div class="heading2">
         <h1>Daftar Buku</h1> <a href="{{ route('add_content_guru') }}" id="plus" class="btn" style="margin-bottom: 1rem; width:20%">Tambah Buku</a>
 
@@ -105,7 +199,7 @@
                     </div>
                     <img src="../uploaded_files/{{ $content->thumb }}" class="thumb" alt="">
                     <h3 class="title">{{ $content->judul }}</h3>
-                    
+
                     <a href="{{ route('detailbukuguru.content', ['videoId' => $content->id]) }}" class="btn">Baca Buku</a>
 
                 </div>
