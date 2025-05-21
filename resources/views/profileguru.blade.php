@@ -71,12 +71,12 @@
         <div class="box">
            <span>{{ $totalUsers }}</span>
            <p>Total Siswa</p>
-           <a href="" class="btn">view Siswa</a>
+           <a href="{{ route('siswaguru.index') }}" class="btn">view Siswa</a>
         </div>
         <div class="box">
            <span>{{ $totalBuku }}</span>
            <p>Total Buku</p>
-           <a href="" class="btn">view Buku</a>
+           <a href="{{ route('contentguru.index') }}" class="btn">view Buku</a>
         </div>
         {{-- <div class="box">
            <span></span>
