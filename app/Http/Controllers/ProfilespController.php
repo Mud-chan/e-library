@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Guru;
 use App\Models\Bookmark;
 use App\Models\Histori;
+use App\Models\Buku;
 // use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -30,6 +31,7 @@ class ProfilespController extends Controller
 
         // Hitung total user
         $totalUsers = User::count();
+        $totalBuku = Buku::count();
  // Ambil URL gambar profil pengguna
 
         return view('profilesp', [
@@ -39,7 +41,8 @@ class ProfilespController extends Controller
             "userProfesi" => $userProfesi,
             "tutorsId" => $tutorsId,
             "totalTutors" => $totalTutors,
-            "totalUsers" => $totalUsers
+            "totalUsers" => $totalUsers,
+            "totalBuku" => $totalBuku,
         ]);
     }
 
