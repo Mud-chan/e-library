@@ -74,7 +74,7 @@
            <a href="" class="btn">view Siswa</a>
         </div>
         <div class="box">
-           <span></span>
+           <span>{{ $totalBuku }}</span>
            <p>Total Pendapatan</p>
            <a href="" class="btn">view Transaksi</a>
         </div>
