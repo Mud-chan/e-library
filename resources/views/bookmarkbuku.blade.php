@@ -11,6 +11,59 @@
 </head>
 <body>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('input', function() {
+                let query = $(this).val();
+                if (query.length >= 2) {
+                    $.ajax({
+                        url: '{{ route('ajax.cari.buku') }}',
+                        method: 'GET',
+                        data: {
+                            query: query
+                        },
+                        success: function(data) {
+                            let resultsBox = $('#search-results');
+                            resultsBox.empty();
+
+                            if (data.length === 0) {
+                                resultsBox.append(
+                                    '<div class="item">Buku tidak ditemukan</div>');
+                            } else {
+                                data.forEach(item => {
+                                    resultsBox.append(`
+                                    <a href="/detail-buku-siswa/${item.id}" class="item">
+                                        <img src="/uploaded_files/${item.thumb}" alt="">
+                                        <div>
+                                            <strong>${item.judul}</strong><br>
+                                            <small>${item.kategori}, ${item.tingkatan}</small>
+                                        </div>
+                                    </a>
+                                `);
+                                });
+                            }
+
+                            resultsBox.show();
+                        }
+                    });
+                } else {
+                    $('#search-results').hide();
+                }
+            });
+
+            // Sembunyikan saat klik luar
+            $(document).click(function(e) {
+                if (!$(e.target).closest('#search-input, #search-results').length) {
+                    $('#search-results').hide();
+                }
+            });
+        });
+    </script>
+
+
+
+
   <!-- Navbar -->
   <header class="header">
 
@@ -18,11 +71,12 @@
 
         <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
-        <form action="{{ route('caribuku') }}" method="post" class="search-form">
-            @csrf
-            <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
-            <button type="submit" class="fas fa-search" name="search_btn"></button>
-        </form>
+        <form action="{{ route('caribuku') }}" method="post" class="search-form" autocomplete="off">
+                @csrf
+                <input type="text" id="search-input" name="search" placeholder="Cari Buku..." required
+                    maxlength="100">
+                <button type="submit" class="fas fa-search" name="search_btn"></button>
+            </form>
 
         <div class="icons">
             {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
@@ -48,6 +102,7 @@
     </section>
 
 </header>
+    <div id="search-results" class="autocomplete-box"></div>
 
   <!-- Katalog Buku -->
   <section class="katalog-buku">
