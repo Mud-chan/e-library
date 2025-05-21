@@ -52,7 +52,7 @@
   <!-- Katalog Buku -->
   <section class="katalog-buku">
 
-    <h3><span class="ikon-bulet"></span> Boolmark</h3>
+    <h3><span class="ikon-bulet"></span> Bookmark</h3>
     <div class="grid-buku">
 
         @if ($bookmarkedBooks->count() > 0)
