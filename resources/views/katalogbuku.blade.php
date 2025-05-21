@@ -124,7 +124,6 @@
                 <input type="text" id="search-input" name="search" placeholder="Cari Buku..." required
                     maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
-
             </form>
 
             <div class="logo-kanan">
