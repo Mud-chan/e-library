@@ -77,7 +77,7 @@
             <a href="{{ route('contentsp.index') }}"><i class="fa-solid fa-book"></i><span>Buku</span></a>
             <a href="{{ route('tutor.index') }}"><i class="fa-solid fa-user-graduate"></i><span>Guru</span></a>
             <a href="{{ route('siswa.index') }}"><i class="fas fa-graduation-cap"></i><span>Siswa</span></a>
-            <a href=""><i class="fa-solid fa-circle-exclamation"></i><span>Informasi</span></a>
+            
             {{-- <a href=""><i class="fa-solid fa-circle-dollar-to-slot"></i><span>Peminjaman</span></a> --}}
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"><i class="fas fa-right-from-bracket"></i><span>Log out</span></a>
 
