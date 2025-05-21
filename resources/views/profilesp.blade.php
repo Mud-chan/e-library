@@ -38,7 +38,7 @@
 
 <section class="tutor-profile" style="min-height: calc(100vh - 19rem);">
 
-    <h1 class="heading">Detail Profil</h1>
+    
 
     @if (session('success'))
     <div class="modal-box" id="success-message">
@@ -65,8 +65,8 @@
        <div class="flex">
         <div class="box">
            <span>{{ $totalTutors }}</span>
-           <p>Total Tutor</p>
-           <a href="{{ route('tutor.index') }}" class="btn">view Tutor</a>
+           <p>Total Guru</p>
+           <a href="{{ route('tutor.index') }}" class="btn">view Guru</a>
         </div>
         <div class="box">
            <span>{{ $totalUsers }}</span>
@@ -75,8 +75,8 @@
         </div>
         <div class="box">
            <span>{{ $totalBuku }}</span>
-           <p>Total Pendapatan</p>
-           <a href="" class="btn">view Transaksi</a>
+           <p>Total Buku</p>
+           <a href="" class="btn">view Buku</a>
         </div>
         {{-- <div class="box">
            <span></span>
