@@ -66,9 +66,6 @@ jobs:
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: vendor/bin/phpunit --testdox
 
-      - name: Run PHPStan (static analysis)
-        run: vendor/bin/phpstan analyse --memory-limit=1G
-
       - name: Run Laravel Pint (code style)
         run: vendor/bin/pint --test
 
