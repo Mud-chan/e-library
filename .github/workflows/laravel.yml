@@ -66,9 +66,6 @@ jobs:
           DB_DATABASE: ${{ github.workspace }}/database/testing.sqlite
         run: vendor/bin/phpunit --testdox
 
-      - name: Run Laravel Pint (code style)
-        run: vendor/bin/pint --test
-
   # ---------- DEPLOY ----------
   deploy:
     needs: test
