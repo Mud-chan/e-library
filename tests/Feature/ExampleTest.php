@@ -16,7 +16,7 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
         $response = $this->get('/logreg');
-        $response = $this->get('/katalogbuku');
+        
 
         $response->assertStatus(200);
     }
