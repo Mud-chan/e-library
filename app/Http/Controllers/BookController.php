@@ -57,7 +57,7 @@ class BookController extends Controller
 
         ['results' => $results, 'process' => $process] = $this->topsis->calculate($books);
 
-        // PAGINASI MANUAL
+        // paginasi
         $results = collect($results);
         $page = $req->get('page', 1);
         $perPage = 10;
