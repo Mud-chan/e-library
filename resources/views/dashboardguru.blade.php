@@ -63,7 +63,7 @@
 
                 <!-- Insights -->
                 <ul class="insights">
-                    <a href="{{ route('contentsp.index') }}">
+                    <a href="{{ route('contentguru.index') }}">
                         <li>
                             <i class='bx bx-book-open'></i>
                             <span class="info">
@@ -75,7 +75,7 @@
                         </li>
                     </a>
 
-                    <a href="{{ route('siswa.index') }}">
+                    <a href="{{ route('siswaguru.index') }}">
                         <li><i class='bx bx-user'></i>
                             <span class="info">
                                 <h3>
