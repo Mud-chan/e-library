@@ -63,11 +63,7 @@
        </div>
 
        <div class="flex">
-        <div class="box">
-           <span>{{ $totalBuku }}</span>
-           <p>Total Tutor</p>
-           <a href="{{ route('tutor.index') }}" class="btn">view Buku</a>
-        </div>
+        
         <div class="box">
            <span>{{ $totalUsers }}</span>
            <p>Total Siswa</p>
