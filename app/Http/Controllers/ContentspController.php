@@ -237,9 +237,9 @@ public function uploadContent(Request $request)
         $content = Buku::where('id', $videoId)
             ->first();
 
-        if (!$content) {
-            return redirect()->route('contentsp')->with('error', 'Video not found!');
-        }
+        // if (!$content) {
+        //     return redirect()->route('contentsp')->with('error', 'Video not found!');
+        // }
 
         // Load the playlists associated with the tutor
         // $playlists = Buku::where('guru_id', $tutorId)->get();
