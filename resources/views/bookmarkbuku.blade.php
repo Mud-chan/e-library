@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/css/katalogbuku.css') }}">
+    <script async src="https://cse.google.com/cse.js?cx=50277ad2efc244574"></script>
 </head>
 <style>
     .autocomplete-box {
@@ -112,12 +113,24 @@
 
         <a href="{{ url('/katalogbuku') }}" class="logo">Siswa</a>
 
+        <div class="search-type-selector">
+            <button type="button" class="search-type-btn active" onclick="setSearchType('basic')">Biasa</button>
+            <button type="button" class="search-type-btn" onclick="setSearchType('gcse')">Lanjutan</button>
+            </div>
+
+
+        <div id="basicSearchForm" class="search-form">
         <form action="{{ route('caribuku') }}" method="post" class="search-form" autocomplete="off">
                 @csrf
                 <input type="text" id="search-input" name="search" placeholder="Cari Buku..." required
                     maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
             </form>
+        </div>
+
+        <div id="gcseSearchWrapper" class="gcse-search-wrapper inactive">
+        <div class="gcse-search"></div>
+        </div>
 
         <div class="icons">
             {{-- <div id="menu-btn" class="fas fa-bars"></div> --}}
@@ -250,6 +263,27 @@
         url.searchParams.set('page', page);
         window.location.href = url.toString();
     }
+
+    function setSearchType(type) {
+    const basicForm = document.getElementById('basicSearchForm');
+    const gcseWrapper = document.getElementById('gcseSearchWrapper');
+    const buttons = document.querySelectorAll('.search-type-btn');
+
+    if (type === 'basic') {
+        basicForm.classList.remove('inactive');
+        gcseWrapper.classList.add('inactive');
+    } else if (type === 'gcse') {
+        basicForm.classList.add('inactive');
+        gcseWrapper.classList.remove('inactive');
+    }
+
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.search-type-btn[onclick*="${type}"]`).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setSearchType('basic');
+});
 </script>
 <script src="{{ asset('assets/js/admin_script.js') }}"></script>
 </body>

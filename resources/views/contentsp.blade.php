@@ -14,13 +14,7 @@
         left: 50%;
         transform: translateX(-50%);
         top: 10%;
-
-
-        /* atur sesuai kebutuhan, atau pakai 50% + translateY(-50%) jika ingin tengah vertikal */
-
-
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
         border-radius: 6px;
     }
 
@@ -87,7 +81,6 @@
                 }
             });
 
-            // Sembunyikan saat klik luar
             $(document).click(function(e) {
                 if (!$(e.target).closest('#search-input, #search-results').length) {
                     $('#search-results').hide();
@@ -96,7 +89,6 @@
         });
     </script>
 
-{{-- <script src="{{ asset('assets/js/admin_script.js') }}"></script> --}}
 <header class="header">
     <section class="flex">
         <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
@@ -204,7 +196,7 @@
 
     <div class="page">
         <div class="pagination">
-            <ul> <!-- pages or li are comes from javascript --> </ul>
+            <ul>  </ul>
         </div>
     </div>
 </section>
@@ -212,7 +204,7 @@
 <script>
     function closeModalAndClearSession() {
         document.getElementById('success-message').style.display = 'none';
-        // Tambahkan kode untuk menghapus sesi jika diperlukan
+        
     }
 
     const element = document.querySelector(".pagination ul");
