@@ -235,7 +235,6 @@ public function uploadContent(Request $request)
         }
 
         $content = Buku::where('id', $videoId)
-            ->where('guru_id', $tutorId)
             ->first();
 
         if (!$content) {
@@ -243,10 +242,10 @@ public function uploadContent(Request $request)
         }
 
         // Load the playlists associated with the tutor
-        $playlists = Buku::where('guru_id', $tutorId)->get();
+        // $playlists = Buku::where('guru_id', $tutorId)->get();
 
         // Render the update content form view with the $content data and playlists
-        return view('update_content', compact('content', 'playlists'), [
+        return view('update_content', compact('content'), [
             "title" => "Content Admin",
             "userName" => $userName, // Teruskan nama pengguna ke tampilan
             "userImage" => $userImage,
