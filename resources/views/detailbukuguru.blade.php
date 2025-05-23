@@ -183,7 +183,7 @@
         <form action="{{ route('video.storeCommentGuru', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
-            <textarea rows="3" placeholder="Write a comment............" name="comment_box"></textarea>
+            <textarea rows="3" placeholder="Write a comment............" name="comment_box" required></textarea>
             <button name="add_comment">Submit</button>
         </form>
 

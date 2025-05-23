@@ -227,7 +227,7 @@
         <form action="{{ route('video.storeCommentsiswa', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
-            <textarea rows="3" placeholder="Tulis comment............" name="comment_box"></textarea>
+            <textarea rows="3" placeholder="Tulis comment............" name="comment_box" required></textarea>
             <button name="add_comment">Kirim</button>
         </form>
 
