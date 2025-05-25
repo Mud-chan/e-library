@@ -24,10 +24,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profileasp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profileasp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">Log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -84,13 +84,13 @@
                 @endif
             </select> --}}
             </select>
-            <p>Sampul Buku <span>*</span></p>
+            <p>Sampul Buku (jpg/jpeg/png)<span>*</span></p>
             <input type="file" name="thumb" accept="image/*"  class="box" id="image">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 5MB</small>
+            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
 
-            <p>Unggah Buku (pdf) <span>*</span></p>
+            <p>Unggah Buku (pdf)<span>*</span></p>
             <input type="file" name="pdf" accept="application/pdf"  class="box" id="video">
-            <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran video terlalu besar maksimal 50MB</small>
+            <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 43 MB)</small>
             <input type="submit" value="Tambah Buku" name="submit" class="btn">
         </form>
 

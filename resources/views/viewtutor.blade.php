@@ -7,11 +7,11 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Tutor</a>
+            <a href="{{ url('/dashboardsp') }}" class="logo">Guru</a>
 
             <form action="{{ route('tutor.caritutor') }}" method="post" class="search-form">
                 @csrf
-                <input type="text" name="search" placeholder="Cari Tutor..." required maxlength="100">
+                <input type="text" name="search" placeholder="Cari Guru..." required maxlength="100">
                 <button type="submit" class="fas fa-search" name="search_btn"></button>
             </form>
 
@@ -26,10 +26,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -51,20 +51,20 @@
                         </div>
                         <img src="../uploaded_files/{{ $content->image }}" class="thumb" alt="">
                         <h3 class="title">Nama : {{ $content->nama }}</h3>
-                        <h4 class="title">{{ $content->email }} </h4>
-                        <h4 class="title">{{ $content->mengampu }}</h4>
+                        <h4 class="title">Email : {{ $content->email }} </h4>
+                        <h4 class="title">Pengajar : {{ $content->mengampu }}</h4>
                             <form action="{{ route('delete_guru') }}" method="post" class="flex-btn">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $content->id }}">
                                 <a href="{{ route('update.guru.form', ['guruId' => $content->id]) }}"
                                     class="option-btn">Ubah</a>
                                 <button type="submit" class="delete-btn"
-                                    onclick="return confirm('Anda Yakin Ingin Menghapus Guru? Harap Diperhatikan Jika Menghapus Guru Maka Akan Berdampak Pada Buku Yang Pernah Di Upload Guru');">Hapus</button>
+                                    onclick="return confirm('Anda Yakin Ingin Menghapus Data Guru? Harap Diperhatikan! Jika Menghapus Data Guru, Maka Data Buku Yang Pernah Diunggah Guru Tersebut Akan Ikut Terhapus');">Hapus</button>
                             </form>
                     </div>
                 @endforeach
             @else
-                <p class="empty">No contents added yet!</p>
+                <p class="empty">Tidak ada data yang ditambahkan!</p>
             @endif
         </div>
         <div class="page">

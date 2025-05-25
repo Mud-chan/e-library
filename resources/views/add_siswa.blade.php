@@ -24,10 +24,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profileasp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profileasp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">Log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -47,7 +47,7 @@
 
         <form action="{{ route('upload_siswa') }}" method="post" enctype="multipart/form-data" id="formup">
             @csrf
-            <p>Nama Siswa <span>*</span></p>
+            <p>Nama Siswa<span>*</span></p>
             <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Siswa" class="box">
 
             <p>Jenis Kelamin<span>*</span></p>
@@ -66,16 +66,16 @@
                 <option value="Kelas 5">Kelas 5</option>
                 <option value="Kelas 6">Kelas 6</option>
             </select>
-            <p>Email Siswa <span>*</span></p>
+            <p>Email Siswa<span>*</span></p>
             <input type="text" name="email" maxlength="100" required placeholder="Masukkan Email Siswa" class="box">
-            <p>Password <span>*</span></p>
-            <input type="text" name="password" maxlength="100" required placeholder="Masukkan Email Siswa" class="box">
-            <p>Konfirmasi Password <span>*</span></p>
+            <p>Password<span>*</span></p>
+            <input type="text" name="password" maxlength="100" required placeholder="Masukkan Password Siswa" class="box">
+            <p>Konfirmasi Password<span>*</span></p>
             <input type="text" name="password_confirmation" maxlength="100" required placeholder="Konfirmasi Password Siswa" class="box">
 
-            <p>Foto Siswa <span>*</span></p>
+            <p>Foto Siswa<span>*</span></p>
             <input type="file" name="image" accept="image/*"  class="box" id="image">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
             <input type="submit" value="Tambah Siswa" name="submit" class="btn">
         </form>
 

@@ -7,7 +7,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardsp') }}" class="logo">Admin.</a>
+            <a href="{{ url('/dashboardsp') }}" class="logo">Admin</a>
 
             <form action="{{ route('siswa.carisiswa') }}" method="post" class="search-form">
                 @csrf
@@ -26,10 +26,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">logout</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
             </div>
 
         </section>
@@ -51,19 +51,20 @@
                         </div>
                         <img src="../uploaded_files/{{ $content->image }}" class="thumb" alt="">
                         <h3 class="title">Nama : {{ $content->nama }}</h3>
-                        <h4 class="title">{{ $content->email }} {{ $content->kelas }}</h3>
+                        <h4 class="title">Email : {{ $content->email }} </h4>
+                        <h4 class="title">{{ $content->kelas }}</h4>
                             <form action="{{ route('delete_siswa') }}" method="post" class="flex-btn">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $content->id }}">
                                 <a href="{{ route('update.siswa.form', ['siswaId' => $content->id]) }}"
                                     class="option-btn">Ubah</a>
                                 <button type="submit" class="delete-btn"
-                                    onclick="return confirm('Anda Yakin Ingin Menghapus Siswa?');">Hapus</button>
+                                    onclick="return confirm('Anda Yakin Ingin Menghapus Data Siswa?');">Hapus</button>
                             </form>
                     </div>
                 @endforeach
             @else
-                <p class="empty">Belum ada Siswa Yang di Tambahkan</p>
+                <p class="empty">Belum ada siswa yang ditambahkan!</p>
             @endif
 
         </div>

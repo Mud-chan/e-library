@@ -7,7 +7,7 @@
 
         <section class="flex">
 
-            <a href="{{ url('/dashboardguru') }}" class="logo">Guru.</a>
+            <a href="{{ url('/dashboardguru') }}" class="logo">Guru</a>
 
             <form action="{{ route('siswa.carisiswaguru') }}" method="post" class="search-form">
                 @csrf
@@ -26,10 +26,10 @@
                 <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
                 <h3>{{ $guruName }}</h3>
                 <span>{{ $guruProfesi }}</span>
-                <a href="{{ url('/profileguru') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profileguru') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">logout</a>
+                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
             </div>
 
         </section>
@@ -63,7 +63,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="empty">Belum ada Siswa Yang di Tambahkan</p>
+                <p class="empty">Tidak ada data yang ditambahkan!</p>
             @endif
 
         </div>

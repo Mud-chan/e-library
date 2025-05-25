@@ -292,7 +292,7 @@
                                                         d="M10.5 18.375l7.938-7.938c.562-.562 1.562-.562 2.125 0s.562 1.563 0 2.126l-9 9c-.563.562-1.5.625-2.063.062L.437 12.562C.126 12.25 0 11.876 0 11.5s.125-.75.438-1.063c.562-.562 1.562-.562 2.124 0z"
                                                         fill="currentColor"></path>
                                                 </svg> </span> </a></li>
-                                    <li><a href="#informasi"><span>Informasi</span> </a></li>
+                                    <li><a href="#informasi"><span>Berita</span> </a></li>
                                     <li><a href="#kontak"><span>Hubungi Kami</span> </a></li>
                                 </ul>
                             </div>

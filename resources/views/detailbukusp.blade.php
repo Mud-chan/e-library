@@ -145,10 +145,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -174,9 +174,9 @@
                 <p>{{ $content->deskripsi }}</p>
             </div>
             <div class="beta" style="display: flex; flex-direction:column;"><a href="#" class="bookmark">🔖
-                    BookMark ({{ $jumlahBookmark }})</a>
+                    Bookmark ({{ $jumlahBookmark }})</a>
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Cek Status
+                    Riwayat Baca
                 </button>
             </div>
 
@@ -208,7 +208,7 @@
                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Status Baca Buku</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Riwayat Baca</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
@@ -219,7 +219,7 @@
                                 <input class="form-control me-2" type="search" name="search"
                                     value="{{ request('search') }}" placeholder="Cari Nama atau Kelas"
                                     aria-label="Search" />
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                                <button class="btn btn-outline-success" type="submit">Cari</button>
                             </form>
 
 
@@ -258,8 +258,8 @@
         <form action="{{ route('video.storeComment', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
-            <textarea rows="3" placeholder="Write a comment............" name="comment_box" required></textarea>
-            <button name="add_comment">Submit</button>
+            <textarea rows="3" placeholder="Tambahkan komentar ..." name="comment_box" required></textarea>
+            <button name="add_comment">Kirim</button>
         </form>
 
             <div class="comments">
@@ -299,7 +299,7 @@
                         @endif
                     @endforeach
                 @else
-                    <p class="empty">Tidak ada komentar!</p>
+                    <p class="empty">Tidak ada komentar yang ditambahkan!</p>
                 @endif
             </div>
             </div>

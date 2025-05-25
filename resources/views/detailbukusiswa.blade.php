@@ -156,12 +156,12 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>Siswa</span>
-                <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesiswa') }}" class="btn">Lihat Profil</a>
                 <a href="{{ url('/historybuku') }}" class="btn">History</a>
                 <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
                 <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
-                <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                class="delete-btn">log out</a>
+                <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                class="delete-btn">lKeluar</a>
 
             </div>
 
@@ -239,7 +239,7 @@
         <form action="{{ route('video.storeCommentsiswa', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
-            <textarea rows="3" placeholder="Tulis comment............" name="comment_box" required></textarea>
+            <textarea rows="3" placeholder="Tambahkan komentar ..." name="comment_box" required></textarea>
             <button name="add_comment">Kirim</button>
         </form>
 
@@ -267,7 +267,7 @@
                                     <form action="{{ route('buku.deleteComment', ['id' => $comment->id]) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Yakin mau hapus komentar ini?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
+                                        <button type="submit" onclick="return confirm('Yakin Ingin Menghapus Komentar?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
                                     </form>
                                 @endif
                 </div>
@@ -275,7 +275,7 @@
         @endif
         @endforeach
     @else
-        <p class="empty">Tidak ada komentar!</p>
+        <p class="empty">Tidak ada komentar yang ditambahkan!</p>
     @endif
 </div>
 

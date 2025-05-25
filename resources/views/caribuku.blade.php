@@ -73,7 +73,7 @@
 
                             if (data.length === 0) {
                                 resultsBox.append(
-                                    '<div class="item">Buku tidak ditemukan</div>');
+                                    '<div class="item">Buku tidak ditemukan!</div>');
                             } else {
                                 data.forEach(item => {
                                     resultsBox.append(`
@@ -137,7 +137,7 @@
 
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <p style="font-weight: 600">Jenis</p>
+                        <p style="font-weight: 600">Jenis Buku</p>
                     </button>
                     <div class="dropdown-content">
                         @foreach (['Umum', 'Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6', 'Karya Guru'] as $tingkatan)
@@ -164,7 +164,7 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>Siswa</span>
-                <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesiswa') }}" class="btn">Lihat Profil</a>
                 <a href="{{ url('/historybuku') }}" class="btn">History</a>
                 <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
                 <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
@@ -182,7 +182,7 @@
     <!-- Katalog Buku -->
     <section class="katalog-buku">
 
-        <h3><span class="ikon-bulet"></span> Hasil Yang Ditemukan</h3>
+        <h3><span class="ikon-bulet"></span> Hasil yang ditemukan</h3>
         <div class="grid-buku">
 
             @if ($contents->count() > 0)
@@ -201,7 +201,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="empty">Tidak ada Hasil Yang Ditemukan!</p>
+                <p class="empty">Tidak ada hasil yang ditemukan!</p>
             @endif
 
         </div>

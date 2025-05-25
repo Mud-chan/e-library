@@ -140,7 +140,7 @@
             margin-bottom: 15px;
         }
 
-        
+
         .comment .circle {
             width: 40px;
             height: 40px;
@@ -277,7 +277,7 @@
     <div class="navbar">
         <div>Home</div>
         <div class="search-section">
-            <input type="text" placeholder="Search here............">
+            <input type="text" placeholder="Cari disini...">
             <button>Search</button>
         </div>
         <div>👤 Diego</div>
@@ -311,7 +311,7 @@
                     </select>
                 </div>
 
-                
+
 
                 <embed class="pdf-viewer" src="assets/images/demo/contoh.pdf" type="application/pdf">
 

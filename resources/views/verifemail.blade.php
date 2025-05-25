@@ -28,7 +28,7 @@
 @if (session('success'))
     <div class="modal-box" id="success-message">
         <i class="fa-solid fa-check-to-slot"></i>
-        <h2>Success</h2>
+        <h2>Sukses</h2>
         <h3>{{ session('success') }}</h3>
         <div class="but">
             <button class="tutupbut" onclick="closeModalAndClearSession()">OK</button>
@@ -42,7 +42,7 @@
     @if (session('sucesup'))
     <div class="modal-up" id="success-message">
         <i class="fa-solid fa-thumbs-up"></i>
-        <h2>Success</h2>
+        <h2>Sukses</h2>
         <h3>{{ session('sucesup') }}</h3>
         <div class="butup">
             <button class="tutupbutup" onclick="closeModalAndClearSession()">OK</button>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="options">
                         {{-- <label><input type="checkbox"> Remember me</label> --}}
-                        <a href="#">Kembali ke Login</a>
+                        <a href="#">Kembali ke Halaman Login</a>
                     </div>
 
                     <button type="submit">Kirim</button>

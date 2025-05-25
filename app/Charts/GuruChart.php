@@ -23,7 +23,7 @@ class GuruChart
     $topGuru = $this->getTopGuru($monthYear);
 
     return $this->chart->barChart()
-        ->setTitle('Top 6 Guru dengan View Terbanyak')
+        ->setTitle('Top 6 Guru Paling Banyak Membaca')
         ->setSubtitle(Carbon::parse($monthYear . '-01')->translatedFormat('F Y'))
         ->addData('Jumlah View', $topGuru['jumlah'])
         ->setXAxis($topGuru['label'])

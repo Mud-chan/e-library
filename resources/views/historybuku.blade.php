@@ -72,7 +72,7 @@
 
                             if (data.length === 0) {
                                 resultsBox.append(
-                                    '<div class="item">Buku tidak ditemukan</div>');
+                                    '<div class="item">Buku tidak ditemukan!</div>');
                             } else {
                                 data.forEach(item => {
                                     resultsBox.append(`
@@ -141,13 +141,13 @@
                 <<img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                     <h3>{{ $userName }}</h3>
                     <span>Siswa</span>
-                    <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
+                    <a href="{{ url('/profilesiswa') }}" class="btn">Lihat Profil</a>
                     <a href="{{ url('/historybuku') }}" class="btn">History</a>
                     <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
                     <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
 
-                    <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                        class="delete-btn">log out</a>
+                    <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                        class="delete-btn">Keluar</a>
 
             </div>
 

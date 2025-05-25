@@ -59,24 +59,24 @@
         <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
         <h3>{{ $userName }}</h3>
         <span>{{ $userProfesi }}</span>
-        <a href="{{ route('tutors.editsp', $tutorsId) }}" class="inline-btn">update profile</a>
+        <a href="{{ route('tutors.editsp', $tutorsId) }}" class="inline-btn">Update Profil</a>
        </div>
 
        <div class="flex">
         <div class="box">
            <span>{{ $totalTutors }}</span>
            <p>Total Guru</p>
-           <a href="{{ route('tutor.index') }}" class="btn">view Guru</a>
+           <a href="{{ route('tutor.index') }}" class="btn">Lihat Guru</a>
         </div>
         <div class="box">
            <span>{{ $totalUsers }}</span>
            <p>Total Siswa</p>
-           <a href="{{ route('siswa.index') }}" class="btn">view Siswa</a>
+           <a href="{{ route('siswa.index') }}" class="btn">Lihat Siswa</a>
         </div>
         <div class="box">
            <span>{{ $totalBuku }}</span>
            <p>Total Buku</p>
-           <a href="{{ route('contentsp.index') }}" class="btn">view Buku</a>
+           <a href="{{ route('contentsp.index') }}" class="btn">Lihat Buku</a>
         </div>
         {{-- <div class="box">
            <span></span>

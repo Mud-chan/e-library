@@ -24,10 +24,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profileasp') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profileasp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">Log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -49,10 +49,10 @@
             @csrf
             <input type="hidden" name="role" value="guru">
 
-            <p>Nama Siswa <span>*</span></p>
+            <p>Nama Guru<span>*</span></p>
             <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Guru" class="box">
 
-            <p>Mengajar Pada Kelas..<span>*</span></p>
+            <p>Mengajar Pada Kelas...<span>*</span></p>
             <select name="mengampu" class="box" required>
                 <option value="" selected disabled>-- Kelas --</option>
                 <option value="Kelas 1">Kelas 1</option>
@@ -70,9 +70,9 @@
             <p>Konfirmasi Password <span>*</span></p>
             <input type="text" name="password_confirmation" maxlength="100" required placeholder="Konfirmasi Password Guru" class="box">
 
-            <p>Foto Siswa <span>*</span></p>
+            <p>Foto Guru <span>*</span></p>
             <input type="file" name="image" accept="image/*"  class="box" id="image">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
             <input type="submit" value="Tambah Guru" name="submit" class="btn">
         </form>
 

@@ -26,10 +26,10 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="{{ url('/profileguru') }}" class="btn">view profile</a>
+            <a href="{{ url('/profileguru') }}" class="btn">Lihat Profil</a>
 
-            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">Log out</a>
+            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+            class="delete-btn">Keluar</a>
 
         </div>
 
@@ -42,13 +42,13 @@
     <form action="{{ route('tutors.updateguru', $tutor->id) }}" method="post" enctype="multipart/form-data" id="formup">
         @csrf
         @method('put')
-       <h3>Update Profile Guru</h3>
+       <h3>Update Profil Guru</h3>
        <div class="flex">
         <div class="col">
            <p>Nama Anda : </p>
            <input type="text" name="nama" placeholder="{{ $tutor->nama }}" maxlength="100"  class="box">
 
-           <p>Mengajar Pada Kelas..<span>*</span></p>
+           <p>Mengajar Pada Kelas...<span>*</span></p>
             <select name="mengampu" class="box" required>
                 <option value="{{ $tutor->mengampu }}" selected>{{ $tutor->mengampu }}</option>
                 <option value="Kelas 1">Kelas 1</option>
@@ -77,16 +77,16 @@
         </div>
         <div class="col">
            <p>Password Lama :</p>
-           <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box">
+           <input type="password" name="old_pass" placeholder="Masukkan password lama" maxlength="20"  class="box">
            <p>Password Baru :</p>
-           <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box">
+           <input type="password" name="new_pass" placeholder="Masukkan password baru" maxlength="20"  class="box">
            <p>Konfirmasi Password :</p>
-           <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box">
+           <input type="password" name="cpass" placeholder="Konfirmasi password baru" maxlength="20"  class="box">
         </div>
      </div>
-     <p>uUnggah Foto Profil </p>
+     <p>Unggah Foto Profil </p>
      <input type="file" name="image" accept="image/*"  class="box" id="image">
-     <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+     <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
      <input type="submit" name="submit" value="update now" class="btn">
 
     </form>

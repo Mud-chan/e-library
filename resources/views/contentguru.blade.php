@@ -108,7 +108,7 @@
 
         <form id="basicSearchForm" action="{{ route('caricontentguru') }}" method="post" class="search-form">
             @csrf
-            <input type="text" name="search" id="search-input" placeholder="Cari Materi..." required maxlength="100">
+            <input type="text" name="search" id="search-input" placeholder="Cari Buku ..." required maxlength="100">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
 
@@ -128,8 +128,8 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="{{ url('/profileguru') }}" class="btn">View Profile</a>
-            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');" class="delete-btn">Log out</a>
+            <a href="{{ url('/profileguru') }}" class="btn">Lihat Profil</a>
+            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');" class="delete-btn">Keluar</a>
         </div>
     </section>
 </header>
@@ -147,7 +147,7 @@
     @if (session('success'))
         <div class="modal-box" id="success-message">
             <i class="fa-solid fa-check-to-slot"></i>
-            <h2>Success</h2>
+            <h2>Sukses</h2>
             <h3>{{ session('success') }}</h3>
             <div class="but">
                 <button class="tutupbut" onclick="closeModalAndClearSession()">OK</button>
@@ -160,7 +160,7 @@
     @if (session('sucesup'))
         <div class="modal-up" id="success-message">
             <i class="fa-solid fa-thumbs-up"></i>
-            <h2>Success</h2>
+            <h2>Sukses</h2>
             <h3>{{ session('sucesup') }}</h3>
             <div class="butup">
                 <button class="tutupbutup" onclick="closeModalAndClearSession()">OK</button>

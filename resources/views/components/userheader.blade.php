@@ -16,7 +16,7 @@ if(isset($message)){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Student ({{ $userName }})</title>
+   <title>Siswa ({{ $userName }})</title>
 
    <!-- Font Awesome CDN link -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -30,7 +30,7 @@ if(isset($message)){
 
 <header class="header">
    <section class="flex">
-      <a href="{{ route('courses.index') }}" class="logo">Student</a>
+      <a href="{{ route('courses.index') }}" class="logo">Siswa</a>
 
 
 
@@ -44,13 +44,13 @@ if(isset($message)){
       <div class="profile">
          <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
          <h3>{{ $userName }}</h3>
-         <span>Student</span>
-         <a href="{{ url('/profileuser') }}" class="btn">View Profile</a>
+         <span>Siswa</span>
+         <a href="{{ url('/profileuser') }}" class="btn">Lihat Profil</a>
          {{-- <div class="flex-btn">
             <a href="login.php" class="option-btn">Login</a>
             <a href="register.php" class="option-btn">Register</a>
          </div> --}}
-         <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');" class="delete-btn">Logout</a>
+         <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');" class="delete-btn">Keluar</a>
 
          {{-- <h3>Please login or register</h3>
          <div class="flex-btn">
@@ -72,8 +72,8 @@ if(isset($message)){
 
       <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
       <h3>{{ $userName }}</h3>
-      <span>Student</span>
-      <a href="{{ url('/profileuser') }}" class="btn">View Profile</a>
+      <span>Siswa</span>
+      <a href="{{ url('/profileuser') }}" class="btn">Lihat Profil</a>
       <a href="{{ url('/dashboarduser') }}" class="btn">Landing Page</a>
       {{-- <h3>Please login or register</h3>
       <div class="flex-btn" style="padding-top: .5rem;">

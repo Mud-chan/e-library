@@ -26,10 +26,10 @@
             <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
             <h3>{{ $userName }}</h3>
             <span>{{ $userProfesi }}</span>
-            <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+            <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
-            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">log out</a>
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+            class="delete-btn">Keluar</a>
 
         </div>
 
@@ -53,12 +53,12 @@
             <img src="{{ asset('uploaded_files/' . $playlists->image) }}" alt="Foto Guru" width="150">
         @endif
         <input type="file" name="image" accept="image/*" class="box" id="image">
-        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
 
         <p>Nama Guru <span>*</span></p>
         <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Guru" class="box" value="{{ $playlists->nama }}">
 
-        <p>Mengajar Pada Kelas..<span>*</span></p>
+        <p>Mengajar Pada Kelas...<span>*</span></p>
             <select name="mengampu" class="box" required>
                 <option value="{{ $playlists->mengampu }}" selected>{{ $playlists->mengampu }}</option>
                 <option value="Kelas 1">Kelas 1</option>
@@ -76,15 +76,15 @@
         <input type="password" name="old_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
         <p>Password Baru</p>
-        <input type="password" name="new_pass" placeholder="Password baru" class="box">
+        <input type="password" name="new_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
         <p>Konfirmasi Password</p>
-        <input type="password" name="cpass" placeholder="Konfirmasi password" class="box">
+        <input type="password" name="cpass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
         <input type="submit" value="Update Guru" name="update" class="btn">
     </form>
     @else
-        <p class="empty">Guru tidak ditemukan!</p>
+        <p class="empty">Tidak ada data yang ditambahkan!</p>
     @endif
 
 

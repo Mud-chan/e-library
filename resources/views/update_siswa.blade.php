@@ -26,10 +26,10 @@
             <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
             <h3>{{ $userName }}</h3>
             <span>{{ $userProfesi }}</span>
-            <a href="{{ url('/profilesp') }}" class="btn">View Profile</a>
+            <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
-            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">log out</a>
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+            class="delete-btn">Keluar</a>
 
         </div>
 
@@ -40,7 +40,7 @@
 
     <section class="video-form">
 
-        <h1 class="heading">Update Buku</h1>
+        <h1 class="heading">Update Siswa</h1>
 
         @if ($siswa)
         <form action="{{ route('update.siswa', ['siswaId' => $siswa->id]) }}" method="post" enctype="multipart/form-data" id="formup">
@@ -53,9 +53,9 @@
                 <img src="{{ asset('uploaded_files/' . $siswa->image) }}" alt="Foto Siswa" width="150">
             @endif
             <input type="file" name="image" accept="image/*" class="box">
-            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+            <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
 
-            <p>Nama Siswa <span>*</span></p>
+            <p>Nama Siswa<span>*</span></p>
             <input type="text" name="nama" maxlength="100" required placeholder="Masukkan Nama Siswa" class="box" value="{{ $siswa->nama }}">
 
             <p>Jenis Kelamin<span>*</span></p>
@@ -77,17 +77,17 @@
             </select>
 
 
-            <p>Email Siswa <span>*</span></p>
+            <p>Email Siswa<span>*</span></p>
             <input type="email" name="email" maxlength="1000" required placeholder="Masukkan Email Siswa" class="box" value="{{ $siswa->email }}">
 
             <p>Password Lama</p>
             <input type="password" name="old_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
             <p>Password Baru</p>
-            <input type="password" name="new_pass" placeholder="Password baru" class="box">
+            <input type="password" name="new_pass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
             <p>Konfirmasi Password</p>
-            <input type="password" name="cpass" placeholder="Konfirmasi password" class="box">
+            <input type="password" name="cpass" placeholder="Kosongkan jika tidak ingin mengganti" class="box">
 
 
 
@@ -95,7 +95,7 @@
             <input type="submit" value="Update Siswa" name="update" class="btn">
         </form>
         @else
-            <p class="empty">Siswa tidak ditemukan!</p>
+            <p class="empty">Tidak ada data yang ditambahkan!</p>
         @endif
 
 

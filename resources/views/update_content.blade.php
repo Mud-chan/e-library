@@ -59,15 +59,15 @@
             <option value="Buku Pelajaran">Buku Pelajaran</option>
         </select>
 
-        <p>Judul Materi <span>*</span></p>
-        <input type="text" name="judul" maxlength="100" required placeholder="Enter video title" class="box" value="{{ $content->judul }}">
+        <p>Judul Buku<span>*</span></p>
+        <input type="text" name="judul" maxlength="100" required placeholder="Masukkan judul buku" class="box" value="{{ $content->judul }}">
 
-        <p>Deskripsi Materi <span>*</span></p>
-        <textarea name="deskripsi" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10">{{ $content->deskripsi }}</textarea>
+        <p>Deskripsi Buku<span>*</span></p>
+        <textarea name="deskripsi" class="box" required placeholder="Masukkan deskripsi buku" maxlength="1000" cols="30" rows="10">{{ $content->deskripsi }}</textarea>
 
 
 
-        <p>Status Buku <span>*</span></p>
+        <p>Status Buku<span>*</span></p>
         <select name="tingkatan" class="box" required>
             <option value="{{ $content->tingkatan }}" selected>{{ $content->tingkatan }}</option>
             <option value="Kelas 1">Kelas 1</option>
@@ -80,20 +80,20 @@
             <option value="Umum">Umum</option>
         </select>
 
-        <p>Unggah Foto Materi</p>
+        <p>Sampul Buku</p>
         <img src="../uploaded_files/{{ $content->thumb }}" alt="">
         <input type="file" name="thumb" accept="image/*" class="box" id="image">
-        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
 
         <p>Unggah Buku (pdf)</p>
         {{-- <video src="../uploaded_files/{{ $content->pdf }}" controls></video> --}}
         <input type="file" name="pdf" accept="pdf/*" class="box" id="video">
-        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran dokumen terlalu besar maksimal 50MB</small>
+        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 43 MB)</small>
 
         <input type="submit" value="Update Buku" name="update" class="btn">
     </form>
 @else
-    <p class="empty">Video tidak ditemukan! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">Tambah Video</a></p>
+    <p class="empty">Tidak ada data yang ditambahkan! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">Tambah Buku</a></p>
 @endif
 
 <script>

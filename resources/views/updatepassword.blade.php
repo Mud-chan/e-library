@@ -37,7 +37,7 @@
         <div class="right">
             {{-- <div class="back-button"><a class="backbtn2" href="/">Beranda</a></div> --}}
             <div class="login-box">
-                <h2>Upadate Password <span></span></h2>
+                <h2>Update Password <span></span></h2>
                 <a href="/">
                 <img class="form-img" src="{{ asset('assets/images/logo2.png') }}" alt="Mini Illustration">
                 </a>
@@ -66,12 +66,12 @@
                     </div>
                     <div class="options">
                         {{-- <label><input type="checkbox"> Remember me</label> --}}
-                        <a href="/forgot-password">Forgot Password?</a>
+                        <a href="/forgot-password">Lupa password? Klik disini!</a>
                     </div>
-                    <small id="password-error" style="display: none;">Password harus minimal 8 karakter</small>
+                    <small id="password-error" style="display: none;">Password harus mengandung 8 karakter</small>
                     <small id="confirm-password-error" style="display: none;">Konfirmasi password harus sama dengan
                         password</small>
-                    <small id="image-error" style="display: none;">Ukuran gambar terlalu besar maksimal 2MB</small>
+                    <small id="image-error" style="display: none;">*Ukuran file terlalu besar (maks. 5 MB)</small>
                     <button type="submit">Ubah</button>
                 </form>
                 <p class="register-text">Kembali ke <a href="/">Beranda</a></p>

@@ -22,7 +22,7 @@ class SiswaChart
         $topSiswa = $this->getTopSiswa($monthYear);
 
         return $this->chart->barChart()
-            ->setTitle('Top 6 Siswa dengan View Terbanyak Bulan Ini')
+            ->setTitle('Top 6 Siswa Paling Banyak Membaca')
             ->setSubtitle(Carbon::parse($monthYear . '-01')->translatedFormat('F Y'))
             ->addData('Jumlah View', $topSiswa['jumlah'])
             ->setXAxis($topSiswa['label']) // label = nama + kelas

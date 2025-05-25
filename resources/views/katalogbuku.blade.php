@@ -144,7 +144,7 @@
 
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <p style="font-weight: 600;">Jenis</p>
+                        <p style="font-weight: 600;">Jenis Buku</p>
                     </button>
                     <div class="dropdown-content">
                         @foreach (['Umum', 'Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6', 'Karya Guru'] as $tingkatan)
@@ -170,13 +170,13 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>Siswa</span>
-                <a href="{{ url('/profilesiswa') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profilesiswa') }}" class="btn">Lihat Profil</a>
                 <a href="{{ url('/historybuku') }}" class="btn">History</a>
                 <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
                 <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
 
-                <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">log out</a>
+                <a href="{{ route('logoutsiswa') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -191,7 +191,7 @@
     <!-- Katalog Buku -->
     <section class="katalog-buku">
 
-        <h3><span class="ikon-bulet"></span> Eksplorasi Kategori</h3>
+        <h3><span class="ikon-bulet"></span> Jelajah Buku</h3>
         <div class="genre" style="display: flex; gap: 10px;">
             <form action="{{ route('caribuku') }}" method="POST">
                 @csrf
@@ -258,7 +258,7 @@
             </div>
         @else
             <h3><span class="ikon-bulet"></span> Rekomendasi Buku</h3>
-            <p>Tidak ada rekomendasi khusus untuk kamu saat ini. Silakan baca beberapa buku terlebih dahulu 😄</p>
+            <p>Tidak ada rekomendasi buku untukmu saat ini. Ayo baca beberapa buku terlebih dahulu!😄</p>
         @endif
 
         <h3><span class="ikon-bulet"></span> Baru Ditambahkan</h3>
@@ -280,7 +280,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="empty">Tidak ada buku yang ditambahkan!</p>
+                <p class="empty">Tidak ada buku baru yang ditambahkan!</p>
             @endif
 
         </div>

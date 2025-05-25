@@ -25,7 +25,7 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="{{ url('/profilesp') }}" class="btn">view profile</a>
+            <a href="{{ url('/profilesp') }}" class="btn">Lihat Profil</a>
 
             <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
             class="delete-btn">log out</a>
@@ -43,7 +43,7 @@
     @if (session('success'))
     <div class="modal-box" id="success-message">
         <i class="fa-solid fa-check-to-slot"></i>
-        <h2>Success</h2>
+        <h2>Sukses</h2>
         <h3>{{ session('success') }}</h3>
         <div class="but">
             <button class="tutupbut" onclick="closeModalAndClearSession()">OK</button>
@@ -59,20 +59,20 @@
         <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
         <h3>{{ $guruName }}</h3>
         <span>{{ $guruProfesi }}</span>
-        <a href="{{ route('tutors.editguru', $tutorsId) }}" class="inline-btn">update profile</a>
+        <a href="{{ route('tutors.editguru', $tutorsId) }}" class="inline-btn">Update Profil</a>
        </div>
 
        <div class="flex">
-        
+
         <div class="box">
            <span>{{ $totalUsers }}</span>
            <p>Total Siswa</p>
-           <a href="{{ route('siswaguru.index') }}" class="btn">view Siswa</a>
+           <a href="{{ route('siswaguru.index') }}" class="btn">Lihat Siswa</a>
         </div>
         <div class="box">
            <span>{{ $totalBuku }}</span>
            <p>Total Buku</p>
-           <a href="{{ route('contentguru.index') }}" class="btn">view Buku</a>
+           <a href="{{ route('contentguru.index') }}" class="btn">Lihat Buku</a>
         </div>
         {{-- <div class="box">
            <span></span>

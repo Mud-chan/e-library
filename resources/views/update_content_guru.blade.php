@@ -26,10 +26,10 @@
             <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
             <h3>{{ $guruName }}</h3>
             <span>{{ $guruProfesi }}</span>
-            <a href="{{ url('/profileguru') }}" class="btn">View Profile</a>
+            <a href="{{ url('/profileguru') }}" class="btn">Lihat Profil</a>
 
-            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">log out</a>
+            <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+            class="delete-btn">Keluar</a>
 
         </div>
 
@@ -49,7 +49,7 @@
         <input type="hidden" name="old_thumb" value="{{ $content->thumb }}">
         <input type="hidden" name="old_video" value="{{ $content->pdf }}">
 
-        <p>Kategori Buku <span>*</span></p>
+        <p>Kategori Buku<span>*</span></p>
         <select name="kategori" class="box" required>
             <option value="{{ $content->kategori }}" selected>{{ $content->kategori }}</option>
             <option value="Kunci Jawaban">Kunci Jawaban</option>
@@ -59,10 +59,10 @@
             <option value="Buku Pelajaran">Buku Pelajaran</option>
         </select>
 
-        <p>Judul Materi <span>*</span></p>
+        <p>Judul Buku<span>*</span></p>
         <input type="text" name="judul" maxlength="100" required placeholder="Enter video title" class="box" value="{{ $content->judul }}">
 
-        <p>Deskripsi Materi <span>*</span></p>
+        <p>Deskripsi Materi<span>*</span></p>
         <textarea name="deskripsi" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10">{{ $content->deskripsi }}</textarea>
 
 
@@ -83,12 +83,12 @@
         <p>Unggah Foto Materi</p>
         <img src="../uploaded_files/{{ $content->thumb }}" alt="">
         <input type="file" name="thumb" accept="image/*" class="box" id="image">
-        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran gambar terlalu besar maksimal 2MB</small>
+        <small id="image-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 5 MB)</small>
 
         <p>Unggah Buku (pdf)</p>
         {{-- <video src="../uploaded_files/{{ $content->pdf }}" controls></video> --}}
         <input type="file" name="pdf" accept="pdf/*" class="box" id="video">
-        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">Ukuran dokumen terlalu besar maksimal 50MB</small>
+        <small id="video-error" style="display: none; font-size: 1.7rem; color: #888; text-align: center;">*Ukuran file terlalu besar (maks. 43 MB)</small>
 
         <input type="submit" value="Update Buku" name="update" class="btn">
     </form>

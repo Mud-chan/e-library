@@ -29,8 +29,8 @@
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
             <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
-            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-            class="delete-btn">log out</a>
+            <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+            class="delete-btn">Keluar</a>
 
         </div>
 
@@ -45,7 +45,7 @@
     @if (session('success'))
     <div class="modal-box" id="success-message">
         <i class="fa-solid fa-check-to-slot"></i>
-        <h2>Success</h2>
+        <h2>Sukses</h2>
         <h3>{{ session('success') }}</h3>
         <div class="but">
             <button class="tutupbut" onclick="closeModalAndClearSession()">OK</button>
@@ -61,18 +61,18 @@
         <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
         <h3>{{ $userName }}</h3>
         <span>{{ $userProfesi }}</span>
-        <a href="{{ route('siswa.editsiswa') }}" class="inline-btn">update profile</a>
+        <a href="{{ route('siswa.editsiswa') }}" class="inline-btn">Update Profil</a>
        </div>
 
        <div class="flex">
         <div class="box">
            <span>{{ $totalBookmark }}</span>
-           <p style="font-size: 1.5rem">Buku Dibookmark</p>
+           <p style="font-size: 1.5rem">Bookmark Saya</p>
            <a href="{{ url('/bookmarkbuku') }}" class="btn">Lihat Bookmark</a>
         </div>
         <div class="box">
            <span>{{ $totalHistori }}</span>
-           <p style="font-size: 1.5rem">Buku Dibaca</p>
+           <p style="font-size: 1.5rem">Riwayat Baca</p>
            <a href="{{ url('/historybuku') }}" class="btn">Lihat Riwayat</a>
         </div>
         {{-- <div class="box">

@@ -33,10 +33,10 @@
                 <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
                 <h3>{{ $userName }}</h3>
                 <span>{{ $userProfesi }}</span>
-                <a href="{{ url('profilesp') }}" class="btn">view profile</a>
+                <a href="{{ url('profilesp') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                    class="delete-btn">log out</a>
+                <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                    class="delete-btn">Keluar</a>
 
             </div>
 
@@ -103,7 +103,7 @@
                 <div class="bottom-data">
                     <div class="orders">
                         <div class="col">
-                            <h3>Siswa Chart</h3>
+                            <h3>Grafik Siswa</h3>
                             <form method="GET" action="{{ route('pages.dashboardsp') }}" class="mb-3">
                                 <input type="month" name="month" value="{{ $selectedMonthsis }}" class="form-control"
                                     style="width: 200px; background-color: #28c76f; color: white; border: none; padding: 8px; border-radius: 5px;">
@@ -114,7 +114,7 @@
                     </div>
                     <div class="orders">
                         <div class="col">
-                            <h3>Guru Chart</h3>
+                            <h3>Grafik Guru</h3>
                             <form method="GET" action="{{ route('pages.dashboardsp') }}" class="mb-3">
                                 <input type="month" name="month" value="{{ $selectedMonth }}" class="form-control"
                                     style="width: 200px; background-color: #28c76f; color: white; border: none; padding: 8px; border-radius: 5px;">
@@ -125,7 +125,7 @@
                     </div>
                     <div class="orders">
                         <div class="col">
-                            <h3>Buku Paling Banyak Dibaca</h3>
+                            <h3>Grafik Buku</h3>
                             <form method="GET" action="{{ route('pages.dashboardsp') }}" class="mb-3">
                                 <input type="month" name="month" value="{{ $selectedMonth }}" class="form-control"
                                     style="width: 200px; background-color: #28c76f; color: white; border: none; padding: 8px; border-radius: 5px;">

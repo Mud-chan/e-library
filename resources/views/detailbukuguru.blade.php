@@ -132,10 +132,10 @@
                 <img src="{{ asset('uploaded_files/' . $guruImage) }}" alt="">
                 <h3>{{ $guruName }}</h3>
                 <span>{{ $guruProfesi }}</span>
-                <a href="{{ url('/profileguru') }}" class="btn">View Profile</a>
+                <a href="{{ url('/profileguru') }}" class="btn">Lihat Profil</a>
 
-                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Logout?');"
-                class="delete-btn">log out</a>
+                <a href="{{ route('logoutad') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
+                class="delete-btn">Keluar</a>
 
             </div>
 
@@ -159,7 +159,7 @@
           <h3>{{ $content->judul }}</h3>
           <p>{{ $content->deskripsi }}</p>
         </div>
-        <a href="#" class="bookmark">🔖 BookMark</a>
+        <a href="#" class="bookmark">🔖 Bookmark</a>
       </div>
 
       <div class="tags">
@@ -183,7 +183,7 @@
         <form action="{{ route('video.storeCommentGuru', ['videoId' => $content->id]) }}" method="post" >
             @csrf
             <input type="hidden" name="content_id" value="{{ $content->id }}">
-            <textarea rows="3" placeholder="Write a comment............" name="comment_box" required></textarea>
+            <textarea rows="3" placeholder="Tambahkan komentar ..." name="comment_box" required></textarea>
             <button name="add_comment">Submit</button>
         </form>
 
@@ -211,7 +211,7 @@
                                     <form action="{{ route('buku.deleteCommentguru', ['id' => $comment->id]) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Yakin mau hapus komentar ini?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
+                                        <button type="submit" onclick="return confirm('Yakin Ingin Menghapus Komentar?')" style="background-color: red; padding: 5px 9px; font-size:12px;">Hapus</button>
                                     </form>
                                 @endif
                 </div>
@@ -219,7 +219,7 @@
         @endif
         @endforeach
     @else
-        <p class="empty">Tidak ada komentar!</p>
+        <p class="empty">Tidak ada komentar yang ditambahkan!</p>
     @endif
 </div>
 
