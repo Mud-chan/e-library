@@ -662,7 +662,7 @@
                                 </div>
                                 <div class="ld-fancy-heading relative">
                                     <p class="ld-fh-element mb-0/5em inline-block relative text-16 leading-1/6em">
-                                        Berita dan Informasi Seputar E-Library MI Ar-Roudhoh</p>
+                                        Berita dan Informasi Seputar   E-Library MI Ar-Roudhoh</p>
                                 </div>
                             </div>
                             <div class="col col-12">
