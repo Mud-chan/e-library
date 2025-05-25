@@ -10,7 +10,7 @@
     <!-- Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script async src="https://cse.google.com/cse.js?cx=50277ad2efc244574"></script>
+    <script async src="https://cse.google.com/cse.js?cx=627a280c18021424e"></script>
 
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="{{ asset('assets/css/admin_style.css') }}">
