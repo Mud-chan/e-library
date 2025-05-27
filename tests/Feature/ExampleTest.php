@@ -4,29 +4,38 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\Models\User;
 
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * Pengujian Halaman Awal dan Migrasi Tabel Siswa, Guru, Buku serta tabel ConterBaca
+     * Pengujian Halaman Awal, Logreg, Forgot Password (tanpa login)
+     * dan Katalog Buku (dengan login sebagai hikarilight83@gmail.com)
      */
     public function test_the_application_returns_a_successful_response(): void
     {
-        $response = $this->get('/');
-        $response->assertStatus(200);
+        // Seed database user (jika belum ada di testing DB)
+        $user = User::factory()->create([
+            'email' => 'hikarilight83@gmail.com',
+            'password' => bcrypt('12345678'),
+        ]);
 
-        $logregtest = $this->get('/logreg');
-        $logregtest->assertStatus(200);
+        // Halaman yang tidak perlu login
+        $home = $this->get('/');
+        $home->assertStatus(200);
 
-        $katalogbuku = $this->get('/katalogbuku');
-        $katalogbuku->assertStatus(200);
+        $logreg = $this->get('/logreg');
+        $logreg->assertStatus(200);
 
-        $forgotPassword = $this->get('/forgot-password');
-        $forgotPassword->assertStatus(200);
+        $forgot = $this->get('/forgot-password');
+        $forgot->assertStatus(200);
 
+        // Halaman yang perlu login
+        $this->actingAs($user);
 
-
+        $katalog = $this->get('/katalogbuku');
+        $katalog->assertStatus(200);
     }
 }
