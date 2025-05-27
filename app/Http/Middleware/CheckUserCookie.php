@@ -16,4 +16,5 @@ class CheckUserCookie
 
         return $next($request);
     }
+    
 }
