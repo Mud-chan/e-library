@@ -4,7 +4,8 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\User;
+use App\Models\Siswatest;
+use Illuminate\Support\Facades\Hash;
 
 class ExampleTest extends TestCase
 {
@@ -17,10 +18,11 @@ class ExampleTest extends TestCase
     public function test_the_application_returns_a_successful_response(): void
     {
         // Seed database user (jika belum ada di testing DB)
-        $user = User::factory()->create([
+        $siswa = Siswatest::factory()->create([
             'email' => 'hikarilight83@gmail.com',
-            'password' => bcrypt('12345678'),
+            'password' => Hash::make('12345678'),
         ]);
+
 
         // Halaman yang tidak perlu login
         $home = $this->get('/');
@@ -33,7 +35,7 @@ class ExampleTest extends TestCase
         $forgot->assertStatus(200);
 
         // Halaman yang perlu login
-        $this->actingAs($user);
+        $this->actingAs($siswa);
 
         $katalog = $this->get('/katalogbuku');
         $katalog->assertStatus(200);
