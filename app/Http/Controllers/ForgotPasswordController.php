@@ -39,12 +39,12 @@ class ForgotPasswordController extends Controller
         $tutor->password = Hash::make($request->password);
         $tutor->save();
         // Redirect ke halaman login setelah berhasil mengupdate password
-        return redirect()->intended(route('logreg'))->with('success', 'Password updated successfully. Please login with your new password.');
+        return redirect()->intended(route('logreg'))->with('success', 'Password berhasil diperbarui! Silahkan log in menggunakan password baru.');
 
     }
 
     // Jika email tidak ditemukan di kedua tabel
-    return redirect()->back()->with('error', 'Email address not associated with any account.');
+    return redirect()->back()->with('error', 'Alamat Email tidak sama dengan data manapun.');
 }
 }
 

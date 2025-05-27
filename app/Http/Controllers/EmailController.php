@@ -16,7 +16,7 @@ class EmailController extends Controller
 
         Mail::to($recipientEmail)->send(new CustomEmail($title, $content));
 
-            return redirect()->route('forgot-password')->with('success', 'Link Update Password Telah Dikirim Ke Email '. $recipientEmail);
+            return redirect()->route('forgot-password')->with('success', 'Link Update Password telah dikirim! Mohon cek email Anda'. $recipientEmail);
     }
 
     public function uppas()
