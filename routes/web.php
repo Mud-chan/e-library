@@ -17,6 +17,12 @@ use App\Http\Controllers\PagesControllerSp;
 use App\Http\Controllers\SiswaguruController;
 use App\Http\Controllers\PagesControllerGuru;
 
+
+
+Route::get('/katalogbuku', [PagesControllerSp::class, 'katalogbuku'])
+    ->middleware('check.user.cookie')
+    ->name('pages.katalogbuku');
+
 // Route::get('/', function () {
 //     return view('index');
 // });
@@ -53,9 +59,9 @@ Route::get('/updatepass', [EmailController::class, 'uppas'])->name('updatepass')
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/dashboardsp', 'PagesControllerSp@dashboard')->name('pages.dashboardsp');
     Route::get('/dashboardguru', 'PagesControllerGuru@dashboard')->name('pages.dashboardguru');
-    Route::get('/katalogbuku', 'PagesControllerSp@katalogbuku')
-        ->middleware('check.user.cookie')  // tambahkan ini
-        ->name('pages.katalogbuku');
+    // Route::get('/katalogbuku', 'PagesControllerSp@katalogbuku')
+    //     ->middleware('check.user.cookie')  // tambahkan ini
+    //     ->name('pages.katalogbuku');
     // Route::get('/profilesp', 'ProfilespController@profilesp')->name('pages.profilesp');
     // Route::post('/carisiswasp', 'PagesControllerSp@carisiswasp')->name('pages.carisiswasp');
     // Route::get('/datatransaksi', 'PagesControllerSp@datatransaksi')->name('pages.datatransaksi');
