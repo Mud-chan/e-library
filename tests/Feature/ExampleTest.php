@@ -15,9 +15,18 @@ class ExampleTest extends TestCase
     public function test_the_application_returns_a_successful_response(): void
     {
         $response = $this->get('/');
-        $response = $this->get('/logreg');
-        
-
         $response->assertStatus(200);
+
+        $logregtest = $this->get('/logreg');
+        $logregtest->assertStatus(200);
+
+        $katalogbuku = $this->get('/katalogbuku');
+        $katalogbuku->assertStatus(200);
+
+        $forgotPassword = $this->get('/forgot-password');
+        $forgotPassword->assertStatus(200);
+
+
+
     }
 }
