@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\Siswatest;
 use Illuminate\Support\Facades\Hash;
 
+
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
@@ -17,11 +18,7 @@ class ExampleTest extends TestCase
      */
     public function test_the_application_returns_a_successful_response(): void
     {
-        // Seed database user (jika belum ada di testing DB)
-        $siswa = Siswatest::factory()->create([
-            'email' => 'hikarilight83@gmail.com',
-            'password' => Hash::make('12345678'),
-        ]);
+
 
 
         // Halaman yang tidak perlu login
@@ -34,10 +31,19 @@ class ExampleTest extends TestCase
         $forgot = $this->get('/forgot-password');
         $forgot->assertStatus(200);
 
-        // Halaman yang perlu login
-        $this->actingAs($siswa);
+        // Buat user dummy
+    $siswa = Siswatest::factory()->create([
+        'email' => 'hikarilight83@gmail.com',
+        'password' => Hash::make('12345678'),
+    ]);
 
-        $katalog = $this->get('/katalogbuku');
-        $katalog->assertStatus(200);
+    // Request tanpa login (cookie)
+    $this->get('/katalogbuku')->assertStatus(302); // pasti redirect login
+
+    // Request dengan cookie user_id berisi id siswa
+    $response = $this->withCookie('user_id', $siswa->id)
+                     ->get('/katalogbuku');
+
+    $response->assertStatus(200);
     }
 }
