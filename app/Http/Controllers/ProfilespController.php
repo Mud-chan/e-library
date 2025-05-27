@@ -157,14 +157,14 @@ class ProfilespController extends Controller
             if (Hash::check($request->old_pass, $tutor->password)) {
                 $tutor->password = Hash::make($request->new_pass);
             } else {
-                return redirect()->route('pages.profilesp')->with('error', 'Password lama yang Anda masukkan salah');
+                return redirect()->route('pages.profilesp')->with('error', 'Password lama yang Anda masukkan salah!');
             }
         }
 
         // Simpan perubahan
         $tutor->save();
 
-        return redirect()->route('pages.profilesp')->with('success', 'Berhasil Memperbarui Profil!');
+        return redirect()->route('pages.profilesp')->with('success', 'Berhasil memperbarui Profil!');
     }
 
 

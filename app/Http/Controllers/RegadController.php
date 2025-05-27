@@ -48,7 +48,7 @@ class RegadController extends Controller
             ]);
 
             if ($user) {
-                return redirect('/tambahtutor')->with('success', 'Akun berhasil dibuat. Silakan login.');
+                return redirect('/tambahtutor')->with('success', 'Akun berhasil dibuat! Silahkan melakukan log in.');
             } else {
                 return redirect()->back()->with('error', 'Gagal membuat akun pengguna.');
             }
@@ -136,14 +136,14 @@ class RegadController extends Controller
             if (Hash::check($request->old_pass, $tutor->password)) {
                 $tutor->password = Hash::make($request->new_pass);
             } else {
-                return redirect()->back()->with('error', 'Incorrect old password.');
+                return redirect()->back()->with('error', 'Password lama yang Anda masukkan salah!.');
             }
         }
 
         // Simpan perubahan
         $tutor->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Berhasil memperbarui profil!');
     }
 }
 

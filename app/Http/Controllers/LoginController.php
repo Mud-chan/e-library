@@ -39,10 +39,10 @@ class LoginController extends Controller
                     Cookie::queue('sp_id', $tutor->id, 4320);
                     return redirect()->intended('/dashboardsp');
                 } else {
-                    return redirect()->back()->with('error', 'Role Tidak Terdaftar');
+                    return redirect()->back()->with('error', 'Email belum terdaftar');
                 }
             } else {
-                return redirect()->back()->with('error', 'Kesalahan Pada Email Dan Password');
+                return redirect()->back()->with('error', 'Kesalahan pada Email dan/atau Password');
             }
         }
     }
@@ -84,7 +84,7 @@ public function logoutsp()
     Cookie::queue(Cookie::forget('sp_id'));
 
     // Redirect kembali ke halaman login
-    return redirect()->route('loginnn')->with('success', 'Logout berhasil');
+    return redirect()->route('loginnn')->with('success', 'Berhasil Keluar');
 }
 
 public function logoutad()
@@ -93,7 +93,7 @@ public function logoutad()
     Cookie::queue(Cookie::forget('tutor_id'));
 
     // Redirect kembali ke halaman login
-    return redirect()->route('loginnn')->with('success', 'Logout berhasil');
+    return redirect()->route('loginnn')->with('success', 'Berhasil Keluar');
 }
 
 public function logoutsiswa()
@@ -102,7 +102,7 @@ public function logoutsiswa()
     Cookie::queue(Cookie::forget('user_id'));
 
     // Redirect kembali ke halaman login
-    return redirect()->route('loginnn')->with('success', 'Logout berhasil');
+    return redirect()->route('loginnn')->with('success', 'Berhasil Keluar');
 }
 
 }

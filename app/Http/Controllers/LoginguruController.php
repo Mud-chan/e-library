@@ -48,7 +48,7 @@ class LoginguruController extends Controller
                 }
             } else {
                 // Jika email atau password salah di kedua tabel
-                return redirect()->back()->with('error', 'Email atau Password yang Anda Masukkan Salah');
+                return redirect()->back()->with('error', 'Kesalahan pada Email dan/atau Password');
             }
         }
 

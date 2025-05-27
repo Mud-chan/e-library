@@ -47,7 +47,7 @@ class RegisterController extends Controller
             ]);
 
             if ($user) {
-                return redirect('/logreg')->with('success', 'Akun berhasil dibuat. Silakan login.');
+                return redirect('/logreg')->with('success', 'Akun berhasil dibuat! Silahkan melakukan log in.');
             } else {
                 return redirect()->back()->with('error', 'Gagal membuat akun pengguna.');
             }
@@ -93,7 +93,7 @@ public function update(Request $request)
         $name = filter_var($name, FILTER_SANITIZE_STRING);
         if (!empty($name)) {
             $user->name = $name;
-            $message[] = 'Username updated successfully!';
+            $message[] = 'Berhasil memperbarui data!';
         }
 
         $email = $request->input('email');
@@ -103,10 +103,10 @@ public function update(Request $request)
             // Cek apakah email sudah ada di database
             $existingEmail = User::where('email', $email)->exists();
             if ($existingEmail) {
-                $message[] = 'Email already taken!';
+                $message[] = 'Alamat Email sudah pernah didaftarkan!';
             } else {
                 $user->email = $email;
-                $message[] = 'Email updated successfully!';
+                $message[] = 'Password berhasil diperbarui!';
             }
         }
 

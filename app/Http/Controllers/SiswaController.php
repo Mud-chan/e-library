@@ -145,10 +145,10 @@ class SiswaController extends Controller
 
         Log::info('Sesudah create Siswa');
 
-        return redirect()->route('siswa.index')->with('success', 'Siswa Baru Berhasil Di Tambahkan');
+        return redirect()->route('siswa.index')->with('success', 'Siswa Baru berhasil ditambahkan');
     } catch (\Exception $e) {
         Log::error('Failed to upload content: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'Siswa Gagal Di Tambahkan: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'Siswa gagal ditambahkan: ' . $e->getMessage());
     }
 }
 
@@ -162,9 +162,9 @@ public function delete(Request $request)
             $content->delete();
             $content->delete();
 
-            $message = 'Video deleted!';
+            $message = 'Data berhasil dihapus!';
         } else {
-            $message = 'Video not found or already deleted!';
+            $message = 'Data tidak ditemukan atau sudah dihapus!';
         }
 
         return redirect()->back()->with('message', $message);

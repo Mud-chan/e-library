@@ -494,7 +494,7 @@ public function DetailBukusiswa($videoId)
     $comment->comment = $request->comment_box;
     $comment->save();
 
-    return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
+    return redirect()->back()->with('success', 'Komentar berhasil diperbarui!');
 }
 
 public function deleteComment($id)
@@ -522,7 +522,7 @@ public function deleteComment($id)
     $userId = Cookie::get('user_id'); // Ambil ID siswa dari cookie
 
     if (!$userId) {
-        return redirect()->route('logreg')->with('error', 'Silakan login terlebih dahulu.');
+        return redirect()->route('logreg')->with('error', 'Silahkan log in terlebih dahulu.');
     }
 
     $rating = Rating::updateOrCreate(
