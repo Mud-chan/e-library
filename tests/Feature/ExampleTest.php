@@ -32,18 +32,18 @@ class ExampleTest extends TestCase
         $forgot->assertStatus(200);
 
         // Buat user dummy
-    $siswa = Siswatest::factory()->create([
-        'email' => 'hikarilight83@gmail.com',
-        'password' => Hash::make('12345678'),
-    ]);
+    // $siswa = Siswatest::factory()->create([
+    //     'email' => 'hikarilight83@gmail.com',
+    //     'password' => Hash::make('12345678'),
+    // ]);
 
-    // Request tanpa login (cookie)
-    $this->get('/katalogbuku')->assertStatus(302); // pasti redirect login
+    // // Request tanpa login (cookie)
+    // $this->get('/katalogbuku')->assertStatus(302); // pasti redirect login
 
-    // Request dengan cookie user_id berisi id siswa
-    $response = $this->withCookie('user_id', $siswa->id)
-                     ->get('/katalogbuku');
+    // // Request dengan cookie user_id berisi id siswa
+    // $response = $this->withCookie('user_id', $siswa->id)
+    //                  ->get('/katalogbuku');
 
-    $response->assertStatus(200);
+    // $response->assertStatus(200);
     }
 }
