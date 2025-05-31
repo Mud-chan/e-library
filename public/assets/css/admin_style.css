@@ -1877,4 +1877,12 @@ section.active .show-modal {
      font-size: 1rem;
     }
 
+    .search-form{
+        display: none;
+      }
+
+      .search-type-selector{
+        display: none;
+      }
+
  }
