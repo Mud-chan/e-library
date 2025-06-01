@@ -148,6 +148,7 @@
     flex-direction: column;
     text-align: center;
     justify-content: center;
+    z-index: 999999;
 
  }
 
@@ -188,8 +189,8 @@ body{
 .katalog-buku {
   padding: 40px 20px;
   max-width: 1200px;
-
   margin: auto;
+  height: 100vh;
 
 }
 
@@ -359,58 +360,6 @@ h3 {
   }
 
 
-  @media only screen and (max-width: 768px) {
-
-    #search-btn{
-        display: inline-block;
-     }
-
-     .header .flex .search-form{
-        position: absolute;
-        top:99%; left: 0; right: 0;
-        width: auto;
-        border-top: var(--border);
-        border-bottom: var(--border);
-        background-color: var(--white);
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        transition: .2s linear;
-     }
-
-     .header .flex .search-form.active{
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-     }
-
-
-    .grid-buku {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-  }
-
-  @media only screen and (max-width: 500px) {
-
-    .grid-buku {
-
-        flex-wrap: wrap;
-      }
-
-      .kartu-buku {
-       width: 150px;
-      }
-
-      .kartu-buku img {
-        width: 130px;
-        height: 160px;
-        border-radius: 10px;
-        object-fit: cover;
-      }
-
-  }
 .dropdown {
     position: relative;
     display: inline-block;
@@ -554,3 +503,64 @@ h3 {
     margin-left: 5px;
 }
 
+
+@media only screen and (max-width: 768px) {
+
+    #search-btn{
+        display: inline-block;
+     }
+
+     .header .flex .search-form{
+        position: absolute;
+        top:99%; left: 0; right: 0;
+        width: auto;
+        border-top: var(--border);
+        border-bottom: var(--border);
+        background-color: var(--white);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: .2s linear;
+     }
+
+     .header .flex .search-form.active{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+     }
+
+
+    .grid-buku {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .search-form{
+        display: none;
+      }
+
+      .search-type-selector{
+        display: none;
+      }
+
+  }
+
+  @media only screen and (max-width: 500px) {
+
+    .grid-buku {
+
+        flex-wrap: wrap;
+      }
+
+      .kartu-buku {
+       width: 150px;
+      }
+
+      .kartu-buku img {
+        width: 130px;
+        height: 160px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+  }

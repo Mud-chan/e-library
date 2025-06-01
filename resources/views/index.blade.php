@@ -486,8 +486,8 @@
                                                         </svg> </span>
                                                 </mark>
                                                 <span class="txt-rotate-keywords"><span
-                                                        class="txt-rotate-keyword active"><span>E-Library</span>
-                                                    </span><span class="txt-rotate-keyword"><span>E-Library</span>
+                                                        class="txt-rotate-keyword active"><span>Library</span>
+                                                    </span><span class="txt-rotate-keyword"><span>Library</span>
                                                     </span></span>
                                             </h1>
                                         </div>
