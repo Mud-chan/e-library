@@ -546,6 +546,22 @@ body{
 .gsc-search-button {
     margin-left: 5px;
 }
+@media screen and (max-width: 576px) {
+    .pdf-view .container {
+        width: 100%;
+        border: none;
+        margin-top: 5vh;
+    }
+
+    .pdf-viewer {
+        height: 100vh;
+    }
+
+    .body {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+  }
 
 @media (max-width: 768px) {
     #search-btn{
@@ -612,19 +628,3 @@ body{
 
 
 
-@media screen and (max-width: 576px) {
-    .pdf-view .container {
-        width: 100%;
-        border: none;
-        margin-top: 5vh;
-    }
-
-    .pdf-viewer {
-        height: 100vh;
-    }
-
-    .body {
-        padding-left: 0rem;
-        padding-right: 0rem;
-    }
-  }
