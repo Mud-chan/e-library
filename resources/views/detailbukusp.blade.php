@@ -323,7 +323,7 @@
 
         // Ganti form action jadi ke edit route
         const form = textarea.closest('form');
-        form.action = `/buku/update-comment-guru/${commentId}`; // pastikan route ini ada di web.php
+        form.action = `/buku/update-comment-sp/${commentId}`; // pastikan route ini ada di web.php
     }
     </script>
 </html>

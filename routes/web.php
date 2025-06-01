@@ -139,6 +139,7 @@ Route::delete('/buku/delete-comment/{id}', [PagesControllerSp::class, 'deleteCom
 
 
 Route::post('/buku/update-comment-guru/{id}', [ContentguruController::class, 'updateCommentGuru'])->name('buku.updateCommentguru');
+Route::post('/buku/update-comment-sp/{id}', [ContentguruController::class, 'updateCommentSp'])->name('buku.updateCommentsp');
 Route::delete('/buku/delete-comment-guru/{id}', [ContentguruController::class, 'deleteCommentGuru'])->name('buku.deleteCommentguru');
 
 // Route::get('/profilsiswa', function () {

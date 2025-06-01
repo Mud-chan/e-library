@@ -494,6 +494,27 @@ public function uploadContentGuru(Request $request)
     return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
 }
 
+public function updateCommentSp(Request $request, $id)
+{
+    $request->validate([
+        'comment_box' => 'required|max:1000',
+    ]);
+
+    $comment = Comments::findOrFail($id);
+
+    $guruId = Cookie::get('sp_id');
+    $tutors = Guru::find($guruId);
+
+    if ($comment->id_siswa !== $tutors->id) {
+        return redirect()->back()->with('error', 'Kamu tidak boleh edit komentar orang lain!');
+    }
+
+    $comment->comment = $request->comment_box;
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Komentar berhasil diupdate!');
+}
+
 public function deleteCommentGuru($id)
 {
     $comment = Comments::findOrFail($id);
