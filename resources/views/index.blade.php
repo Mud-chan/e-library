@@ -293,7 +293,7 @@
                                                         fill="currentColor"></path>
                                                 </svg> </span> </a></li>
                                     <li><a href="#informasi"><span>Berita</span> </a></li>
-                                    <li><a href="#kontak"><span>Hubungi Kami</span> </a></li>
+                                    <li><a href="#kontak"><span>Hubungi Kami </span> </a></li>
                                 </ul>
                             </div>
                         </div>
