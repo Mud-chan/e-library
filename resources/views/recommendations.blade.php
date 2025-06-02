@@ -31,7 +31,7 @@
             <div class="col-12 col-md-6 col-lg-3">
                 <label for="tingkatan" class="form-label">Tingkatan</label>
                 <select name="tingkatan" id="tingkatan" class="form-select">
-                    <option value="">Semua Tingkatan</option>
+                    <option value=""></option>
                     @foreach($levels as $level)
                         <option value="{{ $level }}" {{ request('tingkatan') == $level ? 'selected' : '' }}>
                             {{ $level }}
