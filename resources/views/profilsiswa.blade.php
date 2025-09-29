@@ -28,7 +28,7 @@
             <a href="{{ url('/katalogbuku') }}" class="btn">Katalog Buku</a>
             <a href="{{ url('/historybuku') }}" class="btn">History</a>
             <a href="{{ url('/bookmarkbuku') }}" class="btn">Bookmark</a>
-            <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a>
+            {{-- <a href="{{ url('/recommend') }}" class="btn">SPK TOPSIS</a> --}}
             <a href="{{ route('logoutsp') }}" onclick="return confirm('Anda Yakin Ingin Keluar?');"
             class="delete-btn">Keluar</a>
 

@@ -19,44 +19,6 @@
 </head>
 
 <body>
-    {{-- <header class="header">
-
-        <section class="flex">
-
-            <a href="{{ url('/dashboardsp') }}" class="logo">Admin.</a>
-
-            <form action="search_page.php" method="post" class="search-form">
-                <input type="text" name="search" placeholder="search here..." required maxlength="100">
-                <button type="submit" class="fas fa-search" name="search_btn"></button>
-            </form>
-
-            <div class="icons">
-                <div id="menu-btn" class="fas fa-bars"></div>
-                <div id="search-btn" class="fas fa-search"></div>
-                <div id="user-btn" class="fas fa-user"></div>
-                <div id="toggle-btn" class="fas fa-sun"></div>
-            </div>
-
-            <div class="profile">
-
-                <img src="{{ asset('uploaded_files/' . $userImage) }}" alt="">
-                <h3>{{ $userName }}</h3>
-                <span>{{ $userProfesi }}</span>
-                <a href="{{ url('/profilesp') }}" class="btn">view profile</a>
-
-                <a href="../components/admin_logout.php" onclick="return confirm('logout from this website?');"
-                    class="delete-btn">logout</a>
-
-            </div>
-
-        </section>
-
-    </header> --}}
-
-    <!-- header section ends -->
-
-    <!-- side bar section starts  -->
-
     <div class="side-bar">
 
         <div class="close-side-bar">
